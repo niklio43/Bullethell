@@ -8,8 +8,10 @@ public class PlayerStateMachine : MonoBehaviour
     Animator _animator;
 
     //Movement variables
-    int _speedMultiplier = 10;
-    int _dashPower = 3000;
+    [Header("Movement Variables")]
+    [SerializeField] int _moveSpeed = 10;
+    [SerializeField] float _dashDistance = 100f;
+    [SerializeField] LayerMask layerMask;
     Vector2 _movementInput;
     bool _isDashing = false;
 
@@ -40,7 +42,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.velocity = _movementInput * _speedMultiplier;
+        _rb.velocity = _movementInput * _moveSpeed;
 
         HandleAnimation();
 
@@ -70,16 +72,21 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (context.performed && !_isDashing)
         {
+            Vector2 dir = _movementInput.normalized;
+
+            if (!CanDash(dir, _dashDistance)) return;
+
             _isDashing = true;
 
-            var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            Vector2 dir = mousePosition - transform.position;
-
-            _rb.AddForce(dir.normalized * _dashPower, ForceMode2D.Force);
+            transform.position += new Vector3(dir.x, dir.y, 0) * _dashDistance;
 
             StartCoroutine(ResetDash());
         }
+    }
+
+    bool CanDash(Vector3 dir, float distance)
+    {
+        return Physics2D.Raycast(GetComponent<Collider2D>().bounds.center, dir, distance, ~layerMask).collider == null;
     }
 
     IEnumerator ResetDash()
