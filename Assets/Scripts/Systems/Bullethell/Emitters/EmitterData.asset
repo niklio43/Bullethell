@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 1}
   autoFire: 1
-  maxProjectiles: 10
-  delay: 1000
+  maxProjectiles: 1000
+  delay: 400
   projectilePrefab: {fileID: 925088985354330676, guid: cec66a542eae7e4499fb97e6ff38241b, type: 3}
   timeToLive: 5
-  speed: 1
+  speed: 1.32
   emitterPoints: 10
-  radius: 0
-  spread: 10
-  pitch: 0
-  centerRotation: 180
+  radius: 0.36
+  spread: 36
+  pitch: 96
+  centerRotation: -39
