@@ -1,4 +1,5 @@
 using UnityEngine;
+using BulletHell.Emitters;
 
 public abstract class Weapon : Item
 {
