@@ -1,48 +1,130 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell;
 
 namespace BulletHell.Emitters
 {
-    public class Emitter : BaseEmitter
+    public class Emitter : MonoBehaviour
     {
-        [Header("Spokes")]
-        [Range(1, 10)] protected int groupCount = 1;
-        [Range(0, 1)] protected float groupSpacing = 1;
-        [Range(1, 10)] protected int spokeCount = 3;
-        [Range(0, 100)] protected float spokeSpacing = 25;
+        protected float interval = 0;
+        protected Pool<Projectile> pool;
+        EmitterGroup[] emitterGroups;
 
-        EmitterGroup[] groups;
+        [SerializeField]
+        EmitterData data;
+
+        #region Data Getters
+        public Vector2 direction => data.direction;
+        public bool autoFire => data.autoFire;
+        public int maxProjectiles => data.maxProjectiles;
+        public int delay => data.delay;
+
+        public Projectile projectilePrefab => data.projectilePrefab;
+        public float timeToLive => data.timeToLive;
+        public float speed => data.speed;
+
+        public int emitterPoints => data.emitterPoints;
+        public float spread => data.spread;
+        public float pitch => data.pitch;
+        public float radius => data.radius;
+        public float centerRotation => data.centerRotation;
+        #endregion
 
         private void Awake()
         {
-            groups = new EmitterGroup[groupCount];
+            pool = new Pool<Projectile>(CreateProjectile, maxProjectiles);
+            emitterGroups = new EmitterGroup[40];
+        }
 
-            for (int i = 0; i < groupCount; i++) {
-                float rotation = 0;
-                groups[i] = new EmitterGroup(Rotate(direction, rotation).normalized, spokeCount, spokeSpacing);
+        private void Update()
+        {
+            RefreshEmitterGroups();
+            UpdateEmitter(Time.deltaTime);
+        }
 
-                rotation = CalculateGroupRotation(i, rotation);
+        public void UpdateEmitter(float dt)
+        {
+            if(interval > 0) {
+                interval -= dt;
             }
 
+            UpdateProjectiles(dt);
+            if (autoFire && interval <= 0) {
+                interval += delay / 1000f;
+                FireProjectile(direction);
+            }
         }
 
-
-        float CalculateGroupRotation(int index, float currentRotation)
+        void RefreshEmitterGroups()
         {
-            currentRotation += 360 * groupSpacing / groupCount;
-            return currentRotation;
+            for (int i = 0; i < emitterGroups.Length; i++) {
+                if (i > emitterPoints) { break; }
+                float rotation = CalculateGroupRotation(i, spread) + centerRotation + transform.rotation.eulerAngles.z - (spread * Mathf.Floor(emitterPoints / 2f));
+                Vector2 positon = Rotate(direction, rotation).normalized * radius;
+                Vector2 pointDirection = Rotate(direction, rotation + pitch).normalized;
+
+                if (emitterGroups[i] == null) {
+                    emitterGroups[i] = new EmitterGroup(positon, pointDirection);
+                }
+                else {
+                    emitterGroups[i].Set(positon, pointDirection);
+                }
+            }
         }
 
-
-        protected override ProjectileData FireProjectile(Vector2 direction)
+        Projectile CreateProjectile()
         {
-            throw new System.NotImplementedException();
+            Projectile projectile = Instantiate(projectilePrefab);
+            projectile.name = $"{projectilePrefab.name} (Pooled)";
+            projectile.pool = pool;
+
+            return projectile;
+        }
+        protected virtual void FireProjectile(Vector2 direction)
+        {
+            for (int i = 0; i < emitterPoints; i++) {
+                Projectile projectile = pool.Get();
+                ProjectileData projectileData = projectile.data;
+
+                projectile.gameObject.SetActive(true);
+                projectile.transform.position = emitterGroups[i].position;
+                projectileData.position = emitterGroups[i].position;
+                projectileData.speed = speed;
+                projectileData.velocity = emitterGroups[i].direction * speed;
+                projectileData.timeToLive = timeToLive;
+            }
+        }
+        protected virtual void UpdateProjectiles(float dt)
+        {
+            for (int i = 0; i < pool.active.Count; i++) {
+                UpdateProjectile(pool.active[i].data, dt);
+            }
+        }
+        protected virtual void UpdateProjectile(ProjectileData projectile, float dt)
+        {
+            projectile.position += projectile.velocity * dt;
+            projectile.timeToLive -= dt;
         }
 
-        protected override void UpdateProjectile(ProjectileData projectile)
+        //TODO: Move into an essential/utilities namespace
+        public static Vector2 Rotate(Vector2 v, float degrees)
         {
-            throw new System.NotImplementedException();
+            float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
+            float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
+
+            float tx = v.x;
+            float ty = v.y;
+
+            v.y = (cos * tx) - (sin * ty);
+            v.x = (sin * tx) - (cos * ty);
+
+            return v;
         }
+        float CalculateGroupRotation(int index, float spread) => index * spread;
+
+        protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();
+        public void ClearAllProjectiles() => pool.Dispose();
+        private void OnDisable() => ClearAllProjectiles();
     }
 }
