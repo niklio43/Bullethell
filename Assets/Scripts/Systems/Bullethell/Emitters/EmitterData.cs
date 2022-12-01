@@ -18,7 +18,7 @@ public class EmitterData : ScriptableObject
     [Header("Projectile")]
     public Projectile projectilePrefab;
     public float timeToLive = 5;
-    [Range(0.01f, 10f)]
+    [Range(0.01f, 100f)]
     public float speed = 1;
 
     [Header("Emission Data")]
