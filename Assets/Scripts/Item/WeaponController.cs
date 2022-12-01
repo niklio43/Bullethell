@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] Weapon _weapon;
+    [SerializeField] Item _weapon;
     void Awake()
     {
         GetComponent<SpriteRenderer>().sprite = _weapon.Sprite;
