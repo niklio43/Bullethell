@@ -14,6 +14,8 @@ namespace BulletHell.Emitters
         [SerializeField]
         EmitterData data;
 
+        Transform bulletHolder;
+
         #region Data Getters
         public Vector2 direction => data.direction;
         public bool autoFire => data.autoFire;
@@ -33,6 +35,8 @@ namespace BulletHell.Emitters
 
         private void Awake()
         {
+            GameObject go = new GameObject($"Bullet holder ({name})");
+            bulletHolder = go.transform;
             pool = new Pool<Projectile>(CreateProjectile, maxProjectiles);
             emitterGroups = new EmitterGroup[40];
         }
@@ -85,6 +89,7 @@ namespace BulletHell.Emitters
         {
             for (int i = 0; i < emitterPoints; i++) {
                 Projectile projectile = pool.Get();
+                projectile.transform.parent = bulletHolder.transform;
                 ProjectileData projectileData = projectile.data;
 
                 projectile.gameObject.SetActive(true);
