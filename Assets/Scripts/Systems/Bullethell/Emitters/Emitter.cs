@@ -10,6 +10,7 @@ namespace BulletHell.Emitters
         protected Pool<Projectile> pool;
         List<EmitterGroup> emitterGroups = new List<EmitterGroup>();
 
+        [SerializeField] bool initializeOnAwake = false;
         public EmitterData data;
 
         Transform bulletHolder;
@@ -38,6 +39,12 @@ namespace BulletHell.Emitters
         #endregion
 
         private void Awake()
+        {
+            if (initializeOnAwake)
+                Initialize();
+        }
+
+        public void Initialize()
         {
             GameObject go = new GameObject($"Bullet holder ({name})");
             bulletHolder = go.transform;

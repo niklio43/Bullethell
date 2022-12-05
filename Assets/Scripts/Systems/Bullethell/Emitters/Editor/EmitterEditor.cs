@@ -24,6 +24,11 @@ namespace BulletHell.Emitters.Editor
             }
         }
 
+        void OnSceneGUI()
+        {
+            GUI.Label(new Rect(300, 300, 200, 200), "TEWES");
+        }
+
         private void OnEnable()
         {
             _target = (Emitter)target;
