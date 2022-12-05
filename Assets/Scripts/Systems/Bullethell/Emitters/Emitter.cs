@@ -36,6 +36,8 @@ namespace BulletHell.Emitters
         float _lastSpread = 0;
         float _lastPitch = 0;
         float _lastCenterRotation = 0;
+        float _lastParentRotation = 0;
+        Vector3 _lastPosition = Vector3.zero;
         #endregion
 
         private void Awake()
@@ -73,12 +75,12 @@ namespace BulletHell.Emitters
 
         void RefreshGroups()
         {
-            if (_lastEmitterPoints != emitterPoints || _lastRadius != radius || _lastSpread != spread || _lastPitch != pitch || _lastCenterRotation != centerRotation) {
+            if (_lastParentRotation != transform.rotation.eulerAngles.z || _lastPosition != transform.position ||_lastEmitterPoints != emitterPoints || _lastRadius != radius || _lastSpread != spread || _lastPitch != pitch || _lastCenterRotation != centerRotation) {
                 CreateGroups();
 
                 for (int i = 0; i < emitterPoints; i++) {
                     float rotation = CalculateGroupRotation(i, spread) + centerRotation + transform.rotation.eulerAngles.z - (spread * ((emitterPoints - 1) / 2f));
-                    Vector2 positon = Rotate(this.direction, rotation).normalized * radius;
+                    Vector2 positon = (Rotate(this.direction, rotation).normalized * radius) + (Vector2)transform.position;
                     Vector2 direction = Rotate(this.direction, rotation + pitch).normalized;
                     emitterGroups[i].Set(positon, direction);
                 }
@@ -89,6 +91,8 @@ namespace BulletHell.Emitters
             _lastSpread = spread;
             _lastPitch = pitch;
             _lastCenterRotation = centerRotation;
+            _lastParentRotation = transform.rotation.eulerAngles.z;
+            _lastPosition = transform.position;
         }
 
         void CreateGroups()
