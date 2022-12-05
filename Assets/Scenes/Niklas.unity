@@ -574,7 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerStateMachine: {fileID: 56462415}
   _playerUI: {fileID: 289019620}
-  _emitter: {fileID: 0}
+  _emitter: {fileID: 1341775475}
 --- !u!1 &230056738
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,6 +2976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1065a64cca67c4fbea4bc0ba96a0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initializeOnAwake: 0
   data: {fileID: 0}
 --- !u!114 &1341775476
 MonoBehaviour:

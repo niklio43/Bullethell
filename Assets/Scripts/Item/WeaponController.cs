@@ -9,7 +9,10 @@ public class WeaponController : MonoBehaviour
     void Awake()
     {
         GetComponent<SpriteRenderer>().sprite = _weapon.Sprite;
-        GetComponent<Emitter>().data = _weapon.EmitterData;
+        var emitter = GetComponent<Emitter>();
+        emitter.data = _weapon.EmitterData;
+        emitter.Initialize();
+
     }
 
     void Update()
