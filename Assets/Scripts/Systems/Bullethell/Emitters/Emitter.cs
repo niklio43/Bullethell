@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using BulletHell;
 
 namespace BulletHell.Emitters
 {
@@ -48,7 +45,7 @@ namespace BulletHell.Emitters
 
         public void UpdateEmitter(float dt)
         {
-            if(interval > 0) {
+            if (interval > 0) {
                 interval -= dt;
             }
 
@@ -99,6 +96,7 @@ namespace BulletHell.Emitters
                 projectileData.timeToLive = timeToLive;
             }
         }
+
         protected virtual void UpdateProjectiles(float dt)
         {
             for (int i = 0; i < pool.active.Count; i++) {
