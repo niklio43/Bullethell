@@ -45,6 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82167585c718144ca04b56d66710e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    velocity: {x: 0, y: 0}
+    acceleration: 0
+    gravity: {x: 0, y: 0}
+    position: {x: 0, y: 0}
+    timeToLive: 0
+    speed: 0
 --- !u!1 &3383802806708878080
 GameObject:
   m_ObjectHideFlags: 0
