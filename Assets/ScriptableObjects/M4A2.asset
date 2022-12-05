@@ -15,3 +15,4 @@ MonoBehaviour:
   sprite: {fileID: 1176194004, guid: 02d0ee5e667ffeb48879cf85a0b587fa, type: 3}
   damage: 30
   itemName: M4A2
+  emitterData: {fileID: 11400000, guid: 97c08cec6b91d3f47b58b142adefe284, type: 2}
