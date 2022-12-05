@@ -8,7 +8,8 @@ namespace BulletHell.Emitters
         protected Pool<Projectile> pool;
         EmitterGroup[] emitterGroups;
 
-        public EmitterData data;
+        [SerializeField]
+        EmitterData data;
 
         Transform bulletHolder;
 
@@ -29,7 +30,7 @@ namespace BulletHell.Emitters
         public float centerRotation => data.centerRotation;
         #endregion
 
-        private void Start()
+        private void Awake()
         {
             GameObject go = new GameObject($"Bullet holder ({name})");
             bulletHolder = go.transform;
@@ -52,7 +53,7 @@ namespace BulletHell.Emitters
             UpdateProjectiles(dt);
             if (autoFire && interval <= 0) {
                 interval += delay / 1000f;
-                FireProjectile();
+                FireProjectile(direction);
             }
         }
 
@@ -61,7 +62,7 @@ namespace BulletHell.Emitters
             for (int i = 0; i < emitterGroups.Length; i++) {
                 if (i > emitterPoints) { break; }
                 float rotation = CalculateGroupRotation(i, spread) + centerRotation + transform.rotation.eulerAngles.z - (spread * Mathf.Floor(emitterPoints / 2f));
-                Vector2 positon = Rotate(direction, rotation).normalized * radius + (Vector2)transform.position;
+                Vector2 positon = Rotate(direction, rotation).normalized * radius;
                 Vector2 pointDirection = Rotate(direction, rotation + pitch).normalized;
 
                 if (emitterGroups[i] == null) {
@@ -81,7 +82,7 @@ namespace BulletHell.Emitters
 
             return projectile;
         }
-        public void FireProjectile()
+        protected virtual void FireProjectile(Vector2 direction)
         {
             for (int i = 0; i < emitterPoints; i++) {
                 Projectile projectile = pool.Get();

@@ -8,13 +8,11 @@ public class AssultRifle : Ranged
     [SerializeField] Sprite sprite;
     [SerializeField] int damage;
     [SerializeField] string itemName;
-    [SerializeField] EmitterData emitterData;
 
     void OnEnable()
     {
         Sprite = sprite;
         Damage = damage;
         ItemName = itemName;
-        EmitterData = emitterData;
     }
 }
