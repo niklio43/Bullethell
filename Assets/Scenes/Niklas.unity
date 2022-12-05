@@ -837,7 +837,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 11400000, guid: ec5a4b4affe752f41b6b3cc10d20afff, type: 2}
-<<<<<<< HEAD
 --- !u!114 &396805048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1706,8 +1705,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-=======
->>>>>>> main
 --- !u!1 &939503803
 GameObject:
   m_ObjectHideFlags: 0
