@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using static BulletHell.Utilities;
 
 namespace BulletHell.Emitters
 {
@@ -6,10 +8,9 @@ namespace BulletHell.Emitters
     {
         protected float interval = 0;
         protected Pool<Projectile> pool;
-        EmitterGroup[] emitterGroups;
+        List<EmitterGroup> emitterGroups = new List<EmitterGroup>();
 
-        [SerializeField]
-        EmitterData data;
+        public EmitterData data;
 
         Transform bulletHolder;
 
@@ -18,11 +19,9 @@ namespace BulletHell.Emitters
         public bool autoFire => data.autoFire;
         public int maxProjectiles => data.maxProjectiles;
         public int delay => data.delay;
-
         public Projectile projectilePrefab => data.projectilePrefab;
         public float timeToLive => data.timeToLive;
         public float speed => data.speed;
-
         public int emitterPoints => data.emitterPoints;
         public float spread => data.spread;
         public float pitch => data.pitch;
@@ -30,17 +29,25 @@ namespace BulletHell.Emitters
         public float centerRotation => data.centerRotation;
         #endregion
 
+        #region LastPoll
+        int _lastEmitterPoints = 0;
+        float _lastRadius = 0;
+        float _lastSpread = 0;
+        float _lastPitch = 0;
+        float _lastCenterRotation = 0;
+        #endregion
+
         private void Awake()
         {
             GameObject go = new GameObject($"Bullet holder ({name})");
             bulletHolder = go.transform;
+
             pool = new Pool<Projectile>(CreateProjectile, maxProjectiles);
-            emitterGroups = new EmitterGroup[40];
         }
 
         private void Update()
         {
-            RefreshEmitterGroups();
+            RefreshGroups();
             UpdateEmitter(Time.deltaTime);
         }
 
@@ -53,24 +60,42 @@ namespace BulletHell.Emitters
             UpdateProjectiles(dt);
             if (autoFire && interval <= 0) {
                 interval += delay / 1000f;
-                FireProjectile(direction);
+                FireProjectile();
             }
         }
 
-        void RefreshEmitterGroups()
+        void RefreshGroups()
         {
-            for (int i = 0; i < emitterGroups.Length; i++) {
-                if (i > emitterPoints) { break; }
-                float rotation = CalculateGroupRotation(i, spread) + centerRotation + transform.rotation.eulerAngles.z - (spread * Mathf.Floor(emitterPoints / 2f));
-                Vector2 positon = Rotate(direction, rotation).normalized * radius;
-                Vector2 pointDirection = Rotate(direction, rotation + pitch).normalized;
+            if (_lastEmitterPoints != emitterPoints || _lastRadius != radius || _lastSpread != spread || _lastPitch != pitch || _lastCenterRotation != centerRotation) {
+                CreateGroups();
 
-                if (emitterGroups[i] == null) {
-                    emitterGroups[i] = new EmitterGroup(positon, pointDirection);
+                for (int i = 0; i < emitterPoints; i++) {
+                    float rotation = CalculateGroupRotation(i, spread) + centerRotation + transform.rotation.eulerAngles.z - (spread * ((emitterPoints - 1) / 2f));
+                    Vector2 positon = Rotate(this.direction, rotation).normalized * radius;
+                    Vector2 direction = Rotate(this.direction, rotation + pitch).normalized;
+                    emitterGroups[i].Set(positon, direction);
                 }
-                else {
-                    emitterGroups[i].Set(positon, pointDirection);
+            }
+
+            _lastEmitterPoints = emitterPoints;
+            _lastRadius = radius;
+            _lastSpread = spread;
+            _lastPitch = pitch;
+            _lastCenterRotation = centerRotation;
+        }
+
+        void CreateGroups()
+        {
+            if (_lastEmitterPoints == emitterPoints) { return; }
+
+            if (emitterPoints > emitterGroups.Count) {
+                int amountToCreate = emitterPoints - emitterGroups.Count;
+                for (int i = 0; i < amountToCreate; i++) {
+                    emitterGroups.Add(new EmitterGroup());
                 }
+            }
+            else if (emitterPoints < emitterGroups.Count) {
+                emitterGroups.RemoveRange(emitterPoints, emitterGroups.Count - emitterPoints);
             }
         }
 
@@ -82,7 +107,7 @@ namespace BulletHell.Emitters
 
             return projectile;
         }
-        protected virtual void FireProjectile(Vector2 direction)
+        public virtual void FireProjectile()
         {
             for (int i = 0; i < emitterPoints; i++) {
                 Projectile projectile = pool.Get();
@@ -110,24 +135,10 @@ namespace BulletHell.Emitters
             projectile.timeToLive -= dt;
         }
 
-        //TODO: Move into an essential/utilities namespace
-        public static Vector2 Rotate(Vector2 v, float degrees)
-        {
-            float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
-            float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
-
-            float tx = v.x;
-            float ty = v.y;
-
-            v.y = (cos * tx) - (sin * ty);
-            v.x = (sin * tx) - (cos * ty);
-
-            return v;
-        }
         float CalculateGroupRotation(int index, float spread) => index * spread;
-
         protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();
         public void ClearAllProjectiles() => pool.Dispose();
+
         private void OnDisable() => ClearAllProjectiles();
     }
 }

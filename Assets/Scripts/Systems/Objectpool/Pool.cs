@@ -1,4 +1,3 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
 
@@ -26,11 +25,11 @@ namespace BulletHell
             T item = null;
 
             for (int i = 0; i < members.Count; i++) {
-                if(active.Contains(members[i])) { continue; }
+                if (active.Contains(members[i])) { continue; }
                 item = members[i];
             }
 
-            if(item == null) {
+            if (item == null) {
                 if (members.Count < maxAmount) {
                     item = Create();
                 }
@@ -45,13 +44,13 @@ namespace BulletHell
         }
         public void Release(T item)
         {
-            if(!active.Contains(item)) { return; }
+            if (!active.Contains(item)) { return; }
             active.Remove(item);
         }
         public void Dispose()
         {
             foreach (T item in members) {
-                item.Dispose();
+                item?.Dispose();
             }
 
             members.Clear();

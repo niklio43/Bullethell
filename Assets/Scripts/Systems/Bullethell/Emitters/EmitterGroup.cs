@@ -14,6 +14,12 @@ namespace BulletHell.Emitters
             Set(position, direction);
         }
 
+        public EmitterGroup()
+        {
+            position = Vector2.zero;
+            direction = Vector2.zero;
+        }
+
         public void Set(Vector2 position, Vector2 direction)
         {
             this.position = position;

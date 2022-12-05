@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using BulletHell;
 
 namespace BulletHell
 {
@@ -10,7 +7,11 @@ namespace BulletHell
         public Pool<Projectile> pool;
         public ProjectileData data = new ProjectileData();
 
-        public void Dispose() => Destroy(gameObject);
+        public void Dispose()
+        {
+            Destroy(gameObject);
+        }
+
         public void ResetObject()
         {
             data = new ProjectileData();
@@ -18,11 +19,12 @@ namespace BulletHell
             gameObject.SetActive(false);
             pool.Release(this);
         }
+
         private void FixedUpdate()
         {
             transform.position = data.position;
 
-            if(data.timeToLive <= 0) {
+            if (data.timeToLive <= 0) {
                 ResetObject();
             }
         }
