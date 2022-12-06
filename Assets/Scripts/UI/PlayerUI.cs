@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 using TMPro;
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] Transform[] HotBar;
+    [SerializeField] Transform[] _hotbar;
     [SerializeField] PlayerInput _input;
+    [SerializeField] GameObject _inventory;
+    bool inv = false;
 
     void Start()
     {
-        foreach(Transform obj in HotBar)
+        foreach(Transform obj in _hotbar)
         {
             string output;
             TryGetCurrentInputForAction(obj.name, out output);
@@ -30,28 +32,34 @@ public class PlayerUI : MonoBehaviour
     {
         if (context.performed)
         {
-            HotBar[0].GetChild(1).gameObject.GetComponent<ItemUI>().ConsumeItem();
+            _hotbar[0].GetChild(1).gameObject.GetComponent<ItemUI>().ConsumeItem();
         }
     }
     public void RightHotBar(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            HotBar[1].GetChild(1).gameObject.GetComponent<ItemUI>().ConsumeItem();
+            _hotbar[1].GetChild(1).gameObject.GetComponent<ItemUI>().ConsumeItem();
         }
     }
     public void BottomHotBar(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            HotBar[2].GetChild(1).gameObject.GetComponent<ItemUI>().ConsumeItem();
+            _hotbar[2].GetChild(1).gameObject.GetComponent<ItemUI>().ConsumeItem();
         }
     }
     public void TopHotBar(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            HotBar[3].GetChild(1).gameObject.GetComponent<ItemUI>().ConsumeItem();
+            _hotbar[3].GetChild(1).gameObject.GetComponent<ItemUI>().ConsumeItem();
         }
+    }
+
+    public void ToggleInventory()
+    {
+        inv = !inv;
+        _inventory.SetActive(inv);
     }
 }
