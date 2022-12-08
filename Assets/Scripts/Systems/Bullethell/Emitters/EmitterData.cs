@@ -1,34 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BulletHell.Emitters
 {
-    [CreateAssetMenu(fileName = "EmitterData", menuName = "EmitterData")]
-    public class EmitterData : ScriptableObject
+    [System.Serializable]
+    public class EmitterData
     {
-        [HideInInspector] public Vector2 direction = Vector2.up;
         [Header("General")]
-        public bool autoFire = true;
-        [Range(0, 1000)]
-        public int maxProjectiles = 10;
-        [Range(0, 5000)]
-        public int delay = 1000;
+        [Range(0, 5000)] public int Delay = 1000;
+        [Range(0, 1000)] public int MaxProjectiles = 10;
 
         [Header("Projectile")]
-        public Projectile projectilePrefab;
-        public float timeToLive = 5;
-        [Range(0.01f, 100f)]
-        public float speed = 1;
+        public ProjectileData ProjectileData;
+        public float TimeToLive = 5;
+        [Range(0.01f, 100f)] public float BaseSpeed = 1;
 
-        [Header("Emission Data")]
-        [Range(1, 40)]
-        public int emitterPoints = 1;
-        [Range(0, 10)]
-        public float radius = 0;
-        [Range(-180, 180)]
-        public float spread = 0;
-        [Range(-180, 180)]
-        public float pitch = 0;
-        [Range(-180, 180)]
-        public float centerRotation = 0;
+        [Header("Emission")]
+        [Range(1, 40)] public int EmitterPoints = 1;
+        [Range(-180, 180)] public float CenterRotation = 0;
+        [Range(-180, 180)] public float Pitch = 0;
+        [Range(0, 10)] public float Offset = 0;
+        [Range(-180, 180)] public float Spread = 0;
+
+        Projectile _projectilePrefab;
+        public Projectile ProjectilePrefab
+        {
+            get {
+                if (_projectilePrefab == null) {
+                    _projectilePrefab = Resources.Load<Projectile>("EmitterProjectile");
+                }
+
+                return _projectilePrefab;
+            }
+        }
+
+        public ModifierController Modifiers;
     }
 }

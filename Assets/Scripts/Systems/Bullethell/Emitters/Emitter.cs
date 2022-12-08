@@ -6,52 +6,28 @@ namespace BulletHell.Emitters
 {
     public class Emitter : MonoBehaviour
     {
-        protected float interval = 0;
-        protected Pool<Projectile> pool;
-        List<EmitterGroup> emitterGroups = new List<EmitterGroup>();
+        public bool AutoFire = true;
+        public EmitterData Data;
 
-        [SerializeField] bool initializeOnAwake = false;
-        public EmitterData data;
 
-        Transform bulletHolder;
+        ObjectPool<Projectile> _pool;
+        List<EmitterGroup> _emitterGroups = new List<EmitterGroup>();
 
-        #region Data Getters
-        public Vector2 direction => data.direction;
-        public bool autoFire => data.autoFire;
-        public int maxProjectiles => data.maxProjectiles;
-        public int delay => data.delay;
-        public Projectile projectilePrefab => data.projectilePrefab;
-        public float timeToLive => data.timeToLive;
-        public float speed => data.speed;
-        public int emitterPoints => data.emitterPoints;
-        public float spread => data.spread;
-        public float pitch => data.pitch;
-        public float radius => data.radius;
-        public float centerRotation => data.centerRotation;
-        #endregion
+        float _interval = 0;
 
-        #region LastPoll
-        int _lastEmitterPoints = 0;
-        float _lastRadius = 0;
-        float _lastSpread = 0;
-        float _lastPitch = 0;
-        float _lastCenterRotation = 0;
-        float _lastParentRotation = 0;
-        Vector3 _lastPosition = Vector3.zero;
-        #endregion
+        ModifierController _modifiers => Data.Modifiers;
+        float _parentRotation => transform.rotation.eulerAngles.z;
+        Vector2 _direction => Vector2.up;
 
         private void Awake()
         {
-            if (initializeOnAwake)
-                Initialize();
+            Initialize();
         }
 
         public void Initialize()
         {
-            GameObject go = new GameObject($"Bullet holder ({name})");
-            bulletHolder = go.transform;
-
-            pool = new Pool<Projectile>(CreateProjectile, maxProjectiles);
+            _pool = new ObjectPool<Projectile>(CreateProjectile, Data.MaxProjectiles, name);
+            CreateGroups();
         }
 
         private void Update()
@@ -62,93 +38,110 @@ namespace BulletHell.Emitters
 
         public void UpdateEmitter(float dt)
         {
-            if (interval > 0) {
-                interval -= dt;
+            if (_interval > 0) {
+                _interval -= dt;
             }
 
             UpdateProjectiles(dt);
-            if (autoFire && interval <= 0) {
-                interval += delay / 1000f;
+            if (AutoFire && _interval <= 0) {
+                _interval += Data.Delay / 1000f;
                 FireProjectile();
+            }
+        }
+
+        void CreateGroups()
+        {
+            for (int i = 0; i < Data.EmitterPoints; i++) {
+                _emitterGroups.Add(new EmitterGroup());
             }
         }
 
         void RefreshGroups()
         {
-            if (_lastParentRotation != transform.rotation.eulerAngles.z || _lastPosition != transform.position ||_lastEmitterPoints != emitterPoints || _lastRadius != radius || _lastSpread != spread || _lastPitch != pitch || _lastCenterRotation != centerRotation) {
-                CreateGroups();
+            for (int n = 0; n < Data.EmitterPoints; n++) {
 
-                for (int i = 0; i < emitterPoints; i++) {
-                    float rotation = CalculateGroupRotation(i, spread) + centerRotation + transform.rotation.eulerAngles.z - (spread * ((emitterPoints - 1) / 2f));
-                    Vector2 positon = (Rotate(this.direction, rotation).normalized * radius) + (Vector2)transform.position;
-                    Vector2 direction = Rotate(this.direction, rotation + pitch).normalized;
-                    emitterGroups[i].Set(positon, direction);
+                _emitterGroups[n].ClearModifier();
+
+                float spread = n * Data.Spread;
+                float pitch = Data.Pitch;
+                float offset = Data.Offset;
+
+                //float centerSpread = (spread * ((_emitterPoints - 1) / 2f));
+
+                EmitterModifier activeModifier = null;
+
+                for (int i = 0; i < _modifiers.Count; i++) {
+                    int value = (n % _modifiers[i].Factor) - _modifiers[i].Count;
+                    if (value > 0) { continue; }
+
+                    activeModifier = _modifiers[i];
+                    spread += _modifiers[i].Spread;
+                    pitch += _modifiers[i].Pitch;
+                    offset += _modifiers[i].Offset;
                 }
-            }
 
-            _lastEmitterPoints = emitterPoints;
-            _lastRadius = radius;
-            _lastSpread = spread;
-            _lastPitch = pitch;
-            _lastCenterRotation = centerRotation;
-            _lastParentRotation = transform.rotation.eulerAngles.z;
-            _lastPosition = transform.position;
+                float rotation = spread + Data.CenterRotation + _parentRotation;
+                Vector2 positon = (Rotate(_direction, rotation).normalized * offset) + (Vector2)transform.position;
+
+                Vector2 direction = Rotate(_direction, rotation + pitch).normalized;
+
+                _emitterGroups[n].Set(positon, direction);
+                _emitterGroups[n].SetModifier(activeModifier);
+            }
         }
 
-        void CreateGroups()
-        {
-            if (_lastEmitterPoints == emitterPoints) { return; }
-
-            if (emitterPoints > emitterGroups.Count) {
-                int amountToCreate = emitterPoints - emitterGroups.Count;
-                for (int i = 0; i < amountToCreate; i++) {
-                    emitterGroups.Add(new EmitterGroup());
-                }
-            }
-            else if (emitterPoints < emitterGroups.Count) {
-                emitterGroups.RemoveRange(emitterPoints, emitterGroups.Count - emitterPoints);
-            }
-        }
 
         Projectile CreateProjectile()
         {
-            Projectile projectile = Instantiate(projectilePrefab);
-            projectile.name = $"{projectilePrefab.name} (Pooled)";
-            projectile.pool = pool;
+            Projectile projectile = Instantiate(Data.ProjectilePrefab);
+            projectile.Pool = _pool;
 
             return projectile;
         }
         public virtual void FireProjectile()
         {
-            for (int i = 0; i < emitterPoints; i++) {
-                Projectile projectile = pool.Get();
-                projectile.transform.parent = bulletHolder.transform;
-                ProjectileData projectileData = projectile.data;
+            for (int n = 0; n < Data.EmitterPoints; n++) {
+                EmitterModifier modifier = _emitterGroups[n].Modifier;
+
+                Projectile projectile = _pool.Get();
+
+                ProjectileData projectileData = Data.ProjectileData;
+                float speed = Data.BaseSpeed;
+                float timeToLive = Data.TimeToLive;
+
+                if (modifier != null) {
+                    projectileData = modifier.ProjectileData;
+                    speed *= modifier.SpeedMultiplier;
+                }
+
+                projectile.Initialize(projectileData);
 
                 projectile.gameObject.SetActive(true);
-                projectile.transform.position = emitterGroups[i].position;
-                projectileData.position = emitterGroups[i].position;
-                projectileData.speed = speed;
-                projectileData.velocity = emitterGroups[i].direction * speed;
-                projectileData.timeToLive = timeToLive;
+                projectile.transform.position = _emitterGroups[n].Position;
+                projectile.Position = _emitterGroups[n].Position;
+                projectile.Speed = speed;
+
+                projectile.Acceleration = 0;
+                projectile.Velocity = _emitterGroups[n].Direction * speed;
+                projectile.TimeToLive = timeToLive;
             }
         }
 
         protected virtual void UpdateProjectiles(float dt)
         {
-            for (int i = 0; i < pool.active.Count; i++) {
-                UpdateProjectile(pool.active[i].data, dt);
+            for (int i = 0; i < _pool.active.Count; i++) {
+                UpdateProjectile(_pool.active[i], dt);
             }
         }
-        protected virtual void UpdateProjectile(ProjectileData projectile, float dt)
+        protected virtual void UpdateProjectile(Projectile projectile, float dt)
         {
-            projectile.position += projectile.velocity * dt;
-            projectile.timeToLive -= dt;
+            projectile.Velocity *= (1 + projectile.Acceleration * dt);
+            projectile.Position += projectile.Velocity * dt;
+            projectile.TimeToLive -= dt;
         }
 
-        float CalculateGroupRotation(int index, float spread) => index * spread;
         protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();
-        public void ClearAllProjectiles() => pool.Dispose();
+        public void ClearAllProjectiles() => _pool.Dispose();
 
         private void OnDisable() => ClearAllProjectiles();
     }

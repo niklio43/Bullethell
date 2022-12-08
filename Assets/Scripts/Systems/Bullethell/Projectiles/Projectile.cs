@@ -4,29 +4,47 @@ namespace BulletHell
 {
     public class Projectile : MonoBehaviour, IPoolable
     {
-        public Pool<Projectile> pool;
-        public ProjectileData data = new ProjectileData();
+        public Pool<Projectile> Pool;
+        public ProjectileData Data;
 
-        public void Dispose()
+        [SerializeField] SpriteRenderer spriteRenderer;
+
+        [HideInInspector] public Vector2 Position;
+        [HideInInspector] public Vector2 Velocity;
+        [HideInInspector] public Vector2 Gravity;
+
+        [HideInInspector] public float TimeToLive;
+        [HideInInspector] public float Acceleration;
+        [HideInInspector] public float Speed;
+
+        public void Initialize(ProjectileData data)
         {
-            Destroy(gameObject);
+            Data = data;
+
+            if (data.Sprite != null)
+                spriteRenderer.sprite = data.Sprite;
+
+            transform.localScale = Vector3.one * data.Scale;
+
+            spriteRenderer.color = data.Color;
+            name = $"{data.name}";
+        }
+
+        private void Update()
+        {
+            transform.position = Position;
+
+            if (TimeToLive <= 0) {
+                ResetObject();
+            }
         }
 
         public void ResetObject()
         {
-            data = new ProjectileData();
+            Data = null;
             transform.position = Vector3.zero;
             gameObject.SetActive(false);
-            pool.Release(this);
-        }
-
-        private void FixedUpdate()
-        {
-            transform.position = data.position;
-
-            if (data.timeToLive <= 0) {
-                ResetObject();
-            }
+            Pool.Release(this);
         }
     }
 }

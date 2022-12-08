@@ -6,14 +6,13 @@ using BulletHell.Emitters;
 
 namespace BulletHell
 {
-    [Serializable]
-    public class ProjectileData
+    [CreateAssetMenu(fileName = "ProjectileData", menuName = "Projectile/ProjectileData")]
+    public class ProjectileData : ScriptableObject
     {
-        public Vector2 velocity;
-        public float acceleration;
-        public Vector2 gravity;
-        public Vector2 position;
-        public float timeToLive;
-        public float speed;
+        public new string name = "NewProjectileData";
+
+        public Sprite Sprite;
+        public float Scale = 1;
+        public Color Color = Color.white;
     }
 }

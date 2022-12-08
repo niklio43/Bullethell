@@ -1,5 +1,7 @@
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace BulletHell.Emitters.Editor
 {
@@ -9,24 +11,18 @@ namespace BulletHell.Emitters.Editor
     public class EmitterEditor : Editor
     {
         Emitter _target;
+        Texture2D _emitterIcon;
 
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-            DrawDataInspector();
-        }
+        //public override void OnInspectorGUI()
+        //{
+        //    DrawDefaultInspector();
+        //    DrawDataInspector();
+        //}
 
-        void DrawDataInspector()
-        {
-            if(_target.data != null) {
-                var editor = CreateEditor(_target.data);
-                editor.OnInspectorGUI();
-            }
-        }
 
         void OnSceneGUI()
         {
-            GUI.Label(new Rect(300, 300, 200, 200), "TEWES");
+
         }
 
         private void OnEnable()

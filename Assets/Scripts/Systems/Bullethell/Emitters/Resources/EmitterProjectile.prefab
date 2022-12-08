@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1943916754374656653}
   - component: {fileID: 925088985354330676}
   m_Layer: 0
-  m_Name: TestProjectile
+  m_Name: EmitterProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,13 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82167585c718144ca04b56d66710e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    velocity: {x: 0, y: 0}
-    acceleration: 0
-    gravity: {x: 0, y: 0}
-    position: {x: 0, y: 0}
-    timeToLive: 0
-    speed: 0
+  Data: {fileID: 0}
+  spriteRenderer: {fileID: 8803372606578490048}
 --- !u!1 &3383802806708878080
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,8 +5,9 @@ using UnityEngine;
 
 namespace BulletHell
 {
-    //Rotates a vector (v) by the given amount in degrees (d).
     public static class Utilities {
+
+        //Rotates a vector (v) by the given amount in degrees (d).
         public static Vector2 Rotate(Vector2 v, float d)
         {
             float sin = Mathf.Sin(d * Mathf.Deg2Rad);

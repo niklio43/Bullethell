@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
+  m_Name: Test 1
+  m_EditorClassIdentifier: 
+  name: TestProjectile
+  Sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
+  Scale: 0.5
+  Color: {r: 1, g: 0, b: 0, a: 1}
