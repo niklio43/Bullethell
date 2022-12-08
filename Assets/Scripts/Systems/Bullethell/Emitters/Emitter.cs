@@ -19,7 +19,7 @@ namespace BulletHell.Emitters
         float _parentRotation => transform.rotation.eulerAngles.z;
         Vector2 _direction => Vector2.up;
 
-        private void Awake()
+        private void Start()
         {
             Initialize();
         }
