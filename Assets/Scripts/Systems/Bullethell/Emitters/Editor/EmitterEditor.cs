@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -13,12 +14,19 @@ namespace BulletHell.Emitters.Editor
         Emitter _target;
         Texture2D _emitterIcon;
 
-        //public override void OnInspectorGUI()
-        //{
-        //    DrawDefaultInspector();
-        //    DrawDataInspector();
-        //}
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            DrawDataInspector();
+        }
 
+        private void DrawDataInspector()
+        {
+            if (_target.Data != null) {
+                var editor = CreateEditor(_target.Data);
+                editor.OnInspectorGUI();
+            }
+        }
 
         void OnSceneGUI()
         {

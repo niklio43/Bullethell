@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BulletHell.Emitters
 {
-    [System.Serializable]
-    public class EmitterData
+    [CreateAssetMenu(fileName = "EmitterData", menuName = "Emitters/EmitterData", order = 1)]
+    public class EmitterData : ScriptableObject
     {
         [Header("General")]
         [Range(0, 5000)] public int Delay = 1000;

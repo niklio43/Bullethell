@@ -36,7 +36,7 @@ public class WeaponController : MonoBehaviour
     {
         var emitter = GetComponent<Emitter>();
         emitter.enabled = true;
-        emitter.data = weapon.EmitterData;
+        emitter.Data = weapon.EmitterData;
         emitter.Initialize();
     }
 
