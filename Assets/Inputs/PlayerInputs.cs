@@ -98,6 +98,51 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbilityQ"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a9d7fbd-8fa4-492e-8ab5-a906db293799"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbilityE"",
+                    ""type"": ""Button"",
+                    ""id"": ""b304a482-458f-4c19-b9ef-be5343c5a4cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbilityR"",
+                    ""type"": ""Button"",
+                    ""id"": ""525bd509-a029-4592-b88e-2fa3f0845503"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""c64097a7-82a7-40b7-ad04-29e23cbba133"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""59b19f8d-0083-47c7-abe2-206e464fc82a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -384,6 +429,61 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""TopHotBar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0f3f1d9-97d2-45b5-ba5f-70d5ce88f649"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AbilityQ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0028c6c6-5d7c-4701-85d6-2a50a96cd7bb"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AbilityE"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""074d3f1e-06ca-4b56-b67f-e53ffff8dd48"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AbilityR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b1bb3b7-7ba8-4c59-9f3b-6731f56e0938"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""743aeb3d-563e-4aee-bb02-9a99af39e593"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -979,6 +1079,11 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_Player_RightHotBar = m_Player.FindAction("RightHotBar", throwIfNotFound: true);
         m_Player_BottomHotBar = m_Player.FindAction("BottomHotBar", throwIfNotFound: true);
         m_Player_TopHotBar = m_Player.FindAction("TopHotBar", throwIfNotFound: true);
+        m_Player_AbilityQ = m_Player.FindAction("AbilityQ", throwIfNotFound: true);
+        m_Player_AbilityE = m_Player.FindAction("AbilityE", throwIfNotFound: true);
+        m_Player_AbilityR = m_Player.FindAction("AbilityR", throwIfNotFound: true);
+        m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1058,6 +1163,11 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RightHotBar;
     private readonly InputAction m_Player_BottomHotBar;
     private readonly InputAction m_Player_TopHotBar;
+    private readonly InputAction m_Player_AbilityQ;
+    private readonly InputAction m_Player_AbilityE;
+    private readonly InputAction m_Player_AbilityR;
+    private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -1070,6 +1180,11 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @RightHotBar => m_Wrapper.m_Player_RightHotBar;
         public InputAction @BottomHotBar => m_Wrapper.m_Player_BottomHotBar;
         public InputAction @TopHotBar => m_Wrapper.m_Player_TopHotBar;
+        public InputAction @AbilityQ => m_Wrapper.m_Player_AbilityQ;
+        public InputAction @AbilityE => m_Wrapper.m_Player_AbilityE;
+        public InputAction @AbilityR => m_Wrapper.m_Player_AbilityR;
+        public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1103,6 +1218,21 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @TopHotBar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTopHotBar;
                 @TopHotBar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTopHotBar;
                 @TopHotBar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTopHotBar;
+                @AbilityQ.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityQ;
+                @AbilityQ.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityQ;
+                @AbilityQ.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityQ;
+                @AbilityE.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityE;
+                @AbilityE.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityE;
+                @AbilityE.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityE;
+                @AbilityR.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityR;
+                @AbilityR.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityR;
+                @AbilityR.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityR;
+                @Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1131,6 +1261,21 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @TopHotBar.started += instance.OnTopHotBar;
                 @TopHotBar.performed += instance.OnTopHotBar;
                 @TopHotBar.canceled += instance.OnTopHotBar;
+                @AbilityQ.started += instance.OnAbilityQ;
+                @AbilityQ.performed += instance.OnAbilityQ;
+                @AbilityQ.canceled += instance.OnAbilityQ;
+                @AbilityE.started += instance.OnAbilityE;
+                @AbilityE.performed += instance.OnAbilityE;
+                @AbilityE.canceled += instance.OnAbilityE;
+                @AbilityR.started += instance.OnAbilityR;
+                @AbilityR.performed += instance.OnAbilityR;
+                @AbilityR.canceled += instance.OnAbilityR;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -1295,6 +1440,11 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnRightHotBar(InputAction.CallbackContext context);
         void OnBottomHotBar(InputAction.CallbackContext context);
         void OnTopHotBar(InputAction.CallbackContext context);
+        void OnAbilityQ(InputAction.CallbackContext context);
+        void OnAbilityE(InputAction.CallbackContext context);
+        void OnAbilityR(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
