@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 235eeae7a430be3488ffb94f65b45572, type: 3}
-  m_Name: Player Inventory
+  m_Script: {fileID: 11500000, guid: 353f32ff0a1ffdd47a0f34ea7c5e7a28, type: 3}
+  m_Name: EnemyStats
   m_EditorClassIdentifier: 
-  Container:
-  - Item: {fileID: 11400000, guid: 50341da266b037e4fba199f25d005ee0, type: 2}
-    Amount: 1
+  health: 50
+  maxHealth: 50

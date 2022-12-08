@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 235eeae7a430be3488ffb94f65b45572, type: 3}
-  m_Name: Player Inventory
+  m_Script: {fileID: 11500000, guid: 127406b0d97af214b91ee079ffed890b, type: 3}
+  m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  Container:
-  - Item: {fileID: 11400000, guid: 50341da266b037e4fba199f25d005ee0, type: 2}
-    Amount: 1
+  health: 100
+  maxHealth: 100
+  moveSpeed: 10
+  dashDistance: 4
