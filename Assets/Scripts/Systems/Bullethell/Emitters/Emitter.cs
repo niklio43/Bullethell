@@ -9,7 +9,6 @@ namespace BulletHell.Emitters
         public bool AutoFire = true;
         public EmitterData Data;
 
-
         ObjectPool<Projectile> _pool;
         List<EmitterGroup> _emitterGroups = new List<EmitterGroup>();
 

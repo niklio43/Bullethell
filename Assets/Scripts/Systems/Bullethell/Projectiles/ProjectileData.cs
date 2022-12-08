@@ -6,7 +6,7 @@ using BulletHell.Emitters;
 
 namespace BulletHell
 {
-    [CreateAssetMenu(fileName = "ProjectileData", menuName = "Projectile/ProjectileData")]
+    [CreateAssetMenu(fileName = "ProjectileData", menuName = "Emitters/ProjectileData")]
     public class ProjectileData : ScriptableObject
     {
         public new string name = "NewProjectileData";
