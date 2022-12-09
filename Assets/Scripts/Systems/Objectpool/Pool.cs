@@ -8,9 +8,7 @@ namespace BulletHell
     public class Pool<T> where T : class, IPoolable
     {
         public List<T> members = new List<T>();
-
-        //TODO: Turn this into a list holding indices instead.
-        public List<T> active = new List<T>();
+        public List<int> active = new List<int>();
 
         protected Func<T> CreateFunction;
 
@@ -29,31 +27,36 @@ namespace BulletHell
         public virtual T Get()
         {
             T item = null;
+            int index = 0;
 
             for (int i = 0; i < members.Count; i++) {
-                if (active.Contains(members[i])) { continue; }
+                if (active.Contains(i)) { continue; }
                 item = members[i];
+                index = i;
             }
 
             if (item == null) {
                 if (members.Count < maxAmount) {
                     item = Create();
+                    index = members.Count - 1;
                 }
                 else {
-                    item = active[0];
+                    item = members[active[0]];
                     item.ResetObject();
                 }
             }
 
-            active.Add(item);
+            active.Add(index);
             return item;
         }
 
         //Returns the given object to the pool.
         public virtual void Release(T item)
         {
-            if (!active.Contains(item)) { return; }
-            active.Remove(item);
+            int index = members.IndexOf(item);
+
+            if (!active.Contains(index)) { return; }
+            active.Remove(index);
         }
 
         //Destroys the pool.
@@ -72,7 +75,6 @@ namespace BulletHell
             return newItem;
         }
     }
-
 
     //Class responsible for pooling and managing objects deriving from MonoBehaviour.
     public class ObjectPool<T> : Pool<T> where T : MonoBehaviour, IPoolable

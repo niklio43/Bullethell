@@ -24,6 +24,8 @@ namespace BulletHell.Emitters
         [Range(-180, 180)] public float Spread = 0;
 
         Projectile _projectilePrefab;
+        public float ParentRotation = 0;
+
         public Projectile ProjectilePrefab
         {
             get {
@@ -36,5 +38,6 @@ namespace BulletHell.Emitters
         }
 
         public ModifierController Modifiers;
+        public Vector2 Direction => Vector2.up;
     }
 }

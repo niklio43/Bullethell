@@ -12,15 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068d6e9f944711144bd7d00cd15fca44, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  Delay: 1000
-  MaxProjectiles: 10
-  ProjectileData: {fileID: 0}
+  Delay: 120
+  MaxProjectiles: 1000
+  ProjectileData: {fileID: 11400000, guid: 416b5c5eea371d247acb3f1ef2c76984, type: 2}
   TimeToLive: 5
-  BaseSpeed: 1
-  EmitterPoints: 1
-  CenterRotation: 0
-  Pitch: 0
+  BaseSpeed: 8
+  EmitterPoints: 17
+  CenterRotation: 19561.697
+  Pitch: 6.2
   Offset: 0
-  Spread: 0
+  Spread: 12
+  ParentRotation: 0
   Modifiers:
-    Modifiers: []
+    Modifiers:
+    - Factor: 5
+      Count: 0
+      ProjectileData: {fileID: 11400000, guid: 8ba00ceddcecf1f448820fcf90b515ff, type: 2}
+      SpeedMultiplier: 0.92
+      Pitch: -177.1
+      Offset: 0
+      Spread: 0

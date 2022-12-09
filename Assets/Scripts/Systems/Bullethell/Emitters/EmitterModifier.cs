@@ -7,6 +7,8 @@ namespace BulletHell.Emitters
     [System.Serializable]
     public class EmitterModifier
     {
+        public bool enabled = true;
+
         public int Factor;
         public int Count;
 

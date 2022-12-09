@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BulletHell.Emitters
 {
     [System.Serializable]
-    public sealed class ModifierController
+    public class ModifierController
     {
         public List<EmitterModifier> Modifiers;
         public EmitterModifier this[int i] => Modifiers[i];
