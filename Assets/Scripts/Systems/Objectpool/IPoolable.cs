@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace BulletHell
 {
-
     //Required for objects that are to be pooled.
     public interface IPoolable
     {

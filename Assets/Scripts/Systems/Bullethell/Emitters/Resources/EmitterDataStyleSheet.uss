@@ -1,0 +1,27 @@
+.unity-foldout{
+	background-color: #292929;
+	margin-bottom:4px;
+}
+
+#unity-checkmark{
+	margin: 5px 5px 5px 20px;
+}
+
+.unity-foldout #unity-content{
+	background-color: #292929;
+	margin: 0;
+	padding: 0 5px 5px 5px;
+}
+
+#modifier-name #edit:hover{
+	-unity-background-image-tint-color: #FFB14C;
+}
+
+#move-up:hover{
+	-unity-background-image-tint-color: #FFFFFF;
+}
+
+
+Label{
+	-unity-font-style: bold;
+}

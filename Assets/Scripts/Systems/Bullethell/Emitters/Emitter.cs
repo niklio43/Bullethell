@@ -9,7 +9,7 @@ namespace BulletHell.Emitters
         public EmitterData Data;
 
         EmitterGroups _emitterGroups;
-        ObjectPool<Projectile> _pool;
+        public ObjectPool<Projectile> _pool { get; private set; }
         float _interval = 0;
 
         private void Start()
@@ -36,8 +36,6 @@ namespace BulletHell.Emitters
                 _interval -= dt;
             }
 
-            Data.CenterRotation += Time.deltaTime * 100;
-
 
             UpdateProjectiles(dt);
             if (AutoFire && _interval <= 0) {
@@ -53,6 +51,7 @@ namespace BulletHell.Emitters
 
             return projectile;
         }
+
         public virtual void FireProjectile()
         {
             for (int n = 0; n < Data.EmitterPoints; n++) {
@@ -88,6 +87,7 @@ namespace BulletHell.Emitters
                 UpdateProjectile(_pool.members[_pool.active[i]], dt);
             }
         }
+
         protected virtual void UpdateProjectile(Projectile projectile, float dt)
         {
             projectile.Velocity *= (1 + projectile.Acceleration * dt);
@@ -97,7 +97,6 @@ namespace BulletHell.Emitters
 
         protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();
         public void ClearAllProjectiles() => _pool.Dispose();
-
         private void OnDisable() => ClearAllProjectiles();
     }
 }

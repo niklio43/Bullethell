@@ -19,7 +19,7 @@ namespace BulletHell.Emitters
             _emitterGroups = new List<EmitterGroup>();
         }
 
-        public void UpdateGroups(EmitterData emitterData, ModifierController modifiers)
+        public void UpdateGroups(EmitterData emitterData, List<EmitterModifier> modifiers)
         {
             CreateGroups(emitterData.EmitterPoints);
             RefreshGroups(emitterData, modifiers);
@@ -35,7 +35,7 @@ namespace BulletHell.Emitters
                 _emitterGroups.Add(new EmitterGroup());
             }
         }
-        public void RefreshGroups(EmitterData emitterData, ModifierController modifiers)
+        public void RefreshGroups(EmitterData emitterData, List<EmitterModifier> modifiers)
         {
             for (int n = 0; n < emitterData.EmitterPoints; n++) {
 
@@ -49,7 +49,7 @@ namespace BulletHell.Emitters
                 EmitterModifier activeModifier = null;
 
                 for (int i = 0; i < modifiers.Count; i++) {
-                    if(!modifiers[i].enabled) { continue; }
+                    if(!modifiers[i].Enabled) { continue; }
                     int value = ((n + 1) % modifiers[i].Factor) - modifiers[i].Count;
                     if (value > 0) { continue; }
 

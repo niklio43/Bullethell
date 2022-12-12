@@ -1,26 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace BulletHell.Emitters
 {
-    [System.Serializable]
-    public class EmitterModifier
+    [CreateAssetMenu(fileName = "ModifierData", menuName = "Emitters/ModifierData", order = 1)]
+    public class EmitterModifier : ScriptableObject
     {
-        public bool enabled = true;
+        public bool FoldOut = false;
+        public string guid { get; set; }
+        public bool Enabled = true;
 
+        //General
+        public bool FoldOutGeneral = false;
         public int Factor;
         public int Count;
 
-        string name;
-
-        [Header("Projectile Modifiers")]
+        //Projectile Modifiers
+        public bool FoldOutProjectile = false;
         public ProjectileData ProjectileData;
         [Range(0.1f, 5f)] public float SpeedMultiplier = 1;
 
-        [Header("Emission Modifiers")]
+        //Emission Modifiers
+        public bool FoldOutEmitter = false;
         [Range(-180, 180)] public float Pitch = 0;
         [Range(0, 10)] public float Offset = 0;
         [Range(-180, 180)] public float Spread = 0;
+
+        public void Rename(string newName)
+        {
+            if(newName == name) { return; }
+            name = newName;
+#if UNITY_EDITOR
+            AssetDatabase.SaveAssets();
+#endif
+        }
     }
 }
