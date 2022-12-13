@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7986156219280907538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee438fc75b1644a47bd264fbb614b97d, type: 3}
+  m_Name: Modifier 0
+  m_EditorClassIdentifier: 
+  FoldOut: 1
+  Enabled: 1
+  FoldOutGeneral: 0
+  Factor: 2
+  Count: 0
+  FoldOutProjectile: 0
+  ProjectileData: {fileID: 0}
+  TimeToLive: 0
+  SpeedMultiplier: 1.09
+  FoldOutEmitter: 1
+  Pitch: 10
+  Offset: 0.05
+  NarrowSpread: 0
+--- !u!114 &-4714761268737006512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee438fc75b1644a47bd264fbb614b97d, type: 3}
+  m_Name: Modifier 1
+  m_EditorClassIdentifier: 
+  FoldOut: 1
+  Enabled: 1
+  FoldOutGeneral: 0
+  Factor: 3
+  Count: 0
+  FoldOutProjectile: 0
+  ProjectileData: {fileID: 0}
+  TimeToLive: 0
+  SpeedMultiplier: 0.9
+  FoldOutEmitter: 1
+  Pitch: 20
+  Offset: 0.11
+  NarrowSpread: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,15 +62,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068d6e9f944711144bd7d00cd15fca44, type: 3}
   m_Name: BloodSlashEmitterData
   m_EditorClassIdentifier: 
+  FoldOutGeneral: 1
   Delay: 1000
   MaxProjectiles: 10
-  ProjectileData: {fileID: 11400000, guid: 416b5c5eea371d247acb3f1ef2c76984, type: 2}
+  RotationSpeed: 0
+  FoldOutProjectile: 1
+  ProjectileData: {fileID: 11400000, guid: edf2edafe72fe4f448187540d8b04301, type: 2}
   TimeToLive: 5
-  BaseSpeed: 3
+  BaseSpeed: 28.6
+  FoldOutEmitter: 1
   EmitterPoints: 3
   CenterRotation: -180
   Pitch: 0
   Offset: 0
-  Spread: 5
+  Spread: 0
+  FoldOutModifiers: 0
+  gravityPoint: {x: 0, y: 0}
+  gravityScale: 0
+  ParentRotation: 0
   Modifiers:
-    Modifiers: []
+  - {fileID: -7986156219280907538}
+  - {fileID: -4714761268737006512}

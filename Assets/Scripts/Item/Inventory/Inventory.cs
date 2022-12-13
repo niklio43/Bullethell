@@ -15,15 +15,34 @@ public class Inventory : ScriptableObject
 
     public void AddItem(ItemObject item, int amount)
     {
-        for (int i = 0; i < Container.Items.Count; i++)
+        if (database.GetItem[item.Id] is Weapon || database.GetItem[item.Id] is Armor)
         {
-            if (Container.Items[i].Item == item)
+            SetEmptySlot(item, amount);
+            return;
+        }
+        for (int i = 0; i < Container.Items.Length; i++)
+        {
+            if (Container.Items[i].ID == item.Id)
             {
                 Container.Items[i].AddAmount(amount);
                 return;
             }
         }
-        Container.Items.Add(new InventorySlot(item.Id, item, amount));
+        SetEmptySlot(item, amount);
+    }
+
+    public InventorySlot SetEmptySlot(ItemObject itemObject, int amount)
+    {
+        for (int i = 0; i < Container.Items.Length; i++)
+        {
+            if(Container.Items[i].ID <= -1)
+            {
+                Container.Items[i].UpdateSlot(itemObject.Id, itemObject, amount);
+                return Container.Items[i];
+            }
+        }
+        //no space in inv
+        return null;
     }
 
     [ContextMenu("Save")]
@@ -57,16 +76,28 @@ public class Inventory : ScriptableObject
 [System.Serializable]
 public class InventoryContainer
 {
-    public List<InventorySlot> Items = new List<InventorySlot>();
+    public InventorySlot[] Items = new InventorySlot[24];
 }
 
 [System.Serializable]
 public class InventorySlot
 {
-    public int ID;
+    public int ID = -1;
     public ItemObject Item;
     public int Amount;
+    public InventorySlot()
+    {
+        ID = -1;
+        Item = null;
+        Amount = 0;
+    }
     public InventorySlot(int _id, ItemObject item, int amount)
+    {
+        ID = _id;
+        Item = item;
+        Amount = amount;
+    }
+    public void UpdateSlot(int _id, ItemObject item, int amount)
     {
         ID = _id;
         Item = item;

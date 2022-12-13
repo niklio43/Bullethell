@@ -10,6 +10,7 @@ public class Sword : Melee
     [SerializeField] int damage;
     [SerializeField] string itemName;
     [SerializeField] Pool pool;
+    [SerializeField] Rarity rarity;
 
     void OnEnable()
     {
@@ -17,5 +18,6 @@ public class Sword : Melee
         Damage = damage;
         ItemName = itemName;
         Pool = pool;
+        Rarity = rarity;
     }
 }

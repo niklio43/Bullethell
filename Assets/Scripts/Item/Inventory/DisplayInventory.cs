@@ -13,49 +13,46 @@ public class DisplayInventory : MonoBehaviour
     public int X_SPACE_BETWEEN_ITEM;
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEMS;
-    Dictionary<InventorySlot, GameObject> _itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
+    Dictionary<GameObject, InventorySlot> _itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
     [SerializeField] GameObject _itemPrefab;
 
     void Start()
     {
-        CreateDisplay();
+        CreateSlots();
     }
 
     void Update()
     {
-        UpdateDisplay();
+        UpdateSlots();
     }
 
-
-    void CreateDisplay()
+    public void UpdateSlots()
     {
-        for (int i = 0; i < Inventory.Container.Items.Count; i++)
+        foreach (KeyValuePair<GameObject, InventorySlot> slot in _itemsDisplayed)
         {
-            InventorySlot slot = Inventory.Container.Items[i];
-            var obj = Instantiate(_itemPrefab, Vector3.zero, Quaternion.identity, transform);
-            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponent<Image>().sprite = Inventory.database.GetItem[slot.Item.Id].Sprite;
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.Amount.ToString("n0");
-            _itemsDisplayed.Add(slot, obj);
-        }
-    }
-    void UpdateDisplay()
-    {
-        for (int i = 0; i < Inventory.Container.Items.Count; i++)
-        {
-            InventorySlot slot = Inventory.Container.Items[i];
-            if (_itemsDisplayed.ContainsKey(slot))
+            if(slot.Value.ID >= 0)
             {
-                _itemsDisplayed[slot].GetComponentInChildren<TextMeshProUGUI>().text = slot.Amount.ToString("n0");
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = Inventory.database.GetItem[slot.Value.Item.Id].Sprite;
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+                slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = slot.Value.Amount == 1 ? "" : slot.Value.Amount.ToString("n0");
             }
             else
             {
-                var obj = Instantiate(_itemPrefab, Vector3.zero, Quaternion.identity, transform);
-                obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-                obj.GetComponent<Image>().sprite = Inventory.database.GetItem[slot.Item.Id].Sprite;
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.Amount.ToString("n0");
-                _itemsDisplayed.Add(slot, obj);
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+                slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = "";
             }
+        }
+    }
+
+    void CreateSlots()
+    {
+        _itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
+        for (int i = 0; i < Inventory.Container.Items.Length; i++)
+        {
+            var obj = Instantiate(_itemPrefab, Vector3.zero, Quaternion.identity, transform);
+            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
+            _itemsDisplayed.Add(obj, Inventory.Container.Items[i]);
         }
     }
 

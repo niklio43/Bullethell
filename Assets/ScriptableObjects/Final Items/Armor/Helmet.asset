@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a500ba16cb63a14b822b41907bb067a, type: 3}
   m_Name: Helmet
   m_EditorClassIdentifier: 
+  Id: 2
   defense: 10
   sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
-  itemName: Helmet
+  itemName: Common Headgear
+  rarity: 0

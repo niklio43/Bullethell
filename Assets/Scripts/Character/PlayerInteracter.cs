@@ -43,6 +43,6 @@ public class PlayerInteracter : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        _inventory.Container.Items.Clear();
+        _inventory.Container.Items = new InventorySlot[24];
     }
 }

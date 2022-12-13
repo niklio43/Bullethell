@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 235eeae7a430be3488ffb94f65b45572, type: 3}
-  m_Name: Player Inventory
+  m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
+  m_Name: BloodSlashProjectileData
   m_EditorClassIdentifier: 
-  savePath: /inventory.Save
-  database: {fileID: 11400000, guid: 8b3e3c1ab5b63a44d98e0c589b108941, type: 2}
-  Container:
-    Items: []
+  name: BloodSlash
+  Sprite: {fileID: 21300000, guid: 3cbe10cf40fb2774887730294eb5123b, type: 3}
+  Scale: 1
+  Color: {r: 1, g: 1, b: 1, a: 1}
