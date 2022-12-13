@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: TestProjectile
   Sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
-  Scale: 0.5
-  Color: {r: 1, g: 0, b: 0, a: 1}
+  Scale: 0.1
+  Color: {r: 0.033430457, g: 1, b: 0, a: 1}

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static BulletHell.Utilities;
 
 namespace BulletHell.Emitters
 {
@@ -9,15 +8,9 @@ namespace BulletHell.Emitters
         public bool AutoFire = true;
         public EmitterData Data;
 
-
-        ObjectPool<Projectile> _pool;
-        List<EmitterGroup> _emitterGroups = new List<EmitterGroup>();
-
+        EmitterGroups _emitterGroups;
+        public ObjectPool<Projectile> _pool { get; private set; }
         float _interval = 0;
-
-        ModifierController _modifiers => Data.Modifiers;
-        float _parentRotation => transform.rotation.eulerAngles.z;
-        Vector2 _direction => Vector2.up;
 
         private void Start()
         {
@@ -26,14 +19,17 @@ namespace BulletHell.Emitters
 
         public void Initialize()
         {
+            Data = Instantiate(Data);
             _pool = new ObjectPool<Projectile>(CreateProjectile, Data.MaxProjectiles, name);
-            CreateGroups();
+            _emitterGroups = new EmitterGroups(transform);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            RefreshGroups();
-            UpdateEmitter(Time.deltaTime);
+            Data.CenterRotation += Time.fixedDeltaTime * Data.RotationSpeed * 10;
+            Data.ParentRotation = transform.rotation.eulerAngles.z;
+            _emitterGroups.UpdateGroups(Data, Data.Modifiers);
+            UpdateEmitter(Time.fixedDeltaTime);
         }
 
         public void UpdateEmitter(float dt)
@@ -42,54 +38,13 @@ namespace BulletHell.Emitters
                 _interval -= dt;
             }
 
+
             UpdateProjectiles(dt);
             if (AutoFire && _interval <= 0) {
                 _interval += Data.Delay / 1000f;
                 FireProjectile();
             }
         }
-
-        void CreateGroups()
-        {
-            for (int i = 0; i < Data.EmitterPoints; i++) {
-                _emitterGroups.Add(new EmitterGroup());
-            }
-        }
-
-        void RefreshGroups()
-        {
-            for (int n = 0; n < Data.EmitterPoints; n++) {
-
-                _emitterGroups[n].ClearModifier();
-
-                float spread = n * Data.Spread;
-                float pitch = Data.Pitch;
-                float offset = Data.Offset;
-
-                //float centerSpread = (spread * ((_emitterPoints - 1) / 2f));
-
-                EmitterModifier activeModifier = null;
-
-                for (int i = 0; i < _modifiers.Count; i++) {
-                    int value = (n % _modifiers[i].Factor) - _modifiers[i].Count;
-                    if (value > 0) { continue; }
-
-                    activeModifier = _modifiers[i];
-                    spread += _modifiers[i].Spread;
-                    pitch += _modifiers[i].Pitch;
-                    offset += _modifiers[i].Offset;
-                }
-
-                float rotation = spread + Data.CenterRotation + _parentRotation;
-                Vector2 positon = (Rotate(_direction, rotation).normalized * offset) + (Vector2)transform.position;
-
-                Vector2 direction = Rotate(_direction, rotation + pitch).normalized;
-
-                _emitterGroups[n].Set(positon, direction);
-                _emitterGroups[n].SetModifier(activeModifier);
-            }
-        }
-
 
         Projectile CreateProjectile()
         {
@@ -98,9 +53,10 @@ namespace BulletHell.Emitters
 
             return projectile;
         }
+
         public virtual void FireProjectile()
         {
-            for (int n = 0; n < Data.EmitterPoints; n++) {
+            for (int n = 0; n < Mathf.Clamp(Data.EmitterPoints, 0, Data.MaxProjectiles); n++) {
                 EmitterModifier modifier = _emitterGroups[n].Modifier;
 
                 Projectile projectile = _pool.Get();
@@ -110,7 +66,12 @@ namespace BulletHell.Emitters
                 float timeToLive = Data.TimeToLive;
 
                 if (modifier != null) {
-                    projectileData = modifier.ProjectileData;
+                    if(modifier.TimeToLive > 0)
+                        timeToLive = modifier.TimeToLive;
+
+                    if (modifier.ProjectileData != null)
+                        projectileData = modifier.ProjectileData;
+
                     speed *= modifier.SpeedMultiplier;
                 }
 
@@ -130,9 +91,10 @@ namespace BulletHell.Emitters
         protected virtual void UpdateProjectiles(float dt)
         {
             for (int i = 0; i < _pool.active.Count; i++) {
-                UpdateProjectile(_pool.active[i], dt);
+                UpdateProjectile(_pool.members[_pool.active[i]], dt);
             }
         }
+
         protected virtual void UpdateProjectile(Projectile projectile, float dt)
         {
             projectile.Velocity *= (1 + projectile.Acceleration * dt);
@@ -142,7 +104,6 @@ namespace BulletHell.Emitters
 
         protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();
         public void ClearAllProjectiles() => _pool.Dispose();
-
         private void OnDisable() => ClearAllProjectiles();
     }
 }
