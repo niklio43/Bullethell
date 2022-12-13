@@ -7,6 +7,7 @@ public class PlayerStats : CharacterStats
 {
     [SerializeField] float health;
     [SerializeField] float maxHealth;
+    [SerializeField] int defense;
     public float moveSpeed;
     public float dashDistance;
 
@@ -14,5 +15,6 @@ public class PlayerStats : CharacterStats
     {
         Health = health;
         MaxHealth = maxHealth;
+        Defense = defense;
     }
 }

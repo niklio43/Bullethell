@@ -19,7 +19,7 @@ public class DroppedItem : MonoBehaviour, IPickUp
 
     public void Interact(Inventory inventory)
     {
-        inventory.AddItem(_item, 1);
+        inventory.AddItem(new ItemObject(_item), 1);
         Destroy(gameObject);
     }
 }

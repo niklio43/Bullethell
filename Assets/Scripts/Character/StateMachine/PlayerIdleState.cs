@@ -7,10 +7,7 @@ public class PlayerIdleState : PlayerBaseState
     public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         : base(currentContext, playerStateFactory){}
 
-    public override void EnterState()
-    {
-        Debug.Log("idle");
-    }
+    public override void EnterState(){}
     public override void UpdateState()
     {
         CheckSwitchState();

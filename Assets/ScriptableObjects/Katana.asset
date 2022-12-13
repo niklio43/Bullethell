@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bcd0f6d5e6c47e4f8befedf53a971cc, type: 3}
   m_Name: Katana
   m_EditorClassIdentifier: 
-  _abilitySlot: []
+  _abilitySlot:
+  - {fileID: 11400000, guid: 6f078416c06914c46b0bd4db4620d5b9, type: 2}
   sprite: {fileID: 21300000, guid: 7a6caab4786094a43bea1d69e7677e17, type: 3}
   damage: 80
   itemName: Katana

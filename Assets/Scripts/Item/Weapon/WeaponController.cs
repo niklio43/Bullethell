@@ -21,6 +21,7 @@ public class WeaponController : MonoBehaviour
 
     public void AssignWeapon(Weapon weapon)
     {
+        weapon.Initialize(this);
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
         if (weapon.GetType().Equals(typeof(Ranged)))
         {
@@ -35,15 +36,11 @@ public class WeaponController : MonoBehaviour
     public void AssignWeapon(Ranged weapon)
     {
         var emitter = GetComponent<Emitter>();
-        emitter.enabled = true;
         emitter.Data = weapon.EmitterData;
         emitter.Initialize();
     }
 
-    public void AssignWeapon(Melee weapon)
-    {
-        GetComponent<Emitter>().enabled = false;
-    }
+    public void AssignWeapon(Melee weapon) { }
 
     public void FillAbilitySlot(Weapon weapon)
     {

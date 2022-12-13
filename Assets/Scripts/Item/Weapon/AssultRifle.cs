@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters;
 
-[CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Weapon/Ranged/AssultRifle")]
+[CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/AssultRifle")]
 public class AssultRifle : Ranged
 {
     [SerializeField] Sprite sprite;

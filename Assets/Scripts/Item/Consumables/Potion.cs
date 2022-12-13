@@ -1,21 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BulletHell.Abilities;
 
-[CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Weapon/Melee/Sword")]
-public class Sword : Melee
+[CreateAssetMenu(fileName = "New Potion", menuName = "Inventory System/Consumables/Potion")]
+public class Potion : Consumables
 {
     [SerializeField] Sprite sprite;
-    [SerializeField] int damage;
+    [SerializeField] int restoreAmount;
     [SerializeField] string itemName;
-    [SerializeField] Pool pool;
 
     void OnEnable()
     {
         Sprite = sprite;
-        Damage = damage;
+        RestoreAmount = restoreAmount;
         ItemName = itemName;
-        Pool = pool;
     }
 }

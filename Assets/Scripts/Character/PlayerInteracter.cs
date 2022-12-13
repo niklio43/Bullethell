@@ -23,9 +23,26 @@ public class PlayerInteracter : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            _inventory.Save();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _inventory.Load();
+        }
+    }
+
     public void Interact()
     {
         if (_closestInteractable == null) return;
         _closestInteractable.Interact(_inventory);
+    }
+
+    void OnApplicationQuit()
+    {
+        _inventory.Container.Items.Clear();
     }
 }

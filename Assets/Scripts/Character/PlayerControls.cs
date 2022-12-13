@@ -6,7 +6,7 @@ public class PlayerControls : MonoBehaviour
 {
     [SerializeField] PlayerStateMachine _playerStateMachine;
     [SerializeField] PlayerUI _playerUI;
-    [SerializeField] Emitter _emitter;
+    [SerializeField] Weapon _weapon;
     PlayerInputs _inputs;
     PlayerInteracter playerInteracter;
 
@@ -22,9 +22,9 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Dash.performed += ctx => _playerStateMachine.Dash(ctx);
 
         //Ability
-        //_inputs.Player.AbilityQ.performed += ctx => _playerStateMachine.Dash(ctx);
-        //_inputs.Player.AbilityE.performed += ctx => _playerStateMachine.Dash(ctx);
-        //_inputs.Player.AbilityR.performed += ctx => _playerStateMachine.Dash(ctx);
+        _inputs.Player.AbilityQ.performed += ctx => _weapon.AbilitySlot[0].DoAbility();
+        _inputs.Player.AbilityE.performed += ctx => _weapon.AbilitySlot[1].DoAbility();
+        _inputs.Player.AbilityR.performed += ctx => _weapon.AbilitySlot[2].DoAbility();
 
         //Move
         _inputs.Player.Move.performed += ctx => _playerStateMachine.Move(ctx);
@@ -39,7 +39,6 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Interact.performed += ctx => playerInteracter.Interact();
 
         //Fire projectile
-        _inputs.Player.Fire.started += ctx => _emitter.FireProjectile();
 
         #endregion
     }
