@@ -19,12 +19,14 @@ namespace BulletHell.Emitters
 
         public void Initialize()
         {
+            Data = Instantiate(Data);
             _pool = new ObjectPool<Projectile>(CreateProjectile, Data.MaxProjectiles, name);
             _emitterGroups = new EmitterGroups(transform);
         }
 
         private void FixedUpdate()
         {
+            Data.CenterRotation += Time.fixedDeltaTime * Data.RotationSpeed * 10;
             Data.ParentRotation = transform.rotation.eulerAngles.z;
             _emitterGroups.UpdateGroups(Data, Data.Modifiers);
             UpdateEmitter(Time.fixedDeltaTime);
@@ -54,7 +56,7 @@ namespace BulletHell.Emitters
 
         public virtual void FireProjectile()
         {
-            for (int n = 0; n < Data.EmitterPoints; n++) {
+            for (int n = 0; n < Mathf.Clamp(Data.EmitterPoints, 0, Data.MaxProjectiles); n++) {
                 EmitterModifier modifier = _emitterGroups[n].Modifier;
 
                 Projectile projectile = _pool.Get();
@@ -64,7 +66,12 @@ namespace BulletHell.Emitters
                 float timeToLive = Data.TimeToLive;
 
                 if (modifier != null) {
-                    projectileData = modifier.ProjectileData;
+                    if(modifier.TimeToLive > 0)
+                        timeToLive = modifier.TimeToLive;
+
+                    if (modifier.ProjectileData != null)
+                        projectileData = modifier.ProjectileData;
+
                     speed *= modifier.SpeedMultiplier;
                 }
 

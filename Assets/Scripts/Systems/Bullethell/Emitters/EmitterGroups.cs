@@ -44,22 +44,29 @@ namespace BulletHell.Emitters
                 float spread = n * emitterData.Spread;
                 float pitch = emitterData.Pitch;
                 float offset = emitterData.Offset;
-
+                float centerSpread = (Mathf.CeilToInt((emitterData.EmitterPoints - 1) / 2f)) * emitterData.Spread;
 
                 EmitterModifier activeModifier = null;
 
                 for (int i = 0; i < modifiers.Count; i++) {
                     if(!modifiers[i].Enabled) { continue; }
-                    int value = ((n + 1) % modifiers[i].Factor) - modifiers[i].Count;
+                    int value = ((n + 1 + modifiers[i].Count) % modifiers[i].Factor);
                     if (value > 0) { continue; }
 
                     activeModifier = modifiers[i];
-                    spread = n * emitterData.Spread + modifiers[i].Spread;
+                    spread = n * emitterData.Spread;
+
+                    if (spread > centerSpread) {
+                        spread -= modifiers[i].NarrowSpread;
+                    }
+                    else if(spread < centerSpread){
+                        spread += modifiers[i].NarrowSpread;
+                    }
+
                     pitch = modifiers[i].Pitch;
                     offset = modifiers[i].Offset;
                 }
 
-                float centerSpread = (spread * ((emitterData.EmitterPoints - 1) / 2f));
                 float rotation = spread + emitterData.CenterRotation + emitterData.ParentRotation;
                 Vector2 positon = (Rotate(emitterData.Direction, rotation).normalized * offset) + (Vector2)_transform.position;
 

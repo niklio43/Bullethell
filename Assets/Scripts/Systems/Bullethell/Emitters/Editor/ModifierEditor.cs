@@ -41,9 +41,14 @@ namespace BulletHell.Emitters.Editor
         private void CreateHeader()
         {
             GroupBox header = _root.Query<GroupBox>("modifier-header");
-
             Label name = header.Query<Label>("name");
             name.text = _target.name;
+
+            Toggle toggle = header.Query<Toggle>("toggle-modifier").First();
+
+            toggle.value = _target.Enabled;
+            toggle.RegisterCallback<ClickEvent>((changeEvent) => _target.Enabled = toggle.value);
+
 
             Button editBtn = header.Query<Button>("edit").First();
             VisualElement nameField = header.Query<VisualElement>("namefield").First();
@@ -69,11 +74,18 @@ namespace BulletHell.Emitters.Editor
 
         private void CreateFields()
         {
-            Foldout foldout = _root.Query<Foldout>("modifier-foldout").First();
-            foldout.value = _target.FoldOut;
-            foldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOut = foldout.value);
-
+            Label name = _root.Query<Label>("name").First();
             GroupBox dataRoot = _root.Query<GroupBox>("modifier-data").First();
+
+            name.RegisterCallback<ClickEvent>((changeEvent) => {
+                _target.FoldOut = !_target.FoldOut;
+
+                dataRoot.style.display = (_target.FoldOut) ? DisplayStyle.Flex : DisplayStyle.None;
+            });
+
+
+
+            dataRoot.style.display = DisplayStyle.None;
 
             #region General Data Foldout
             Foldout generalFoldout = new Foldout();
@@ -95,6 +107,7 @@ namespace BulletHell.Emitters.Editor
             projectileFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutProjectile = projectileFoldout.value);
 
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("ProjectileData")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("TimeToLive")));
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("SpeedMultiplier")));
             dataRoot.Add(projectileFoldout);
             #endregion
@@ -108,7 +121,7 @@ namespace BulletHell.Emitters.Editor
 
             emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Pitch")));
             emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Offset")));
-            emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Spread")));
+            emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("NarrowSpread")));
             dataRoot.Add(emissionFoldout);
             #endregion
         }

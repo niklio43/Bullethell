@@ -61,6 +61,7 @@ namespace BulletHell.Emitters.Editor
 
             generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Delay")));
             generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("MaxProjectiles")));
+            generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("RotationSpeed")));
             dataRoot.Add(generalFoldout);
             #endregion
 

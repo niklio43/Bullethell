@@ -42,6 +42,7 @@ namespace BulletHell
                 }
                 else {
                     item = members[active[0]];
+                    index = active[0];
                     item.ResetObject();
                 }
             }

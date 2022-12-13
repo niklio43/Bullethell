@@ -13,6 +13,7 @@ namespace BulletHell.Emitters
         public bool FoldOutGeneral = false;
         [Range(0, 5000)] public int Delay = 1000;
         [Range(0, 1000)] public int MaxProjectiles = 10;
+        [Range(0, 10)] public float RotationSpeed = 0;
 
         //Projectile
         public bool FoldOutProjectile = false;
@@ -27,6 +28,11 @@ namespace BulletHell.Emitters
         [Range(-180, 180)] public float Pitch = 0;
         [Range(0, 10)] public float Offset = 0;
         [Range(-180, 180)] public float Spread = 0;
+
+        //Modifiers
+        public bool FoldOutModifiers = false;
+        public Vector2 gravityPoint;
+        public float gravityScale;
 
         Projectile _projectilePrefab;
         public float ParentRotation = 0;
@@ -114,6 +120,18 @@ namespace BulletHell.Emitters
                 i--;
             }
             Modifiers.Clear();
+        }
+
+        public EmitterModifier GetModifier(string name)
+        {
+            foreach (EmitterModifier modifier in Modifiers) {
+                if(modifier.name == name) {
+                    return modifier;
+                }
+            }
+
+            Debug.LogError($"No modifier with the name: '{name}' could be found!");
+            return null;
         }
 
         #endregion

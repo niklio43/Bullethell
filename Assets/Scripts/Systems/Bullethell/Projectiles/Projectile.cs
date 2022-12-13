@@ -10,7 +10,7 @@ namespace BulletHell
         [SerializeField] SpriteRenderer spriteRenderer;
 
         [HideInInspector] public Vector2 Position;
-        [HideInInspector] public Vector2 Velocity;
+        [SerializeField] public Vector2 Velocity;
         [HideInInspector] public Vector2 Gravity;
 
         [HideInInspector] public float TimeToLive;

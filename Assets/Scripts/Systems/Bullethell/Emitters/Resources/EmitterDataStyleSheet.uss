@@ -17,8 +17,29 @@
 	-unity-background-image-tint-color: #FFB14C;
 }
 
+#modifier-name #name:hover{
+
+	color: #62BBF5;
+}
+
+#modifier-data-foldout{
+	margin-bottom:0px;
+}
+
 #move-up:hover{
-	-unity-background-image-tint-color: #FFFFFF;
+	-unity-background-image-tint-color: red;
+}
+
+#modifier-foldout #unity-content{
+	padding: 0 0 0 0;
+}
+
+#modifier-data-foldout{
+	background-color: #292929;
+}
+
+#modifier-data-foldout #unity-content{
+	padding-left: 5px;
 }
 
 

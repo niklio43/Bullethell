@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9102084176814406992
+--- !u!114 &-7538624243931054505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee438fc75b1644a47bd264fbb614b97d, type: 3}
-  m_Name: Modifier 0
+  m_Name: Modifier 1
   m_EditorClassIdentifier: 
   FoldOut: 0
   Enabled: 1
   FoldOutGeneral: 0
   Factor: 0
   Count: 0
-  FoldOutProjectile: 1
+  FoldOutProjectile: 0
   ProjectileData: {fileID: 0}
-  SpeedMultiplier: 0.972
-  FoldOutEmitter: 1
-  Pitch: -48.2
+  SpeedMultiplier: 1
+  FoldOutEmitter: 0
+  Pitch: 0
   Offset: 0
-  Spread: 0
+  NarrowSpread: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,19 +36,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068d6e9f944711144bd7d00cd15fca44, type: 3}
   m_Name: EmitterData
   m_EditorClassIdentifier: 
-  FoldOutGeneral: 0
-  Delay: 1000
-  MaxProjectiles: 10
-  FoldOutProjectile: 0
-  ProjectileData: {fileID: 0}
-  TimeToLive: 5
-  BaseSpeed: 1
+  FoldOutGeneral: 1
+  Delay: 149
+  MaxProjectiles: 1000
+  FoldOutProjectile: 1
+  ProjectileData: {fileID: 11400000, guid: 416b5c5eea371d247acb3f1ef2c76984, type: 2}
+  TimeToLive: 10
+  BaseSpeed: 2
   FoldOutEmitter: 1
-  EmitterPoints: 1
-  CenterRotation: 0
+  EmitterPoints: 30
+  CenterRotation: 117.7
   Pitch: 0
   Offset: 0
-  Spread: 0
+  Spread: 18
+  FoldOutModifiers: 0
+  gravityPoint: {x: 0, y: 0}
+  gravityScale: 0
   ParentRotation: 0
   Modifiers:
-  - {fileID: -9102084176814406992}
+  - {fileID: 5985815723968814306}
+  - {fileID: -7538624243931054505}
+--- !u!114 &5985815723968814306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee438fc75b1644a47bd264fbb614b97d, type: 3}
+  m_Name: Modifier 0
+  m_EditorClassIdentifier: 
+  FoldOut: 1
+  Enabled: 1
+  FoldOutGeneral: 1
+  Factor: 5
+  Count: 9
+  FoldOutProjectile: 1
+  ProjectileData: {fileID: 11400000, guid: 0507a8c7149dc404aac77d1475bcd523, type: 2}
+  SpeedMultiplier: 1.5
+  FoldOutEmitter: 1
+  Pitch: -3.2
+  Offset: 4.19
+  NarrowSpread: -106

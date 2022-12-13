@@ -20,13 +20,14 @@ namespace BulletHell.Emitters
         //Projectile Modifiers
         public bool FoldOutProjectile = false;
         public ProjectileData ProjectileData;
+        public float TimeToLive = 0;
         [Range(0.1f, 5f)] public float SpeedMultiplier = 1;
 
         //Emission Modifiers
         public bool FoldOutEmitter = false;
         [Range(-180, 180)] public float Pitch = 0;
         [Range(0, 10)] public float Offset = 0;
-        [Range(-180, 180)] public float Spread = 0;
+        [Range(-180, 180)] public float NarrowSpread = 0;
 
         public void Rename(string newName)
         {
