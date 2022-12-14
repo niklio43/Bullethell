@@ -8,11 +8,13 @@ public class Potion : Consumables
     [SerializeField] Sprite sprite;
     [SerializeField] int restoreAmount;
     [SerializeField] string itemName;
+    [SerializeField] ItemType itemType;
 
     void OnEnable()
     {
         Sprite = sprite;
         RestoreAmount = restoreAmount;
         ItemName = itemName;
+        ItemType = itemType;
     }
 }

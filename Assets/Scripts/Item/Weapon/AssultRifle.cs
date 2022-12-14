@@ -11,6 +11,7 @@ public class AssultRifle : Ranged
     [SerializeField] string itemName;
     [SerializeField] EmitterData emitterData;
     [SerializeField] Rarity rarity;
+    [SerializeField] ItemType itemType;
 
     void OnEnable()
     {
@@ -19,5 +20,6 @@ public class AssultRifle : Ranged
         ItemName = itemName;
         EmitterData = emitterData;
         Rarity = rarity;
+        ItemType = itemType;
     }
 }

@@ -7,6 +7,7 @@ public class Headgear : Armor
     [SerializeField] Sprite sprite;
     [SerializeField] string itemName;
     [SerializeField] Rarity rarity;
+    [SerializeField] ItemType itemType;
 
     void OnEnable()
     {
@@ -14,5 +15,6 @@ public class Headgear : Armor
         Sprite = sprite;
         ItemName = itemName;
         Rarity = rarity;
+        ItemType = itemType;
     }
 }

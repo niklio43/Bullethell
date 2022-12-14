@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInteracter : MonoBehaviour
 {
+    public MouseItem MouseItem = new MouseItem();
     [SerializeField, Range(0, 100f)] float _interactRadius = 5f;
     [SerializeField] LayerMask _interactable;
     [SerializeField] Inventory _inventory;

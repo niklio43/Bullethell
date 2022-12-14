@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a8d755cb32f174193f5d1508cf204c, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
+  Id: 0
   sprite: {fileID: 21300000, guid: 8bea18d8d9e83d640aa779633b1a9222, type: 3}
   restoreAmount: 100
   itemName: Health Potion
+  itemType: 4

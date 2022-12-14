@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 4
   defense: 15
-  sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
+  sprite: {fileID: -538765877, guid: aa04c1d8ca98f1e4fa6283fa20baf934, type: 3}
   itemName: Rare Legwear
   rarity: 1
+  itemType: 3
