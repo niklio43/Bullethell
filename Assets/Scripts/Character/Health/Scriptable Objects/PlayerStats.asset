@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  defense: 25
   moveSpeed: 10
   dashDistance: 4

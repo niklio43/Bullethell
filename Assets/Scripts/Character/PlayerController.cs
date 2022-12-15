@@ -9,13 +9,14 @@ public class PlayerController : Character
 
     protected override void Init()
     {
-        heal.Stop();
-        takeDamage.Stop();
+        //heal.Stop();
+        //takeDamage.Stop();
     }
 
     public override void TakeDamage(float value)
     {
-        base.TakeDamage(value);
+        float mitigatedDamage = value / (stats.Defense / 10);
+        base.TakeDamage(mitigatedDamage);
         takeDamage.Play();
         AudioManager.instance.PlayOnce("PlayerDamage");
         //CameraShake.Shake(0.05f, 0.1f);

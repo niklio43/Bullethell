@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInteracter : MonoBehaviour
 {
+    public MouseItem MouseItem = new MouseItem();
     [SerializeField, Range(0, 100f)] float _interactRadius = 5f;
     [SerializeField] LayerMask _interactable;
     [SerializeField] Inventory _inventory;
@@ -23,9 +24,26 @@ public class PlayerInteracter : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            _inventory.Save();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _inventory.Load();
+        }
+    }
+
     public void Interact()
     {
         if (_closestInteractable == null) return;
         _closestInteractable.Interact(_inventory);
+    }
+
+    void OnApplicationQuit()
+    {
+        _inventory.Container.Items = new InventorySlot[24];
     }
 }

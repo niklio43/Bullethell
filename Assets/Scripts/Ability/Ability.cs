@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 namespace BulletHell.Abilities
 {
-    [CreateAssetMenu(fileName = "New Ability", menuName = "Abilities/Ability")]
-    public class Ability : ScriptableObject
+    public abstract class Ability : ScriptableObject
     {
         [SerializeField] Sprite _abilityIcon;
         public string _abilityName;
@@ -21,6 +20,8 @@ namespace BulletHell.Abilities
         }
         List<float> timers;
 
+        public virtual void Initialize(WeaponController weaponController) { }
+
         void Activate(InputAction.CallbackContext context)
         {
             if (currentAmount <= 0) return;
@@ -32,7 +33,7 @@ namespace BulletHell.Abilities
             timers.Add(coolDownTime);
         }
 
-        public void DoAbility() { }
+        public abstract void DoAbility();
 
         public virtual void UpdateAbility(float dt)
         {
