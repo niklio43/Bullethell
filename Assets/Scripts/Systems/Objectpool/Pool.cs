@@ -98,7 +98,7 @@ namespace BulletHell
         public override void Dispose()
         {
             foreach (T item in members) {
-                if(item.gameObject != null)
+                if(item != null && item.gameObject != null)
                 UnityEngine.Object.Destroy(item.gameObject);
             }
 

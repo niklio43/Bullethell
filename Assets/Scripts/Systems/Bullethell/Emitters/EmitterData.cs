@@ -19,7 +19,10 @@ namespace BulletHell.Emitters
         public bool FoldOutProjectile = false;
         public ProjectileData ProjectileData;
         public float TimeToLive = 5;
-        [Range(0.01f, 100f)] public float BaseSpeed = 1;
+        [Range(0.01f, 100f)] public float Speed = 1;
+        [Range(0.01f, 100f)] public float Acceleration = 1;
+        public float Gravity = 0;
+        public Vector2 GravityPoint = Vector2.zero;
 
         //Emission
         public bool FoldOutEmitter = false;
@@ -29,10 +32,6 @@ namespace BulletHell.Emitters
         [Range(0, 10)] public float Offset = 0;
         [Range(-180, 180)] public float Spread = 0;
 
-        //Modifiers
-        public bool FoldOutModifiers = false;
-        public Vector2 gravityPoint;
-        public float gravityScale;
 
         Projectile _projectilePrefab;
         public float ParentRotation = 0;

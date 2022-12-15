@@ -62,13 +62,13 @@ namespace BulletHell.Emitters.Editor
                 textField.visible = nameField.visible;
                 name.visible = !nameField.visible;
             };
-
             confirmButton.clicked += () => {
                 _target.Rename(textField.text);
                 name.text = _target.name;
                 nameField.visible = false;
                 textField.visible = false;
                 name.visible = true;
+                AssetDatabase.SaveAssets();
             };
         }
 
@@ -82,8 +82,6 @@ namespace BulletHell.Emitters.Editor
 
                 dataRoot.style.display = (_target.FoldOut) ? DisplayStyle.Flex : DisplayStyle.None;
             });
-
-
 
             dataRoot.style.display = DisplayStyle.None;
 
@@ -107,8 +105,10 @@ namespace BulletHell.Emitters.Editor
             projectileFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutProjectile = projectileFoldout.value);
 
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("ProjectileData")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("TimeToLive")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("SpeedMultiplier")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Speed")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Acceleration")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Gravity")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("GravityPoint")));
             dataRoot.Add(projectileFoldout);
             #endregion
 

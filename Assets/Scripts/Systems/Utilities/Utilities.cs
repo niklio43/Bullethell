@@ -21,5 +21,12 @@ namespace BulletHell
 
             return v;
         }
+
+        public static Vector3 DirFromAngle(float angleInDegrees, float rotation)
+        {
+            angleInDegrees += rotation + 90;
+
+            return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0);
+        }
     }
 }

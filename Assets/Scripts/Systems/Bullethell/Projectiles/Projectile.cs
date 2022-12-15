@@ -10,8 +10,10 @@ namespace BulletHell
         [SerializeField] SpriteRenderer spriteRenderer;
 
         [HideInInspector] public Vector2 Position;
-        [SerializeField] public Vector2 Velocity;
-        [HideInInspector] public Vector2 Gravity;
+        [HideInInspector] public Vector2 Velocity;
+        [HideInInspector] public Vector2 Direction;
+        [HideInInspector] public Vector2 GravityPoint;
+        [HideInInspector] public float Gravity;
 
         [HideInInspector] public float TimeToLive;
         [HideInInspector] public float Acceleration;
@@ -20,14 +22,13 @@ namespace BulletHell
         public void Initialize(ProjectileData data)
         {
             Data = data;
-
+            gameObject.SetActive(true);
             if (data.Sprite != null)
                 spriteRenderer.sprite = data.Sprite;
 
             transform.localScale = Vector3.one * data.Scale;
 
             spriteRenderer.color = data.Color;
-            name = $"{data.name}";
         }
 
         private void Update()

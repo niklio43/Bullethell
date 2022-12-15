@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace BulletHell.Emitters
 {
-    [CreateAssetMenu(fileName = "ModifierData", menuName = "Emitters/ModifierData", order = 1)]
     public class EmitterModifier : ScriptableObject
     {
         public bool FoldOut = false;
@@ -20,14 +19,17 @@ namespace BulletHell.Emitters
         //Projectile Modifiers
         public bool FoldOutProjectile = false;
         public ProjectileData ProjectileData;
-        public float TimeToLive = 0;
-        [Range(0.1f, 5f)] public float SpeedMultiplier = 1;
+        [Range(0.01f, 100f)] public float Speed = 1;
+        public float Acceleration;
+        public float Gravity;
+        public Vector2 GravityPoint;
 
         //Emission Modifiers
         public bool FoldOutEmitter = false;
         [Range(-180, 180)] public float Pitch = 0;
         [Range(0, 10)] public float Offset = 0;
         [Range(-180, 180)] public float NarrowSpread = 0;
+
 
         public void Rename(string newName)
         {

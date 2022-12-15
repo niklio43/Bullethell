@@ -9,7 +9,7 @@ namespace BulletHell.Emitters
         public Vector2 Position;
         public Vector2 Direction;
 
-        public EmitterModifier Modifier;
+        public EmitterModifier Modifier { get; private set; }
         public bool HasModifier => (Modifier != null);
         
         public EmitterGroup(Vector2 position, Vector2 direction)
@@ -23,15 +23,10 @@ namespace BulletHell.Emitters
             Direction = Vector2.zero;
         }
 
-        public void Set(Vector2 position, Vector2 direction)
+        public void Set(Vector2 position, Vector2 direction, EmitterModifier modifier = null)
         {
             this.Position = position;
             this.Direction = direction;
-        }
-
-        public void SetModifier(EmitterModifier modifier)
-        {
-            if(modifier == null) { return; }
             Modifier = modifier;
         }
 

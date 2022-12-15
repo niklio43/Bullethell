@@ -74,7 +74,10 @@ namespace BulletHell.Emitters.Editor
 
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("ProjectileData")));
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("TimeToLive")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("BaseSpeed")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Speed")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Acceleration")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Gravity")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("GravityPoint")));
             dataRoot.Add(projectileFoldout);
             #endregion
 
@@ -92,6 +95,7 @@ namespace BulletHell.Emitters.Editor
             emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Spread")));
             dataRoot.Add(emissionFoldout);
             #endregion
+
         }
 
         void CreateModifierInspectors()
