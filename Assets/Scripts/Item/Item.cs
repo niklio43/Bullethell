@@ -19,11 +19,12 @@ public enum ItemType
 
 public abstract class Item : ScriptableObject
 {
-    public int Id;
     Sprite _sprite;
+    public bool Stackable;
     string _itemName;
     Rarity _rarity;
     ItemType _itemType;
+    public ItemObject data = new ItemObject();
 
     public Sprite Sprite { get { return _sprite; } set { _sprite = value; } }
     public string ItemName { get { return _itemName; } set { _itemName = value; } }
@@ -35,7 +36,7 @@ public abstract class Item : ScriptableObject
 public class ItemObject
 {
     public string Name;
-    public int Id;
+    public int Id = -1;
     public ItemObject()
     {
         Name = "";
@@ -44,6 +45,6 @@ public class ItemObject
     public ItemObject(Item item)
     {
         Name = item.name;
-        Id = item.Id;
+        Id = item.data.Id;
     }
 }

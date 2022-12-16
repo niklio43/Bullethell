@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon : Item
 {
-    int _damage;
+    public int _damage;
     Pool _pool;
     [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
 

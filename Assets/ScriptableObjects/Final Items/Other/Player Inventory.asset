@@ -12,127 +12,127 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235eeae7a430be3488ffb94f65b45572, type: 3}
   m_Name: Player Inventory
   m_EditorClassIdentifier: 
-  savePath: /inventory.Save
+  savePath: /Inventory.Save
   database: {fileID: 11400000, guid: 8b3e3c1ab5b63a44d98e0c589b108941, type: 2}
   Container:
-    Items:
-    - ID: -1
+    Slots:
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0
-    - ID: -1
+    - AllowedItems: 
       Item:
         Name: 
-        Id: 0
+        Id: -1
       Amount: 0

@@ -4,11 +4,56 @@ using UnityEngine;
 
 public class PlayerInteracter : MonoBehaviour
 {
-    public MouseItem MouseItem = new MouseItem();
     [SerializeField, Range(0, 100f)] float _interactRadius = 5f;
     [SerializeField] LayerMask _interactable;
     [SerializeField] Inventory _inventory;
+    [SerializeField] Inventory _equipment;
     IInteractable _closestInteractable = null;
+
+    void Start()
+    {
+        for (int i = 0; i < _equipment.GetSlots.Length; i++)
+        {
+            _equipment.GetSlots[i].OnBeforeUpdate += OnBeforeSlotUpdate;
+            _equipment.GetSlots[i].OnAfterUpdate += OnAfterSlotUpdate;
+        }
+    }
+
+    public void OnBeforeSlotUpdate(InventorySlot slot)
+    {
+        if (slot.Item == null) return;
+
+        switch (slot.Parent.Inventory.type)
+        {
+            case InterfaceType.Inventory:
+                break;
+            case InterfaceType.Equipment:
+                print(string.Concat("Removed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
+                //remove stats
+                break;
+            case InterfaceType.Dialogue:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void OnAfterSlotUpdate(InventorySlot slot)
+    {
+        switch (slot.Parent.Inventory.type)
+        {
+            case InterfaceType.Inventory:
+                break;
+            case InterfaceType.Equipment:
+                print(string.Concat("Placed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
+                //add stats
+                break;
+            case InterfaceType.Dialogue:
+                break;
+            default:
+                break;
+        }
+    }
 
     void FixedUpdate()
     {
@@ -29,10 +74,12 @@ public class PlayerInteracter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             _inventory.Save();
+            _equipment.Save();
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
             _inventory.Load();
+            _equipment.Load();
         }
     }
 
@@ -44,6 +91,7 @@ public class PlayerInteracter : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        _inventory.Container.Items = new InventorySlot[24];
+        _inventory.Clear();
+        _equipment.Clear();
     }
 }

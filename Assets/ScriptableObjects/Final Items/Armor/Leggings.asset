@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ad13b8eb864a4478c986093a096c9c, type: 3}
   m_Name: Leggings
   m_EditorClassIdentifier: 
-  Id: 4
+  Stackable: 0
+  data:
+    Name: Leggings
+    Id: 2
   defense: 15
   sprite: {fileID: -538765877, guid: aa04c1d8ca98f1e4fa6283fa20baf934, type: 3}
   itemName: Rare Legwear
