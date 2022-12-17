@@ -16,7 +16,15 @@ MonoBehaviour:
   data:
     Name: Leggings
     Id: 2
-  defense: 15
+    buffs:
+    - attribute: 1
+      value: 0
+      min: 1
+      max: 25
+    - attribute: 3
+      value: 0
+      min: 1
+      max: 25
   sprite: {fileID: -538765877, guid: aa04c1d8ca98f1e4fa6283fa20baf934, type: 3}
   itemName: Rare Legwear
   rarity: 1

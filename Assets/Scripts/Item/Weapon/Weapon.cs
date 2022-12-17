@@ -4,11 +4,9 @@ using UnityEngine;
 
 public abstract class Weapon : Item
 {
-    public int _damage;
     Pool _pool;
     [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
 
-    public int Damage { get { return _damage; } set { _damage = value; } }
     public Pool Pool { get { return _pool; } set { _pool = value; } }
     public List<Ability> AbilitySlot { get { return _abilitySlot; } set { _abilitySlot = value; } }
 

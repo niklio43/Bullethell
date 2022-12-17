@@ -11,7 +11,7 @@ public class PlayerStateMachine : MonoBehaviour
     Vector2 _movementInput;
     bool _isDashing = false;
 
-    PlayerStats stats;
+    [SerializeField] PlayerStats _stats;
 
     //State variables
     PlayerBaseState _currentState;
@@ -27,8 +27,6 @@ public class PlayerStateMachine : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-        stats = GetComponent<PlayerController>().stats;
-
         //Setup state
         _states = new PlayerStateFactory(this);
         _currentState = _states.Idle();
@@ -42,7 +40,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.velocity = _movementInput * stats.moveSpeed;
+        _rb.velocity = _movementInput * _stats.moveSpeed;
 
         HandleAnimation();
 
@@ -74,11 +72,11 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Vector2 dir = _movementInput.normalized;
 
-            if (!CanDash(dir, stats.dashDistance)) return;
+            if (!CanDash(dir, _stats.dashDistance)) return;
 
             _isDashing = true;
 
-            transform.position += new Vector3(dir.x, dir.y, 0) * stats.dashDistance;
+            transform.position += new Vector3(dir.x, dir.y, 0) * _stats.dashDistance;
 
             StartCoroutine(ResetDash());
         }

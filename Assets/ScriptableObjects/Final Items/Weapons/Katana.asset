@@ -15,12 +15,19 @@ MonoBehaviour:
   Stackable: 0
   data:
     Name: Katana
-    Id: 4
-  _damage: 110
+    Id: 3
+    buffs:
+    - attribute: 0
+      value: 0
+      min: 1
+      max: 20
+    - attribute: 4
+      value: 0
+      min: 1
+      max: 20
   _abilitySlot:
   - {fileID: 11400000, guid: 6f078416c06914c46b0bd4db4620d5b9, type: 2}
   sprite: {fileID: 21300000, guid: 7a6caab4786094a43bea1d69e7677e17, type: 3}
-  damage: 110
   itemName: Legendary Blood Katana
   pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}
   rarity: 3

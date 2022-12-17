@@ -9,9 +9,16 @@ public class PlayerInteracter : MonoBehaviour
     [SerializeField] Inventory _inventory;
     [SerializeField] Inventory _equipment;
     IInteractable _closestInteractable = null;
+    public Attribute[] attributes;
+    [SerializeField] PlayerStats _stats;
 
     void Start()
     {
+        for (int i = 0; i < attributes.Length; i++)
+        {
+            attributes[i].SetParent(this);
+        }
+
         for (int i = 0; i < _equipment.GetSlots.Length; i++)
         {
             _equipment.GetSlots[i].OnBeforeUpdate += OnBeforeSlotUpdate;
@@ -21,7 +28,7 @@ public class PlayerInteracter : MonoBehaviour
 
     public void OnBeforeSlotUpdate(InventorySlot slot)
     {
-        if (slot.Item == null) return;
+        if (slot.Item.Id == -1) return;
 
         switch (slot.Parent.Inventory.type)
         {
@@ -29,7 +36,16 @@ public class PlayerInteracter : MonoBehaviour
                 break;
             case InterfaceType.Equipment:
                 print(string.Concat("Removed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
-                //remove stats
+                for (int i = 0; i < slot.Item.buffs.Length; i++)
+                {
+                    for (int j = 0; j < attributes.Length; j++)
+                    {
+                        if (attributes[j].Type == slot.Item.buffs[i].attribute)
+                        {
+                            attributes[j].Value.RemoveModifier(slot.Item.buffs[i]);
+                        }
+                    }
+                }
                 break;
             case InterfaceType.Dialogue:
                 break;
@@ -40,13 +56,24 @@ public class PlayerInteracter : MonoBehaviour
 
     public void OnAfterSlotUpdate(InventorySlot slot)
     {
+        if (slot.Item.Id == -1) return;
+
         switch (slot.Parent.Inventory.type)
         {
             case InterfaceType.Inventory:
                 break;
             case InterfaceType.Equipment:
                 print(string.Concat("Placed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
-                //add stats
+                for (int i = 0; i < slot.Item.buffs.Length; i++)
+                {
+                    for (int j = 0; j < attributes.Length; j++)
+                    {
+                        if (attributes[j].Type == slot.Item.buffs[i].attribute)
+                        {
+                            attributes[j].Value.AddModifier(slot.Item.buffs[i]);
+                        }
+                    }
+                }
                 break;
             case InterfaceType.Dialogue:
                 break;
@@ -89,9 +116,34 @@ public class PlayerInteracter : MonoBehaviour
         _closestInteractable.Interact(_inventory);
     }
 
+    public void AttributeModified(Attribute attribute)
+    {
+        Debug.Log(string.Concat(attribute.Type, " was updated! Value is now ", attribute.Value.ModifiedValue));
+        _stats.UpdateValues(attribute.Value.ModifiedValue, attribute.Type);
+    }
+
     void OnApplicationQuit()
     {
         _inventory.Clear();
         _equipment.Clear();
+    }
+}
+
+[System.Serializable]
+public class Attribute
+{
+    [System.NonSerialized]
+    public PlayerInteracter Parent;
+    public Attributes Type;
+    public ModifiableInt Value;
+
+    public void SetParent(PlayerInteracter parent)
+    {
+        Parent = parent;
+        Value = new ModifiableInt(AttributeModified);
+    }
+    public void AttributeModified()
+    {
+        Parent.AttributeModified(this);
     }
 }

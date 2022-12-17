@@ -16,7 +16,15 @@ MonoBehaviour:
   data:
     Name: Helmet
     Id: 1
-  defense: 10
+    buffs:
+    - attribute: 1
+      value: 0
+      min: 1
+      max: 20
+    - attribute: 2
+      value: 0
+      min: 1
+      max: 20
   sprite: {fileID: -434624252, guid: aa04c1d8ca98f1e4fa6283fa20baf934, type: 3}
   itemName: Common Headgear
   rarity: 0
