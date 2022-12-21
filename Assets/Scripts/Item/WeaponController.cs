@@ -5,7 +5,7 @@ using BulletHell.Emitters;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] Weapon _weapon;
+    /*[SerializeField] Weapon _weapon;
     void Awake()
     {
         AssignWeapon(_weapon);
@@ -17,8 +17,9 @@ public class WeaponController : MonoBehaviour
         {
             FillAbilitySlot(_weapon);
         }
-    }
+    }*/
 
+    //this no good
     public void AssignWeapon(Weapon weapon)
     {
         weapon.Initialize(this);

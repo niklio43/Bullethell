@@ -46,6 +46,10 @@ public class PlayerInteracter : MonoBehaviour
                         }
                     }
                 }
+                if(_equipment.GetSlots[4] != null)
+                {
+                    transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<WeaponController>().AssignWeapon((Weapon)slot.GetItemData);
+                }
                 break;
             case InterfaceType.Dialogue:
                 break;

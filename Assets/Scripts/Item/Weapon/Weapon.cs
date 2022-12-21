@@ -20,7 +20,7 @@ public abstract class Weapon : Item
 
     public void AddAbility(Ability ability, Weapon weapon, WeaponController weaponController)
     {
-        if (_abilitySlot.Count >= 3) return;
+        if (_abilitySlot.Count >= 4) return;
         if(_abilitySlot.Contains(ability)) { weaponController.FillAbilitySlot(weapon); return; }
         _abilitySlot.Add(ability);
         ability.Initialize(weaponController);

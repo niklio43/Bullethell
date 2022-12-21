@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityIcon: {fileID: 21300000, guid: 3cbe10cf40fb2774887730294eb5123b, type: 3}
   _abilityName: Blood Slash
-  coolDownTime: 1
-  maxAmount: 3
-  currentAmount: 3
+  coolDownTime: 0
+  maxAmount: 1
+  currentAmount: 1
+  _animation: {fileID: 0}
+  _weaponVfx: {fileID: 0}
   _emitterData: {fileID: 11400000, guid: 50dd8777566f09546b570544927d72e6, type: 2}
