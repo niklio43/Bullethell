@@ -40,7 +40,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.velocity = _movementInput * _stats.moveSpeed;
+        _rb.velocity = _movementInput * _stats.MoveSpeed;
 
         HandleAnimation();
 
@@ -72,11 +72,11 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Vector2 dir = _movementInput.normalized;
 
-            if (!CanDash(dir, _stats.dashDistance)) return;
+            if (!CanDash(dir, _stats.DashDistance)) return;
 
             _isDashing = true;
 
-            transform.position += new Vector3(dir.x, dir.y, 0) * _stats.dashDistance;
+            transform.position += new Vector3(dir.x, dir.y, 0) * _stats.DashDistance;
 
             StartCoroutine(ResetDash());
         }

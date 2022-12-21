@@ -711,19 +711,6 @@ MonoBehaviour:
     m_Bits: 64
   _inventory: {fileID: 11400000, guid: 8c92590e686871f47962c9e52badc592, type: 2}
   _equipment: {fileID: 11400000, guid: 54db3d7bdb4ead441b9397c93cc57454, type: 2}
-  attributes:
-  - Type: 0
-    Value:
-      _baseValue: 0
-      _modifiedValue: 0
-  - Type: 1
-    Value:
-      _baseValue: 0
-      _modifiedValue: 0
-  - Type: 2
-    Value:
-      _baseValue: 0
-      _modifiedValue: 0
   _stats: {fileID: 11400000, guid: b22f1e21f41718a439277b30dd370066, type: 2}
 --- !u!114 &56462419
 MonoBehaviour:

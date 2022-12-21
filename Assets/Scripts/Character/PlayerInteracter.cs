@@ -9,14 +9,14 @@ public class PlayerInteracter : MonoBehaviour
     [SerializeField] Inventory _inventory;
     [SerializeField] Inventory _equipment;
     IInteractable _closestInteractable = null;
-    public Attribute[] attributes;
+
     [SerializeField] PlayerStats _stats;
 
     void Start()
     {
-        for (int i = 0; i < attributes.Length; i++)
+        for (int i = 0; i < _stats.attributes.Length; i++)
         {
-            attributes[i].SetParent(this);
+            _stats.attributes[i].SetParent(this);
         }
 
         for (int i = 0; i < _equipment.GetSlots.Length; i++)
@@ -38,11 +38,11 @@ public class PlayerInteracter : MonoBehaviour
                 print(string.Concat("Removed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
                 for (int i = 0; i < slot.Item.buffs.Length; i++)
                 {
-                    for (int j = 0; j < attributes.Length; j++)
+                    for (int j = 0; j < _stats.attributes.Length; j++)
                     {
-                        if (attributes[j].Type == slot.Item.buffs[i].attribute)
+                        if (_stats.attributes[j].Type == slot.Item.buffs[i].attribute)
                         {
-                            attributes[j].Value.RemoveModifier(slot.Item.buffs[i]);
+                            _stats.attributes[j].Value.RemoveModifier(slot.Item.buffs[i]);
                         }
                     }
                 }
@@ -66,11 +66,11 @@ public class PlayerInteracter : MonoBehaviour
                 print(string.Concat("Placed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
                 for (int i = 0; i < slot.Item.buffs.Length; i++)
                 {
-                    for (int j = 0; j < attributes.Length; j++)
+                    for (int j = 0; j < _stats.attributes.Length; j++)
                     {
-                        if (attributes[j].Type == slot.Item.buffs[i].attribute)
+                        if (_stats.attributes[j].Type == slot.Item.buffs[i].attribute)
                         {
-                            attributes[j].Value.AddModifier(slot.Item.buffs[i]);
+                            _stats.attributes[j].Value.AddModifier(slot.Item.buffs[i]);
                         }
                     }
                 }

@@ -5,29 +5,27 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "Utilities/Stats/PlayerStats")]
 public class PlayerStats : CharacterStats
 {
-    public float moveSpeed;
-    public float dashDistance;
-    public int stamina;
-    int baseDef;
-    int baseAtk;
-    int baseStamina;
+    [SerializeField] float health;
+    [SerializeField] float maxHealth;
+    [SerializeField] float moveSpeed;
+    [SerializeField] int dashDistance;
 
     void OnEnable()
     {
-        baseDef = Defense;
-        baseAtk = Attack;
-        baseStamina = stamina;
+        Health = health;
+        MaxHealth = maxHealth;
+        MoveSpeed = moveSpeed;
+        DashDistance = dashDistance;
     }
 
     public void UpdateValues(int value, Attributes attribute)
     {
-        if(attribute == Attributes.Defense)
-            Defense = baseDef + value;
-
-        if (attribute == Attributes.Attack)
-            Attack = baseAtk + value;
-
-        if (attribute == Attributes.Stamina)
-            stamina = baseStamina + value;
+        for (int i = 0; i < attributes.Length; i++)
+        {
+            if(attribute == attributes[i].Type)
+            {
+                attributes[i].Value.ModifiedValue += value;
+            }
+        }
     }
 }
