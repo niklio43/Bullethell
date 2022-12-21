@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
-  m_Name: Test
+  m_Script: {fileID: 11500000, guid: 36c1c2bebedb30b43bf7689b5e9634c5, type: 3}
+  m_Name: ObstacleAvoidanceBehaviour
   m_EditorClassIdentifier: 
-  name: TestProjectile
-  Sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
-  Scale: 0.8
-  Color: {r: 0.5999012, g: 0, b: 1, a: 1}
+  _avoidanceRadius: 2

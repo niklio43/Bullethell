@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace BulletHell.Enemies.Detection
 {
+    [System.Serializable]
     public class DetectionData
     {
         public Collider2D[] Obstacles;
@@ -12,7 +13,7 @@ namespace BulletHell.Enemies.Detection
         public Collider2D[] Friendlies;
 
         public int ObstacleCount => (Obstacles == null) ? 0 : Obstacles.Length;
-        public int PlayersCount => (Obstacles == null) ? 0 : Obstacles.Length;
-        public int FriendliesCount => (Obstacles == null) ? 0 : Obstacles.Length;
+        public int PlayersCount => (Players == null) ? 0 : Players.Length;
+        public int FriendliesCount => (Friendlies == null) ? 0 : Friendlies.Length;
     }
 }

@@ -6,10 +6,10 @@ using BulletHell;
 
 namespace BulletHell.Enemies.Detection
 {
-    [CustomEditor(typeof(AgentFOV))]
-    public class AgentFOVEditor : Editor
+    [CustomEditor(typeof(AgentDetection))]
+    public class AgentDetectionEditor : Editor
     {
-        AgentFOV _target;
+        AgentDetection _target;
 
         private void OnSceneGUI()
         {
@@ -35,7 +35,7 @@ namespace BulletHell.Enemies.Detection
 
         private void OnEnable()
         {
-            _target = (AgentFOV)target;
+            _target = (AgentDetection)target;
         }
     }
 }
