@@ -7,7 +7,6 @@ using BulletHell.Emitters;
 public class AssultRifle : Ranged
 {
     [SerializeField] Sprite sprite;
-    [SerializeField] int damage;
     [SerializeField] string itemName;
     [SerializeField] EmitterData emitterData;
     [SerializeField] Rarity rarity;
@@ -16,7 +15,6 @@ public class AssultRifle : Ranged
     void OnEnable()
     {
         Sprite = sprite;
-        Damage = damage;
         ItemName = itemName;
         EmitterData = emitterData;
         Rarity = rarity;

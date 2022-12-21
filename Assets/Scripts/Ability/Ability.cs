@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
+
 namespace BulletHell.Abilities
 {
     public abstract class Ability : ScriptableObject
@@ -10,6 +12,9 @@ namespace BulletHell.Abilities
         public float coolDownTime = 0;
         public int maxAmount = 1;
         public int currentAmount;
+        [SerializeField] Animation _animation;
+        [SerializeField] VisualEffect _weaponVfx;
+
         public float timer
         {
             get
@@ -28,6 +33,10 @@ namespace BulletHell.Abilities
             if (!context.performed) return;
 
             DoAbility();
+
+            _animation.Play();
+            _weaponVfx.Play();
+
             currentAmount--;
 
             timers.Add(coolDownTime);

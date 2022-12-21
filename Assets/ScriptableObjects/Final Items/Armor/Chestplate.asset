@@ -12,8 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4796fda49a7c354e9c43a14edf6d6b7, type: 3}
   m_Name: Chestplate
   m_EditorClassIdentifier: 
-  Id: 3
-  defense: 20
+  Stackable: 0
+  data:
+    Name: Chestplate
+    Id: 0
+    buffs:
+    - attribute: 1
+      value: 0
+      min: 1
+      max: 30
   sprite: {fileID: -1257856410, guid: aa04c1d8ca98f1e4fa6283fa20baf934, type: 3}
   itemName: Common Chestwear
   rarity: 0

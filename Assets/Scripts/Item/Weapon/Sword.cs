@@ -7,7 +7,6 @@ using BulletHell.Abilities;
 public class Sword : Melee
 {
     [SerializeField] Sprite sprite;
-    [SerializeField] int damage;
     [SerializeField] string itemName;
     [SerializeField] Pool pool;
     [SerializeField] Rarity rarity;
@@ -16,7 +15,6 @@ public class Sword : Melee
     void OnEnable()
     {
         Sprite = sprite;
-        Damage = damage;
         ItemName = itemName;
         Pool = pool;
         Rarity = rarity;

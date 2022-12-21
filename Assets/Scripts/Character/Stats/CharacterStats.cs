@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class CharacterStats : ScriptableObject
 {
+    public Attribute[] attributes;
+
     float _health;
     float _maxHealth;
-    int _defense;
+    float _moveSpeed;
+    int _dashDistance;
 
     public float Health { get { return _health; } set { _health = value; } }
     public float MaxHealth { get { return _maxHealth; } set { _maxHealth = value; } }
-    public int Defense { get { return _defense; } set { _defense = value; } }
+    public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
+    public int DashDistance { get { return _dashDistance; } set { _dashDistance = value; } }
 }

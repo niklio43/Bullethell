@@ -12,14 +12,18 @@ public class DroppedItem : MonoBehaviour, IPickUp, ISerializationCallbackReceive
 
     public void Interact(Inventory inventory)
     {
-        inventory.AddItem(new ItemObject(_item), 1);
-        Destroy(gameObject);
+        if(inventory.AddItem(new ItemObject(_item), 1))
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void OnBeforeSerialize()
     {
+#if UNITY_EDITOR
         GetComponent<SpriteRenderer>().sprite = _item.Sprite;
         EditorUtility.SetDirty(GetComponent<SpriteRenderer>());
+#endif
     }
 
 
