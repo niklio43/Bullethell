@@ -8,7 +8,6 @@ public class AssultRifle : Ranged
 {
     [SerializeField] Sprite sprite;
     [SerializeField] string itemName;
-    [SerializeField] EmitterData emitterData;
     [SerializeField] Rarity rarity;
     [SerializeField] ItemType itemType;
 
@@ -16,7 +15,6 @@ public class AssultRifle : Ranged
     {
         Sprite = sprite;
         ItemName = itemName;
-        EmitterData = emitterData;
         Rarity = rarity;
         ItemType = itemType;
     }
