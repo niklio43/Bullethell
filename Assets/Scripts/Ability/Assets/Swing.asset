@@ -18,4 +18,4 @@ MonoBehaviour:
   maxAmount: 1
   currentAmount: 0
   _weaponVfx: {fileID: 0}
-  WeaponAnimation: {fileID: 7400000, guid: 6be7875f5cae33445bb2977eeb444940, type: 2}
+  WeaponAttackAnimation: {fileID: 7400000, guid: 6be7875f5cae33445bb2977eeb444940, type: 2}

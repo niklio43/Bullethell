@@ -13,7 +13,7 @@ namespace BulletHell.Abilities
         public int maxAmount = 1;
         public int currentAmount;
         [SerializeField] VisualEffect _weaponVfx;
-        public AnimationClip WeaponAnimation;
+        public AnimationClip WeaponAttackAnimation;
 
         public float timer
         {

@@ -23,7 +23,9 @@ MonoBehaviour:
       max: 20
   _abilitySlot:
   - {fileID: 11400000, guid: 2e3d99465567c27488827aa4c07da26a, type: 2}
+  WeaponIdleAnimation: {fileID: 7400000, guid: 2bf09474120ff614db23d31314b28810, type: 2}
   sprite: {fileID: 1176194004, guid: 02d0ee5e667ffeb48879cf85a0b587fa, type: 3}
   itemName: M4A2
+  pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}
   rarity: 0
   itemType: 0

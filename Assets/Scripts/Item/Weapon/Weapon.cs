@@ -7,6 +7,7 @@ public abstract class Weapon : Item
 {
     Pool _pool;
     [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
+    public AnimationClip WeaponIdleAnimation;
 
     public Pool Pool { get { return _pool; } set { _pool = value; } }
 

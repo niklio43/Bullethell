@@ -28,6 +28,7 @@ MonoBehaviour:
   _abilitySlot:
   - {fileID: 11400000, guid: a0070805f62fa0a40b3ed74bc947a6c6, type: 2}
   - {fileID: 11400000, guid: 6f078416c06914c46b0bd4db4620d5b9, type: 2}
+  WeaponIdleAnimation: {fileID: 7400000, guid: a0a06d7246b2b3747b5ab5d269e287a3, type: 2}
   sprite: {fileID: 21300000, guid: 7a6caab4786094a43bea1d69e7677e17, type: 3}
   itemName: Legendary Blood Katana
   pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}

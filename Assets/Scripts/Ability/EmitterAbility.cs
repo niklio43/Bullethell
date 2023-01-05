@@ -23,7 +23,7 @@ namespace BulletHell.Abilities
 
         public override void UnInitialize(WeaponController weaponController)
         {
-            Destroy(weaponController.transform.GetChild(0).gameObject);
+            Destroy(_emitter.gameObject);
         }
     }
 }

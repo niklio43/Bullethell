@@ -26,7 +26,9 @@ public class WeaponController : MonoBehaviour
     public void AssignWeapon(Weapon weapon)
     {
         weapon.Initialize(this);
+        GetComponent<Animator>().Play(weapon.WeaponIdleAnimation.name);
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
+        gameObject.name = weapon.name;
 
         foreach (Ability ability in weapon.Pool._ability)
         {
@@ -50,6 +52,8 @@ public class WeaponController : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = null;
 
         GetComponent<AbilityHolder>().abilities.Clear();
+
+        GetComponent<Animator>().Play("Empty");
 
         var playerSM = transform.GetComponentInParent<PlayerStateMachine>();
         playerSM.Weapon = null;

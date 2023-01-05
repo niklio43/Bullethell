@@ -46,9 +46,9 @@ public class PlayerInteracter : MonoBehaviour
                         }
                     }
                 }
-                if (_equipment.GetSlots[4].Amount == 0)
+                if (slot.GetItemData.ItemType == ItemType.Weapon && slot == _equipment.GetSlots[3])
                 {
-                    GetComponentInChildren<WeaponController>().UnAssignWeapon(slot.GetItemData as Weapon);
+                    GetComponentInChildren<WeaponController>().UnAssignWeapon(_equipment.GetSlots[3].GetItemData as Weapon);
                 }
                 break;
             case InterfaceType.Dialogue:
@@ -78,9 +78,9 @@ public class PlayerInteracter : MonoBehaviour
                         }
                     }
                 }
-                if (_equipment.GetSlots[4] != null)
+                if (slot.GetItemData.ItemType == ItemType.Weapon && slot == _equipment.GetSlots[3])
                 {
-                    GetComponentInChildren<WeaponController>().AssignWeapon(slot.GetItemData as Weapon);
+                    GetComponentInChildren<WeaponController>().AssignWeapon(_equipment.GetSlots[3].GetItemData as Weapon);
                 }
                 break;
             case InterfaceType.Dialogue:
