@@ -5,15 +5,37 @@ using UnityEngine;
 
 namespace BulletHell.Enemies.Detection
 {
-    [System.Serializable]
     public class DetectionData
     {
-        public Collider2D[] Obstacles;
-        public Collider2D[] Players;
-        public Collider2D[] Friendlies;
+        public EntityData[] this[string key] => Data[key];
 
-        public int ObstacleCount => (Obstacles == null) ? 0 : Obstacles.Length;
-        public int PlayersCount => (Players == null) ? 0 : Players.Length;
-        public int FriendliesCount => (Friendlies == null) ? 0 : Friendlies.Length;
+        private Dictionary<string, EntityData[]> Data = new Dictionary<string, EntityData[]>();
+
+        public void Clear() => Data.Clear();
+
+        public int Count(string tag)
+        {
+            if(!Data.ContainsKey(tag)) { return 0; }
+
+            return Data[tag].Length;
+        }
+
+        public void Add(string key, EntityData[] entities)
+        {
+            Data.Add(key, entities);
+        }
+    }
+
+    public class EntityData
+    {
+        public Collider2D Collider;
+        public Transform transform => Collider.transform;
+        public GameObject gameObject => Collider.gameObject;
+        public string tag => Collider.tag;
+
+        public EntityData(Collider2D collider)
+        {
+            Collider = collider;
+        }
     }
 }

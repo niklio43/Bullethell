@@ -8,14 +8,13 @@ public class PlayerStats : CharacterStats
     [SerializeField] float health;
     [SerializeField] float maxHealth;
     [SerializeField] float moveSpeed;
-    [SerializeField] int dashDistance;
+    public int DashDistance;
 
     void OnEnable()
     {
         Health = health;
         MaxHealth = maxHealth;
         MoveSpeed = moveSpeed;
-        DashDistance = dashDistance;
     }
 
     public void UpdateValues(int value, Attributes attribute)

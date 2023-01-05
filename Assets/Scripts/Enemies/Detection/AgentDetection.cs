@@ -7,13 +7,9 @@ namespace BulletHell.Enemies.Detection
     {
         public bool ShowGizmo = true;
 
-        [Header("FOV")]
-        [Range(0, 360)] public float Angle = 45;
-        public float Radius = 2;
-        public float innerRadius = 1;
-        public float ObstacleDetectionRadius = 1;
+        [Range(0, 10)] public float Radius = 2;
+        [Range(0, 10)] public float ObstacleDetectionRadius = 1;
 
-        [Header("Runtime Data")]
         public DetectionData Data = new DetectionData();
 
         private void Start()
@@ -23,66 +19,28 @@ namespace BulletHell.Enemies.Detection
 
         public void Detect()
         {
-            Data.Obstacles = DetectObstacles();
-            Data.Players = DetectPlayers();
-            Data.Friendlies = DetectFriendlies();
+            Data.Clear();
+            Data.Add("Player", DetectEntities("Player", Radius));
+            Data.Add("Enemy", DetectEntities("Enemy", Radius));
+            Data.Add("Obstacle", DetectEntities("Obstacle", ObstacleDetectionRadius));
         }
 
-        public Collider2D[] DetectPlayers()
+        private EntityData[] DetectEntities(string tag = "", float radius = 1)
         {
-            LayerMask mask = 1 << LayerMask.NameToLayer("Player");
-            LayerMask obstacleMask = 1 << LayerMask.NameToLayer("Obstacle");
+            List<EntityData> entities = new List<EntityData>();
 
-            return DetectInFOV(mask, obstacleMask);
-        }
+            LayerMask mask = 1 << LayerMask.NameToLayer("Entity");
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, mask);
 
-        public Collider2D[] DetectFriendlies()
-        {
-            LayerMask mask = 1 << LayerMask.NameToLayer("Enemy");
-            LayerMask obstacleMask = 1 << LayerMask.NameToLayer("Obstacle");
+            foreach (var entity in colliders) {
+                if(gameObject == entity.gameObject) { continue; }
 
-            return DetectInFOV(mask, obstacleMask);
-        }
-
-        public Collider2D[] DetectObstacles()
-        {
-            LayerMask mask = 1 << LayerMask.NameToLayer("Obstacle");
-            Collider2D[] obstacles = Physics2D.OverlapCircleAll(transform.position, ObstacleDetectionRadius, mask);
-
-            return obstacles;
-        }
-
-        public Collider2D[] DetectInFOV(LayerMask mask, LayerMask obstacleMask)
-        {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Radius, mask);
-
-            List<Collider2D> visable = new List<Collider2D>();
-
-            foreach (Collider2D item in colliders) {
-
-                if (TargetInView(item.transform, obstacleMask)) {
-                    visable.Add(item);
+                if(tag == "" || entity.tag == tag) {
+                    entities.Add(new EntityData(entity));
                 }
             }
 
-            return visable.ToArray();
+            return entities.ToArray();
         }
-
-        public bool TargetInView(Transform target, LayerMask obstacleMask)
-        {
-            float dist = Vector2.Distance(transform.position, target.position);
-            if (dist > Radius) { return false; }
-
-            Vector2 direction = (target.position - transform.position).normalized;
-
-            if (dist < innerRadius || Vector2.Angle(transform.up, direction) < Angle / 2) {
-                if (!Physics.Raycast(transform.position, direction, dist, obstacleMask)) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
     }
 }

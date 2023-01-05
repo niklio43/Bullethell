@@ -13,10 +13,10 @@ namespace BulletHell.Enemies.Steering
         public override void GetSteering(ContextMap danger, ContextMap interest, AgentSteering steering, DetectionData detectionData)
         {
             Transform transform = steering.transform;
-            if(detectionData.ObstacleCount == 0) { return; }
+            if(detectionData.Count("Obstacle") == 0) { return; }
 
-            foreach (Collider2D obstacle in detectionData.Obstacles) {
-                Vector2 direction = obstacle.ClosestPoint(transform.position) - (Vector2)transform.position;
+            foreach (EntityData obstacle in detectionData["Obstacle"]) {
+                Vector2 direction = obstacle.Collider.ClosestPoint(transform.position) - (Vector2)transform.position;
                 float distance = direction.magnitude;
 
                 float weight = distance <= steering.ColliderRadius ? 1 : Mathf.Clamp01(_avoidanceRadius - distance) / _avoidanceRadius;

@@ -10,12 +10,11 @@ namespace BulletHell.Enemies.Steering
     {
         [Header("Context Data")]
         public int Resolution = 16;
-        public float ColliderRadius;
         [SerializeField] List<SteeringBehaviour> _behaviours = new List<SteeringBehaviour>();
 
         [Header("Agent Data")]
+        public float ColliderRadius;
         [SerializeField] float speed = 3.5f;
-
 
         [HideInInspector] public Vector2[] Directions;
         ContextMap _interest, _danger;
@@ -44,15 +43,10 @@ namespace BulletHell.Enemies.Steering
             }
         }
 
-
         private void Update()
         {
             Vector2 moveDirection = (Vector3)ContextSolver.GetDirection(_danger, _interest, this);
-            float angle = Vector2.SignedAngle(Vector2.right, moveDirection) - 90f;
-            Vector3 targetRotation = new Vector3(0, 0, angle);
-            var lookTo = Quaternion.Euler(targetRotation);
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookTo, 100 * Time.deltaTime);
             transform.position += (Vector3)moveDirection * Time.deltaTime;
         }
 
@@ -68,7 +62,7 @@ namespace BulletHell.Enemies.Steering
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.green;
+            Gizmos.color = new Color(.495f, .788f, .478f);
             Gizmos.DrawWireSphere(transform.position, ColliderRadius);
            
             if (_interest != null && _danger != null) {
