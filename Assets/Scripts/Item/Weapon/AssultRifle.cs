@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.Abilities;
 using BulletHell.Emitters;
 
 [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/AssultRifle")]
@@ -8,7 +9,7 @@ public class AssultRifle : Ranged
 {
     [SerializeField] Sprite sprite;
     [SerializeField] string itemName;
-    [SerializeField] EmitterData emitterData;
+    [SerializeField] Pool pool;
     [SerializeField] Rarity rarity;
     [SerializeField] ItemType itemType;
 
@@ -16,7 +17,7 @@ public class AssultRifle : Ranged
     {
         Sprite = sprite;
         ItemName = itemName;
-        EmitterData = emitterData;
+        Pool = pool;
         Rarity = rarity;
         ItemType = itemType;
     }

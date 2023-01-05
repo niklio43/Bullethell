@@ -8,7 +8,7 @@ public class PlayerUI : MonoBehaviour
 {
     [SerializeField] Transform[] _hotbar;
     [SerializeField] PlayerInput _input;
-    [SerializeField] GameObject _inventory;
+    [SerializeField] GameObject[] _inventory;
     bool inv = false;
 
     void Start()
@@ -60,6 +60,7 @@ public class PlayerUI : MonoBehaviour
     public void ToggleInventory()
     {
         inv = !inv;
-        _inventory.SetActive(inv);
+        foreach(GameObject obj in _inventory)
+            obj.SetActive(inv);
     }
 }

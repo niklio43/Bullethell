@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbcd0d906c9574249ac12faaa4133eab, type: 3}
+  m_Name: Swing
+  m_EditorClassIdentifier: 
+  _abilityIcon: {fileID: 0}
+  _abilityName: Swing
+  coolDownTime: 0
+  maxAmount: 1
+  currentAmount: 0
+  _weaponVfx: {fileID: 0}
+  WeaponAttackAnimation: {fileID: 7400000, guid: 6be7875f5cae33445bb2977eeb444940, type: 2}

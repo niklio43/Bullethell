@@ -12,6 +12,8 @@ public class PlayerStateMachine : MonoBehaviour
     bool _isDashing = false;
 
     [SerializeField] PlayerStats _stats;
+    [HideInInspector] public Weapon Weapon;
+    [SerializeField] Animator _weaponAnimator;
 
     //State variables
     PlayerBaseState _currentState;
@@ -46,6 +48,25 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (_movementInput.x == 0) return;
         HandleRotation();
+    }
+
+    public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
+    {
+        if (Weapon == null) { Debug.Log("No Weapon Error"); return; }
+        if (Weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("No Abillities"); return; }
+
+        Weapon.AbilitySlot[abilityIndex].Activate(ctx);
+
+        if (Weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation == null) { Debug.Log("No Weapon Animation"); return; }
+
+        _weaponAnimator.Play(Weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation.name);
+
+        Invoke("ResetAnimation", Weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation.length);
+    }
+
+    void ResetAnimation()
+    {
+        _weaponAnimator.Play(Weapon.WeaponIdleAnimation.name);
     }
 
     void HandleRotation()

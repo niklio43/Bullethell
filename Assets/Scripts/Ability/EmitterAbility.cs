@@ -20,5 +20,10 @@ namespace BulletHell.Abilities
             _emitter.Data = _emitterData;
             _emitter.AutoFire = false;
         }
+
+        public override void UnInitialize(WeaponController weaponController)
+        {
+            Destroy(_emitter.gameObject);
+        }
     }
 }

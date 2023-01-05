@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters;
+using BulletHell.Abilities;
 
 public class WeaponController : MonoBehaviour
 {
+    public Transform CircleOrigin;
+    public float Radius;
+
     /*[SerializeField] Weapon _weapon;
     void Awake()
     {
@@ -19,32 +23,59 @@ public class WeaponController : MonoBehaviour
         }
     }*/
 
-    //this no good
     public void AssignWeapon(Weapon weapon)
     {
         weapon.Initialize(this);
+        GetComponent<Animator>().Play(weapon.WeaponIdleAnimation.name);
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
-        if (weapon.GetType().Equals(typeof(Ranged)))
-        {
-            Ranged rangedWeapon = (Ranged)weapon;
-            AssignWeapon(rangedWeapon);
-            return;
-        }
-        Melee meleeWeapon = (Melee)weapon;
-        AssignWeapon(meleeWeapon);
-    }
+        gameObject.name = weapon.name;
 
-    public void AssignWeapon(Ranged weapon)
-    {
+        foreach (Ability ability in weapon.Pool._ability)
+        {
+            GetComponent<AbilityHolder>().abilities.Add(ability);
+        }
+
+        var playerSM = transform.GetComponentInParent<PlayerStateMachine>();
+        playerSM.Weapon = weapon;
+
+        /*if (GetComponent<Emitter>() == null)
+            gameObject.AddComponent<Emitter>();
+
         var emitter = GetComponent<Emitter>();
         emitter.Data = weapon.EmitterData;
-        emitter.Initialize();
+        emitter.Initialize();*/
     }
 
-    public void AssignWeapon(Melee weapon) { }
+    public void UnAssignWeapon(Weapon weapon)
+    {
+        weapon.UnInitialize(this);
+        GetComponent<SpriteRenderer>().sprite = null;
+
+        GetComponent<AbilityHolder>().abilities.Clear();
+
+        GetComponent<Animator>().Play("Empty");
+
+        var playerSM = transform.GetComponentInParent<PlayerStateMachine>();
+        playerSM.Weapon = null;
+    }
 
     public void FillAbilitySlot(Weapon weapon)
     {
         weapon.AddAbility(weapon.Pool._ability[Random.Range(0, weapon.Pool._ability.Length)], weapon, this);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.black;
+        Vector3 position = CircleOrigin == null ? Vector3.zero : CircleOrigin.position;
+        Gizmos.DrawWireSphere(position, Radius);
+    }
+
+    public void DetectColliders()
+    {
+        foreach (Collider2D collider in Physics2D.OverlapCircleAll(CircleOrigin.position, Radius))
+        {
+            Debug.Log(collider.name);
+        }
     }
 }

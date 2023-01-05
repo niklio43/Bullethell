@@ -35,7 +35,7 @@ public class PlayerInteracter : MonoBehaviour
             case InterfaceType.Inventory:
                 break;
             case InterfaceType.Equipment:
-                print(string.Concat("Removed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
+                //print(string.Concat("Removed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
                 for (int i = 0; i < slot.Item.buffs.Length; i++)
                 {
                     for (int j = 0; j < _stats.attributes.Length; j++)
@@ -46,9 +46,9 @@ public class PlayerInteracter : MonoBehaviour
                         }
                     }
                 }
-                if(_equipment.GetSlots[4] != null)
+                if (slot.GetItemData.ItemType == ItemType.Weapon && slot == _equipment.GetSlots[3])
                 {
-                    transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<WeaponController>().AssignWeapon((Weapon)slot.GetItemData);
+                    GetComponentInChildren<WeaponController>().UnAssignWeapon(_equipment.GetSlots[3].GetItemData as Weapon);
                 }
                 break;
             case InterfaceType.Dialogue:
@@ -67,7 +67,7 @@ public class PlayerInteracter : MonoBehaviour
             case InterfaceType.Inventory:
                 break;
             case InterfaceType.Equipment:
-                print(string.Concat("Placed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
+                //print(string.Concat("Placed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
                 for (int i = 0; i < slot.Item.buffs.Length; i++)
                 {
                     for (int j = 0; j < _stats.attributes.Length; j++)
@@ -77,6 +77,10 @@ public class PlayerInteracter : MonoBehaviour
                             _stats.attributes[j].Value.AddModifier(slot.Item.buffs[i]);
                         }
                     }
+                }
+                if (slot.GetItemData.ItemType == ItemType.Weapon && slot == _equipment.GetSlots[3])
+                {
+                    GetComponentInChildren<WeaponController>().AssignWeapon(_equipment.GetSlots[3].GetItemData as Weapon);
                 }
                 break;
             case InterfaceType.Dialogue:
@@ -122,7 +126,7 @@ public class PlayerInteracter : MonoBehaviour
 
     public void AttributeModified(Attribute attribute)
     {
-        Debug.Log(string.Concat(attribute.Type, " was updated! Value is now ", attribute.Value.ModifiedValue));
+        //Debug.Log(string.Concat(attribute.Type, " was updated! Value is now ", attribute.Value.ModifiedValue));
         _stats.UpdateValues(attribute.Value.ModifiedValue, attribute.Type);
     }
 

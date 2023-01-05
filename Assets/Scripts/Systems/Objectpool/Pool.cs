@@ -103,6 +103,8 @@ namespace BulletHell
             }
 
             base.Dispose();
+
+            GameObject.Destroy(_poolHolder.gameObject);
         }
 
         //Creates new instaces of the pooled object using the given "CreateFunction".

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Abilities;
 
-[CreateAssetMenu(fileName = "BloodSlash", menuName = "Abilities/BloodSlash")]
-public class BloodSlash : EmitterAbility
+[CreateAssetMenu(fileName = "AbilityProjectile", menuName = "Abilities/New Projectile Ability")]
+public class AbilityProjectile : EmitterAbility
 {
     public override void DoAbility()
     {
