@@ -5,21 +5,21 @@ using UnityEngine;
 
 namespace BulletHell.Enemies.Steering
 {
-    [CreateAssetMenu(fileName = "ObstacleAvoidanceBehaviour", menuName = "Enemies/Steering/ObstacleAvoidanceBehaviour", order = 1)]
+    [CreateAssetMenu(fileName = "ObstacleAvoidanceBehaviour", menuName = "Enemies/Steering/Obstacle Avoidance Behaviour", order = 1)]
     public class ObstacleAvoidanceBehaviour : SteeringBehaviour
     {
         [SerializeField] float _avoidanceRadius;
 
         public override void GetSteering(ContextMap danger, ContextMap interest, AgentSteering steering, DetectionData detectionData)
         {
-            Transform transform = steering.transform;
-            if(detectionData.Count("Obstacle") == 0) { return; }
+            Transform transform = steering.Owner.transform;
+            if(detectionData.Count("Obstacles") == 0) { return; }
 
-            foreach (EntityData obstacle in detectionData["Obstacle"]) {
+            foreach (EntityData obstacle in detectionData["Obstacles"]) {
                 Vector2 direction = obstacle.Collider.ClosestPoint(transform.position) - (Vector2)transform.position;
                 float distance = direction.magnitude;
 
-                float weight = distance <= steering.ColliderRadius ? 1 : Mathf.Clamp01(_avoidanceRadius - distance) / _avoidanceRadius;
+                float weight = distance <= steering.Collider.radius ? 1 : Mathf.Clamp01(_avoidanceRadius - distance) / _avoidanceRadius;
                 Vector2 directionNormalized = direction.normalized;
 
                 for (int i = 0; i < danger.Count; i++) {

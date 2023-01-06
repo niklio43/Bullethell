@@ -7,10 +7,9 @@ namespace BulletHell.FiniteStateMachine
 {
     public class StateBuilder
     {
+        public Enum Id { get; set; }
         private readonly List<ITransition> _transitions = new List<ITransition>();
         private readonly List<IAction> _actions = new List<IAction>();
-
-        public Enum Id { get; set; }
 
         public StateBuilder SetTransition(string change, Enum id)
         {

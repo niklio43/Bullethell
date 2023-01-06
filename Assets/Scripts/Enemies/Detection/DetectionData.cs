@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -22,6 +23,11 @@ namespace BulletHell.Enemies.Detection
 
         public void Add(string key, EntityData[] entities)
         {
+            if(Data.ContainsKey(key) && Data[key] != null) {
+               entities = Data[key].Concat(entities).ToArray();
+               Data.Remove(key);
+            }
+
             Data.Add(key, entities);
         }
     }

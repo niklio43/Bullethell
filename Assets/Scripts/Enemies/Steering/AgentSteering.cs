@@ -5,72 +5,66 @@ using BulletHell.Enemies.Detection;
 
 namespace BulletHell.Enemies.Steering
 {
-    [RequireComponent(typeof(AgentDetection))]
-    public class AgentSteering : MonoBehaviour
+    [System.Serializable]
+    public class AgentSteering
     {
-        [Header("Context Data")]
-        public int Resolution = 16;
-        [SerializeField] List<SteeringBehaviour> _behaviours = new List<SteeringBehaviour>();
-
-        [Header("Agent Data")]
-        public float ColliderRadius;
-        [SerializeField] float speed = 3.5f;
-
+        [HideInInspector] public CircleCollider2D Collider;
         [HideInInspector] public Vector2[] Directions;
+
+        public EnemyMovement Owner { get; private set; }
+        EnemyDetection _enemyDetection;
+
+        [SerializeField] int _resolution = 16;
+        [SerializeField] List<SteeringBehaviour> _behaviours = new List<SteeringBehaviour>();
         ContextMap _interest, _danger;
-        AgentDetection _detector;
         
-        private void Awake()
+        public void Initialize(EnemyMovement owner, EnemyDetection enemyDetection)
         {
-            _detector = GetComponent<AgentDetection>();
-            _interest = new ContextMap(Resolution);
-            _danger = new ContextMap(Resolution);
-            CreateDirections();
+            Owner = owner;
+            _enemyDetection = enemyDetection;
+            Collider = Owner.GetComponent<CircleCollider2D>();
+
+            _interest = new ContextMap(_resolution);
+            _danger = new ContextMap(_resolution);
+            CreateDirections(_resolution);
         }
 
-        private void Start()
-        {
-            InvokeRepeating(nameof(EvaluateBehaviors), 0, 0.1f);
-        }
-
-        private void EvaluateBehaviors()
+        public void EvaluateBehaviors()
         {
             _interest.Clear();
             _danger.Clear();
 
             foreach (SteeringBehaviour behaviour in _behaviours) {
-                behaviour.GetSteering(_danger, _interest, this, _detector.Data);
+                behaviour.GetSteering(_danger, _interest, this, _enemyDetection.Data);
             }
         }
 
-        private void Update()
+        public Vector2 GetDirection()
         {
-            Vector2 moveDirection = (Vector3)ContextSolver.GetDirection(_danger, _interest, this);
-
-            transform.position += (Vector3)moveDirection * Time.deltaTime;
+            return ContextSolver.GetDirection(_danger, _interest, this);
         }
 
-
-        void CreateDirections()
+        void CreateDirections(int resolution)
         {
-            Directions = new Vector2[Resolution];
-            for (int i = 0; i < Resolution; i++) {
-                float angle = i * Mathf.PI * 2 / Resolution;
+            Directions = new Vector2[resolution];
+            for (int i = 0; i < resolution; i++) {
+                float angle = i * Mathf.PI * 2 / resolution;
                 Directions[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
             }
         }
 
-        private void OnDrawGizmosSelected()
+        public void OnDrawGizmos()
         {
+            if(!Application.isPlaying || Owner == null) { return; } 
             Gizmos.color = new Color(.495f, .788f, .478f);
-            Gizmos.DrawWireSphere(transform.position, ColliderRadius);
+            Gizmos.DrawWireSphere(Owner.transform.position, Collider.radius);
            
             if (_interest != null && _danger != null) {
-                for (int i = 0; i < Resolution; i++) {
+                for (int i = 0; i < Directions.Length; i++) {
                     Gizmos.color = Color.green;
-                    Gizmos.DrawLine(transform.position, (Vector2)transform.position + Directions[i] * _interest[i]);
+                    Gizmos.DrawLine(Owner.transform.position, (Vector2)Owner.transform.position + Directions[i] * _interest[i]);
                     Gizmos.color = Color.red;
-                    Gizmos.DrawLine(transform.position, (Vector2)transform.position + Directions[i] * _danger[i]);
+                    Gizmos.DrawLine(Owner.transform.position, (Vector2)Owner.transform.position + Directions[i] * _danger[i]);
                 }
             }
         }
