@@ -31,7 +31,10 @@ public class Enemy : MonoBehaviour
             Stats.AttackTimer -= Time.deltaTime;
         }
 
-
+        if (Target != null) {
+            Vector2 targetDirection = Target.position - transform.position;
+            GetComponent<SpriteRenderer>().flipX = (Vector2.Dot(targetDirection, Vector2.right) < 0) ? true : false;
+        }
 
         DetectionData = _detection.Detect();
         _brain.Think();

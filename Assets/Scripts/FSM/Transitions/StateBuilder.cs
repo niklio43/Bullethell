@@ -26,6 +26,25 @@ namespace BulletHell.FiniteStateMachine
         {
             return AddAction(new ActionSetAnimationClip(clip));
         }
+        public StateBuilder SetAnimatorTrigger(string name)
+        {
+            return AddAction(new ActionSetAnimatorTrigger(name));
+        }
+
+        public StateBuilder SetAnimatorBool(string name, bool value)
+        {
+            return AddAction(new ActionSetAnimatorBool(name, value));
+        }
+
+        public StateBuilder SetAnimatorInt(string name, int value)
+        {
+            return AddAction(new ActionSetAnimatorInt(name, value));
+        }
+
+        public StateBuilder SetAnimatorFloat(string name, float value)
+        {
+            return AddAction(new ActionSetAnimatorFloat(name, value));
+        }
 
         public StateBuilder Update(Action<IAction> action)
         {
