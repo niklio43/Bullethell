@@ -16,6 +16,6 @@ MonoBehaviour:
   _abilityName: Swing
   coolDownTime: 0
   maxAmount: 1
-  currentAmount: 0
+  currentAmount: 1
   _weaponVfx: {fileID: 0}
   WeaponAttackAnimation: {fileID: 7400000, guid: 6be7875f5cae33445bb2977eeb444940, type: 2}

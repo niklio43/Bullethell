@@ -9,11 +9,13 @@ namespace BulletHell.Abilities
     {
         protected Emitter _emitter;
         [SerializeField] EmitterData _emitterData;
+        [HideInInspector] public WeaponController WeaponController;
 
-        public override abstract void DoAbility();
+        public override abstract void DoAbility(Weapon weapon, int abilityIndex);
 
         public override void Initialize(WeaponController weaponController)
         {
+            WeaponController = weaponController;
             _emitter = new GameObject($"{name} (Emitter)").AddComponent<Emitter>();
             _emitter.transform.SetParent(weaponController.transform);
             _emitter.transform.localPosition = Vector3.zero;

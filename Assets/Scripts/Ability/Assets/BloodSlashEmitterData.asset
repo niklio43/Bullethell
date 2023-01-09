@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 068d6e9f944711144bd7d00cd15fca44, type: 3}
-  m_Name: BulletEmitterData
+  m_Name: BloodSlashEmitterData
   m_EditorClassIdentifier: 
   FoldOutGeneral: 1
   Delay: 1000
   MaxProjectiles: 10
   RotationSpeed: 0
   FoldOutProjectile: 1
-  ProjectileData: {fileID: 11400000, guid: c814d66baa0cdf9459e87403ceb911b9, type: 2}
+  ProjectileData: {fileID: 11400000, guid: edf2edafe72fe4f448187540d8b04301, type: 2}
   TimeToLive: 5
   Speed: 20
   Acceleration: 1
   Gravity: 0
   GravityPoint: {x: 0, y: 0}
   FoldOutEmitter: 1
-  EmitterPoints: 1
+  EmitterPoints: 3
   CenterRotation: 180
   Pitch: 0
   Offset: 0
-  Spread: 0
+  Spread: 10
   ParentRotation: 0
   Modifiers: []

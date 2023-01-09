@@ -18,5 +18,6 @@ MonoBehaviour:
   maxAmount: 3
   currentAmount: 3
   _weaponVfx: {fileID: 0}
-  WeaponAnimation: {fileID: 0}
-  _emitterData: {fileID: 11400000, guid: 50dd8777566f09546b570544927d72e6, type: 2}
+  WeaponAttackAnimation: {fileID: 0}
+  _emitterData: {fileID: 11400000, guid: 6d4b57bc5e11ea74cbcb464ff769e9b6, type: 2}
+  WeaponController: {fileID: 0}

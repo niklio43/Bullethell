@@ -28,12 +28,12 @@ namespace BulletHell.Abilities
         public virtual void Initialize(WeaponController weaponController) { }
         public virtual void UnInitialize(WeaponController weaponController) { }
 
-        public void Activate(InputAction.CallbackContext context)
+        public void Activate(InputAction.CallbackContext context, Weapon weapon, int abilityIndex)
         {
             if (currentAmount <= 0) return;
             if (!context.performed) return;
 
-            DoAbility();
+            DoAbility(weapon, abilityIndex);
 
             //_weaponVfx.Play();
 
@@ -42,7 +42,7 @@ namespace BulletHell.Abilities
             timers.Add(coolDownTime);
         }
 
-        public abstract void DoAbility();
+        public abstract void DoAbility(Weapon weapon, int abilityIndex);
 
         public virtual void UpdateAbility(float dt)
         {
