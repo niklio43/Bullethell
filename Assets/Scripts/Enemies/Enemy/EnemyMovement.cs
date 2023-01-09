@@ -40,11 +40,8 @@ namespace BulletHell.Enemies
         {
             Vector2 MoveDirection = ContextSolver.GetDirection(_agentSteering);
 
-
-            transform.position += (Vector3)MoveDirection * MoveSpeed * Time.deltaTime;
-
-            //_rb.AddForce(MoveDirection * MoveSpeed);
-            //_rb.velocity = Vector3.ClampMagnitude(_rb.velocity, MoveSpeed);
+            _rb.AddForce(MoveDirection * MoveSpeed);
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, MoveSpeed);
         }
 
         private void OnDrawGizmos()
