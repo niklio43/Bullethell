@@ -6,27 +6,35 @@ using UnityEngine;
 
 namespace BulletHell.Enemies.Steering
 {
-    [CreateAssetMenu(fileName = "SeekBehaviour", menuName = "Enemies/Steering/SeekBehaviour", order = 1)]
+    [CreateAssetMenu(fileName = "SeekBehaviour", menuName = "Enemies/Steering/Seek Behaviour", order = 1)]
     public class SeekBehaviour : SteeringBehaviour
     {
         public float Weight = 0;
+        public float Margin = 0;
 
-        public override void GetSteering(ContextMap danger, ContextMap interest, AgentSteering steering, DetectionData detectionData)
+        public override void GetSteering(AgentSteering steering, Enemy enemy)
         {
-            Transform transform = steering.transform;
-            if(detectionData.Count("Player") == 0) { return; }
+            Transform transform = steering.Owner.transform;
+            if(enemy.Target == null) { return; }
 
-            List<EntityData> target = detectionData["Player"].OrderBy(n => Vector2.Distance(transform.position, n.transform.position)).ToList();
-            Vector2 directionToTarget = target[0].transform.position - transform.position;
+            float distance = Vector2.Distance(enemy.Target.position, transform.position);
 
-            for (int i = 0; i < interest.Count; i++) {
-                float result = Vector2.Dot(directionToTarget.normalized, steering.Directions[i]);
+            Vector2 towardsVector = enemy.Target.position - transform.position;
 
+            int towards = 0;
+
+            if(Mathf.Abs(distance - enemy.Stats.PreferredDistance) > Margin) {
+                towards = (int)Mathf.Sign(distance - enemy.Stats.PreferredDistance);
+            }
+
+            for (int i = 0; i < steering.Directions.Length; i++) {
+                float result = Vector2.Dot(towardsVector.normalized * towards, steering.Directions[i]);
                 result *= Weight;
+
                 result = Mathf.Clamp01(result);
 
-                if(result > interest[i])
-                    interest[i] = result;
+                if(result > steering.Interest[i])
+                    steering.Interest[i] = result;
             }
         }
     }

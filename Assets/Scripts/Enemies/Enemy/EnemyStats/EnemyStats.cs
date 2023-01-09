@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.Enemies.Steering;
 
-[CreateAssetMenu(fileName = "EnemyStats", menuName = "Utilities/Stats/EnemyStats")]
-public class EnemyStats : CharacterStats
+
+namespace BulletHell.Enemies
 {
-    [SerializeField] float health;
-    [SerializeField] float maxHealth;
-
-    void OnEnable()
+    [CreateAssetMenu(fileName = "EnemyStats", menuName = "Enemies/Stats")]
+    public class EnemyStats : CharacterStats
     {
-        Health = health;
-        MaxHealth = maxHealth;
+        public enum EnemyMovementType
+        {
+            Grounded,
+            Flying
+        }
+
+        public EnemyMovementType MovementType;
+
+        [Range(0, 10)] public float AttackDistance;
+        [Range(0, 10)] public float PreferredDistance;
     }
 }

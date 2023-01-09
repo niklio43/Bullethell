@@ -15,7 +15,7 @@ namespace BulletHell.Enemies
            .State(EnemyStates.Idle, (foundPlayer) => {
                foundPlayer.SetTransition("foundPlayer", EnemyStates.Chasing)
                .Update((action) => {
-                   if (enemy.GetComponent<AgentDetection>().Data["Player"].Length > 0) {
+                   if (enemy.Target != null) {
                        action.Transition("foundPlayer");
                    }
                });
@@ -23,7 +23,6 @@ namespace BulletHell.Enemies
            .State(EnemyStates.Chasing, (chasingPlayer) => {
                chasingPlayer.SetTransition("attackPlayer", EnemyStates.Attacking)
                .Update((action) => {
-                   Debug.Log("chasing");
                });
            })
            .Build();
