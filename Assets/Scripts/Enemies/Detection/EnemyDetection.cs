@@ -3,27 +3,37 @@ using UnityEngine;
 
 namespace BulletHell.Enemies.Detection
 {
-    public class EnemyDetection
+    public class EnemyDetection : MonoBehaviour
     {
-        public DetectionData Data;
-        Enemy _owner;
+        public bool DrawGizmos = false;
+        [Range(0, 10)] public float DetectionRadius = 2;
+        [Range(0, 10)] public float ObstacleDetectionRadius = 1;
 
-        public EnemyDetection(Enemy owner)
+        Enemy _enemy;
+
+        private void Awake()
         {
-            _owner = owner;
-            Data = new DetectionData();
+            _enemy = GetComponent<Enemy>();
         }
 
-        public void Detect()
+        private void Start()
         {
-            Data.Clear();
-            Data.Add("Players", DetectEntities("Player", _owner.Stats.DetectionRadius));
-            Data.Add("Enemies", DetectEntities("Enemy", _owner.Stats.DetectionRadius));
-            Data.Add("Obstacles", DetectEntities("Obstacle", _owner.Stats.ObstacleDetectionRadius));
+            InvokeRepeating(nameof(Detect), 0, .05f);
+        }
 
-            if(_owner.Stats.MovementType == EnemyStats.EnemyMovementType.Grounded) {
-                Data.Add("Obstacles", DetectEntities("GroundObstacle", _owner.Stats.ObstacleDetectionRadius));
+        public DetectionData Detect()
+        {
+            DetectionData data = new DetectionData();
+
+            data.Add("Players", DetectEntities("Player", DetectionRadius));
+            data.Add("Enemies", DetectEntities("Enemy", DetectionRadius));
+            data.Add("Obstacles", DetectEntities("Obstacle", ObstacleDetectionRadius));
+
+            if(_enemy.Stats.MovementType == EnemyStats.EnemyMovementType.Grounded) {
+                data.Add("Obstacles", DetectEntities("GroundObstacle", ObstacleDetectionRadius));
             }
+
+            return data;
         }
 
         EntityData[] DetectEntities(string tag, float radius = 1)
@@ -31,10 +41,10 @@ namespace BulletHell.Enemies.Detection
             List<EntityData> entities = new List<EntityData>();
 
             LayerMask mask = 1 << LayerMask.NameToLayer("Entity");
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(_owner.transform.position, radius, mask);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, mask);
 
             foreach (var entity in colliders) {
-                if(_owner.gameObject == entity.gameObject) { continue; }
+                if(gameObject == entity.gameObject) { continue; }
 
                 if(entity.tag == tag) {
                     entities.Add(new EntityData(entity));

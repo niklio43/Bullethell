@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace BulletHell.Enemies.Detection
+namespace BulletHell.Enemies
 {
     [CustomEditor(typeof(Enemy))]
     public class EnemyEditor : Editor
@@ -13,6 +13,12 @@ namespace BulletHell.Enemies.Detection
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
+
+            if(_target.Stats != null) {
+                var editor = Editor.CreateEditor(_target.Stats);
+                editor.OnInspectorGUI();
+            }
+
         }
 
         private void OnSceneGUI()
@@ -24,10 +30,10 @@ namespace BulletHell.Enemies.Detection
         private void Draw()
         {
             Handles.color = Color.red;
-            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.Stats.DetectionRadius);
+            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.Stats.AttackDistance);
 
-            Handles.color = Color.yellow;
-            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.Stats.ObstacleDetectionRadius);
+            Handles.color = Color.green;
+            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.Stats.PreferredDistance);
         }
 
         private void OnEnable()

@@ -10,24 +10,24 @@ namespace BulletHell.Enemies.Steering
     {
         [SerializeField] float _avoidanceRadius;
 
-        public override void GetSteering(ContextMap danger, ContextMap interest, AgentSteering steering, DetectionData detectionData)
+        public override void GetSteering(AgentSteering steering, Enemy enemy)
         {
             Transform transform = steering.Owner.transform;
-            if(detectionData.Count("Obstacles") == 0) { return; }
+            if(enemy.DetectionData.Count("Obstacles") == 0) { return; }
 
-            foreach (EntityData obstacle in detectionData["Obstacles"]) {
+            foreach (EntityData obstacle in enemy.DetectionData["Obstacles"]) {
                 Vector2 direction = obstacle.Collider.ClosestPoint(transform.position) - (Vector2)transform.position;
                 float distance = direction.magnitude;
 
                 float weight = distance <= steering.Collider.radius ? 1 : Mathf.Clamp01(_avoidanceRadius - distance) / _avoidanceRadius;
                 Vector2 directionNormalized = direction.normalized;
 
-                for (int i = 0; i < danger.Count; i++) {
+                for (int i = 0; i < steering.Danger.Count; i++) {
                     float result = Vector2.Dot(directionNormalized, steering.Directions[i]);
                     float value = result * weight;
 
-                    if (value > danger[i])
-                        danger[i] = value;
+                    if (value > steering.Danger[i])
+                        steering.Danger[i] = value;
                 }
             }
         }

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SeekBehaviour
   m_EditorClassIdentifier: 
   Weight: 0.5
+  Margin: 0.3

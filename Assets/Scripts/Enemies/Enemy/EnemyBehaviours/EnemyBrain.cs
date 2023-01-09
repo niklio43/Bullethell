@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.FiniteStateMachine;
-
+using BulletHell.Enemies.Detection;
 
 namespace BulletHell.Enemies
 {
@@ -19,7 +19,7 @@ namespace BulletHell.Enemies
 
         public abstract void Initialize(Enemy enemy);
 
-        public void Think()
+        public void Think(DetectionData detectionData)
         {
             FSM.Update();
         }

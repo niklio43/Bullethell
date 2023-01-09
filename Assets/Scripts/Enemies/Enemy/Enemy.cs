@@ -4,32 +4,45 @@ using UnityEngine;
 using BulletHell.Enemies;
 using BulletHell.Enemies.Detection;
 using System;
+using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
     public EnemyStats Stats;
-    public EnemyBrain Brain;
-    public EnemyDetection Detection;
-    public enum EnemyStates
-    {
-        Idle,
-        Chasing,
-        Attacking
-    }
+    
+    [SerializeField] public EnemyBrain _brain;
+    EnemyDetection _detection;
+
+    public Transform Target;
+
+    public DetectionData DetectionData;
+
 
     private void Awake()
     {
-        Brain = Instantiate(Brain);
-        Brain.Initialize(this);
-
-        Detection = new EnemyDetection(this);
+        _brain = Instantiate(_brain);
+        _brain.Initialize(this);
+        
+        _detection = GetComponent<EnemyDetection>();
     }
 
     private void Update()
     {
-        Detection.Detect();
-        Brain.Think();
+        DetectionData = _detection.Detect();
+        _brain.Think(DetectionData);
+
+        if (DetectionData["Players"].Length > 0) {
+            Transform target = DetectionData["Players"].OrderBy(n => Vector2.Distance(transform.position, n.transform.position)).First().transform;
+            SetTarget(target);
+        }
     }
+
+    public void SetTarget(Transform target)
+    {
+        Target = target;
+    }
+
+    #region Component Caching
 
     Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();
     public new T GetComponent<T>() where T : Component
@@ -44,4 +57,6 @@ public class Enemy : MonoBehaviour
         }
         return component;
     }
+
+    #endregion
 }

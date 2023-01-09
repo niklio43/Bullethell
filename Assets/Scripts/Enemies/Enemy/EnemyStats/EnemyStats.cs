@@ -18,13 +18,6 @@ namespace BulletHell.Enemies
         public EnemyMovementType MovementType;
 
         [Range(0, 10)] public float AttackDistance;
-
-        [Header("Detection Settings")]
-        [Range(0, 10)] public float DetectionRadius = 2;
-        [Range(0, 10)] public float ObstacleDetectionRadius = 1;
-
-
-
-
+        [Range(0, 10)] public float PreferredDistance;
     }
 }

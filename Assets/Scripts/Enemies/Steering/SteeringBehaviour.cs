@@ -7,6 +7,6 @@ namespace BulletHell.Enemies.Steering
 {
     public abstract class SteeringBehaviour : ScriptableObject
     {
-        public abstract void GetSteering(ContextMap danger, ContextMap interest, AgentSteering steering, DetectionData detectionData);
+        public abstract void GetSteering(AgentSteering steering, Enemy enemy);
     }
 }

@@ -12,36 +12,36 @@ namespace BulletHell.Enemies.Steering
         [HideInInspector] public Vector2[] Directions;
 
         public EnemyMovement Owner { get; private set; }
-        EnemyDetection _enemyDetection;
 
         [SerializeField] int _resolution = 16;
         [SerializeField] List<SteeringBehaviour> _behaviours = new List<SteeringBehaviour>();
-        ContextMap _interest, _danger;
-        
-        public void Initialize(EnemyMovement owner, EnemyDetection enemyDetection)
+
+        public ContextMap Interest;
+        public ContextMap Danger;
+
+        public void Initialize(EnemyMovement owner)
         {
             Owner = owner;
-            _enemyDetection = enemyDetection;
             Collider = Owner.GetComponent<CircleCollider2D>();
 
-            _interest = new ContextMap(_resolution);
-            _danger = new ContextMap(_resolution);
+            Interest = new ContextMap(_resolution);
+            Danger = new ContextMap(_resolution);
             CreateDirections(_resolution);
         }
 
-        public void EvaluateBehaviors()
+        public void EvaluateBehaviors(Enemy enemy)
         {
-            _interest.Clear();
-            _danger.Clear();
+            Interest.Clear();
+            Danger.Clear();
 
             foreach (SteeringBehaviour behaviour in _behaviours) {
-                behaviour.GetSteering(_danger, _interest, this, _enemyDetection.Data);
+                behaviour.GetSteering(this, enemy);
             }
         }
 
         public Vector2 GetDirection()
         {
-            return ContextSolver.GetDirection(_danger, _interest, this);
+            return ContextSolver.GetDirection(this);
         }
 
         void CreateDirections(int resolution)
@@ -59,12 +59,12 @@ namespace BulletHell.Enemies.Steering
             Gizmos.color = new Color(.495f, .788f, .478f);
             Gizmos.DrawWireSphere(Owner.transform.position, Collider.radius);
            
-            if (_interest != null && _danger != null) {
+            if (Interest != null && Danger != null) {
                 for (int i = 0; i < Directions.Length; i++) {
                     Gizmos.color = Color.green;
-                    Gizmos.DrawLine(Owner.transform.position, (Vector2)Owner.transform.position + Directions[i] * _interest[i]);
+                    Gizmos.DrawLine(Owner.transform.position, (Vector2)Owner.transform.position + Directions[i] * Interest[i]);
                     Gizmos.color = Color.red;
-                    Gizmos.DrawLine(Owner.transform.position, (Vector2)Owner.transform.position + Directions[i] * _danger[i]);
+                    Gizmos.DrawLine(Owner.transform.position, (Vector2)Owner.transform.position + Directions[i] * Danger[i]);
                 }
             }
         }

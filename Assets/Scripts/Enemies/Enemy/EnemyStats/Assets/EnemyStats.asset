@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
   attributes: []
-  Health: 0
-  MaxHealth: 0
-  MoveSpeed: 1
+  Health: 100
+  MaxHealth: 100
+  MoveSpeed: 2
   MovementType: 0
-  AttackDistance: 0
-  DetectionRadius: 3.25
-  ObstacleDetectionRadius: 1
+  AttackDistance: 3.24
+  PreferredDistance: 2.74
