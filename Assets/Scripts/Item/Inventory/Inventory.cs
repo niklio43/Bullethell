@@ -69,7 +69,7 @@ public class Inventory : ScriptableObject
                 return GetSlots[i];
             }
         }
-        //no space in inv
+        //TODO Add functionality for full inventory.
         return null;
     }
 

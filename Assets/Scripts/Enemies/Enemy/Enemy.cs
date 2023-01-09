@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
 
     public DetectionData DetectionData = new DetectionData();
 
-
     private void Awake()
     {
         _brain = Instantiate(_brain);
@@ -29,7 +28,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         DetectionData = _detection.Detect();
-        _brain.Think(DetectionData);
+        _brain.Think();
 
         if (DetectionData["Players"].Length > 0) {
             Transform target = DetectionData["Players"].OrderBy(n => Vector2.Distance(transform.position, n.transform.position)).First().transform;

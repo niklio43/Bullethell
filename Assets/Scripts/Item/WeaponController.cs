@@ -38,6 +38,7 @@ public class WeaponController : MonoBehaviour
         playerSM.Weapon = null;
     }
 
+    //TODO Add additional functionality.
     public void FillAbilitySlot(Weapon weapon)
     {
         weapon.AddAbility(weapon.Pool._ability[Random.Range(0, weapon.Pool._ability.Length)], weapon, this);
@@ -50,6 +51,7 @@ public class WeaponController : MonoBehaviour
         Gizmos.DrawWireSphere(position, Radius);
     }
 
+    //TODO Add additional functionality.
     public void DetectColliders()
     {
         foreach (Collider2D collider in Physics2D.OverlapCircleAll(CircleOrigin.position, Radius))

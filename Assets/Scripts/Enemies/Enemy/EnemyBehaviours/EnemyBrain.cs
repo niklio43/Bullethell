@@ -19,7 +19,7 @@ namespace BulletHell.Enemies
 
         public abstract void Initialize(Enemy enemy);
 
-        public void Think(DetectionData detectionData)
+        public void Think()
         {
             FSM.Update();
         }
