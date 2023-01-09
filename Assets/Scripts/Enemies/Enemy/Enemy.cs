@@ -27,6 +27,12 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if(Stats.AttackTimer > 0) {
+            Stats.AttackTimer -= Time.deltaTime;
+        }
+
+
+
         DetectionData = _detection.Detect();
         _brain.Think();
 

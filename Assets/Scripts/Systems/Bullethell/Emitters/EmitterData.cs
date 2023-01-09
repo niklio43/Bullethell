@@ -35,7 +35,7 @@ namespace BulletHell.Emitters
 
         Projectile _projectilePrefab;
         public float ParentRotation = 0;
-        public Vector2 Direction => Vector2.up;
+        public Vector2 Direction = Vector2.up;
         public Projectile ProjectilePrefab
         {
             get {

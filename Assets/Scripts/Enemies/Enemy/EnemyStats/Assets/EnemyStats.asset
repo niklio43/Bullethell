@@ -17,5 +17,5 @@ MonoBehaviour:
   MaxHealth: 100
   MoveSpeed: 2
   MovementType: 0
-  AttackDistance: 3.24
-  PreferredDistance: 2.74
+  AttackDistance: 3.5
+  PreferredDistance: 2.83
