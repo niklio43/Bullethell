@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /* How to use:
- * add this script object that needs to drop random loot
+ * add this script to object that needs to drop random loot
  * make serialized list of itemdrop class like this ([SerializeField] List<ItemDrop> _dropTable = new List<ItemDrop>();)
  * choose items and drop chances in inspector (effectively making your own loot table)
  * getcomponent on this script and call DropItem method when desired, eg:
