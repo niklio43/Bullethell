@@ -14,9 +14,12 @@ public class AbilityMelee : Ability
         _weaponController = weaponController;
     }
 
-    public override void DoAbility()
+    public override void DoAbility(Weapon weapon, int abilityIndex)
     {
-        Debug.Log("Swing");
+        if (weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation == null) { Debug.Log("No Weapon Animation"); return; }
+
+        _weaponController.PlayAnimation(abilityIndex, weapon);
+
         _weaponController.DetectColliders();
     }
 

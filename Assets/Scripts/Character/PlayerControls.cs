@@ -8,7 +8,6 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] PlayerUI _playerUI;
     PlayerInputs _inputs;
     PlayerInteracter playerInteracter;
-
     void Awake()
     {
         playerInteracter = GetComponent<PlayerInteracter>();

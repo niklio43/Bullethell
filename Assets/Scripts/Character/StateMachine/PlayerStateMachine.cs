@@ -13,7 +13,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     [SerializeField] PlayerStats _stats;
     [HideInInspector] public Weapon Weapon;
-    [SerializeField] Animator _weaponAnimator;
 
     //State variables
     PlayerBaseState _currentState;
@@ -53,20 +52,9 @@ public class PlayerStateMachine : MonoBehaviour
     public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
     {
         if (Weapon == null) { Debug.Log("No Weapon Error"); return; }
-        if (Weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("No Abillities"); return; }
+        if (abilityIndex > Weapon.AbilitySlot.Count - 1 || Weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
 
-        Weapon.AbilitySlot[abilityIndex].Activate(ctx);
-
-        if (Weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation == null) { Debug.Log("No Weapon Animation"); return; }
-
-        _weaponAnimator.Play(Weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation.name);
-
-        Invoke("ResetAnimation", Weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation.length);
-    }
-
-    void ResetAnimation()
-    {
-        _weaponAnimator.Play(Weapon.WeaponIdleAnimation.name);
+        Weapon.AbilitySlot[abilityIndex].Activate(ctx, Weapon, abilityIndex);
     }
 
     void HandleRotation()

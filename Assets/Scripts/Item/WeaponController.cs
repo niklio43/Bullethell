@@ -9,20 +9,6 @@ public class WeaponController : MonoBehaviour
     public Transform CircleOrigin;
     public float Radius;
 
-    /*[SerializeField] Weapon _weapon;
-    void Awake()
-    {
-        AssignWeapon(_weapon);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            FillAbilitySlot(_weapon);
-        }
-    }*/
-
     public void AssignWeapon(Weapon weapon)
     {
         weapon.Initialize(this);
@@ -30,20 +16,13 @@ public class WeaponController : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
         gameObject.name = weapon.name;
 
-        foreach (Ability ability in weapon.Pool._ability)
+        foreach (Ability ability in weapon.AbilitySlot)
         {
             GetComponent<AbilityHolder>().abilities.Add(ability);
         }
 
         var playerSM = transform.GetComponentInParent<PlayerStateMachine>();
         playerSM.Weapon = weapon;
-
-        /*if (GetComponent<Emitter>() == null)
-            gameObject.AddComponent<Emitter>();
-
-        var emitter = GetComponent<Emitter>();
-        emitter.Data = weapon.EmitterData;
-        emitter.Initialize();*/
     }
 
     public void UnAssignWeapon(Weapon weapon)
@@ -77,5 +56,18 @@ public class WeaponController : MonoBehaviour
         {
             Debug.Log(collider.name);
         }
+    }
+
+    public void PlayAnimation(int abilityIndex, Weapon weapon)
+    {
+        GetComponent<Animator>().Play(weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation.name);
+
+        StartCoroutine(ResetAnimation(weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation.length, weapon));
+    }
+
+    IEnumerator ResetAnimation(float time, Weapon weapon)
+    {
+        yield return new WaitForSeconds(time);
+        GetComponent<Animator>().Play(weapon.WeaponIdleAnimation.name);
     }
 }

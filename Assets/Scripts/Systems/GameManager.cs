@@ -69,6 +69,12 @@ public class GameManager : MonoBehaviour
         onStateChange?.Invoke(gameState);
     }
 
+    //temporary function, replace with async system later
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void Quit()
     {
 #if UNITY_EDITOR
