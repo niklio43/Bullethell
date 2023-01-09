@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerStateMachine : MonoBehaviour
 {
     Rigidbody2D _rb;
-    Animator _animator;
 
     [SerializeField] LayerMask layerMask;
     Vector2 _movementInput;
@@ -26,7 +25,6 @@ public class PlayerStateMachine : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
 
         //Setup state
         _states = new PlayerStateFactory(this);
@@ -43,8 +41,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _rb.velocity = _movementInput * _stats.MoveSpeed;
 
-        HandleAnimation();
-
         if (_movementInput.x == 0) return;
         HandleRotation();
     }
@@ -59,15 +55,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     void HandleRotation()
     {
-        if (_movementInput.x > 0) { transform.localRotation = Quaternion.Euler(0, 180, 0); }
+        if (_movementInput.x < 0) { transform.localRotation = Quaternion.Euler(0, 180, 0); }
         else { transform.localRotation = Quaternion.Euler(0, 0, 0); }
-    }
-
-    void HandleAnimation()
-    {
-        _animator.SetFloat("Horizontal", _movementInput.x);
-        _animator.SetFloat("Vertical", _movementInput.y);
-        _animator.SetFloat("Speed", _movementInput.sqrMagnitude);
     }
 
     public void Move(InputAction.CallbackContext context)
