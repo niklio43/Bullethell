@@ -1,6 +1,7 @@
 using BulletHell.Enemies.Detection;
 using BulletHell.FiniteStateMachine;
 using UnityEngine;
+using BulletHell.Emitters;
 
 namespace BulletHell.Enemies
 {

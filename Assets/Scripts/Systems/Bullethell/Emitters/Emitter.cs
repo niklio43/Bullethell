@@ -54,7 +54,7 @@ namespace BulletHell.Emitters
             return projectile;
         }
 
-        public virtual void FireProjectile()
+        public virtual void FireProjectile(Vector2 direction = default)
         {
             for (int i = 0; i < Mathf.Clamp(Data.EmitterPoints, 0, Data.MaxProjectiles); i++) {
                 Projectile projectile = _pool.Get();
@@ -88,7 +88,7 @@ namespace BulletHell.Emitters
                 projectile.Acceleration = acceleration;
                 projectile.Gravity = gravity;
                 projectile.GravityPoint = gravityPoint;
-                projectile.Direction = _emitterGroups[i].Direction;
+                projectile.Direction = _emitterGroups[i].Direction + direction;
                 projectile.Velocity = _emitterGroups[i].Direction * speed;
             }
         }

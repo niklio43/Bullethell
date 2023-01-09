@@ -28,8 +28,10 @@ namespace BulletHell.Emitters.Editor
         {
             _root = new VisualElement();
 
+            PropertyField autoFireField = new PropertyField(serializedObject.FindProperty("AutoFire"));
             PropertyField dataField = new PropertyField(serializedObject.FindProperty("Data"));
             dataField.RegisterCallback<SerializedPropertyChangeEvent>((changeEvent) => RepaintInspector());
+            _root.Add(autoFireField);
             _root.Add(dataField);
         }
 

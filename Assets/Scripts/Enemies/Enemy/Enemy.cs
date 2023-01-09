@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 
     public Transform Target;
 
-    public DetectionData DetectionData;
+    public DetectionData DetectionData = new DetectionData();
 
 
     private void Awake()
