@@ -6,14 +6,11 @@ public class SlotListener : MonoBehaviour
 {
     public Inventory Inventory;
     public Inventory Equipment;
-    PlayerController _playerController;
-    WeaponController _weaponController;
+    [SerializeField] PlayerController _playerController;
+    [SerializeField] WeaponController _weaponController;
 
     void Start()
     {
-        _playerController = transform.parent.GetComponent<PlayerController>();
-        _weaponController = GetComponentInChildren<WeaponController>();
-
         for (int i = 0; i < Equipment.GetSlots.Length; i++)
         {
             Equipment.GetSlots[i].OnBeforeUpdate += OnBeforeSlotUpdate;

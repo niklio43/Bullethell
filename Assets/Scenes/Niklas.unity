@@ -3628,6 +3628,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Inventory: {fileID: 11400000, guid: 8c92590e686871f47962c9e52badc592, type: 2}
   Equipment: {fileID: 11400000, guid: 54db3d7bdb4ead441b9397c93cc57454, type: 2}
+  _playerController: {fileID: 56462419}
+  _weaponController: {fileID: 1341775476}
 --- !u!1 &1341775473
 GameObject:
   m_ObjectHideFlags: 0
