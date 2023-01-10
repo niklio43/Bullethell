@@ -11,12 +11,6 @@ namespace BulletHell.Stats
         public float Value;
         Dictionary<string, StatModifier> _modifiers = new Dictionary<string, StatModifier>();
 
-        public Stat(string name, float baseValue)
-        {
-            Name = name;
-            Value = baseValue;
-        }
-
         public float Get()
         {
             float total = Value;

@@ -7,13 +7,13 @@ namespace BulletHell.Stats
     [System.Serializable]
     public class CharacterStats
     {
-        public Stat this[string key] { get { return this[key]; } }
+        public Stat this[string key] { get { return Stats[key]; } }
 
 
         [SerializeField] List<Stat> _stats = new List<Stat>();
         public Dictionary<string, Stat> Stats = new Dictionary<string, Stat>();
 
-        public void Awake()
+        public void Initialize()
         {
             foreach (Stat stat in _stats) {
                 Stats.Add(stat.Name, stat);

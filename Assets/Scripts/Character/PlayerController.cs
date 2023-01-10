@@ -8,5 +8,4 @@ public class PlayerController : Character
     {
         Stats.UpdateList();
     }
-
 }

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PlayerInteracter : MonoBehaviour
 {
-    [SerializeField, Range(0, 100f)] float _interactRadius = 5f;
-    [SerializeField] LayerMask _interactable;
+    [SerializeField, Range(0, 10f)] float _interactRadius = 5f;
+
+    LayerMask _interactableMask => 1 << LayerMask.NameToLayer("Interactable");
     IInteractable _closestInteractable = null;
     SlotListener _slotListener;
 
     void FixedUpdate()
     {
         _slotListener = GetComponentInChildren<SlotListener>();
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, _interactRadius, _interactable);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, _interactRadius, _interactableMask);
         if (hit != null)
         {
             DroppedItem droppedItem = hit.GetComponent<DroppedItem>();
@@ -48,5 +49,11 @@ public class PlayerInteracter : MonoBehaviour
     {
         _slotListener.Inventory.Clear();
         _slotListener.Equipment.Clear();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, _interactRadius);
     }
 }

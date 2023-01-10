@@ -15,6 +15,7 @@ public class PlayerStateMachine : MonoBehaviour
     //State variables
     PlayerBaseState _currentState;
     PlayerStateFactory _states;
+    PlayerController _controller;
 
     //getters and setters
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
@@ -24,6 +25,7 @@ public class PlayerStateMachine : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _controller = GetComponent<PlayerController>();
 
         //Setup state
         _states = new PlayerStateFactory(this);
@@ -60,7 +62,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        _movementInput = context.ReadValue<Vector2>();
+        _movementInput = context.ReadValue<Vector2>() * _controller.Stats["MoveSpeed"].Value;
     }
 
     public void Dash(InputAction.CallbackContext context)

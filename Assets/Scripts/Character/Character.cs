@@ -8,6 +8,11 @@ public class Character : MonoBehaviour
 {
     public CharacterStats Stats;
 
+    private void Awake()
+    {
+        Stats.Initialize();
+    }
+
     public virtual void TakeDamage(float amount)
     {
         Stats["Hp"].Value += amount;
