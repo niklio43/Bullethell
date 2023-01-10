@@ -25,8 +25,8 @@ namespace BulletHell.Abilities
         }
         List<float> timers;
 
-        public virtual void Initialize(WeaponController weaponController) { }
-        public virtual void UnInitialize(WeaponController weaponController) { }
+        public virtual void Initialize(GameObject owner) { }
+        public virtual void UnInitialize(GameObject owner) { }
 
         public void Activate(InputAction.CallbackContext context, Weapon weapon, int abilityIndex)
         {

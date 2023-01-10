@@ -13,6 +13,6 @@ public class AbilityProjectile : EmitterAbility
 
         if (weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation == null) { Debug.Log("No Ability Animation"); return; }
 
-        WeaponController.PlayAnimation(abilityIndex, weapon);
+        Owner.GetComponent<WeaponController>().PlayAnimation(abilityIndex, weapon);
     }
 }

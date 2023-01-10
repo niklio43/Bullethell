@@ -513,12 +513,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -874790727, guid: b2c8f4dffbc4d1e419312262e17f2021, type: 3}
+  m_Sprite: {fileID: -1417054032, guid: 68f7689c925f7a34698faf99fe2f48a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.4375, y: 1.0625}
+  m_Size: {x: 0.6, y: 0.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -995,6 +995,8 @@ GameObject:
   - component: {fileID: 230056740}
   - component: {fileID: 230056739}
   - component: {fileID: 230056742}
+  - component: {fileID: 230056743}
+  - component: {fileID: 230056744}
   m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1061,7 +1063,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230056738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2857525, y: 0.31, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1101,6 +1103,36 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &230056743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230056738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93b8cb6897a26b4998195a4095c4fb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 230056740}
+  _target: {fileID: 56462413}
+  _threshold: 1
+  _zoom: -10
+  _damping: 0.01
+--- !u!114 &230056744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230056738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4e24dbcdcc724488904a286da97676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
 --- !u!114 &289019620 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1280149869705643992, guid: 15d37370597e52740a2ce13311669345, type: 3}

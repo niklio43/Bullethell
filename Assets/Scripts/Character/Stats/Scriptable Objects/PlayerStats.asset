@@ -25,7 +25,7 @@ MonoBehaviour:
     Value:
       _baseValue: 0
       _modifiedValue: 0
-  health: 100
-  maxHealth: 100
-  moveSpeed: 10
-  dashDistance: 4
+  Health: 100
+  MaxHealth: 100
+  MoveSpeed: 10
+  DashDistance: 4

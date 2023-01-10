@@ -6,21 +6,21 @@ using BulletHell.Abilities;
 [CreateAssetMenu(fileName = "AbilityMelee", menuName = "Abilities/New Melee Ability")]
 public class AbilityMelee : Ability
 {
-    WeaponController _weaponController;
+    GameObject _owner;
 
-    public override void Initialize(WeaponController weaponController)
+    public override void Initialize(GameObject owner)
     {
-        base.Initialize(weaponController);
-        _weaponController = weaponController;
+        base.Initialize(owner);
+        _owner = owner;
     }
 
     public override void DoAbility(Weapon weapon, int abilityIndex)
     {
         if (weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation == null) { Debug.Log("No Weapon Animation"); return; }
 
-        _weaponController.PlayAnimation(abilityIndex, weapon);
+        _owner.GetComponent<WeaponController>().PlayAnimation(abilityIndex, weapon);
 
-        _weaponController.DetectColliders();
+        _owner.GetComponent<WeaponController>().DetectColliders();
     }
 
 }

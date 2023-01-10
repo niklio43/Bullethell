@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float _threshold;
     [SerializeField, Range(-20, 0)] float _zoom;
     [SerializeField, Range(0, 0.3f)] float _damping;
+
     void Update()
     {
         Vector3 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
