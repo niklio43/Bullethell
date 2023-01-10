@@ -336,22 +336,6 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 3134107e-b444-4a8e-9a93-d2fc0a4d050d
-    m_ActionName: Player/LeftHotBar[/Keyboard/1]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 51de4526-c404-409b-8442-8a08bdedc828
-    m_ActionName: Player/RightHotBar[/Keyboard/2]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a1ecd2f4-6a1f-4883-8b59-c16899f674a3
-    m_ActionName: Player/BottomHotBar[/Keyboard/3]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 37238ba5-c9fc-44e8-bbc1-5abcea4f9f70
-    m_ActionName: Player/TopHotBar[/Keyboard/4]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 1a9d7fbd-8fa4-492e-8ab5-a906db293799
     m_ActionName: Player/AbilityQ[/Keyboard/q]
   - m_PersistentCalls:
@@ -507,9 +491,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactRadius: 5
-  _interactable:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &56462419
 MonoBehaviour:
   m_ObjectHideFlags: 0
