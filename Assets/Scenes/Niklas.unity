@@ -515,6 +515,8 @@ MonoBehaviour:
       Value: 10
     - Name: DashDistance
       Value: 4
+    - Name: MoveSpeed
+      Value: 4
 --- !u!1 &59200425
 GameObject:
   m_ObjectHideFlags: 0
