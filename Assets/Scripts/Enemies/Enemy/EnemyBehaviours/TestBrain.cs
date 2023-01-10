@@ -12,30 +12,26 @@ namespace BulletHell.Enemies
             FSM = new FSMBuilder()
            .Owner(enemy.gameObject)
            .Default(EnemyStates.Idle)
-           .State(EnemyStates.Idle, (foundPlayer) => {
-               foundPlayer.SetTransition("chasePlayer", EnemyStates.Chasing)
+           .State(EnemyStates.Idle, (idle) => {
+               idle.SetTransition("chasePlayer", EnemyStates.Chasing)
                .Update((action) => {
                    if (enemy.Target != null) {
                        action.Transition("chasePlayer");
                    }
                });
            })
-           .State(EnemyStates.Chasing, (chasingPlayer) => {
-               chasingPlayer.SetTransition("attackPlayer", EnemyStates.Attacking)
+           .State(EnemyStates.Chasing, (chasing) => {
+               chasing.SetTransition("attackPlayer", EnemyStates.Attacking)
                .Update((action) => {
+
                    enemy.GetComponent<Animator>().SetBool("Running", (enemy.GetComponent<Rigidbody2D>().velocity.SqrMagnitude() > 1));
-                   if (enemy.Stats.AttackTimer < 0 && Vector2.Distance(enemy.transform.position, enemy.Target.position) < enemy.Stats.AttackDistance) {
-                       action.Transition("attackPlayer");
-                   }
                });
            })
-           .State(EnemyStates.Attacking, (attackingPlayer) => {
-               attackingPlayer.SetTransition("chasePlayer", EnemyStates.Chasing)
+           .State(EnemyStates.Attacking, (attacking) => {
+               attacking.SetTransition("chasePlayer", EnemyStates.Chasing)
                .SetAnimationClip("Idle")
                .Update((action) => {
-                   enemy.GetComponentInChildren<Emitter>().SetDirection((enemy.Target.position - enemy.transform.position).normalized);
-                   enemy.GetComponentInChildren<Emitter>().FireProjectile();
-                   enemy.Stats.AttackTimer = 1;
+
                    action.Transition("chasePlayer");
                });
            })

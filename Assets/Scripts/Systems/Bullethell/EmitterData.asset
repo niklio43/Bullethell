@@ -30,4 +30,5 @@ MonoBehaviour:
   Offset: 0
   Spread: 0
   ParentRotation: 0
+  Direction: {x: 0, y: 1}
   Modifiers: []

@@ -97,6 +97,7 @@ namespace BulletHell
         //Destroys the pool and all elements contained within.
         public override void Dispose()
         {
+
             foreach (T item in members) {
                 if(item != null && item.gameObject != null)
                 UnityEngine.Object.Destroy(item.gameObject);
@@ -104,6 +105,7 @@ namespace BulletHell
 
             base.Dispose();
 
+            if(_poolHolder.gameObject != null)
             GameObject.Destroy(_poolHolder.gameObject);
         }
 

@@ -19,8 +19,5 @@ namespace BulletHell.Enemies
 
         [Range(0, 10)] public float AttackDistance;
         [Range(0, 10)] public float PreferredDistance;
-
-
-        public float AttackTimer = 1;
     }
 }

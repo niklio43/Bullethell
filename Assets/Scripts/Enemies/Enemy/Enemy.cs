@@ -27,10 +27,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(Stats.AttackTimer > 0) {
-            Stats.AttackTimer -= Time.deltaTime;
-        }
-
         if (Target != null) {
             Vector2 targetDirection = Target.position - transform.position;
             GetComponent<SpriteRenderer>().flipX = (Vector2.Dot(targetDirection, Vector2.right) < 0) ? true : false;
