@@ -62,9 +62,7 @@ public class WeaponController : MonoBehaviour
 
     public void PlayAnimation(int abilityIndex, Weapon weapon)
     {
-        GetComponent<Animator>().Play(weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation.name);
 
-        StartCoroutine(ResetAnimation(weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation.length, weapon));
     }
 
     IEnumerator ResetAnimation(float time, Weapon weapon)

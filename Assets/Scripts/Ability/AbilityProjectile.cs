@@ -7,12 +7,10 @@ using BulletHell.Abilities;
 public class AbilityProjectile : EmitterAbility
 {
 
-    public override void DoAbility(Weapon weapon, int abilityIndex)
+    public override void DoAbility()
     {
         _emitter.FireProjectile();
 
-        if (weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation == null) { Debug.Log("No Ability Animation"); return; }
 
-        Owner.GetComponent<WeaponController>().PlayAnimation(abilityIndex, weapon);
     }
 }

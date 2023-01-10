@@ -12,8 +12,6 @@ namespace BulletHell.Abilities
         public float coolDownTime = 0;
         public int maxAmount = 1;
         public int currentAmount;
-        [SerializeField] VisualEffect _weaponVfx;
-        public AnimationClip WeaponAttackAnimation;
 
         public float timer
         {
@@ -28,21 +26,19 @@ namespace BulletHell.Abilities
         public virtual void Initialize(GameObject owner) { }
         public virtual void UnInitialize(GameObject owner) { }
 
-        public void Activate(InputAction.CallbackContext context, Weapon weapon, int abilityIndex)
+        public void Activate(InputAction.CallbackContext context)
         {
             if (currentAmount <= 0) return;
             if (!context.performed) return;
 
-            DoAbility(weapon, abilityIndex);
-
-            //_weaponVfx.Play();
+            DoAbility();
 
             currentAmount--;
 
             timers.Add(coolDownTime);
         }
 
-        public abstract void DoAbility(Weapon weapon, int abilityIndex);
+        public abstract void DoAbility();
 
         public virtual void UpdateAbility(float dt)
         {

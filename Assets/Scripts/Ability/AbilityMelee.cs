@@ -14,13 +14,8 @@ public class AbilityMelee : Ability
         _owner = owner;
     }
 
-    public override void DoAbility(Weapon weapon, int abilityIndex)
+    public override void DoAbility()
     {
-        if (weapon.AbilitySlot[abilityIndex].WeaponAttackAnimation == null) { Debug.Log("No Weapon Animation"); return; }
-
-        _owner.GetComponent<WeaponController>().PlayAnimation(abilityIndex, weapon);
-
         _owner.GetComponent<WeaponController>().DetectColliders();
     }
-
 }

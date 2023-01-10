@@ -11,7 +11,7 @@ namespace BulletHell.Abilities
         [SerializeField] EmitterData _emitterData;
         [HideInInspector] public GameObject Owner;
 
-        public override abstract void DoAbility(Weapon weapon, int abilityIndex);
+        public override abstract void DoAbility();
 
         public override void Initialize(GameObject owner)
         {

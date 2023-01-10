@@ -50,7 +50,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (Weapon == null) { Debug.Log("No Weapon Error"); return; }
         if (abilityIndex > Weapon.AbilitySlot.Count - 1 || Weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
 
-        Weapon.AbilitySlot[abilityIndex].Activate(ctx, Weapon, abilityIndex);
+        Weapon.AbilitySlot[abilityIndex].Activate(ctx);
     }
 
     void HandleRotation()
