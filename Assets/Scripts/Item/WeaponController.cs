@@ -11,7 +11,7 @@ public class WeaponController : MonoBehaviour
 
     public void AssignWeapon(Weapon weapon)
     {
-        weapon.Initialize(this);
+        weapon.Initialize(gameObject);
         GetComponent<Animator>().Play(weapon.WeaponIdleAnimation.name);
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
         gameObject.name = weapon.name;
@@ -27,7 +27,7 @@ public class WeaponController : MonoBehaviour
 
     public void UnAssignWeapon(Weapon weapon)
     {
-        weapon.UnInitialize(this);
+        weapon.UnInitialize(gameObject);
         GetComponent<SpriteRenderer>().sprite = null;
 
         GetComponent<AbilityHolder>().abilities.Clear();
@@ -41,7 +41,7 @@ public class WeaponController : MonoBehaviour
     //TODO Add additional functionality.
     public void FillAbilitySlot(Weapon weapon)
     {
-        weapon.AddAbility(weapon.Pool._ability[Random.Range(0, weapon.Pool._ability.Length)], weapon, this);
+        weapon.AddAbility(weapon.Pool._ability[Random.Range(0, weapon.Pool._ability.Length)], weapon, gameObject);
     }
 
     private void OnDrawGizmosSelected()

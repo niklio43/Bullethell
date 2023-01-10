@@ -13,27 +13,27 @@ public abstract class Weapon : Item
 
     public List<Ability> AbilitySlot { get { return _abilitySlot; } set { _abilitySlot = value; } }
 
-    public void Initialize(WeaponController weaponController)
+    public void Initialize(GameObject owner)
     {
         foreach(Ability ability in _abilitySlot)
         {
-            ability.Initialize(weaponController);
+            ability.Initialize(owner);
         }
     }
 
-    public void UnInitialize(WeaponController weaponController)
+    public void UnInitialize(GameObject owner)
     {
         foreach (Ability ability in _abilitySlot)
         {
-            ability.UnInitialize(weaponController);
+            ability.UnInitialize(owner);
         }
     }
 
-    public void AddAbility(Ability ability, Weapon weapon, WeaponController weaponController)
+    public void AddAbility(Ability ability, Weapon weapon, GameObject owner)
     {
         if (_abilitySlot.Count >= 4) return;
-        if(_abilitySlot.Contains(ability)) { weaponController.FillAbilitySlot(weapon); return; }
+        if(_abilitySlot.Contains(ability)) { owner.GetComponent<WeaponController>().FillAbilitySlot(weapon); return; }
         _abilitySlot.Add(ability);
-        ability.Initialize(weaponController);
+        ability.Initialize(owner);
     }
 }

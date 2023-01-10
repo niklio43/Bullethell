@@ -1,45 +1,28 @@
 using System.Collections;
 using UnityEngine;
 
-public class CameraShake : MonoBehaviour
+public class CameraShake : Singleton<CameraShake>
 {
-    public static CameraShake instance;
-
-    Vector3 _originalPos;
-    float timeAtCurrentFrame;
-    float timeAtLastFrame;
-    float fakeDelta;
-
-    void Awake()
-    {
-        instance = this;
-    }
-
-    void Update()
-    {
-        timeAtCurrentFrame = Time.realtimeSinceStartup;
-        fakeDelta = timeAtCurrentFrame - timeAtLastFrame;
-        timeAtLastFrame = timeAtCurrentFrame;
-    }
-
     public static void Shake(float duration, float amount)
     {
-        instance._originalPos = instance.gameObject.transform.localPosition;
-        instance.StopAllCoroutines();
-        instance.StartCoroutine(instance.cShake(duration, amount));
+        Instance.StopAllCoroutines();
+        Instance.StartCoroutine(cShake(duration, amount));
     }
 
-    public IEnumerator cShake(float duration, float amount)
+    static IEnumerator cShake(float duration, float amount)
     {
-        while (duration > 0)
+        Vector3 startPosition = Instance.transform.position;
+
+        float timeElapsed = 0;
+
+        while(timeElapsed < duration)
         {
-            transform.localPosition = _originalPos + Random.insideUnitSphere * amount;
+            yield return new WaitForEndOfFrame();
+            timeElapsed += Time.deltaTime;
 
-            duration -= fakeDelta;
-
-            yield return null;
+            Instance.transform.position = startPosition + (Vector3)Random.insideUnitCircle * amount;
         }
 
-        transform.localPosition = _originalPos;
+        Instance.transform.localPosition = startPosition;
     }
 }
