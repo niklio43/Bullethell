@@ -42,42 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LeftHotBar",
-                    "type": "Button",
-                    "id": "3134107e-b444-4a8e-9a93-d2fc0a4d050d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RightHotBar",
-                    "type": "Button",
-                    "id": "51de4526-c404-409b-8442-8a08bdedc828",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "BottomHotBar",
-                    "type": "Button",
-                    "id": "a1ecd2f4-6a1f-4883-8b59-c16899f674a3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TopHotBar",
-                    "type": "Button",
-                    "id": "37238ba5-c9fc-44e8-bbc1-5abcea4f9f70",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "AbilityQ",
                     "type": "Button",
                     "id": "1a9d7fbd-8fa4-492e-8ab5-a906db293799",
@@ -363,50 +327,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c3810605-8e1b-4c37-a8f2-69d952367c82",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "LeftHotBar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5df51d60-ca0d-44b1-ab4d-b04963d164c5",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "RightHotBar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "781f1702-cb98-4618-a9e3-1684fc5bea9f",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "BottomHotBar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "310f87a5-4de0-4406-ad9d-7e658d890414",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "TopHotBar",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

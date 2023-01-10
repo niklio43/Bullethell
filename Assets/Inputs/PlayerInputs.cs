@@ -64,42 +64,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LeftHotBar"",
-                    ""type"": ""Button"",
-                    ""id"": ""3134107e-b444-4a8e-9a93-d2fc0a4d050d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RightHotBar"",
-                    ""type"": ""Button"",
-                    ""id"": ""51de4526-c404-409b-8442-8a08bdedc828"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""BottomHotBar"",
-                    ""type"": ""Button"",
-                    ""id"": ""a1ecd2f4-6a1f-4883-8b59-c16899f674a3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TopHotBar"",
-                    ""type"": ""Button"",
-                    ""id"": ""37238ba5-c9fc-44e8-bbc1-5abcea4f9f70"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""AbilityQ"",
                     ""type"": ""Button"",
                     ""id"": ""1a9d7fbd-8fa4-492e-8ab5-a906db293799"",
@@ -385,50 +349,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c3810605-8e1b-4c37-a8f2-69d952367c82"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""LeftHotBar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5df51d60-ca0d-44b1-ab4d-b04963d164c5"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""RightHotBar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""781f1702-cb98-4618-a9e3-1684fc5bea9f"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""BottomHotBar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""310f87a5-4de0-4406-ad9d-7e658d890414"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""TopHotBar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1130,10 +1050,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_LeftHotBar = m_Player.FindAction("LeftHotBar", throwIfNotFound: true);
-        m_Player_RightHotBar = m_Player.FindAction("RightHotBar", throwIfNotFound: true);
-        m_Player_BottomHotBar = m_Player.FindAction("BottomHotBar", throwIfNotFound: true);
-        m_Player_TopHotBar = m_Player.FindAction("TopHotBar", throwIfNotFound: true);
         m_Player_AbilityQ = m_Player.FindAction("AbilityQ", throwIfNotFound: true);
         m_Player_AbilityE = m_Player.FindAction("AbilityE", throwIfNotFound: true);
         m_Player_AbilityR = m_Player.FindAction("AbilityR", throwIfNotFound: true);
@@ -1214,10 +1130,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Dash;
-    private readonly InputAction m_Player_LeftHotBar;
-    private readonly InputAction m_Player_RightHotBar;
-    private readonly InputAction m_Player_BottomHotBar;
-    private readonly InputAction m_Player_TopHotBar;
     private readonly InputAction m_Player_AbilityQ;
     private readonly InputAction m_Player_AbilityE;
     private readonly InputAction m_Player_AbilityR;
@@ -1231,10 +1143,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
-        public InputAction @LeftHotBar => m_Wrapper.m_Player_LeftHotBar;
-        public InputAction @RightHotBar => m_Wrapper.m_Player_RightHotBar;
-        public InputAction @BottomHotBar => m_Wrapper.m_Player_BottomHotBar;
-        public InputAction @TopHotBar => m_Wrapper.m_Player_TopHotBar;
         public InputAction @AbilityQ => m_Wrapper.m_Player_AbilityQ;
         public InputAction @AbilityE => m_Wrapper.m_Player_AbilityE;
         public InputAction @AbilityR => m_Wrapper.m_Player_AbilityR;
@@ -1261,18 +1169,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @LeftHotBar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftHotBar;
-                @LeftHotBar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftHotBar;
-                @LeftHotBar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftHotBar;
-                @RightHotBar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightHotBar;
-                @RightHotBar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightHotBar;
-                @RightHotBar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightHotBar;
-                @BottomHotBar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBottomHotBar;
-                @BottomHotBar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBottomHotBar;
-                @BottomHotBar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBottomHotBar;
-                @TopHotBar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTopHotBar;
-                @TopHotBar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTopHotBar;
-                @TopHotBar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTopHotBar;
                 @AbilityQ.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityQ;
                 @AbilityQ.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityQ;
                 @AbilityQ.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityQ;
@@ -1304,18 +1200,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @LeftHotBar.started += instance.OnLeftHotBar;
-                @LeftHotBar.performed += instance.OnLeftHotBar;
-                @LeftHotBar.canceled += instance.OnLeftHotBar;
-                @RightHotBar.started += instance.OnRightHotBar;
-                @RightHotBar.performed += instance.OnRightHotBar;
-                @RightHotBar.canceled += instance.OnRightHotBar;
-                @BottomHotBar.started += instance.OnBottomHotBar;
-                @BottomHotBar.performed += instance.OnBottomHotBar;
-                @BottomHotBar.canceled += instance.OnBottomHotBar;
-                @TopHotBar.started += instance.OnTopHotBar;
-                @TopHotBar.performed += instance.OnTopHotBar;
-                @TopHotBar.canceled += instance.OnTopHotBar;
                 @AbilityQ.started += instance.OnAbilityQ;
                 @AbilityQ.performed += instance.OnAbilityQ;
                 @AbilityQ.canceled += instance.OnAbilityQ;
@@ -1491,10 +1375,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnLeftHotBar(InputAction.CallbackContext context);
-        void OnRightHotBar(InputAction.CallbackContext context);
-        void OnBottomHotBar(InputAction.CallbackContext context);
-        void OnTopHotBar(InputAction.CallbackContext context);
         void OnAbilityQ(InputAction.CallbackContext context);
         void OnAbilityE(InputAction.CallbackContext context);
         void OnAbilityR(InputAction.CallbackContext context);
