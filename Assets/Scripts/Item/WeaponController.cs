@@ -60,14 +60,16 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void PlayAnimation(int abilityIndex, Weapon weapon)
+    public void PlayAnimation(Animator animator, AnimationClip clip)
     {
-
+        AnimationClip idle = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+        animator.Play(clip.name);
+        StartCoroutine(ResetAnimation(clip.length, idle));
     }
 
-    IEnumerator ResetAnimation(float time, Weapon weapon)
+    IEnumerator ResetAnimation(float time, AnimationClip idle)
     {
         yield return new WaitForSeconds(time);
-        GetComponent<Animator>().Play(weapon.WeaponIdleAnimation.name);
+        GetComponent<Animator>().Play(idle.name);
     }
 }
