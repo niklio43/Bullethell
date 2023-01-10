@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using BulletHell.Stats;
 public enum Rarity
 {
     Common,
@@ -15,13 +15,6 @@ public enum ItemType
     Chestgear,
     Legwear,
     Consumable
-}
-
-public enum Attributes
-{
-    Attack,
-    Defense,
-    Stamina
 }
 
 public abstract class Item : ScriptableObject
@@ -50,7 +43,7 @@ public class ItemObject
 {
     public string Name;
     public int Id = -1;
-    public ItemBuff[] buffs;
+    public StatModifier[] buffs;
 
     public ItemObject()
     {
@@ -61,38 +54,5 @@ public class ItemObject
     {
         Name = item.name;
         Id = item.data.Id;
-        buffs = new ItemBuff[item.data.buffs.Length];
-        for (int i = 0; i < buffs.Length; i++)
-        {
-            buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max)
-            {
-                attribute = item.data.buffs[i].attribute
-            };
-        }
-    }
-}
-
-[System.Serializable]
-public class ItemBuff : IModifier
-{
-    public Attributes attribute;
-    public int value;
-    public int min;
-    public int max;
-    public ItemBuff(int _min, int _max)
-    {
-        min = _min;
-        max = _max;
-        GenerateValue();
-    }
-
-    public void AddValue(ref int baseValue)
-    {
-        baseValue += value;
-    }
-
-    public void GenerateValue()
-    {
-        value = UnityEngine.Random.Range(min, max);
     }
 }

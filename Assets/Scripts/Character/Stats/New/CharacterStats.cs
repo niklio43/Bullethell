@@ -23,5 +23,10 @@ namespace BulletHell.Stats
         {
             Stats[modifier.Stat].AddModifier(modifier);
         }
+
+        public void RemoveModifierFromStat(StatModifier modifier)
+        {
+            Stats[modifier.Stat].RemoveModifier(modifier);
+        }
     }
 }

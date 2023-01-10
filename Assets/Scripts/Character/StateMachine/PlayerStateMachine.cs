@@ -69,11 +69,11 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Vector2 dir = _movementInput.normalized;
 
-            if (!CanDash(dir, _stats.DashDistance)) return;
+            if (!CanDash(dir, GetComponent<PlayerController>().Stats["DashDistance"].Value)) return;
 
             _isDashing = true;
 
-            transform.position += new Vector3(dir.x, dir.y, 0) * _stats.DashDistance;
+            transform.position += new Vector3(dir.x, dir.y, 0) * GetComponent<PlayerController>().Stats["DashDistance"].Value;
 
             StartCoroutine(ResetDash());
         }

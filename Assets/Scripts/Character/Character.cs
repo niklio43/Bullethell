@@ -6,23 +6,23 @@ using BulletHell.Stats;
 
 public class Character : MonoBehaviour
 {
-    public CharacterStats stats;
+    public CharacterStats Stats;
 
     public virtual void TakeDamage(float amount)
     {
-        stats["Hp"].Value += amount;
+        Stats["Hp"].Value += amount;
 
-        if(stats["Hp"].Value <= 0) {
+        if(Stats["Hp"].Value <= 0) {
             OnDeath();
         }
     }
 
     public virtual void Heal(float amount)
     {
-        stats["Hp"].Value += amount;
+        Stats["Hp"].Value += amount;
 
-        if(stats["Hp"].Value > stats["MaxHp"].Value) {
-            stats["Hp"].Value = stats["MaxHp"].Value;
+        if(Stats["Hp"].Value > Stats["MaxHp"].Value) {
+            Stats["Hp"].Value = Stats["MaxHp"].Value;
         }
     }
 

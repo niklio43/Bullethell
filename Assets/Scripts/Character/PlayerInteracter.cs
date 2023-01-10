@@ -33,16 +33,9 @@ public class PlayerInteracter : MonoBehaviour
             case InterfaceType.Inventory:
                 break;
             case InterfaceType.Equipment:
-                //print(string.Concat("Removed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
                 for (int i = 0; i < slot.Item.buffs.Length; i++)
                 {
-                    //for (int j = 0; j < _stats.attributes.Length; j++)
-                    //{
-                    //    if (_stats.attributes[j].Type == slot.Item.buffs[i].attribute)
-                    //    {
-                    //        _stats.attributes[j].Value.RemoveModifier(slot.Item.buffs[i]);
-                    //    }
-                    //}
+                    GetComponent<PlayerController>().Stats.RemoveModifierFromStat(slot.Item.buffs[i]);
                 }
                 if (slot.GetItemData.ItemType == ItemType.Weapon && slot == _equipment.GetSlots[3])
                 {
@@ -65,14 +58,9 @@ public class PlayerInteracter : MonoBehaviour
             case InterfaceType.Inventory:
                 break;
             case InterfaceType.Equipment:
-                //print(string.Concat("Placed ", slot.Item.Name, " on ", slot.Parent.Inventory.type, ", Allowed Items: ", string.Join(", ", slot.AllowedItems)));
                 for (int i = 0; i < slot.Item.buffs.Length; i++)
                 {
-                    //for (int j = 0; j < _stats.attributes.Length; j++) {
-                    //    if (_stats.attributes[j].Type == slot.Item.buffs[i].attribute) {
-                    //        _stats.attributes[j].Value.AddModifier(slot.Item.buffs[i]);
-                    //    }
-                    //}
+                    GetComponent<PlayerController>().Stats.AddModifierToStat(slot.Item.buffs[i]);
                 }
                 if (slot.GetItemData.ItemType == ItemType.Weapon && slot == _equipment.GetSlots[3])
                 {
