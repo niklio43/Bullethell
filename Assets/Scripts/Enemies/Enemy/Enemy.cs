@@ -8,8 +8,6 @@ using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
-    public EnemyStats Stats;
-    
     [SerializeField] public EnemyBrain _brain;
     EnemyDetection _detection;
 

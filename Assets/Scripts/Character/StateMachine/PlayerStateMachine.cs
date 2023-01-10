@@ -10,7 +10,6 @@ public class PlayerStateMachine : MonoBehaviour
     Vector2 _movementInput;
     bool _isDashing = false;
 
-    [SerializeField] PlayerStats _stats;
     [HideInInspector] public Weapon Weapon;
 
     //State variables
@@ -39,7 +38,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.velocity = _movementInput * _stats.MoveSpeed;
+        _rb.velocity = _movementInput;
 
         if (_movementInput.x == 0) return;
         HandleRotation();

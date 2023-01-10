@@ -1,34 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.Stats;
+
 
 public class Character : MonoBehaviour
 {
-    public CharacterStats characterStats;
+    public CharacterStats stats;
 
-    void Awake()
+    public virtual void TakeDamage(float amount)
     {
-        characterStats = Instantiate(characterStats);
-        Init();
+        stats["Hp"].Value += amount;
+
+        if(stats["Hp"].Value <= 0) {
+            OnDeath();
+        }
     }
 
-    protected virtual void Init() { }
-
-    public virtual void TakeDamage(float value)
+    public virtual void Heal(float amount)
     {
-        characterStats.Health -= value;
-        if (characterStats.Health <= 0) { OnDeath(); }
+        stats["Hp"].Value += amount;
+
+        if(stats["Hp"].Value > stats["MaxHp"].Value) {
+            stats["Hp"].Value = stats["MaxHp"].Value;
+        }
     }
 
-    public virtual void Heal(float value)
+    public virtual void OnDeath()
     {
-        if (characterStats.Health + value > characterStats.MaxHealth) { characterStats.Health = characterStats.MaxHealth; return; }
-        characterStats.Health += value;
-    }
-
-    protected virtual void OnDeath()
-    {
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        Destroy(gameObject, 0.4f);
+        throw new System.NotImplementedException();
     }
 }
