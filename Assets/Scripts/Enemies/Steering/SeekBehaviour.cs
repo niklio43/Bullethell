@@ -23,8 +23,8 @@ namespace BulletHell.Enemies.Steering
 
             int towards = 0;
 
-            if(Mathf.Abs(distance - enemy.Stats.PreferredDistance) > Margin) {
-                towards = (int)Mathf.Sign(distance - enemy.Stats.PreferredDistance);
+            if(Mathf.Abs(distance - enemy.PreferredDistance) > Margin) {
+                towards = (int)Mathf.Sign(distance - enemy.PreferredDistance);
             }
 
             for (int i = 0; i < steering.Directions.Length; i++) {

@@ -15,6 +15,17 @@ public class Enemy : MonoBehaviour
 
     public DetectionData DetectionData = new DetectionData();
 
+    public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
+
+    public enum EnemyMovmentType
+    {
+        Grounded,
+        Airborne
+    }
+
+    public float PreferredDistance;
+    public float AttackDistance;
+
     private void Awake()
     {
         _brain = Instantiate(_brain);

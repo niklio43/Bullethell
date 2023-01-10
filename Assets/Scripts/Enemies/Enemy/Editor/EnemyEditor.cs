@@ -13,27 +13,20 @@ namespace BulletHell.Enemies
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
-
-            if(_target.Stats != null) {
-                var editor = Editor.CreateEditor(_target.Stats);
-                editor.OnInspectorGUI();
-            }
-
         }
 
         private void OnSceneGUI()
         {
-            if(_target.Stats != null)
             Draw();
         }
 
         private void Draw()
         {
             Handles.color = Color.red;
-            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.Stats.AttackDistance);
+            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.AttackDistance);
 
             Handles.color = Color.green;
-            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.Stats.PreferredDistance);
+            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.PreferredDistance);
         }
 
         private void OnEnable()

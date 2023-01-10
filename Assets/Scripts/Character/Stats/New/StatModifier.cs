@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BulletHell.Stats
 {
+    [System.Serializable]
     public class StatModifier
     {
         public string Stat;

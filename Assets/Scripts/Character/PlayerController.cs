@@ -4,6 +4,9 @@ using UnityEngine.VFX;
 
 public class PlayerController : Character
 {
-
+    private void Update()
+    {
+     
+    }
 
 }

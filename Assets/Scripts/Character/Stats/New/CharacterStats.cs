@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BulletHell.Stats
 {
+    [System.Serializable]
     public class CharacterStats
     {
         public Stat this[string key] { get { return this[key]; } }
@@ -28,5 +29,17 @@ namespace BulletHell.Stats
         {
             Stats[modifier.Stat].RemoveModifier(modifier);
         }
+
+        public void UpdateList()
+        {
+            foreach (Stat stat in Stats.Values) {
+                foreach (Stat _stat in _stats) {
+                    if(_stat.Name == stat.Name) {
+                        _stat.Value = stat.Get();
+                    }
+                }
+            }
+        }
+
     }
 }
