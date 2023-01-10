@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510ae321432917143bae9b0ef5c24156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactRadius: 5
+  _interactRadius: 1.15
 --- !u!114 &56462419
 MonoBehaviour:
   m_ObjectHideFlags: 0

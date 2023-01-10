@@ -42,6 +42,15 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _rb.velocity = _movementInput;
 
+        if(_movementInput != Vector2.zero)
+        {
+            GetComponent<Animator>().Play("Walking");
+        }
+        else if(_movementInput == Vector2.zero)
+        {
+            GetComponent<Animator>().Play("Idle");
+        }
+
         if (_movementInput.x == 0) return;
         HandleRotation();
     }
