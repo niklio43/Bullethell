@@ -575,7 +575,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4
-  _stats: {fileID: 11400000, guid: b22f1e21f41718a439277b30dd370066, type: 2}
   Weapon: {fileID: 0}
 --- !u!114 &56462417
 MonoBehaviour:
@@ -609,7 +608,6 @@ MonoBehaviour:
     m_Bits: 64
   _inventory: {fileID: 11400000, guid: 8c92590e686871f47962c9e52badc592, type: 2}
   _equipment: {fileID: 11400000, guid: 54db3d7bdb4ead441b9397c93cc57454, type: 2}
-  _stats: {fileID: 11400000, guid: b22f1e21f41718a439277b30dd370066, type: 2}
 --- !u!114 &56462419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,9 +620,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: affcddb8698f3384db5288b82e6acaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 11400000, guid: b22f1e21f41718a439277b30dd370066, type: 2}
-  heal: {fileID: 0}
-  takeDamage: {fileID: 0}
+  Stats:
+    _stats:
+    - Name: Hp
+      Value: 100
+    - Name: MaxHp
+      Value: 100
+    - Name: Def
+      Value: 10
+    - Name: Str
+      Value: 10
+    - Name: DashDistance
+      Value: 4
 --- !u!1 &59200425
 GameObject:
   m_ObjectHideFlags: 0

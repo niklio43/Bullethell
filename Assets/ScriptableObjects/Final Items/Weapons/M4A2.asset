@@ -17,10 +17,10 @@ MonoBehaviour:
     Name: M4A2
     Id: 4
     buffs:
-    - attribute: 0
-      value: 0
-      min: 1
-      max: 20
+    - Stat: Hp
+      Id: Lilla Odjuret
+      type: 0
+      Value: 10
   _abilitySlot:
   - {fileID: 11400000, guid: 2e3d99465567c27488827aa4c07da26a, type: 2}
   WeaponIdleAnimation: {fileID: 7400000, guid: 2bf09474120ff614db23d31314b28810, type: 2}
