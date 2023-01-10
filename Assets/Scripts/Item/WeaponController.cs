@@ -60,10 +60,10 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void PlayAnimation(Animator animator, AnimationClip clip)
+    public void PlayAnimation(AnimationClip clip)
     {
-        AnimationClip idle = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
-        animator.Play(clip.name);
+        AnimationClip idle = GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
+        GetComponent<Animator>().Play(clip.name);
         StartCoroutine(ResetAnimation(clip.length, idle));
     }
 
