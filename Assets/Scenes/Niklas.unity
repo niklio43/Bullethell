@@ -536,6 +536,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1232672119}
   - {fileID: 939503804}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -606,8 +607,6 @@ MonoBehaviour:
   _interactable:
     serializedVersion: 2
     m_Bits: 64
-  _inventory: {fileID: 11400000, guid: 8c92590e686871f47962c9e52badc592, type: 2}
-  _equipment: {fileID: 11400000, guid: 54db3d7bdb4ead441b9397c93cc57454, type: 2}
 --- !u!114 &56462419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,7 +2263,7 @@ Transform:
   m_Children:
   - {fileID: 1341775474}
   m_Father: {fileID: 56462413}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &939503805
 MonoBehaviour:
@@ -3583,6 +3582,52 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1232672118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1232672119}
+  - component: {fileID: 1232672120}
+  m_Layer: 2
+  m_Name: InventoryController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1232672119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232672118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 56462413}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1232672120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232672118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbeffb978567c64e8519569bd397523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 11400000, guid: 8c92590e686871f47962c9e52badc592, type: 2}
+  Equipment: {fileID: 11400000, guid: 54db3d7bdb4ead441b9397c93cc57454, type: 2}
 --- !u!1 &1341775473
 GameObject:
   m_ObjectHideFlags: 0

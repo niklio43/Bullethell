@@ -43,7 +43,7 @@ public class ItemObject
 {
     public string Name;
     public int Id = -1;
-    public StatModifier[] buffs;
+    public StatModifier[] buffs = new StatModifier[0];
 
     public ItemObject()
     {

@@ -6,7 +6,7 @@ public class PlayerController : Character
 {
     private void Update()
     {
-     
+        Stats.UpdateList();
     }
 
 }

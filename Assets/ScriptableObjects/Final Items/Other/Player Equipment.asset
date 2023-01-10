@@ -21,24 +21,29 @@ MonoBehaviour:
       Item:
         Name: 
         Id: -1
+        buffs: []
       Amount: 0
     - AllowedItems: 02000000
       Item:
         Name: 
         Id: -1
+        buffs: []
       Amount: 0
     - AllowedItems: 03000000
       Item:
         Name: 
         Id: -1
+        buffs: []
       Amount: 0
+    - AllowedItems: 00000000
+      Item:
+        Name: Katana
+        Id: 3
+        buffs: []
+      Amount: 1
     - AllowedItems: 00000000
       Item:
         Name: 
         Id: -1
-      Amount: 0
-    - AllowedItems: 00000000
-      Item:
-        Name: 
-        Id: -1
+        buffs: []
       Amount: 0

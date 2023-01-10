@@ -6,76 +6,12 @@ public class PlayerInteracter : MonoBehaviour
 {
     [SerializeField, Range(0, 100f)] float _interactRadius = 5f;
     [SerializeField] LayerMask _interactable;
-    [SerializeField] Inventory _inventory;
-    [SerializeField] Inventory _equipment;
     IInteractable _closestInteractable = null;
-
-    void Start()
-    {
-        //for (int i = 0; i < _stats.attributes.Length; i++)
-        //{
-        //    _stats.attributes[i].SetParent(this);
-        //}
-
-        for (int i = 0; i < _equipment.GetSlots.Length; i++)
-        {
-            _equipment.GetSlots[i].OnBeforeUpdate += OnBeforeSlotUpdate;
-            _equipment.GetSlots[i].OnAfterUpdate += OnAfterSlotUpdate;
-        }
-    }
-
-    public void OnBeforeSlotUpdate(InventorySlot slot)
-    {
-        if (slot.Item.Id == -1) return;
-
-        switch (slot.Parent.Inventory.type)
-        {
-            case InterfaceType.Inventory:
-                break;
-            case InterfaceType.Equipment:
-                for (int i = 0; i < slot.Item.buffs.Length; i++)
-                {
-                    GetComponent<PlayerController>().Stats.RemoveModifierFromStat(slot.Item.buffs[i]);
-                }
-                if (slot.GetItemData.ItemType == ItemType.Weapon && slot == _equipment.GetSlots[3])
-                {
-                    GetComponentInChildren<WeaponController>().UnAssignWeapon(_equipment.GetSlots[3].GetItemData as Weapon);
-                }
-                break;
-            case InterfaceType.Dialogue:
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void OnAfterSlotUpdate(InventorySlot slot)
-    {
-        if (slot.Item.Id == -1) return;
-
-        switch (slot.Parent.Inventory.type)
-        {
-            case InterfaceType.Inventory:
-                break;
-            case InterfaceType.Equipment:
-                for (int i = 0; i < slot.Item.buffs.Length; i++)
-                {
-                    GetComponent<PlayerController>().Stats.AddModifierToStat(slot.Item.buffs[i]);
-                }
-                if (slot.GetItemData.ItemType == ItemType.Weapon && slot == _equipment.GetSlots[3])
-                {
-                    GetComponentInChildren<WeaponController>().AssignWeapon(_equipment.GetSlots[3].GetItemData as Weapon);
-                }
-                break;
-            case InterfaceType.Dialogue:
-                break;
-            default:
-                break;
-        }
-    }
+    SlotListener _slotListener;
 
     void FixedUpdate()
     {
+        _slotListener = GetComponentInChildren<SlotListener>();
         Collider2D hit = Physics2D.OverlapCircle(transform.position, _interactRadius, _interactable);
         if (hit != null)
         {
@@ -92,25 +28,25 @@ public class PlayerInteracter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            _inventory.Save();
-            _equipment.Save();
+            _slotListener.Inventory.Save();
+            _slotListener.Equipment.Save();
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            _inventory.Load();
-            _equipment.Load();
+            _slotListener.Inventory.Load();
+            _slotListener.Equipment.Load();
         }
     }
 
     public void Interact()
     {
         if (_closestInteractable == null) return;
-        _closestInteractable.Interact(_inventory);
+        _closestInteractable.Interact(_slotListener.Inventory);
     }
 
     void OnApplicationQuit()
     {
-        _inventory.Clear();
-        _equipment.Clear();
+        _slotListener.Inventory.Clear();
+        _slotListener.Equipment.Clear();
     }
 }
