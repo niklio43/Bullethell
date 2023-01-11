@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Attack_1
   m_EditorClassIdentifier: 
   _abilityIcon: {fileID: 0}
-  _abilityName: 
-  coolDownTime: 0
+  _abilityName: Attack1
+  coolDownTime: 1
   maxAmount: 1
   currentAmount: 0
-  _emitterData: {fileID: 0}
+  _emitterData: {fileID: 11400000, guid: cd03a073d1a995442971584d8f665799, type: 2}
   Owner: {fileID: 0}
   _clip: {fileID: 0}

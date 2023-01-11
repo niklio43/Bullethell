@@ -23,6 +23,11 @@ namespace BulletHell.Abilities
             _emitter.AutoFire = false;
         }
 
+        public virtual void AimAtDirection(Vector2 direction)
+        {
+            _emitter.SetDirection(direction);
+        }
+
         public override void UnInitialize(GameObject owner)
         {
             Destroy(_emitter.gameObject);
