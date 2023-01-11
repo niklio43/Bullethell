@@ -3889,6 +3889,18 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 56462413}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: AttackDistance
+      value: 2.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: PreferredDistance
+      value: 1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[2].Value
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
 --- !u!1 &1918095987

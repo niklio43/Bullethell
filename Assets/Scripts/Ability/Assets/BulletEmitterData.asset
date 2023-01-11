@@ -25,9 +25,10 @@ MonoBehaviour:
   GravityPoint: {x: 0, y: 0}
   FoldOutEmitter: 1
   EmitterPoints: 1
-  CenterRotation: 180
+  CenterRotation: -70
   Pitch: 0
   Offset: 0
   Spread: 0
   ParentRotation: 0
+  Direction: {x: 0, y: 1}
   Modifiers: []

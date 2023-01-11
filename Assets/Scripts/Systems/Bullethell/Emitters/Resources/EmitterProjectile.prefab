@@ -47,6 +47,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 0}
   spriteRenderer: {fileID: 8803372606578490048}
+  Position: {x: 0, y: 0}
+  Velocity: {x: 0, y: 0}
+  Direction: {x: 0, y: 0}
+  GravityPoint: {x: 0, y: 0}
+  Gravity: 0
+  TimeToLive: 0
+  Acceleration: 0
+  Speed: 0
 --- !u!1 &3383802806708878080
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +127,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
