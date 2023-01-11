@@ -57,6 +57,7 @@ namespace BulletHell.Emitters
         public void SetDirection(Vector2 direction)
         {
             Data.Direction = direction;
+            _emitterGroups.UpdateGroups(Data, Data.Modifiers);
         }
 
         public virtual void FireProjectile()

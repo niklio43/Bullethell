@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Attack2
   Sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
-  Scale: 0.4
+  Scale: 0.1
   Color: {r: 1, g: 0.15566039, b: 0.15566039, a: 1}

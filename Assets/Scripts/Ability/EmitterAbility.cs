@@ -9,13 +9,12 @@ namespace BulletHell.Abilities
     {
         protected Emitter _emitter;
         [SerializeField] EmitterData _emitterData;
-        [HideInInspector] public GameObject Owner;
 
         public override abstract void DoAbility();
 
         public override void Initialize(GameObject owner)
         {
-            Owner = owner;
+            base.Initialize(owner);
             _emitter = new GameObject($"{name} (Emitter)").AddComponent<Emitter>();
             _emitter.transform.SetParent(owner.transform);
             _emitter.transform.localPosition = Vector3.zero;
