@@ -11,9 +11,6 @@ namespace BulletHell.Enemies
         public bool DrawGizmos = false;
         [SerializeField] AgentSteering _agentSteering = new AgentSteering();
 
-        public float Acceleration;
-        public float MoveSpeed;
-
         Enemy _enemy;
         Rigidbody2D _rb;
 
@@ -40,8 +37,8 @@ namespace BulletHell.Enemies
         {
             Vector2 MoveDirection = ContextSolver.GetDirection(_agentSteering);
 
-            _rb.AddForce(MoveDirection * MoveSpeed);
-            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, MoveSpeed);
+            _rb.AddForce(MoveDirection * _enemy.Stats["MoveSpeed"].Get());
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _enemy.Stats["MoveSpeed"].Get());
         }
 
         private void OnDrawGizmos()

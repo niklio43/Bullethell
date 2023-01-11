@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stats:
-    _stats:
+    _statsList:
     - Name: Hp
       Value: 100
     - Name: MaxHp
@@ -512,10 +512,10 @@ MonoBehaviour:
     - Name: Def
       Value: 10
     - Name: Str
-      Value: 10
-    - Name: DashDistance
-      Value: 4
+      Value: 3
     - Name: MoveSpeed
+      Value: 5
+    - Name: DashDistance
       Value: 4
 --- !u!1 &59200425
 GameObject:

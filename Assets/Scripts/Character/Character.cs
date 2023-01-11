@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Stats;
 
-
 public class Character : MonoBehaviour
 {
     public CharacterStats Stats;
 
-    private void Awake()
+    public void Initialize()
     {
-        Stats.Initialize();
+        Stats.TranslateListToDictionary();
     }
 
     public virtual void TakeDamage(float amount)

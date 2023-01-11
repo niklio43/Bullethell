@@ -4,8 +4,8 @@ using UnityEngine.VFX;
 
 public class PlayerController : Character
 {
-    private void Update()
+    private void Awake()
     {
-        Stats.UpdateList();
+        Initialize();
     }
 }

@@ -6,7 +6,7 @@ using BulletHell.Enemies.Detection;
 using System;
 using System.Linq;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     [SerializeField] public EnemyBrain _brain;
     EnemyDetection _detection;
@@ -23,11 +23,12 @@ public class Enemy : MonoBehaviour
         Airborne
     }
 
-    public float PreferredDistance;
-    public float AttackDistance;
+    [Range(0, 10)] public float PreferredDistance;
+    [Range(0, 10)] public float AttackDistance;
 
     private void Awake()
     {
+        Initialize();
         _brain = Instantiate(_brain);
         _brain.Initialize(this);
         
