@@ -17,7 +17,7 @@ public class AbilityMelee : Ability
 
     public override void DoAbility()
     {
-        _owner.GetComponent<WeaponController>().DetectColliders();
+        _owner.GetComponent<WeaponController>().DetectColliders(Damage);
 
         if (_clip == null) return;
 

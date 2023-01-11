@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: StandardFire
   m_EditorClassIdentifier: 
   _abilityIcon: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
-  _abilityName: Standard Fire
-  coolDownTime: 0
-  maxAmount: 1
-  currentAmount: 1
+  AbilityName: 
+  CoolDownTime: 0
+  MaxAmount: 1
+  CurrentAmount: 0
+  Damage: 15
   _emitterData: {fileID: 11400000, guid: ce3d27fb06e631e4d9d8892a35369ed7, type: 2}
   Owner: {fileID: 0}
   _clip:

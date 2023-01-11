@@ -32,6 +32,7 @@ namespace BulletHell.Enemies
         {
             foreach (var ability in _attacks) {
                 if (ability.CanCast()) {
+                    Debug.Log("Annika");
                     ability.AimAtTarget(target);
                     ability.Activate();
                     break;

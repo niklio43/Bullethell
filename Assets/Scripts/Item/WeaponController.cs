@@ -52,7 +52,7 @@ public class WeaponController : MonoBehaviour
     }
 
     //TODO Add additional functionality.
-    public void DetectColliders()
+    public void DetectColliders(float damage)
     {
         foreach (Collider2D collider in Physics2D.OverlapCircleAll(CircleOrigin.position, Radius))
         {
@@ -60,7 +60,7 @@ public class WeaponController : MonoBehaviour
             GameObject other = collider.gameObject;
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<Enemy>().TakeDamage(20);
+                other.GetComponent<Enemy>().TakeDamage(damage);
             }
         }
     }

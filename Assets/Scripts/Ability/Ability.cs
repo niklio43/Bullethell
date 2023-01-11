@@ -8,12 +8,13 @@ namespace BulletHell.Abilities
     public abstract class Ability : ScriptableObject
     {
         [SerializeField] Sprite _abilityIcon;
-        public string _abilityName;
-        public float coolDownTime = 0;
-        public int maxAmount = 1;
-        public int currentAmount;
+        public string AbilityName;
+        public float CoolDownTime = 0;
+        public int MaxAmount = 1;
+        public int CurrentAmount;
+        public float Damage;
 
-        public float timer
+        public float Timer
         {
             get
             {
@@ -35,17 +36,17 @@ namespace BulletHell.Abilities
 
         public void Activate()
         {
-            if (currentAmount <= 0) return;
+            if (CurrentAmount <= 0) return;
             DoAbility();
 
-            currentAmount--;
+            CurrentAmount--;
 
-            timers.Add(coolDownTime);
+            timers.Add(CoolDownTime);
         }
 
         public abstract void DoAbility();
 
-        public bool CanCast() => (currentAmount > 0);
+        public bool CanCast() => (CurrentAmount > 0);
 
         public virtual void UpdateAbility(float dt)
         {
@@ -54,7 +55,7 @@ namespace BulletHell.Abilities
                 timers[i] -= dt;
                 if (timers[i] <= 0)
                 {
-                    currentAmount++;
+                    CurrentAmount++;
                     timers.RemoveAt(i);
                     i--;
                 }

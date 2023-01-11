@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Swing
   m_EditorClassIdentifier: 
   _abilityIcon: {fileID: 0}
-  _abilityName: Swing
-  coolDownTime: 0
-  maxAmount: 1
-  currentAmount: 1
+  AbilityName: Slash
+  CoolDownTime: 0
+  MaxAmount: 1
+  CurrentAmount: 1
+  Damage: 20
   _clip:
   - {fileID: 7400000, guid: 6be7875f5cae33445bb2977eeb444940, type: 2}
   - {fileID: 7400000, guid: 9f1118b3e94606943ad0bee3007664a8, type: 2}
