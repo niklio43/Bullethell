@@ -17,4 +17,6 @@ MonoBehaviour:
   coolDownTime: 0
   maxAmount: 1
   currentAmount: 1
-  _clip: {fileID: 7400000, guid: 6be7875f5cae33445bb2977eeb444940, type: 2}
+  _clip:
+  - {fileID: 7400000, guid: 6be7875f5cae33445bb2977eeb444940, type: 2}
+  - {fileID: 7400000, guid: 9f1118b3e94606943ad0bee3007664a8, type: 2}

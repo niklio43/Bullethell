@@ -17,7 +17,7 @@ MonoBehaviour:
   coolDownTime: 0
   maxAmount: 1
   currentAmount: 1
-  _weaponVfx: {fileID: 0}
-  WeaponAttackAnimation: {fileID: 7400000, guid: a0413323fc218164fb1827f0ad5f34d8, type: 2}
   _emitterData: {fileID: 11400000, guid: ce3d27fb06e631e4d9d8892a35369ed7, type: 2}
-  WeaponController: {fileID: 0}
+  Owner: {fileID: 0}
+  _clip:
+  - {fileID: 7400000, guid: a0413323fc218164fb1827f0ad5f34d8, type: 2}

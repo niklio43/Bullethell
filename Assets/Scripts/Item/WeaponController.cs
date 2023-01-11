@@ -57,19 +57,24 @@ public class WeaponController : MonoBehaviour
         foreach (Collider2D collider in Physics2D.OverlapCircleAll(CircleOrigin.position, Radius))
         {
             Debug.Log(collider.name);
+            GameObject other = collider.gameObject;
+            if (other.CompareTag("Enemy"))
+            {
+                //other.GetComponent<Enemy>().ta
+            }
         }
     }
 
-    public void PlayAnimation(AnimationClip clip)
+    public void PlayAnimation(List<AnimationClip> clip)
     {
-        AnimationClip idle = GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
-        GetComponent<Animator>().Play(clip.name);
-        StartCoroutine(ResetAnimation(clip.length, idle));
-    }
+        AnimationClip currentAnim = GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
 
-    IEnumerator ResetAnimation(float time, AnimationClip idle)
-    {
-        yield return new WaitForSeconds(time);
-        GetComponent<Animator>().Play(idle.name);
+        if(currentAnim.name == "WeaponMeleeAttack")
+        {
+            GetComponent<Animator>().Play(clip[1].name);
+            return;
+        }
+
+        GetComponent<Animator>().Play(clip[0].name);
     }
 }
