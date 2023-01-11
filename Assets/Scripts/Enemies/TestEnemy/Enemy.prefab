@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 8461412192270030077}
   - component: {fileID: 9165680796869295427}
   - component: {fileID: 749910741064891454}
+  - component: {fileID: 8461412190976600947}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -97,9 +98,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de4780273cdc14bb1921d455a0faf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats: {fileID: 11400000, guid: 455bd6e3a44496442a95855d7d00b02e, type: 2}
+  Stats:
+    _statsList:
+    - Name: Hp
+      Value: 100
+    - Name: MaxHp
+      Value: 100
+    - Name: MoveSpeed
+      Value: 5
   _brain: {fileID: 11400000, guid: 37c9d09971a128a42abd57b7f443573f, type: 2}
   Target: {fileID: 0}
+  MovementType: 0
+  PreferredDistance: 2.26
+  AttackDistance: 2.59
 --- !u!114 &8461412192270030075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawGizmos: 1
-  DetectionRadius: 5.03
+  DetectionRadius: 3.67
   ObstacleDetectionRadius: 1.97
 --- !u!114 &8461412192270030072
 MonoBehaviour:
@@ -135,8 +146,6 @@ MonoBehaviour:
     _behaviours:
     - {fileID: 11400000, guid: 6e27e9802452eca47a75242fb3d56a64, type: 2}
     - {fileID: 11400000, guid: 8a421364e60503945bb613885c0197e0, type: 2}
-  Acceleration: 1
-  MoveSpeed: 3.5
 --- !u!58 &8461412192270030074
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -236,7 +245,7 @@ Animator:
   m_GameObject: {fileID: 8461412192270030066}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1e6da4fa53f789f40856191ec0156131, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -246,3 +255,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8461412190976600947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461412192270030066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36a97dbc1569fa4eb82750ff5bf899a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attacks:
+  - {fileID: 11400000, guid: 197d1e8b4a3fd8a4cba0ec38af4c9af7, type: 2}
+  - {fileID: 11400000, guid: 006b04360df18d74a93cdb9824cde2b2, type: 2}

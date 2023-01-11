@@ -7,7 +7,7 @@ namespace BulletHell.Enemies
 {
     public class EnemyAttack : MonoBehaviour
     {
-        [SerializeField] List<Ability> _attacks = new List<Ability>();
+        [SerializeField] List<AbilityProjectile> _attacks = new List<AbilityProjectile>();
 
         private void Awake()
         {
@@ -28,12 +28,13 @@ namespace BulletHell.Enemies
             throw new System.NotImplementedException();
         }
 
-        public void CastOrderedAbility()
+        public void CastOrderedAbility(Transform target)
         {
             foreach (var ability in _attacks) {
                 if (ability.CanCast()) {
+                    ability.AimAtTarget(target);
                     ability.Activate();
-                    return;
+                    break;
                 }
             }
         }

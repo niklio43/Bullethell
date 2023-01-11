@@ -34,7 +34,9 @@ namespace BulletHell
         private void Update()
         {
             transform.position = Position;
+            var angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
 
+            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             if (TimeToLive <= 0) {
                 ResetObject();
             }

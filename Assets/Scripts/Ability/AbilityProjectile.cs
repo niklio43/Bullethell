@@ -16,4 +16,11 @@ public class AbilityProjectile : EmitterAbility
 
         Owner.GetComponent<WeaponController>().PlayAnimation(_clip);
     }
+
+    public void AimAtTarget(Transform target)
+    {
+        Vector2 direction = target.position - Owner.transform.position;
+        AimAtDirection(direction);
+    }
+
 }

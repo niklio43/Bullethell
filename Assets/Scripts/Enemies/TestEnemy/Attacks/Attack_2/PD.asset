@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
   m_Name: PD
   m_EditorClassIdentifier: 
-  name: PointedProjectile
-  Sprite: {fileID: 21300000, guid: e7f635a5571eb6040abdba4d0e4e8c11, type: 3}
-  Scale: 2
-  Color: {r: 1, g: 1, b: 1, a: 1}
+  name: Attack2
+  Sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
+  Scale: 0.4
+  Color: {r: 1, g: 0.15566039, b: 0.15566039, a: 1}

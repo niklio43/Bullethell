@@ -86,7 +86,7 @@ namespace BulletHell.Emitters
                 projectile.Initialize(projectileData);
 
                 projectile.transform.position = _emitterGroups[i].Position;
-
+                
                 projectile.Position = _emitterGroups[i].Position;
                 projectile.TimeToLive = timeToLive;
                 projectile.Speed = speed;

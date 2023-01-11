@@ -33,7 +33,7 @@ namespace BulletHell.Enemies
                attacking.SetTransition("chasePlayer", EnemyStates.Chasing)
                .SetAnimationClip("Idle")
                .Update((action) => {
-                   enemy.GetComponent<EnemyAttack>().CastOrderedAbility();
+                   enemy.GetComponent<EnemyAttack>().CastOrderedAbility(enemy.Target);
                    action.Transition("chasePlayer");
                });
            })
