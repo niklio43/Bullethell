@@ -54,5 +54,6 @@ public class ItemObject
     {
         Name = item.name;
         Id = item.data.Id;
+        buffs = item.data.buffs;
     }
 }

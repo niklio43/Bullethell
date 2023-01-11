@@ -37,10 +37,10 @@ MonoBehaviour:
       Amount: 0
     - AllowedItems: 00000000
       Item:
-        Name: Katana
-        Id: 3
+        Name: 
+        Id: -1
         buffs: []
-      Amount: 1
+      Amount: 0
     - AllowedItems: 00000000
       Item:
         Name: 
