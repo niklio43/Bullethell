@@ -49,6 +49,10 @@ public class Enemy : Character
             Transform target = DetectionData["Players"].OrderBy(n => Vector2.Distance(transform.position, n.transform.position)).First().transform;
             SetTarget(target);
         }
+
+
+
+        GetComponent<Animator>().SetBool("Running", (GetComponent<Rigidbody2D>().velocity.SqrMagnitude() > 1));
     }
 
     public void SetTarget(Transform target)
@@ -61,6 +65,13 @@ public class Enemy : Character
         float distance = Vector2.Distance(transform.position, Target.position);
 
         return (distance < AttackDistance);
+    }
+
+    public bool TargetTooClose()
+    {
+        float distance = Vector2.Distance(transform.position, Target.position);
+
+        return (distance < PreferredDistance);
     }
 
 

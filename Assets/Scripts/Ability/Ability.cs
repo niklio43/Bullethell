@@ -14,7 +14,9 @@ namespace BulletHell.Abilities
         public int CurrentAmount;
         public float Damage;
 
-        public float Timer
+        protected GameObject Owner;
+
+        public float timer
         {
             get
             {
@@ -24,7 +26,11 @@ namespace BulletHell.Abilities
         }
         List<float> timers;
 
-        public virtual void Initialize(GameObject owner) { }
+        public virtual void Initialize(GameObject owner) {
+            Owner = owner;
+            currentAmount = 1;
+            timers = new List<float>();
+        }
         public virtual void UnInitialize(GameObject owner) { }
 
         public void Activate(InputAction.CallbackContext context)
