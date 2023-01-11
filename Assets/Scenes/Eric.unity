@@ -557,9 +557,111 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: AttackDistance
+      value: 2.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: PreferredDistance
+      value: 2.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._stats.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats.Stats.m_Keys.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats.Stats.m_Values.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._stats.Array.data[0].Name
+      value: Hp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._stats.Array.data[1].Name
+      value: MaxHp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._stats.Array.data[2].Name
+      value: MoveSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats.Stats.m_Keys.Array.data[0]
+      value: TEST
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._stats.Array.data[0].Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._stats.Array.data[1].Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._stats.Array.data[2].Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[0].Name
+      value: Hp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[1].Name
+      value: MaxHp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[2].Name
+      value: MoveSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[0].Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[1].Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[2].Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats.Stats.m_Values.Array.data[0].Name
+      value: NoName
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030075, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: DetectionRadius
+      value: 3.67
+      objectReference: {fileID: 0}
     - target: {fileID: 9165680796869295427, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+--- !u!1 &8461412190976600946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+  m_PrefabInstance: {fileID: 8461412190976600945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8461412190976600947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461412190976600946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36a97dbc1569fa4eb82750ff5bf899a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attacks: []

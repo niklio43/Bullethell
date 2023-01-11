@@ -28,9 +28,14 @@ namespace BulletHell.Abilities
 
         public void Activate(InputAction.CallbackContext context)
         {
-            if (currentAmount <= 0) return;
             if (!context.performed) return;
 
+            Activate();
+        }
+
+        public void Activate()
+        {
+            if (currentAmount <= 0) return;
             DoAbility();
 
             currentAmount--;
@@ -39,6 +44,8 @@ namespace BulletHell.Abilities
         }
 
         public abstract void DoAbility();
+
+        public bool CanCast() => (currentAmount > 0);
 
         public virtual void UpdateAbility(float dt)
         {

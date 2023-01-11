@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 068d6e9f944711144bd7d00cd15fca44, type: 3}
+  m_Name: Emitter
+  m_EditorClassIdentifier: 
+  FoldOutGeneral: 0
+  Delay: 1000
+  MaxProjectiles: 10
+  RotationSpeed: 0
+  FoldOutProjectile: 0
+  ProjectileData: {fileID: 0}
+  TimeToLive: 5
+  Speed: 1
+  Acceleration: 1
+  Gravity: 0
+  GravityPoint: {x: 0, y: 0}
+  FoldOutEmitter: 0
+  EmitterPoints: 1
+  CenterRotation: 0
+  Pitch: 0
+  Offset: 0
+  Spread: 0
+  ParentRotation: 0
+  Direction: {x: 0, y: 1}
+  Modifiers: []

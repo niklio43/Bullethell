@@ -23,15 +23,17 @@ namespace BulletHell.Enemies
            .State(EnemyStates.Chasing, (chasing) => {
                chasing.SetTransition("attackPlayer", EnemyStates.Attacking)
                .Update((action) => {
-
                    enemy.GetComponent<Animator>().SetBool("Running", (enemy.GetComponent<Rigidbody2D>().velocity.SqrMagnitude() > 1));
+                   if (enemy.TargetInAttackRange()) {
+                       action.Transition("attackPlayer");
+                   }
                });
            })
            .State(EnemyStates.Attacking, (attacking) => {
                attacking.SetTransition("chasePlayer", EnemyStates.Chasing)
                .SetAnimationClip("Idle")
                .Update((action) => {
-
+                   enemy.GetComponent<EnemyAttack>().CastOrderedAbility();
                    action.Transition("chasePlayer");
                });
            })

@@ -25,7 +25,7 @@ namespace BulletHell.Abilities
 
         public override void UnInitialize(GameObject owner)
         {
-            //Destroy(_emitter.gameObject);
+            Destroy(_emitter.gameObject);
         }
     }
 }

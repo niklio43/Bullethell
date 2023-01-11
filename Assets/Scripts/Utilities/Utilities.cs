@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace BulletHell
@@ -20,6 +22,16 @@ namespace BulletHell
             angleInDegrees += rotation + 90;
 
             return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0);
+        }
+
+        public static T Copy<T>(T other)
+        {
+            using (MemoryStream ms = new MemoryStream()) {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(ms, other);
+                ms.Position = 0;
+                return (T)formatter.Deserialize(ms);
+            }
         }
     }
 }
