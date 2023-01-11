@@ -19,11 +19,7 @@ public class Character : MonoBehaviour
 
     public virtual void TakeDamage(float amount)
     {
-        float trueDamage = CalculateDamage(amount);
-
-        Debug.Log(trueDamage);
-
-        Stats["Hp"].Value -= trueDamage;
+        Stats["Hp"].Value -= amount;
 
         CameraShake.Shake(0.1f, 0.3f);
 
@@ -41,11 +37,6 @@ public class Character : MonoBehaviour
         _spriteRenderer.material.SetInt("_hit", 1);
         yield return new WaitForSeconds(0.1f);
         _spriteRenderer.material.SetInt("_hit", 0);
-    }
-
-    float CalculateDamage(float baseDamage)
-    {
-        return baseDamage + (Stats["Str"].Value * 1.4f);
     }
 
     public virtual void Heal(float amount)

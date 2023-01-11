@@ -15,6 +15,7 @@ public class AbilityMelee : Ability
         _owner = owner;
     }
 
+    //TODO calculate true damage before sending it
     public override void DoAbility()
     {
         _owner.GetComponent<WeaponController>().DetectColliders(Damage);

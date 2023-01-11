@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityIcon: {fileID: 0}
   AbilityName: 
-  CoolDownTime: 0
+  CoolDownTime: 1
   MaxAmount: 1
-  CurrentAmount: 2
+  CurrentAmount: 1
   Damage: 0
   _emitterData: {fileID: 11400000, guid: cd03a073d1a995442971584d8f665799, type: 2}
-  Owner: {fileID: 0}
   _clip:
   - {fileID: 0}
