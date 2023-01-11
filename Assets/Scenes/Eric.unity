@@ -501,18 +501,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8461412190976600947, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: _attacks.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8461412190976600947, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: _attacks.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 197d1e8b4a3fd8a4cba0ec38af4c9af7, type: 2}
-    - target: {fileID: 8461412190976600947, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: _attacks.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 921110db2f3d4154ca1906228130fe13, type: 2}
     - target: {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_Name
       value: Enemy
