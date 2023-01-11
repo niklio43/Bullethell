@@ -13,8 +13,8 @@ public class AbilityProjectile : EmitterAbility
         _emitter.FireProjectile();
 
         if (_clip == null) return;
-
-        Owner.GetComponent<WeaponController>().PlayAnimation(_clip);
+        if(Owner.TryGetComponent<WeaponController>(out WeaponController weaponController))
+        weaponController.PlayAnimation(_clip);
     }
 
     public void AimAtTarget(Transform target)
