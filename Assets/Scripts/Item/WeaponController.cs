@@ -60,7 +60,7 @@ public class WeaponController : MonoBehaviour
             GameObject other = collider.gameObject;
             if (other.CompareTag("Enemy"))
             {
-                //other.GetComponent<Enemy>().ta
+                other.GetComponent<Enemy>().TakeDamage(20);
             }
         }
     }
