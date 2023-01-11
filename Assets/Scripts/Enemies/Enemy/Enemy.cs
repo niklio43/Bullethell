@@ -56,6 +56,14 @@ public class Enemy : Character
         Target = target;
     }
 
+    public bool TargetInAttackRange()
+    {
+        float distance = Vector2.Distance(transform.position, Target.position);
+
+        return (distance < AttackDistance);
+    }
+
+
     #region Component Caching
 
     Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();
