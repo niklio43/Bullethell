@@ -3889,22 +3889,6 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 56462413}
-    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: AttackDistance
-      value: 1.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: PreferredDistance
-      value: 0.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 8461412192270030075, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: DetectionRadius
-      value: 4.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 8461412192270030075, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: ObstacleDetectionRadius
-      value: 1.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
 --- !u!1 &1918095987

@@ -109,8 +109,8 @@ MonoBehaviour:
   _brain: {fileID: 11400000, guid: 37c9d09971a128a42abd57b7f443573f, type: 2}
   Target: {fileID: 0}
   MovementType: 0
-  PreferredDistance: 2.26
-  AttackDistance: 2.59
+  PreferredDistance: 0.81
+  AttackDistance: 1.51
 --- !u!114 &8461412192270030075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawGizmos: 1
-  DetectionRadius: 3.67
-  ObstacleDetectionRadius: 1.97
+  DetectionRadius: 4.86
+  ObstacleDetectionRadius: 1.8
 --- !u!114 &8461412192270030072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 369efa0c75f8c6b4891fe3b66c202b46, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,7 +223,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -2037182161, guid: 68f7689c925f7a34698faf99fe2f48a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
