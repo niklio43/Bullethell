@@ -6,7 +6,7 @@ using BulletHell.Abilities;
 [CreateAssetMenu(fileName = "AbilityProjectile", menuName = "Abilities/New Projectile Ability")]
 public class AbilityProjectile : EmitterAbility
 {
-    [SerializeField] AnimationClip _clip;
+    [SerializeField] List<AnimationClip> _clip;
 
     public override void DoAbility()
     {

@@ -7,7 +7,7 @@ using BulletHell.Abilities;
 public class AbilityMelee : Ability
 {
     GameObject _owner;
-    [SerializeField] AnimationClip _clip;
+    [SerializeField] List<AnimationClip> _clip;
 
     public override void Initialize(GameObject owner)
     {
