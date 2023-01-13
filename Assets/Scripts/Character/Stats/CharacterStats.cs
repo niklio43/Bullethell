@@ -16,32 +16,35 @@ namespace BulletHell.Stats
         [System.Serializable]
         public class StatDictionary : SerializedDictionary<string, Stat> { };
         StatDictionary _stats;
+        GameObject _owner;
+
+        public void Initialize(GameObject owner)
+        {
+            _owner = owner;
+        }
 
         public void TranslateListToDictionary()
         {
             _stats = new StatDictionary();
+
             foreach (Stat stat in _statsList) {
                 _stats.Add(stat.Name, Utilities.Copy(stat));
             }
         }
 
-        public void UpdateList()
+        public void AddModifierToStat(StatModifier modifier, float time)
         {
-            foreach (Stat stat in _statsList) {
-                stat.Value = _stats[stat.Name].Get();
-            }
+            _stats[modifier.Stat].AddModifier(modifier, time);
         }
 
         public void AddModifierToStat(StatModifier modifier)
         {
             _stats[modifier.Stat].AddModifier(modifier);
-            UpdateList();
         }
 
         public void RemoveModifierFromStat(StatModifier modifier)
         {
             _stats[modifier.Stat].RemoveModifier(modifier);
-            UpdateList();
         }
     }
 }

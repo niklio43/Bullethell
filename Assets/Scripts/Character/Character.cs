@@ -6,15 +6,15 @@ using BulletHell.Stats;
 public class Character : MonoBehaviour
 {
     public CharacterStats Stats;
-    SpriteRenderer _spriteRenderer;
-    Animator _animator;
+    protected SpriteRenderer _spriteRenderer;
+    protected Animator _animator;
 
     public void Initialize()
     {
         Stats.TranslateListToDictionary();
 
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     public virtual void TakeDamage(float amount)

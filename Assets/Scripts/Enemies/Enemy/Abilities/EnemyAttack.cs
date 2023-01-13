@@ -28,6 +28,17 @@ namespace BulletHell.Enemies
             throw new System.NotImplementedException();
         }
 
+        public bool CanAttack()
+        {
+            foreach (var ability in _attacks) {
+                if (ability.CanCast()) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void CastOrderedAbility(Transform target)
         {
             foreach (var ability in _attacks) {

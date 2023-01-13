@@ -1,4 +1,3 @@
-using BulletHell.Emitters;
 using BulletHell.FiniteStateMachine;
 using UnityEngine;
 
@@ -23,7 +22,8 @@ namespace BulletHell.Enemies
            .State(EnemyStates.Chasing, (chasing) => {
                chasing.SetTransition("attackPlayer", EnemyStates.Attacking)
                .Update((action) => {
-                   if (enemy.TargetInAttackRange()) {
+                   enemy.CanMove = true;
+                   if (enemy.TargetInAttackRange() && enemy.GetComponent<EnemyAttack>().CanAttack()) {
                        action.Transition("attackPlayer");
                    }
                });
@@ -31,7 +31,13 @@ namespace BulletHell.Enemies
            .State(EnemyStates.Attacking, (attacking) => {
                attacking.SetTransition("chasePlayer", EnemyStates.Chasing)
                .Update((action) => {
+                   attacking.SetAnimatorBool("Attacking", true);
+                   enemy.CanMove = false;
                    enemy.GetComponent<EnemyAttack>().CastOrderedAbility(enemy.Target);
+
+
+
+
                    action.Transition("chasePlayer");
                });
            })

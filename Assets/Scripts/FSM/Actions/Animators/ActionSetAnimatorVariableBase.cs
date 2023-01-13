@@ -10,7 +10,7 @@ namespace BulletHell.FiniteStateMachine
 
         protected override void OnInit()
         {
-            _animator = ParentState.ParentFsm.Owner.GetComponent<Animator>();
+            _animator = ParentState.ParentFsm.Owner.GetComponentInChildren<Animator>();
         }
     }
 }
