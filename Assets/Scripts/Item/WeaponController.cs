@@ -14,7 +14,8 @@ public class WeaponController : MonoBehaviour
     public void AssignWeapon(Weapon weapon)
     {
         weapon.Initialize(gameObject);
-        GetComponent<Animator>().Play(weapon.WeaponIdleAnimation.name);
+        GetComponent<Animator>().runtimeAnimatorController = weapon.animatorController;
+        GetComponent<Animator>().Play("Idle");
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
         gameObject.name = weapon.name;
 
@@ -29,12 +30,12 @@ public class WeaponController : MonoBehaviour
 
     public void UnAssignWeapon(Weapon weapon)
     {
-        weapon.UnInitialize(gameObject);
+        weapon.Uninitialize();
         GetComponent<SpriteRenderer>().sprite = null;
 
         GetComponent<AbilityHolder>().abilities.Clear();
 
-        GetComponent<Animator>().Play("Empty");
+        GetComponent<Animator>().runtimeAnimatorController = null;
 
         var playerSM = transform.GetComponentInParent<PlayerStateMachine>();
         playerSM.Weapon = null;
@@ -65,19 +66,6 @@ public class WeaponController : MonoBehaviour
                 other.GetComponent<Enemy>().TakeDamage(damage);
             }
         }
-    }
-
-    public void PlayAnimation(List<AnimationClip> clip)
-    {
-        AnimationClip currentAnim = GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
-
-        if(currentAnim.name == "WeaponMeleeAttack")
-        {
-            GetComponent<Animator>().Play(clip[1].name);
-            return;
-        }
-
-        GetComponent<Animator>().Play(clip[0].name);
     }
 
     public void PlayVfx(VisualEffectAsset vfx)

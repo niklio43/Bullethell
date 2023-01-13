@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbcd0d906c9574249ac12faaa4133eab, type: 3}
+  m_Script: {fileID: 11500000, guid: 928c8b0a5e078df478385f7e8c6480b3, type: 3}
   m_Name: Swing
   m_EditorClassIdentifier: 
-  _abilityIcon: {fileID: 0}
-  Vfx: {fileID: 8926484042661614526, guid: 5d7155e1f6a9c424899b50fa7fdc44ef, type: 3}
-  AbilityName: Slash
-  CoolDownTime: 0.2
-  MaxAmount: 1
-  CurrentAmount: 1
-  Damage: 1
-  _clip:
-  - {fileID: 7400000, guid: 6be7875f5cae33445bb2977eeb444940, type: 2}
-  - {fileID: 7400000, guid: 9f1118b3e94606943ad0bee3007664a8, type: 2}
+  _icon: {fileID: 0}
+  _name: Swing
+  _description: Small slash
+  _maxAmount: 1
+  _coolDownTime: 0.1
+  behaviours:
+  - {fileID: 11400000, guid: 6e55704eaf99e1a4cbc852a09cab0685, type: 2}
+  _clip: {fileID: 7400000, guid: 3b61dc5520f28914a98a34abe6bfe2fa, type: 2}
+  _vfx: {fileID: 8926484042661614526, guid: 5d7155e1f6a9c424899b50fa7fdc44ef, type: 3}

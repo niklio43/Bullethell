@@ -2,7 +2,7 @@ using BulletHell.Stats;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BulletHell.Abilities.New
+namespace BulletHell.Abilities
 {
     [CreateAssetMenu(fileName = "BuffAbilityBehaviour", menuName = "Abilities/New Buff Ability Behaviour")]
     public class BuffAbilityBehaviour : BaseAbilityBehaviour

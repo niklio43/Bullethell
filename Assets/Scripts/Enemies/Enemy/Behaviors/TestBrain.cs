@@ -23,9 +23,9 @@ namespace BulletHell.Enemies
                chasing.SetTransition("attackPlayer", EnemyStates.Attacking)
                .Update((action) => {
                    enemy.CanMove = true;
-                   if (enemy.TargetInAttackRange() && enemy.GetComponent<EnemyAttack>().CanAttack()) {
+                   /*if (enemy.TargetInAttackRange() && enemy.GetComponent<EnemyAttack>().CanAttack()) {
                        action.Transition("attackPlayer");
-                   }
+                   }*/
                });
            })
            .State(EnemyStates.Attacking, (attacking) => {
@@ -33,7 +33,7 @@ namespace BulletHell.Enemies
                .Update((action) => {
                    attacking.SetAnimatorBool("Attacking", true);
                    enemy.CanMove = false;
-                   enemy.GetComponent<EnemyAttack>().CastOrderedAbility(enemy.Target);
+                   //enemy.GetComponent<EnemyAttack>().CastOrderedAbility(enemy.Target);
 
 
 

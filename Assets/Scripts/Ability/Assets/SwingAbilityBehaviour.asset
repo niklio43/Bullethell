@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c92e32e6d823cb48b8526cc83a1df52, type: 3}
-  m_Name: BuffAbilityBehaviour
+  m_Script: {fileID: 11500000, guid: 6ac6d821632218d47b61098782b8669a, type: 3}
+  m_Name: SwingAbilityBehaviour
   m_EditorClassIdentifier: 
-  _durationPolicy: 0
-  _buffs: []

@@ -7,7 +7,7 @@ namespace BulletHell.Enemies
 {
     public class EnemyAttack : MonoBehaviour
     {
-        [SerializeField] List<AbilityProjectile> _attacks = new List<AbilityProjectile>();
+        /*[SerializeField] List<AbilityProjectile> _attacks = new List<AbilityProjectile>();
 
         private void Awake()
         {
@@ -49,6 +49,6 @@ namespace BulletHell.Enemies
                     break;
                 }
             }
-        }
+        }*/
     }
 }

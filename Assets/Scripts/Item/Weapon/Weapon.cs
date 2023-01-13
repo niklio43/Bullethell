@@ -1,13 +1,14 @@
 using BulletHell.Abilities;
 using BulletHell.Emitters;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public abstract class Weapon : Item
 {
     Pool _pool;
     [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
-    public AnimationClip WeaponIdleAnimation;
+    public AnimatorController animatorController;
 
     public Pool Pool { get { return _pool; } set { _pool = value; } }
 
@@ -21,11 +22,11 @@ public abstract class Weapon : Item
         }
     }
 
-    public void UnInitialize(GameObject owner)
+    public void Uninitialize()
     {
         foreach (Ability ability in _abilitySlot)
         {
-            ability.UnInitialize(owner);
+            ability.Uninitialize();
         }
     }
 

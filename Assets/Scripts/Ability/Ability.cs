@@ -1,73 +1,101 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using BulletHell;
 
 namespace BulletHell.Abilities
 {
-    public abstract class Ability : ScriptableObject
+    [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/New Ability")]
+    public sealed class Ability : ScriptableObject
     {
-        [SerializeField] Sprite _abilityIcon;
-        public VisualEffectAsset Vfx;
-        public string AbilityName;
-        public float CoolDownTime = 0;
-        public int MaxAmount = 1;
-        public int CurrentAmount;
-        public float Damage;
+        [Header("General")]
+        [SerializeField] Sprite _icon;
+        [SerializeField] string _name;
+        [SerializeField, TextArea] string _description;
 
-        protected GameObject Owner;
+        [Header("Settings")]
+        [SerializeField] int _maxAmount;
+        [SerializeField] float _coolDownTime;
 
-        public float Timer
+        [Header("Ability Behaviours")]
+        [SerializeField] List<BaseAbilityBehaviour> behaviours;
+
+        [Header("Animation")]
+        [SerializeField] AnimationClip _clip;
+
+        [Header("VFX")]
+        [SerializeField] VisualEffectAsset _vfx;
+
+        GameObject _owner;
+        int _currentAmount;
+
+        List<float> _timers;
+        public void Initialize(GameObject owner)
         {
-            get
-            {
-                if (timers.Count == 0) { return 0; }
-                return timers[0];
+            _owner = owner;
+            _timers = new List<float>();
+            _currentAmount = 1;
+            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+                behaviour.Initialize(this, owner);
             }
         }
-        List<float> timers;
+        public void Uninitialize() {
 
-        public virtual void Initialize(GameObject owner) {
-            Owner = owner;
-            CurrentAmount = 1;
-            timers = new List<float>();
-        }
-        public virtual void UnInitialize(GameObject owner) { }
-
-        public void Activate(InputAction.CallbackContext context)
-        {
-            if (!context.performed) return;
-
-            Activate();
+            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+                behaviour.Uninitialize();
+            }
         }
 
-        public void Activate()
+        public void Cast()
         {
-            if (CurrentAmount <= 0) return;
+            if (_currentAmount <= 0 ) return;
             DoAbility();
 
-            CurrentAmount--;
+            _currentAmount--;
 
-            timers.Add(CoolDownTime);
+            _timers.Add(_coolDownTime);
+        }
+        void DoAbility()
+        {
+            if (_clip != null)
+            {
+            PlayAnimation(_clip.name);
+            MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
+            }
+
+            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+                behaviour.Perform(_owner);
+            }
         }
 
-        public abstract void DoAbility();
-
-        public bool CanCast() => (CurrentAmount > 0);
-
-        public virtual void UpdateAbility(float dt)
+        void PlayAnimation(string name)
         {
-            for (int i = 0; i < timers.Count; i++)
-            {
-                timers[i] -= dt;
-                if (timers[i] <= 0)
-                {
-                    CurrentAmount++;
-                    timers.RemoveAt(i);
+            _owner.GetComponent<Animator>().Play(name);
+        }
+
+        public void UpdateAbility(float dt)
+        {
+            UpdateTimers(dt);
+        }
+
+        void UpdateTimers(float dt)
+        {
+            for (int i = 0; i < _timers.Count; i++) {
+                _timers[i] -= dt;
+                if (_timers[i] <= 0) {
+                    _currentAmount++;
+                    _timers.RemoveAt(i);
                     i--;
                 }
             }
         }
+
+        #region Getters
+        public bool CanCast() => (_currentAmount > 0);
+        public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
+        public string GetName() => _name;
+        public string GetDescription() => _description;
+        #endregion
 
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters;
 
-namespace BulletHell.Abilities.New
+namespace BulletHell.Abilities
 {
     [CreateAssetMenu(fileName = "EmitterAbilityBehaviour", menuName = "Abilities/New Emitter Ability Behaviour")]
     public class EmitterAbilityBehaviour : BaseAbilityBehaviour
@@ -23,7 +23,7 @@ namespace BulletHell.Abilities.New
                 _emitterObjects.Add(emitter);
             }
         }
-        public override void Unitialize()
+        public override void Uninitialize()
         {
             foreach (Emitter emitter in _emitterObjects) {
                 MonoBehaviour.Destroy(emitter.gameObject);
