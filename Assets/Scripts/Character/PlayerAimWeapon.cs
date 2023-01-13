@@ -18,16 +18,23 @@ public class PlayerAimWeapon : MonoBehaviour
         transform.GetChild(0).position = transform.position + (_aimLength * shoulderToMouseDir.normalized);
 
         Vector2 scale = transform.localScale;
+        Vector2 scaleParent = transform.parent.localScale;
         if(aimDirection.x < 0)
         {
             scale.y = -1;
-        }else if(aimDirection.x > 0)
+            scale.x = -1;
+            scaleParent.x = -1;
+        }
+        else if(aimDirection.x > 0)
         {
             scale.y = 1;
+            scale.x = 1;
+            scaleParent.x = 1;
         }
         transform.localScale = scale;
+        transform.parent.localScale = scaleParent;
 
-        if(transform.eulerAngles.z > 50 && transform.eulerAngles.z < 120)
+        if (transform.eulerAngles.z > 50 && transform.eulerAngles.z < 120)
         {
             GetComponentInChildren<SpriteRenderer>().sortingOrder = 9;
         }

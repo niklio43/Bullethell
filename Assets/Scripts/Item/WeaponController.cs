@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters;
 using BulletHell.Abilities;
+using UnityEngine.VFX;
+using System;
 
 public class WeaponController : MonoBehaviour
 {
@@ -41,7 +43,7 @@ public class WeaponController : MonoBehaviour
     //TODO Add additional functionality.
     public void FillAbilitySlot(Weapon weapon)
     {
-        weapon.AddAbility(weapon.Pool._ability[Random.Range(0, weapon.Pool._ability.Length)], weapon, gameObject);
+        weapon.AddAbility(weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)], weapon, gameObject);
     }
 
     private void OnDrawGizmosSelected()
@@ -77,4 +79,33 @@ public class WeaponController : MonoBehaviour
 
         GetComponent<Animator>().Play(clip[0].name);
     }
+
+    public void PlayVfx(VisualEffectAsset vfx)
+    {
+        var visualEffect = GetComponent<VisualEffect>();
+        visualEffect.visualEffectAsset = vfx;
+        visualEffect.Play();
+
+        visualEffect.SetVector3("angle", transform.parent.eulerAngles);
+    }
+
+    #region Component Caching
+
+    Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();
+    public new T GetComponent<T>() where T : Component
+    {
+        if (_cachedComponents.ContainsKey(typeof(T)))
+        {
+            return (T)_cachedComponents[typeof(T)];
+        }
+
+        var component = base.GetComponent<T>();
+        if (component != null)
+        {
+            _cachedComponents.Add(typeof(T), component);
+        }
+        return component;
+    }
+
+    #endregion
 }

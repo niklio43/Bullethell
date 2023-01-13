@@ -8,6 +8,7 @@ namespace BulletHell.Abilities
     public abstract class Ability : ScriptableObject
     {
         [SerializeField] Sprite _abilityIcon;
+        public VisualEffectAsset Vfx;
         public string AbilityName;
         public float CoolDownTime = 0;
         public int MaxAmount = 1;

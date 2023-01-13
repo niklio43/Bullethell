@@ -20,6 +20,11 @@ public class AbilityMelee : Ability
     {
         _owner.GetComponent<WeaponController>().DetectColliders(Damage);
 
+        if(Vfx != null)
+        {
+            _owner.GetComponent<WeaponController>().PlayVfx(Vfx);
+        }
+
         if (_clip == null) return;
 
         _owner.GetComponent<WeaponController>().PlayAnimation(_clip);

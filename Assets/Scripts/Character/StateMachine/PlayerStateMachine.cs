@@ -50,9 +50,6 @@ public class PlayerStateMachine : MonoBehaviour
         {
             GetComponent<Animator>().Play("Idle");
         }
-
-        if (_movementInput.x == 0) return;
-        HandleRotation();
     }
 
     public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
@@ -61,12 +58,6 @@ public class PlayerStateMachine : MonoBehaviour
         if (abilityIndex > Weapon.AbilitySlot.Count - 1 || Weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
 
         Weapon.AbilitySlot[abilityIndex].Activate(ctx);
-    }
-
-    void HandleRotation()
-    {
-        if (_movementInput.x < 0) { transform.localRotation = Quaternion.Euler(0, 180, 0); }
-        else { transform.localRotation = Quaternion.Euler(0, 0, 0); }
     }
 
     public void Move(InputAction.CallbackContext context)

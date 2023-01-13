@@ -17,6 +17,8 @@ public class Enemy : Character
 
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
 
+    [SerializeField] Transform _damagePopupPrefab;
+
     public enum EnemyMovmentType
     {
         Grounded,
@@ -53,6 +55,14 @@ public class Enemy : Character
 
 
         GetComponent<Animator>().SetBool("Running", (GetComponent<Rigidbody2D>().velocity.SqrMagnitude() > 1));
+    }
+
+    public override void TakeDamage(float amount)
+    {
+        base.TakeDamage(amount);
+
+        DamagePopup damagePopup = Instantiate(_damagePopupPrefab, transform.position, Quaternion.identity).GetComponent<DamagePopup>();
+        damagePopup.Setup(amount);
     }
 
     public void SetTarget(Transform target)
