@@ -24,8 +24,24 @@ namespace BulletHell.Stats
             return total + (total * multiplier);
         }
 
+        public void AddModifier(StatModifier modifier, float time)
+        {
+            if (_modifiers.ContainsKey(modifier.Id)) {
+                Debug.LogWarning("A modifier with the same id is already applied to the stat.");
+                return;
+            }
+
+            AddModifier(modifier);
+            MonoInstance.GetInstance().Invoke(() => { RemoveModifier(modifier); }, time);
+        }
+
         public void AddModifier(StatModifier modifier)
         {
+            if (_modifiers.ContainsKey(modifier.Id)) { 
+                Debug.LogWarning("A modifier with the same id is already applied to the stat."); 
+                return; 
+            }
+
             _modifiers.Add(modifier.Id, modifier);
         }
 
@@ -33,5 +49,6 @@ namespace BulletHell.Stats
         {
             _modifiers.Remove(modifier.Id);
         }
+
     }
 }

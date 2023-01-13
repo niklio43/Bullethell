@@ -33,5 +33,16 @@ namespace BulletHell
                 return (T)formatter.Deserialize(ms);
             }
         }
+
+        public static Coroutine Invoke(this MonoBehaviour mb, Action action, float timeInSeconds)
+        {
+            return mb.StartCoroutine(InvokeRoutine(action, timeInSeconds));
+        }
+
+        private static IEnumerator InvokeRoutine(Action action, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            action();
+        }
     }
 }
