@@ -8,14 +8,15 @@ using System.Linq;
 
 public class Enemy : Character
 {
-    [SerializeField] public EnemyBrain _brain;
-    EnemyDetection _detection;
-
     public Transform Target;
-
     public DetectionData DetectionData = new DetectionData();
-
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
+    [SerializeField] public EnemyBrain _brain;
+    public bool CanMove = false;
+
+    EnemyDetection _detection;
+    public EnemyMovement _enemyMovement;
+
 
     public enum EnemyMovmentType
     {
@@ -33,13 +34,14 @@ public class Enemy : Character
         _brain.Initialize(this);
         
         _detection = GetComponent<EnemyDetection>();
+        _enemyMovement = GetComponent<EnemyMovement>();
     }
 
     private void Update()
     {
         if (Target != null) {
             Vector2 targetDirection = Target.position - transform.position;
-            GetComponent<SpriteRenderer>().flipX = (Vector2.Dot(targetDirection, Vector2.right) < 0) ? true : false;
+            _spriteRenderer.flipX = (Vector2.Dot(targetDirection, Vector2.right) < 0) ? true : false;
         }
 
         DetectionData = _detection.Detect();
@@ -50,9 +52,10 @@ public class Enemy : Character
             SetTarget(target);
         }
 
+        if(CanMove) 
+            _enemyMovement.Move();
 
-
-        GetComponent<Animator>().SetBool("Running", (GetComponent<Rigidbody2D>().velocity.SqrMagnitude() > 1));
+        _animator.SetBool("Walking", (GetComponent<Rigidbody2D>().velocity.SqrMagnitude() > 1));
     }
 
     public void SetTarget(Transform target)

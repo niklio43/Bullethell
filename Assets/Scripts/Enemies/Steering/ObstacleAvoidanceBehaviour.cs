@@ -19,7 +19,7 @@ namespace BulletHell.Enemies.Steering
                 Vector2 direction = obstacle.Collider.ClosestPoint(transform.position) - (Vector2)transform.position;
                 float distance = direction.magnitude;
 
-                float weight = distance <= steering.Collider.radius ? 1 : Mathf.Clamp01(_avoidanceRadius - distance) / _avoidanceRadius;
+                float weight =  steering.Collider.IsTouching(obstacle.Collider) ? 1 : Mathf.Clamp01(_avoidanceRadius - distance) / _avoidanceRadius;
                 Vector2 directionNormalized = direction.normalized;
 
                 for (int i = 0; i < steering.Danger.Count; i++) {

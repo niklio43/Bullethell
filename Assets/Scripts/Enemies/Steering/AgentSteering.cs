@@ -8,7 +8,7 @@ namespace BulletHell.Enemies.Steering
     [System.Serializable]
     public class AgentSteering
     {
-        [HideInInspector] public CircleCollider2D Collider;
+        [HideInInspector] public BoxCollider2D Collider;
         [HideInInspector] public Vector2[] Directions;
 
         public EnemyMovement Owner { get; private set; }
@@ -22,7 +22,7 @@ namespace BulletHell.Enemies.Steering
         public void Initialize(EnemyMovement owner)
         {
             Owner = owner;
-            Collider = Owner.GetComponent<CircleCollider2D>();
+            Collider = Owner.GetComponent<BoxCollider2D>();
 
             Interest = new ContextMap(_resolution);
             Danger = new ContextMap(_resolution);
@@ -57,7 +57,6 @@ namespace BulletHell.Enemies.Steering
         {
             if(!Application.isPlaying || Owner == null) { return; } 
             Gizmos.color = new Color(.495f, .788f, .478f);
-            Gizmos.DrawWireSphere(Owner.transform.position, Collider.radius);
            
             if (Interest != null && Danger != null) {
                 for (int i = 0; i < Directions.Length; i++) {

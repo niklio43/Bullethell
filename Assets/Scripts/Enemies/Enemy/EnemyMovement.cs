@@ -22,12 +22,6 @@ namespace BulletHell.Enemies
 
             InvokeRepeating(nameof(EvaluateSteering), 0, 0.05f);
         }
-
-        private void Update()
-        {
-            Move();
-        }
-
         public void EvaluateSteering()
         {
             _agentSteering.EvaluateBehaviors(_enemy);
