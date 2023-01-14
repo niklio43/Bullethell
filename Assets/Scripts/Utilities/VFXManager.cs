@@ -19,6 +19,7 @@ namespace BulletHell.VFX
         public static void PlayBurst(VisualEffectAsset asset, Vector3 position, Transform parent = null)
         {
             RuntimeVisualEffect vfx = Pool.Get();
+            vfx.gameObject.SetActive(true);
             if (parent != null)
                 vfx.transform.parent = parent;
 
@@ -28,6 +29,7 @@ namespace BulletHell.VFX
         public static void Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null)
         {
             RuntimeVisualEffect vfx = Pool.Get();
+            vfx.gameObject.SetActive(true);
             if (parent != null)
                 vfx.transform.parent = parent;
 
@@ -37,38 +39,45 @@ namespace BulletHell.VFX
 
         RuntimeVisualEffect Create()
         {
-            RuntimeVisualEffect vfx = new RuntimeVisualEffect();
-            vfx.Pool = _pool;
+            RuntimeVisualEffect vfx = new GameObject().AddComponent<RuntimeVisualEffect>();
+            vfx.Initialize(Pool);
 
             return vfx;
         }
     }
 
-    public class RuntimeVisualEffect : VisualEffect, IPoolable
+    public class RuntimeVisualEffect : MonoBehaviour, IPoolable
     {
-        public Pool<RuntimeVisualEffect> Pool;
-        public new string name = "(Runtime) VisualEffect";
+        Pool<RuntimeVisualEffect> _pool;
+        VisualEffect _vfx;
+
+        public void Initialize(Pool<RuntimeVisualEffect> pool)
+        {
+            _pool = pool;
+            _vfx = gameObject.AddComponent<VisualEffect>();
+        }
 
         public void PlayBurst(VisualEffectAsset asset)
         {
-            PlayBurst(asset);
-            MonoInstance.Instance.StartCoroutine(CheckIfPlaying());
+            _vfx.visualEffectAsset = asset;
+            _vfx.Play();
+            MonoInstance.Instance.StartCoroutine(PlayForSeconds(1));
         }
 
         public void Play(VisualEffectAsset asset, float time)
         {
-            visualEffectAsset = asset;
-            Play();
+            _vfx.visualEffectAsset = asset;
+            _vfx.Play();
             MonoInstance.Instance.StartCoroutine(PlayForSeconds(time));
         }
 
         public void ResetObject()
         {
-            Stop();
-            visualEffectAsset = null;
+            _vfx.Stop();
+            _vfx.visualEffectAsset = null;
             transform.position = Vector3.zero;
             gameObject.SetActive(false);
-            Pool.Release(this);
+            _pool.Release(this);
         }
 
         #region Coroutines
@@ -80,7 +89,7 @@ namespace BulletHell.VFX
 
         IEnumerator CheckIfPlaying()
         {
-            while (aliveParticleCount > 0) { yield return new WaitForFixedUpdate(); }
+            while (_vfx.aliveParticleCount > 0) { yield return new WaitForFixedUpdate(); }
             ResetObject();
         }
         #endregion
