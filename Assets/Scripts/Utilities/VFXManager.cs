@@ -13,39 +13,24 @@ namespace BulletHell.VFX
             _pool = new ObjectPool<RuntimeVisualEffect>(Create, 100, name);
         }
 
-        #region Play Burst
-        public static void PlayBurst(VisualEffectAsset asset, Transform parent = null)
+        public static void PlayBurst(VisualEffectAsset asset, Vector3 position, Transform parent = null)
         {
             RuntimeVisualEffect vfx = _pool.Get();
             if (parent != null)
                 vfx.transform.parent = parent;
+
+            vfx.transform.localPosition = position;
             vfx.PlayBurst(asset);
         }
-
-        public static void PlayBurst(VisualEffectAsset asset, Vector3 position)
-        {
-            RuntimeVisualEffect vfx = _pool.Get();
-            vfx.transform.position = position;
-            vfx.PlayBurst(asset);
-        }
-        #endregion
-
-        #region Play
-        public static void Play(VisualEffectAsset asset, float time, Transform parent = null)
+        public static void Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null)
         {
             RuntimeVisualEffect vfx = _pool.Get();
             if (parent != null)
                 vfx.transform.parent = parent;
-            vfx.Play(asset, time);
-        }
 
-        public static void Play(VisualEffectAsset asset, float time, Vector3 position)
-        {
-            RuntimeVisualEffect vfx = _pool.Get();
-            vfx.transform.position = position;
+            vfx.transform.localPosition = position;
             vfx.Play(asset, time);
         }
-        #endregion
 
         RuntimeVisualEffect Create()
         {
