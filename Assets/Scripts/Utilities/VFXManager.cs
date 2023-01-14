@@ -8,7 +8,7 @@ namespace BulletHell.VFX
     {
         public static ObjectPool<RuntimeVisualEffect> _pool { get; private set; }
 
-        public void Awake()
+        protected override void OnAwake()
         {
             _pool = new ObjectPool<RuntimeVisualEffect>(Create, 100, name);
         }
