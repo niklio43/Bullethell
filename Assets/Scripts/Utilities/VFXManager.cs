@@ -6,16 +6,19 @@ namespace BulletHell.VFX
 {
     public class VFXManager : Singleton<VFXManager>
     {
-        public static ObjectPool<RuntimeVisualEffect> _pool { get; private set; }
-
-        protected override void OnAwake()
-        {
-            _pool = new ObjectPool<RuntimeVisualEffect>(Create, 100, name);
+        public static ObjectPool<RuntimeVisualEffect> Pool {
+            get {
+                if(_pool == null)
+                    _pool = new ObjectPool<RuntimeVisualEffect>(Instance.Create, 100, Instance.name);
+                return _pool;
+            }
+            
         }
+        static ObjectPool<RuntimeVisualEffect> _pool;
 
         public static void PlayBurst(VisualEffectAsset asset, Vector3 position, Transform parent = null)
         {
-            RuntimeVisualEffect vfx = _pool.Get();
+            RuntimeVisualEffect vfx = Pool.Get();
             if (parent != null)
                 vfx.transform.parent = parent;
 
@@ -24,7 +27,7 @@ namespace BulletHell.VFX
         }
         public static void Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null)
         {
-            RuntimeVisualEffect vfx = _pool.Get();
+            RuntimeVisualEffect vfx = Pool.Get();
             if (parent != null)
                 vfx.transform.parent = parent;
 
