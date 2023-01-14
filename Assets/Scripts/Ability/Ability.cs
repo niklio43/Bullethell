@@ -23,9 +23,6 @@ namespace BulletHell.Abilities
         [Header("Animation")]
         [SerializeField] AnimationClip _clip;
 
-        [Header("VFX")]
-        [SerializeField] VisualEffectAsset _vfx;
-
         GameObject _owner;
         int _currentAmount;
 

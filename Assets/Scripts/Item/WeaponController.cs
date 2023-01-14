@@ -47,34 +47,11 @@ public class WeaponController : MonoBehaviour
         weapon.AddAbility(weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)], weapon, gameObject);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.black;
-        Vector3 position = CircleOrigin == null ? Vector3.zero : CircleOrigin.position;
-        Gizmos.DrawWireSphere(position, Radius);
-    }
-
-    //TODO Add additional functionality.
-    public void DetectColliders(float damage)
-    {
-        foreach (Collider2D collider in Physics2D.OverlapCircleAll(CircleOrigin.position, Radius))
-        {
-            Debug.Log(collider.name);
-            GameObject other = collider.gameObject;
-            if (other.CompareTag("Enemy"))
-            {
-                other.GetComponent<Enemy>().TakeDamage(damage);
-            }
-        }
-    }
-
     public void PlayVfx(VisualEffectAsset vfx)
     {
         var visualEffect = GetComponent<VisualEffect>();
         visualEffect.visualEffectAsset = vfx;
         visualEffect.Play();
-
-        visualEffect.SetVector3("angle", transform.parent.eulerAngles);
     }
 
     #region Component Caching

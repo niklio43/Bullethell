@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac6d821632218d47b61098782b8669a, type: 3}
   m_Name: SwingAbilityBehaviour
   m_EditorClassIdentifier: 
+  _vfx: {fileID: 8926484042661614526, guid: 5d7155e1f6a9c424899b50fa7fdc44ef, type: 3}
