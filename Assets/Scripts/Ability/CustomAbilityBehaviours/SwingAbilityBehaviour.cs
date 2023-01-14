@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using BulletHell.VFX;
 
 namespace BulletHell.Abilities
 {
@@ -20,7 +21,7 @@ namespace BulletHell.Abilities
         {
             WeaponController weaponController = owner.GetComponent<WeaponController>();
 
-            weaponController.PlayVfx(_vfx);
+            BulletHell.VFX.VFXManager.PlayBurst(_vfx, Vector3.zero, owner.transform);
 
             foreach (Collider2D collider in Physics2D.OverlapCircleAll(weaponController.CircleOrigin.position, weaponController.Radius))
             {
