@@ -61,6 +61,8 @@ namespace BulletHell.VFX
         {
             _vfx.visualEffectAsset = asset;
             _vfx.Play();
+
+            //TODO Fix so that the VFX stops playing when burst has finished.
             MonoInstance.Instance.StartCoroutine(PlayForSeconds(1));
         }
 
