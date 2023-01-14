@@ -78,13 +78,16 @@ namespace BulletHell
     }
 
     //Class responsible for pooling and managing objects deriving from MonoBehaviour.
-    public class ObjectPool<T> : Pool<T> where T : MonoBehaviour, IPoolable
+    public class ObjectPool<T> : Pool<T> where T : Behaviour, IPoolable
     {
         Transform _poolHolder;
 
-        public ObjectPool(Func<T> CreateFunction, int maxAmount = 10, string poolName = "") : base(CreateFunction, maxAmount)
+        public ObjectPool(Func<T> CreateFunction, int maxAmount = 10, string poolName = "", Transform parent = null) : base(CreateFunction, maxAmount)
         {
             _poolHolder = new GameObject($"{poolName} (ObjectPool)").transform;
+            if(parent != null) {
+                _poolHolder.transform.parent = parent;
+            }
         }
         
         //Returns the given object to the pool.
