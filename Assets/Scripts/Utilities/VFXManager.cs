@@ -9,7 +9,7 @@ namespace BulletHell.VFX
         public static ObjectPool<RuntimeVisualEffect> Pool {
             get {
                 if(_pool == null)
-                    _pool = new ObjectPool<RuntimeVisualEffect>(Instance.Create, 100, Instance.name);
+                    _pool = new ObjectPool<RuntimeVisualEffect>(Instance.Create, 100, "VFX Pool");
                 return _pool;
             }
             
@@ -40,6 +40,7 @@ namespace BulletHell.VFX
         RuntimeVisualEffect Create()
         {
             RuntimeVisualEffect vfx = new GameObject().AddComponent<RuntimeVisualEffect>();
+            vfx.name = "Runtime VisualEffect";
             vfx.Initialize(Pool);
 
             return vfx;
