@@ -6,7 +6,7 @@ public class SlotListener : MonoBehaviour
 {
     public Inventory Inventory;
     public Inventory Equipment;
-    [SerializeField] PlayerController _playerController;
+    [SerializeField] Player _player;
     [SerializeField] WeaponController _weaponController;
 
     void Start()
@@ -29,7 +29,7 @@ public class SlotListener : MonoBehaviour
             case InterfaceType.Equipment:
                 for (int i = 0; i < slot.Item.buffs.Length; i++)
                 {
-                    _playerController.Stats.RemoveModifierFromStat(slot.Item.buffs[i]);
+                    _player.Stats.RemoveModifierFromStat(slot.Item.buffs[i]);
                 }
                 if (slot.GetItemData.ItemType == ItemType.Weapon && slot == Equipment.GetSlots[3])
                 {
@@ -54,7 +54,7 @@ public class SlotListener : MonoBehaviour
             case InterfaceType.Equipment:
                 for (int i = 0; i < slot.Item.buffs.Length; i++)
                 {
-                    _playerController.Stats.AddModifierToStat(slot.Item.buffs[i]);
+                    _player.Stats.AddModifierToStat(slot.Item.buffs[i]);
                 }
                 if (slot.GetItemData.ItemType == ItemType.Weapon && slot == Equipment.GetSlots[3])
                 {
