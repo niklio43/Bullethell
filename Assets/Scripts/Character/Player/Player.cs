@@ -1,66 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
-public class PlayerStateMachine : MonoBehaviour
+using System.Collections.Generic;
+
+public class Player : Character
 {
     Rigidbody2D _rb;
-
-    [SerializeField] LayerMask layerMask;
     Vector2 _movementInput;
+    float _ghostFadeTimer = 1;
     bool _isDashing = false;
-
+    List<GameObject> _ghosts = new List<GameObject>();
     [HideInInspector] public Weapon Weapon;
 
-    //State variables
-    PlayerBaseState _currentState;
-    PlayerStateFactory _states;
-    PlayerController _controller;
+    [SerializeField] LayerMask layerMask;
 
-    //getters and setters
-    public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
     public Vector2 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
-    public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
-
-    float _ghostFadeTimer = 1;
-    List<GameObject> _ghosts = new List<GameObject>();
 
     void Awake()
     {
+        Initialize();
+
         _rb = GetComponent<Rigidbody2D>();
-        _controller = GetComponent<PlayerController>();
-
-        //Setup state
-        _states = new PlayerStateFactory(this);
-        _currentState = _states.Idle();
-        _currentState.EnterState();
-    }
-
-    void Update()
-    {
-        _currentState?.UpdateState();
-
-        if (!IsDashing) return;
-        _ghostFadeTimer -= Time.deltaTime;
-        foreach(GameObject obj in _ghosts)
-        {
-            Color tmp = obj.GetComponent<SpriteRenderer>().color;
-            tmp.a = _ghostFadeTimer;
-            obj.GetComponent<SpriteRenderer>().color = tmp;
-        }
     }
 
     void FixedUpdate()
     {
         _rb.velocity = _movementInput;
 
-        if(_movementInput != Vector2.zero)
+        if (_movementInput == Vector2.zero) { _animator.Play("Idle"); return; }
+        _animator.Play("Walking");
+    }
+
+    void Update()
+    {
+        if (!_isDashing) return;
+        _ghostFadeTimer -= Time.deltaTime;
+        foreach (GameObject obj in _ghosts)
         {
-            GetComponent<Animator>().Play("Walking");
-        }
-        else if(_movementInput == Vector2.zero)
-        {
-            GetComponent<Animator>().Play("Idle");
+            Color tmp = obj.GetComponent<SpriteRenderer>().color;
+            tmp.a = _ghostFadeTimer;
+            obj.GetComponent<SpriteRenderer>().color = tmp;
         }
     }
 
@@ -74,7 +54,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        _movementInput = context.ReadValue<Vector2>() * _controller.Stats["MoveSpeed"].Value;
+        _movementInput = context.ReadValue<Vector2>() * Stats["MoveSpeed"].Value;
     }
 
     #region Dash
@@ -85,11 +65,11 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Vector2 dir = _movementInput.normalized;
 
-            if (!CanDash(dir, GetComponent<PlayerController>().Stats["DashDistance"].Value)) return;
+            if (!CanDash(dir, Stats["DashDistance"].Value)) return;
 
             _isDashing = true;
 
-            Vector3 targetPos = new Vector3(dir.x, dir.y, 0) * GetComponent<PlayerController>().Stats["DashDistance"].Value;
+            Vector3 targetPos = new Vector3(dir.x, dir.y, 0) * Stats["DashDistance"].Value;
 
             transform.position += targetPos;
 
@@ -106,7 +86,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     void InstantiateGhostTrail(Vector2 dir)
     {
-        for (int i = 0; i < GetComponent<PlayerController>().Stats["DashDistance"].Value; i++)
+        for (int i = 0; i < Stats["DashDistance"].Value; i++)
         {
             GameObject ghost = new GameObject("Ghost");
             ghost.AddComponent<SpriteRenderer>().sprite = GetComponent<SpriteRenderer>().sprite;
@@ -126,11 +106,31 @@ public class PlayerStateMachine : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _isDashing = false;
         _ghostFadeTimer = 1;
-        foreach(GameObject obj in _ghosts)
+        foreach (GameObject obj in _ghosts)
         {
             Destroy(obj);
         }
         _ghosts.Clear();
+    }
+
+    #endregion
+
+    #region Component Caching
+
+    Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();
+    public new T GetComponent<T>() where T : Component
+    {
+        if (_cachedComponents.ContainsKey(typeof(T)))
+        {
+            return (T)_cachedComponents[typeof(T)];
+        }
+
+        var component = base.GetComponent<T>();
+        if (component != null)
+        {
+            _cachedComponents.Add(typeof(T), component);
+        }
+        return component;
     }
 
     #endregion

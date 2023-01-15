@@ -24,7 +24,7 @@ public class WeaponController : MonoBehaviour
             GetComponent<AbilityHolder>().abilities.Add(ability);
         }
 
-        var playerSM = transform.GetComponentInParent<PlayerStateMachine>();
+        var playerSM = transform.GetComponentInParent<Player>();
         playerSM.Weapon = weapon;
     }
 
@@ -37,7 +37,7 @@ public class WeaponController : MonoBehaviour
 
         GetComponent<Animator>().runtimeAnimatorController = null;
 
-        var playerSM = transform.GetComponentInParent<PlayerStateMachine>();
+        var playerSM = transform.GetComponentInParent<Player>();
         playerSM.Weapon = null;
     }
 
@@ -45,13 +45,6 @@ public class WeaponController : MonoBehaviour
     public void FillAbilitySlot(Weapon weapon)
     {
         weapon.AddAbility(weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)], weapon, gameObject);
-    }
-
-    public void PlayVfx(VisualEffectAsset vfx)
-    {
-        var visualEffect = GetComponent<VisualEffect>();
-        visualEffect.visualEffectAsset = vfx;
-        visualEffect.Play();
     }
 
     #region Component Caching
