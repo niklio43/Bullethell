@@ -63,7 +63,7 @@ namespace BulletHell.VFX
             _vfx.Play();
 
             //TODO Fix so that the VFX stops playing when burst has finished.
-            MonoInstance.Instance.StartCoroutine(PlayForSeconds(1));
+            MonoInstance.Instance.StartCoroutine(PlayForSeconds(.5f));
         }
 
         public void Play(VisualEffectAsset asset, float time)
@@ -82,19 +82,16 @@ namespace BulletHell.VFX
             _pool.Release(this);
         }
 
-        #region Coroutines
         IEnumerator PlayForSeconds(float time)
         {
             yield return new WaitForSeconds(time);
-            ResetObject();
-        }
+            _vfx.Stop();
+            while(_vfx.aliveParticleCount > 0) {
+                yield return new WaitForFixedUpdate();
+            }
 
-        IEnumerator CheckIfPlaying()
-        {
-            while (_vfx.aliveParticleCount > 0) { yield return new WaitForFixedUpdate(); }
             ResetObject();
         }
-        #endregion
     }
 
 }
