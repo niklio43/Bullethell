@@ -5,6 +5,7 @@ using BulletHell.Emitters;
 using BulletHell.Abilities;
 using UnityEngine.VFX;
 using System;
+using BulletHell.Player;
 
 public class WeaponController : MonoBehaviour
 {
