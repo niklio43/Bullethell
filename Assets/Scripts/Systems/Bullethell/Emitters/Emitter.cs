@@ -101,8 +101,8 @@ namespace BulletHell.Emitters
 
         protected virtual void UpdateProjectiles(float dt)
         {
-            for (int i = 0; i < _pool.active.Count; i++) {
-                UpdateProjectile(_pool.members[_pool.active[i]], dt);
+            for (int i = 0; i < _pool.Active.Count; i++) {
+                UpdateProjectile(_pool.Members[_pool.Active[i]], dt);
             }
         }
 
