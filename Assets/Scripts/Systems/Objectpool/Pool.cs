@@ -114,7 +114,7 @@ namespace BulletHell
 
             try {
                 GameObject.Destroy(_poolHolder.gameObject);
-            } catch(Exception e) { }
+            } catch(Exception e) { Debug.Log(e); }
         }
 
         //Creates new instaces of the pooled object using the given "CreateFunction".
