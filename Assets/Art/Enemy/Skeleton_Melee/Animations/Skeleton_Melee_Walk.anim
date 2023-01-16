@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle
+  m_Name: Skeleton_Melee_Walk
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,12 +20,18 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: d87c529e4b8fa0c469e2e88290540600, type: 3}
+      value: {fileID: -219221877, guid: 719c24b4dd04fec498e1c4ace3619678, type: 3}
+    - time: 0.1
+      value: {fileID: 1868986007, guid: 719c24b4dd04fec498e1c4ace3619678, type: 3}
+    - time: 0.2
+      value: {fileID: -2131946731, guid: 719c24b4dd04fec498e1c4ace3619678, type: 3}
+    - time: 0.3
+      value: {fileID: -2034111937, guid: 719c24b4dd04fec498e1c4ace3619678, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 60
+  m_SampleRate: 10
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -40,13 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: d87c529e4b8fa0c469e2e88290540600, type: 3}
+    - {fileID: -219221877, guid: 719c24b4dd04fec498e1c4ace3619678, type: 3}
+    - {fileID: 1868986007, guid: 719c24b4dd04fec498e1c4ace3619678, type: 3}
+    - {fileID: -2131946731, guid: 719c24b4dd04fec498e1c4ace3619678, type: 3}
+    - {fileID: -2034111937, guid: 719c24b4dd04fec498e1c4ace3619678, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
