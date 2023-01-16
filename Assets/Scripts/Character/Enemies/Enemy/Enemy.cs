@@ -8,15 +8,17 @@ using System.Linq;
 
 public class Enemy : Character
 {
-    public Transform Target;
-    public DetectionData DetectionData = new DetectionData();
-    public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
     [SerializeField] public EnemyBrain _brain;
-    public bool CanMove = false;
+    public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
 
+    public DetectionData DetectionData = new DetectionData();
+    [HideInInspector] public Transform Target;
+    [HideInInspector] public bool CanMove = true;
+
+    [HideInInspector] public Animator Animator { get; private set; }
+    [HideInInspector] public EnemyAbilities Abilities { get; private set; }
     EnemyDetection _detection;
-    public EnemyMovement _enemyMovement;
-
+    EnemyMovement _enemyMovement;
 
     [SerializeField] Transform _damagePopupPrefab;
 
@@ -26,24 +28,32 @@ public class Enemy : Character
         Airborne
     }
 
+    [Header("Distances")]
     [Range(0, 10)] public float PreferredDistance;
     [Range(0, 10)] public float AttackDistance;
 
     private void Awake()
     {
-        Initialize();
-        _brain = Instantiate(_brain);
-        _brain.Initialize(this);
-        
+        Animator = GetComponentInChildren<Animator>();
+        Abilities = GetComponentInChildren<EnemyAbilities>();
         _detection = GetComponent<EnemyDetection>();
         _enemyMovement = GetComponent<EnemyMovement>();
+
+        Initialize();
+
+        _brain = Instantiate(_brain);
+        _brain.Initialize(this);
     }
 
     private void Update()
     {
         if (Target != null) {
             Vector2 targetDirection = Target.position - transform.position;
-            _spriteRenderer.flipX = (Vector2.Dot(targetDirection, Vector2.right) < 0) ? true : false;
+            if ((Vector2.Dot(targetDirection, Vector2.right) < 0)) {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }else {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
         }
 
         DetectionData = _detection.Detect();
@@ -54,10 +64,8 @@ public class Enemy : Character
             SetTarget(target);
         }
 
-        if(CanMove) 
-            _enemyMovement.Move();
-
-        _animator.SetBool("Walking", (GetComponent<Rigidbody2D>().velocity.SqrMagnitude() > 1));
+        Abilities.UpdateAim(Target);
+        if(CanMove) _enemyMovement.Move();
     }
 
     public override void TakeDamage(float amount)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e724e7a520059ba469cbb8554a713280
+guid: 84777e64b92d0554dbfa1402237c0ecd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -68,7 +68,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sekeleton_Mage_Attack_0
+      name: Skeleton_Mage_projectile_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b60ca37cefbca9d45b0a149f0da6a3e1
-      internalID: -1284170472
+      spriteID: 629801d02b3aa3048860bc75e0c107a8
+      internalID: 933130202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sekeleton_Mage_Attack_1
+      name: Skeleton_Mage_projectile_1
       rect:
         serializedVersion: 2
         x: 48
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ee4e9dab3ffdbb4589b01472120bf22
-      internalID: 268804455
+      spriteID: 445f038f247967c4483090aaa27b08c2
+      internalID: 1621605336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sekeleton_Mage_Attack_2
+      name: Skeleton_Mage_projectile_2
       rect:
         serializedVersion: 2
         x: 96
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73d3a48c75126944dbd4394460042829
-      internalID: -2112582885
+      spriteID: 27fa07395a176984cacbc850eb72e35e
+      internalID: 694487165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sekeleton_Mage_Attack_3
+      name: Skeleton_Mage_projectile_3
       rect:
         serializedVersion: 2
         x: 144
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a39aaaeb7a5ac1a48ab85b4c27314c45
-      internalID: -520662057
+      spriteID: 7132c7a4fa69b944fa2427f2efa250e1
+      internalID: 4221601
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sekeleton_Mage_Attack_4
+      name: Skeleton_Mage_projectile_4
       rect:
         serializedVersion: 2
         x: 192
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5892f956c012754409c6426de586b43c
-      internalID: -939003013
+      spriteID: fd1acabb1f55daf4d8dd105443245240
+      internalID: -944877185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sekeleton_Mage_Attack_5
+      name: Skeleton_Mage_projectile_5
       rect:
         serializedVersion: 2
         x: 240
@@ -224,29 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b35d9696f9effb44a6530ef72f72374
-      internalID: -2037562096
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sekeleton_Mage_Attack_6
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7d8c2d230b3c4247b32135744a769a1
-      internalID: 2023692166
+      spriteID: a2454cff80b163e40839e78172227bf4
+      internalID: 690986269
       vertices: []
       indices: 
       edges: []
@@ -262,13 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sekeleton_Mage_Attack_4: -939003013
-      Sekeleton_Mage_Attack_6: 2023692166
-      Sekeleton_Mage_Attack_3: -520662057
-      Sekeleton_Mage_Attack_2: -2112582885
-      Sekeleton_Mage_Attack_1: 268804455
-      Sekeleton_Mage_Attack_0: -1284170472
-      Sekeleton_Mage_Attack_5: -2037562096
+      Skeleton_Mage_projectile_0: 933130202
+      Skeleton_Mage_projectile_2: 694487165
+      Skeleton_Mage_projectile_3: 4221601
+      Skeleton_Mage_projectile_5: 690986269
+      Skeleton_Mage_projectile_4: -944877185
+      Skeleton_Mage_projectile_1: 1621605336
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

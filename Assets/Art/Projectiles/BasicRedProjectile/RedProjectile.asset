@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
-  m_Name: PD
+  m_Name: RedProjectile
   m_EditorClassIdentifier: 
-  name: PointedProjectile
-  Sprite: {fileID: 21300000, guid: e7f635a5571eb6040abdba4d0e4e8c11, type: 3}
+  name: NewProjectileData
+  Sprite: {fileID: 933130202, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
+  Animator: {fileID: 9100000, guid: f8ad612027543594ab7371cbf62e3462, type: 2}
   Scale: 2
   Color: {r: 1, g: 1, b: 1, a: 1}

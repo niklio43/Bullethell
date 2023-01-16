@@ -7,7 +7,8 @@ namespace BulletHell
         public Pool<Projectile> Pool;
         public ProjectileData Data;
 
-        [SerializeField] SpriteRenderer spriteRenderer;
+        [SerializeField] SpriteRenderer _spriteRenderer;
+        [SerializeField] Animator _animator;
 
         [HideInInspector] public Vector2 Position;
         [HideInInspector] public Vector2 Velocity;
@@ -24,11 +25,16 @@ namespace BulletHell
             Data = data;
             gameObject.SetActive(true);
             if (data.Sprite != null)
-                spriteRenderer.sprite = data.Sprite;
+                _spriteRenderer.sprite = data.Sprite;
+            if(data.Animator != null) {
+                _animator.runtimeAnimatorController = data.Animator;
+            }
+
+
 
             transform.localScale = Vector3.one * data.Scale;
 
-            spriteRenderer.color = data.Color;
+            _spriteRenderer.color = data.Color;
         }
 
         private void Update()

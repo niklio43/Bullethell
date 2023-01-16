@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VFX;
-using BulletHell;
 
 namespace BulletHell.Abilities
 {
@@ -23,6 +21,14 @@ namespace BulletHell.Abilities
         [Header("Animation")]
         [SerializeField] AnimationClip _clip;
 
+        #region Getters
+        public bool CanCast() => (_currentAmount > 0);
+        public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
+        public int GetCurrentAmount => _currentAmount;
+        public string GetName() => _name;
+        public string GetDescription() => _description;
+        #endregion
+
         GameObject _owner;
         int _currentAmount;
 
@@ -36,8 +42,8 @@ namespace BulletHell.Abilities
                 behaviour.Initialize(this, owner);
             }
         }
-        public void Uninitialize() {
-
+        public void Uninitialize()
+        {
             foreach (BaseAbilityBehaviour behaviour in behaviours) {
                 behaviour.Uninitialize();
             }
@@ -45,19 +51,19 @@ namespace BulletHell.Abilities
 
         public void Cast()
         {
-            if (_currentAmount <= 0 ) return;
+            if (_currentAmount <= 0) return;
             DoAbility();
 
             _currentAmount--;
 
             _timers.Add(_coolDownTime);
         }
+
         void DoAbility()
         {
-            if (_clip != null)
-            {
-            PlayAnimation(_clip.name);
-            MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
+            if (_clip != null) {
+                PlayAnimation(_clip.name);
+                MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
             }
 
             foreach (BaseAbilityBehaviour behaviour in behaviours) {
@@ -86,13 +92,5 @@ namespace BulletHell.Abilities
                 }
             }
         }
-
-        #region Getters
-        public bool CanCast() => (_currentAmount > 0);
-        public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
-        public string GetName() => _name;
-        public string GetDescription() => _description;
-        #endregion
-
     }
 }
