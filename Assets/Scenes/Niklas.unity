@@ -6702,7 +6702,6 @@ MonoBehaviour:
       Value: 5
     - Name: DashDistance
       Value: 4
-  _isDashing: 0
   Weapon: {fileID: 0}
   layerMask:
     serializedVersion: 2
