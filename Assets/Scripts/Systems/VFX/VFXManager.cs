@@ -6,17 +6,18 @@ namespace BulletHell.VFX
 {
     public class VFXManager : Singleton<VFXManager>
     {
-        public static ObjectPool<RuntimeVisualEffect> Pool {
+        public static ObjectPool<RuntimeVisualEffect> Pool
+        {
             get {
-                if(_pool == null)
+                if (_pool == null)
                     _pool = new ObjectPool<RuntimeVisualEffect>(Instance.Create, 100, "VFX Pool");
                 return _pool;
             }
-            
+
         }
         static ObjectPool<RuntimeVisualEffect> _pool;
 
-        public static void PlayBurst(VisualEffectAsset asset, Vector3 position, Transform parent = null)
+        public static void PlayBurst(VisualEffectAsset asset, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null)
         {
             RuntimeVisualEffect vfx = Pool.Get();
             vfx.gameObject.SetActive(true);
@@ -24,9 +25,9 @@ namespace BulletHell.VFX
                 vfx.transform.parent = parent;
 
             vfx.transform.localPosition = position;
-            vfx.PlayBurst(asset);
+            vfx.PlayBurst(asset, vfxAttributes);
         }
-        public static void Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null)
+        public static void Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null)
         {
             RuntimeVisualEffect vfx = Pool.Get();
             vfx.gameObject.SetActive(true);
@@ -34,7 +35,7 @@ namespace BulletHell.VFX
                 vfx.transform.parent = parent;
 
             vfx.transform.localPosition = position;
-            vfx.Play(asset, time);
+            vfx.Play(asset, time, vfxAttributes);
         }
 
         RuntimeVisualEffect Create()
@@ -58,18 +59,30 @@ namespace BulletHell.VFX
             _vfx = gameObject.AddComponent<VisualEffect>();
         }
 
-        public void PlayBurst(VisualEffectAsset asset)
+        public void PlayBurst(VisualEffectAsset asset, VFXAttribute[] vfxAttributes = null)
         {
             _vfx.visualEffectAsset = asset;
+
+            if (vfxAttributes != null)
+                foreach (VFXAttribute attribute in vfxAttributes) {
+                    attribute.SetValue(_vfx);
+                }
+
             _vfx.Play();
 
             //TODO Fix so that the VFX stops playing when burst has finished.
             MonoInstance.Instance.StartCoroutine(PlayForSeconds(.5f));
         }
 
-        public void Play(VisualEffectAsset asset, float time)
+        public void Play(VisualEffectAsset asset, float time, VFXAttribute[] vfxAttributes = null)
         {
             _vfx.visualEffectAsset = asset;
+
+            if (vfxAttributes != null)
+                foreach (VFXAttribute attribute in vfxAttributes) {
+                    attribute.SetValue(_vfx);
+                }
+
             _vfx.Play();
             MonoInstance.Instance.StartCoroutine(PlayForSeconds(time));
         }
@@ -87,7 +100,7 @@ namespace BulletHell.VFX
         {
             yield return new WaitForSeconds(time);
             _vfx.Stop();
-            while(_vfx.aliveParticleCount > 0) {
+            while (_vfx.aliveParticleCount > 0) {
                 yield return new WaitForFixedUpdate();
             }
 
@@ -95,4 +108,51 @@ namespace BulletHell.VFX
         }
     }
 
+    #region VFX Attributes
+    public abstract class VFXAttribute
+    {
+        protected readonly string _attributeName;
+        public VFXAttribute(string name)
+        {
+            _attributeName = name;
+        }
+        public abstract void SetValue(VisualEffect vfx);
+    }
+    public class VFXBool : VFXAttribute
+    {
+        private readonly bool _value;
+        public VFXBool(string name, bool value) : base(name)
+        {
+            _value = value;
+        }
+        public override void SetValue(VisualEffect vfx)
+        {
+            vfx.SetBool(_attributeName, _value);
+        }
+    }
+    public class VFXFloat : VFXAttribute
+    {
+        private readonly float _value;
+        public VFXFloat(string name, float value) : base(name)
+        {
+            _value = value;
+        }
+        public override void SetValue(VisualEffect vfx)
+        {
+            vfx.SetFloat(_attributeName, _value);
+        }
+    }
+    public class VFXInt : VFXAttribute
+    {
+        private readonly int _value;
+        public VFXInt(string name, int value) : base(name)
+        {
+            _value = value;
+        }
+        public override void SetValue(VisualEffect vfx)
+        {
+            vfx.SetInt(_attributeName, _value);
+        }
+    }
+    #endregion
 }

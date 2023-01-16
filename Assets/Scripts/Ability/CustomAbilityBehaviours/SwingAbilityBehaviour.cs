@@ -21,7 +21,7 @@ namespace BulletHell.Abilities
         {
             WeaponController weaponController = owner.GetComponent<WeaponController>();
 
-            BulletHell.VFX.VFXManager.PlayBurst(_vfx, Vector3.zero, owner.transform);
+            BulletHell.VFX.VFXManager.PlayBurst(_vfx, Vector3.zero, owner.transform, new VFXAttribute[] { new VFXFloat("Angle", weaponController.transform.rotation.eulerAngles.z) });
 
             foreach (Collider2D collider in Physics2D.OverlapCircleAll(weaponController.CircleOrigin.position, weaponController.Radius))
             {
