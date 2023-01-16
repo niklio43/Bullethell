@@ -2,11 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    static GameManager _instance;
-    public static GameManager Instance { get { return _instance; } }
-
     public static GameStates gameState = GameStates.Playing;
 
     [SerializeField] InputAction pauseGame;
@@ -18,16 +15,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
         pauseGame.Enable();
 
         pauseGame.performed += ctx => PauseGame();

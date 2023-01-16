@@ -10,27 +10,16 @@ using UnityEngine;
  * AudioManager.instance.PlayLocal("name", gameObject);
  */
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
     public Sound[] sounds;
     [HideInInspector]
     public float menuVolume;
 
-    public static AudioManager instance;
     [SerializeField] float multiplier = 30f;
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
         foreach (Sound sound in sounds)
         {
             sound.audio = gameObject.AddComponent<AudioSource>();
