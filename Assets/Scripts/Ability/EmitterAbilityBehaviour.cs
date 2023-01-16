@@ -9,10 +9,13 @@ namespace BulletHell.Abilities
     public class EmitterAbilityBehaviour : BaseAbilityBehaviour
     {
         [SerializeField] List<EmitterData> _emitters;
-        List<Emitter> _emitterObjects;
+        public List<Emitter> _emitterObjects;
 
         public override void Initialize(Ability ability, GameObject owner)
         {
+            _emitterObjects.Clear();
+
+
             foreach (EmitterData emitterData in _emitters) {
                 Emitter emitter = new GameObject($"{ability.GetName()} (Emitter)").AddComponent<Emitter>();
                 emitter.transform.SetParent(owner.transform);

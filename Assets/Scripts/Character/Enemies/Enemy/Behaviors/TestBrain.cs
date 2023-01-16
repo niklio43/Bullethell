@@ -23,22 +23,30 @@ namespace BulletHell.Enemies
                chasing.SetTransition("attackPlayer", EnemyStates.Attacking)
                .Update((action) => {
                    enemy.CanMove = true;
-                   /*if (enemy.TargetInAttackRange() && enemy.GetComponent<EnemyAttack>().CanAttack()) {
+
+                   if (enemy.GetComponent<Rigidbody2D>().velocity.magnitude > .1f) {
+                       enemy.Animator.Play("Walk");
+                   }
+                   else {
+                       enemy.Animator.Play("Idle");
+                   }
+
+                   if (enemy.TargetInAttackRange() && enemy.Abilities.CanAttack()) {
                        action.Transition("attackPlayer");
-                   }*/
+                   }
                });
            })
            .State(EnemyStates.Attacking, (attacking) => {
-               attacking.SetTransition("chasePlayer", EnemyStates.Chasing)
+               attacking.SetTransition("idle", EnemyStates.Idle)
+               .SetAnimationClip("Attack")
                .Update((action) => {
-                   attacking.SetAnimatorBool("Attacking", true);
                    enemy.CanMove = false;
-                   //enemy.GetComponent<EnemyAttack>().CastOrderedAbility(enemy.Target);
+                   enemy.Animator.Play("Attack");
 
-
-
-
-                   action.Transition("chasePlayer");
+                   MonoInstance.Instance.Invoke(() => { 
+                       enemy.Abilities.CastOrderedAbility();
+                       action.Transition("idle");
+                   }, enemy.Animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
                });
            })
            .Build();

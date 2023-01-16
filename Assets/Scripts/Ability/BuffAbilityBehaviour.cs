@@ -22,18 +22,20 @@ namespace BulletHell.Abilities
 
         public override void Perform(GameObject owner)
         {
-            CharacterStats stats = owner.GetComponent<CharacterStats>();
+            if(!owner.TryGetComponent(out Character stats)) { Debug.LogWarning($"Could not apply buff. {owner.name} does not inherit from Character."); }
+
+            CharacterStats characterStats = stats.Stats;
 
             foreach (StatModifier buff in _buffs) {
                 switch (_durationPolicy) {
                     case DurationPolicy.Instant:
-                        stats.AddModifierToStat(buff, 0);
+                        characterStats.AddModifierToStat(buff, 0);
                         break;
                     case DurationPolicy.HasDuration:
-                        stats.AddModifierToStat(buff, _duration);
+                        characterStats.AddModifierToStat(buff, _duration);
                         break;
                     case DurationPolicy.Permanent:
-                        stats.AddModifierToStat(buff);
+                        characterStats.AddModifierToStat(buff);
                         break;
                 }
             }

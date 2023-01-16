@@ -12,6 +12,7 @@ namespace BulletHell
         public new string name = "NewProjectileData";
 
         public Sprite Sprite;
+        public RuntimeAnimatorController Animator;
         public float Scale = 1;
         public Color Color = Color.white;
     }
