@@ -11,13 +11,15 @@ namespace BulletHell.Player
         Rigidbody2D _rb;
         Vector2 _movementInput;
         float _ghostFadeTimer = 1;
-        public bool _isDashing = false;
+        bool _isDashing = false;
+        bool _isInteracting = false;
         List<GameObject> _ghosts = new List<GameObject>();
         [HideInInspector] public Weapon Weapon;
 
         [SerializeField] LayerMask layerMask;
 
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
+        public bool IsInteracting { get { return _isInteracting; } set { _isInteracting = value; } }
         public Vector2 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
 
         void Awake()

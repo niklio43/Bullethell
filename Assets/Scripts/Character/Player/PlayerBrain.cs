@@ -27,12 +27,22 @@ namespace BulletHell.Player
                Default.SetTransition("dashing", PlayerStates.Dashing)
                .Update((action) => {
                    //conditiong for transition
+                   if (_player.IsDashing)
+                   {
+                       action.Transition("dashing");
+                   }
+                   if (_player.IsInteracting)
+                   {
+                       action.Transition("interacting");
+                   }
                });
            })
            .State(PlayerStates.Interacting, (interacting) => {
                interacting.SetTransition("default", PlayerStates.Default)
                .Update((action) => {
                    //conditiong for transition
+                   if (_player.IsInteracting) return;
+                   action.Transition("default");
                });
            })
            .State(PlayerStates.Dashing, (dashing) => {
