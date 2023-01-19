@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81059c9ca7bfbae4e9a553b520e8aca4, type: 3}
   m_Name: TestBrain
   m_EditorClassIdentifier: 
+  ability_1: {fileID: 11400000, guid: f2dfa72b1fde1634ea995c8807932b41, type: 2}
+  ability_2: {fileID: 11400000, guid: 79ac9752ade28de46aca17bd3105df90, type: 2}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using BulletHell.Stats;
 
 namespace BulletHell
 {
@@ -20,6 +21,9 @@ namespace BulletHell
         [HideInInspector] public float Acceleration;
         [HideInInspector] public float Speed;
 
+        [HideInInspector] public DamageInfo Damage;
+
+
         public void Initialize(ProjectileData data)
         {
             Data = data;
@@ -31,9 +35,7 @@ namespace BulletHell
             }
 
 
-
             transform.localScale = Vector3.one * data.Scale;
-
             _spriteRenderer.color = data.Color;
         }
 

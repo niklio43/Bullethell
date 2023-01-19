@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068d6e9f944711144bd7d00cd15fca44, type: 3}
   m_Name: Emitter
   m_EditorClassIdentifier: 
-  FoldOutGeneral: 0
+  FoldOutGeneral: 1
   Delay: 1000
   MaxProjectiles: 10
   RotationSpeed: 0
   FoldOutProjectile: 1
   ProjectileData: {fileID: 11400000, guid: 9c804f785f32dba4c979abf7a77a631e, type: 2}
-  TimeToLive: 5
-  Speed: 7
+  TimeToLive: 2.2
+  Speed: 10
   Acceleration: 1
-  Gravity: 0
+  Gravity: 0.2
   GravityPoint: {x: 0, y: 0}
   FoldOutEmitter: 1
-  EmitterPoints: 5
-  CenterRotation: -25
+  EmitterPoints: 10
+  CenterRotation: 0
   Pitch: 0
   Offset: 0
-  Spread: 10
+  Spread: 36
   ParentRotation: 0
   Direction: {x: 0, y: 1}
   Modifiers: []

@@ -30,16 +30,20 @@ namespace BulletHell.Abilities
         #endregion
 
         GameObject _owner;
+        GameObject _host;
         int _currentAmount;
 
         List<float> _timers;
-        public void Initialize(GameObject owner)
+        public void Initialize(GameObject owner, GameObject host = null)
         {
             _owner = owner;
+            
+            _host = (host == null) ? owner : host;
+
             _timers = new List<float>();
             _currentAmount = 1;
             foreach (BaseAbilityBehaviour behaviour in behaviours) {
-                behaviour.Initialize(this, owner);
+                behaviour.Initialize(this, owner, _host);
             }
         }
         public void Uninitialize()
@@ -67,7 +71,7 @@ namespace BulletHell.Abilities
             }
 
             foreach (BaseAbilityBehaviour behaviour in behaviours) {
-                behaviour.Perform(_owner);
+                behaviour.Perform(_owner, _host);
             }
         }
 

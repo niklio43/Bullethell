@@ -8,7 +8,10 @@ public class Character : MonoBehaviour
     public CharacterStats Stats;
     protected SpriteRenderer _spriteRenderer;
     protected Animator _animator;
-
+    private void Start()
+    {
+        Initialize();
+    }
     public void Initialize()
     {
         Stats.TranslateListToDictionary();
@@ -17,9 +20,11 @@ public class Character : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
-    public virtual void TakeDamage(float amount)
+    public virtual void TakeDamage(DamageInfo damage)
     {
-        Stats["Hp"].Value -= amount;
+        Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
+
+        Debug.Log(Stats["Hp"].Value);
 
         CameraShake.Shake(0.1f, 0.3f);
 
@@ -31,6 +36,7 @@ public class Character : MonoBehaviour
         if (_spriteRenderer == null) return;
         StartCoroutine(ResetMaterial());
     }
+
 
     IEnumerator ResetMaterial()
     {

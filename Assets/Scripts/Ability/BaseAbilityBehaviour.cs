@@ -7,8 +7,8 @@ namespace BulletHell.Abilities
     [System.Serializable]
     public abstract class BaseAbilityBehaviour : ScriptableObject
     {
-        public virtual void Initialize(Ability ability, GameObject owner) { }
+        public virtual void Initialize(Ability ability, GameObject owner, GameObject host) { }
         public virtual void Uninitialize() { }
-        public abstract void Perform(GameObject owner);
+        public abstract void Perform(GameObject owner, GameObject host);
     }
 }

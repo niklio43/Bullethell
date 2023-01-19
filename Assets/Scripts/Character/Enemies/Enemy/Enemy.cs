@@ -5,22 +5,22 @@ using BulletHell.Enemies;
 using BulletHell.Enemies.Detection;
 using System;
 using System.Linq;
+using BulletHell.Stats;
 
 public class Enemy : Character
 {
-    [SerializeField] public EnemyBrain _brain;
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
-
-    public DetectionData DetectionData = new DetectionData();
     [HideInInspector] public Transform Target;
     [HideInInspector] public bool CanMove = true;
-
     [HideInInspector] public Animator Animator { get; private set; }
-    [HideInInspector] public EnemyAbilities Abilities { get; private set; }
+    [HideInInspector] public DetectionData DetectionData = new DetectionData();
+    public EnemyAim Aim;
+
+    [SerializeField] EnemyBrain _brain;
+    [SerializeField] Transform _damagePopupPrefab;
     EnemyDetection _detection;
     EnemyMovement _enemyMovement;
-
-    [SerializeField] Transform _damagePopupPrefab;
+    
 
     public enum EnemyMovmentType
     {
@@ -35,7 +35,6 @@ public class Enemy : Character
     private void Awake()
     {
         Animator = GetComponentInChildren<Animator>();
-        Abilities = GetComponentInChildren<EnemyAbilities>();
         _detection = GetComponent<EnemyDetection>();
         _enemyMovement = GetComponent<EnemyMovement>();
 
@@ -64,16 +63,16 @@ public class Enemy : Character
             SetTarget(target);
         }
 
-        Abilities.UpdateAim(Target);
+        Aim.UpdateAim(Target);
         if(CanMove) _enemyMovement.Move();
     }
 
-    public override void TakeDamage(float amount)
+    public override void TakeDamage(DamageInfo damage)
     {
-        base.TakeDamage(amount);
+        base.TakeDamage(damage);
 
-        DamagePopup damagePopup = Instantiate(_damagePopupPrefab, transform.position, Quaternion.identity).GetComponent<DamagePopup>();
-        damagePopup.Setup(amount);
+        //DamagePopup damagePopup = Instantiate(_damagePopupPrefab, transform.position, Quaternion.identity).GetComponent<DamagePopup>();
+        //damagePopup.Setup(damage.RawDamage);
     }
 
     public void SetTarget(Transform target)

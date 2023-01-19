@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emitters:
   - {fileID: 11400000, guid: bb8c80c1485c2e041aa759f3eb59bb58, type: 2}
-  _emitterObjects:
-  - {fileID: 0}
+  _damageValues:
+  - Type: 0
+    Value: 10
