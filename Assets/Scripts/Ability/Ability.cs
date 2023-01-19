@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace BulletHell.Abilities
 {
@@ -26,6 +28,7 @@ namespace BulletHell.Abilities
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
         public int GetCurrentAmount => _currentAmount;
         public string GetName() => _name;
+        public Sprite GetIcon() => _icon;
         public string GetDescription() => _description;
         #endregion
 
@@ -37,14 +40,17 @@ namespace BulletHell.Abilities
         {
             _owner = owner;
             _timers = new List<float>();
-            _currentAmount = 1;
-            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+            _currentAmount = _maxAmount;
+
+            foreach (BaseAbilityBehaviour behaviour in behaviours)
+            {
                 behaviour.Initialize(this, owner);
             }
         }
         public void Uninitialize()
         {
-            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+            foreach (BaseAbilityBehaviour behaviour in behaviours)
+            {
                 behaviour.Uninitialize();
             }
         }
@@ -61,12 +67,14 @@ namespace BulletHell.Abilities
 
         void DoAbility()
         {
-            if (_clip != null) {
+            if (_clip != null)
+            {
                 PlayAnimation(_clip.name);
                 MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
             }
 
-            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+            foreach (BaseAbilityBehaviour behaviour in behaviours)
+            {
                 behaviour.Perform(_owner);
             }
         }
@@ -83,9 +91,11 @@ namespace BulletHell.Abilities
 
         void UpdateTimers(float dt)
         {
-            for (int i = 0; i < _timers.Count; i++) {
+            for (int i = 0; i < _timers.Count; i++)
+            {
                 _timers[i] -= dt;
-                if (_timers[i] <= 0) {
+                if (_timers[i] <= 0)
+                {
                     _currentAmount++;
                     _timers.RemoveAt(i);
                     i--;

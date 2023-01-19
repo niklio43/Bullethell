@@ -6,20 +6,20 @@ using BulletHell.Player;
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] PlayerUI _playerUI;
-    Player _player;
+    PlayerController _player;
     PlayerInputs _inputs;
     PlayerInteracter playerInteracter;
     void Awake()
     {
         playerInteracter = GetComponent<PlayerInteracter>();
-        _player = GetComponent<Player>();
+        _player = GetComponent<PlayerController>();
 
         _inputs = new PlayerInputs();
 
         #region Input bindings
 
         //Dash
-        _inputs.Player.Dash.performed += ctx => _player.Dash(ctx);
+        _inputs.Player.Dash.performed += ctx => _player.Dash(0, ctx);
 
         //Ability
         _inputs.Player.AbilityQ.performed += ctx => _player.Attack(1, ctx);

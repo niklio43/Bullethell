@@ -6,7 +6,7 @@ namespace BulletHell.Player
     public class PlayerBrain : MonoBehaviour
     {
         IFSM _FSM;
-        Player _player;
+        PlayerController _player;
 
         public enum PlayerStates
         {
@@ -17,7 +17,7 @@ namespace BulletHell.Player
 
         void Awake()
         {
-            _player = GetComponent<Player>();
+            _player = GetComponent<PlayerController>();
 
             _FSM = new FSMBuilder()
            .Owner(gameObject)

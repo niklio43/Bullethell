@@ -5,6 +5,7 @@ using BulletHell.Enemies;
 using BulletHell.Enemies.Detection;
 using System;
 using System.Linq;
+using BulletHell;
 
 public class Enemy : Character
 {
@@ -21,6 +22,8 @@ public class Enemy : Character
     EnemyMovement _enemyMovement;
 
     [SerializeField] Transform _damagePopupPrefab;
+
+    ObjectPool<DamagePopup> _damagePopupPool;
 
     public enum EnemyMovmentType
     {
@@ -43,6 +46,8 @@ public class Enemy : Character
 
         _brain = Instantiate(_brain);
         _brain.Initialize(this);
+
+        _damagePopupPool = new ObjectPool<DamagePopup>(CreateDamagePopup, 10, "DamagePopupPool");
     }
 
     private void Update()
@@ -68,12 +73,23 @@ public class Enemy : Character
         if(CanMove) _enemyMovement.Move();
     }
 
+    DamagePopup CreateDamagePopup()
+    {
+        DamagePopup damagePopup = Instantiate(_damagePopupPrefab, transform.position, Quaternion.identity).GetComponent<DamagePopup>();
+
+        damagePopup.Pool = _damagePopupPool;
+
+        return damagePopup;
+    }
+
     public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);
 
-        DamagePopup damagePopup = Instantiate(_damagePopupPrefab, transform.position, Quaternion.identity).GetComponent<DamagePopup>();
-        damagePopup.Setup(amount);
+        DamagePopup damagePopup = _damagePopupPool.Get();
+        damagePopup.gameObject.SetActive(true);
+
+        damagePopup.Setup(amount, transform.position);
     }
 
     public void SetTarget(Transform target)
