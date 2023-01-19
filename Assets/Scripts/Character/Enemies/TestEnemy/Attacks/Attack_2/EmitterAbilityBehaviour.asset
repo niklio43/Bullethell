@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
-  m_Name: PD
+  m_Script: {fileID: 11500000, guid: 07b6096dd3f2adb459f51b81e6c8d83a, type: 3}
+  m_Name: EmitterAbilityBehaviour
   m_EditorClassIdentifier: 
-  name: Attack2
-  Sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
-  Scale: 0.1
-  Color: {r: 1, g: 0.15566039, b: 0.15566039, a: 1}
+  _emitters:
+  - {fileID: 11400000, guid: b4c89e222fac8c248b545a13b102d5d9, type: 2}

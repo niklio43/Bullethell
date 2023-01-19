@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b6096dd3f2adb459f51b81e6c8d83a, type: 3}
-  m_Name: EmitterAbilityBehaviour
+  m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
+  m_Name: PD
   m_EditorClassIdentifier: 
-  _emitters:
-  - {fileID: 11400000, guid: bb8c80c1485c2e041aa759f3eb59bb58, type: 2}
-  _emitterObjects:
-  - {fileID: 0}
+  name: NewProjectileData
+  Sprite: {fileID: 0}
+  Animator: {fileID: 0}
+  Scale: 1
+  Color: {r: 1, g: 1, b: 1, a: 1}

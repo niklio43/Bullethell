@@ -9,23 +9,25 @@ namespace BulletHell.Stats
     [System.Serializable]
     public class CharacterStats
     {
-        public Stat this[string key] { get { return _stats[key]; } }
+        public Stat this[string key] { get {
+                if (!_stats.ContainsKey(key)) return default(Stat);
+                return _stats[key]; 
+            } 
+        }
+
+        public float GetStatValue(string key)
+        {
+            if (!_stats.ContainsKey(key)) return 0f;
+            return _stats[key].Value;
+        }
 
         [SerializeField] List<Stat> _statsList = new List<Stat>();
 
-        [System.Serializable]
-        public class StatDictionary : SerializedDictionary<string, Stat> { };
-        StatDictionary _stats;
-        GameObject _owner;
-
-        public void Initialize(GameObject owner)
-        {
-            _owner = owner;
-        }
+        public Dictionary<string, Stat> _stats = new Dictionary<string, Stat>();
 
         public void TranslateListToDictionary()
         {
-            _stats = new StatDictionary();
+            _stats = new Dictionary<string, Stat>();
 
             foreach (Stat stat in _statsList) {
                 _stats.Add(stat.Name, Utilities.Copy(stat));

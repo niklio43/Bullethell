@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.Stats;
 
 namespace BulletHell.Emitters
 {
@@ -7,6 +8,9 @@ namespace BulletHell.Emitters
     {
         public bool AutoFire = true;
         public EmitterData Data;
+
+        List<string> _hitTags = new List<string>();
+        DamageInfo _damage;
 
         EmitterGroupsManager _emitterGroups;
         public ObjectPool<Projectile> _pool { get; private set; }
@@ -23,6 +27,17 @@ namespace BulletHell.Emitters
             _pool = new ObjectPool<Projectile>(CreateProjectile, Data.MaxProjectiles, name);
             _emitterGroups = new EmitterGroupsManager(transform);
         }
+        public void SetHitTags(List<string> hitTags)
+        {
+            _hitTags = hitTags;
+
+        }
+
+        public void SetDamage(DamageInfo damage)
+        {
+            _damage = damage;
+        }
+
 
         private void FixedUpdate()
         {
@@ -75,8 +90,9 @@ namespace BulletHell.Emitters
                 Vector2 gravityPoint = Data.GravityPoint;
 
                 if (modifier != null) {
-                    if(modifier.ProjectileData != null)
+                    if (modifier.ProjectileData != null) {
                         projectileData = modifier.ProjectileData;
+                    }
 
                     gravity = modifier.Gravity;
                     gravityPoint = modifier.GravityPoint;
@@ -84,10 +100,7 @@ namespace BulletHell.Emitters
                     acceleration = modifier.Acceleration;
                 }
 
-                projectile.Initialize(projectileData);
-
                 projectile.transform.position = _emitterGroups[i].Position;
-                
                 projectile.Position = _emitterGroups[i].Position;
                 projectile.TimeToLive = timeToLive;
                 projectile.Speed = speed;
@@ -96,6 +109,8 @@ namespace BulletHell.Emitters
                 projectile.GravityPoint = gravityPoint;
                 projectile.Direction = _emitterGroups[i].Direction;
                 projectile.Velocity = _emitterGroups[i].Direction * speed;
+                projectile.Damage = _damage;
+                projectile.Initialize(projectileData);
             }
         }
 
@@ -112,6 +127,17 @@ namespace BulletHell.Emitters
             projectile.Velocity += (projectile.Direction * projectile.Acceleration * dt) + gravity;
             projectile.Position += projectile.Velocity * dt;
             projectile.TimeToLive -= dt;
+
+            Collider2D[] hits = Physics2D.OverlapCircleAll(projectile.Position, projectile.Data.CollisionRadius, 1 << LayerMask.NameToLayer("Entity"));
+            foreach (var item in hits) {
+                if (_hitTags.Contains(item.tag)) {
+                    if(item.TryGetComponent(out Character character)) {
+                        character.TakeDamage(projectile.Damage);
+                    }
+                    projectile.ResetObject();
+                }
+            }
+
         }
 
         protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();

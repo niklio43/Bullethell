@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using BulletHell.VFX;
+using BulletHell.Stats;
 
 namespace BulletHell.Abilities
 {
@@ -11,7 +12,7 @@ namespace BulletHell.Abilities
     {
         [Header("VFX")]
         [SerializeField] VisualEffectAsset _vfx;
-        public override void Perform(GameObject owner)
+        public override void Perform(GameObject owner, GameObject host)
         {
             DetectColliders(1, owner);
         }
@@ -29,7 +30,9 @@ namespace BulletHell.Abilities
                 GameObject other = collider.gameObject;
                 if (other.CompareTag("Enemy"))
                 {
-                    other.GetComponent<Enemy>().TakeDamage(damage);
+                    List<DamageValue> _damage = new List<DamageValue>() { new DamageValue(DamageType.rawDamage, 1) };
+
+                    other.GetComponent<Enemy>().TakeDamage(new DamageInfo(_damage));
                 }
             }
         }

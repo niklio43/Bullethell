@@ -7,12 +7,15 @@ namespace BulletHell.Enemies
 {
     public class EnemyAbilities : MonoBehaviour
     {
+        Enemy _enemy;
         [SerializeField] List<Ability> _abilities = new List<Ability>();
 
         private void Awake()
         {
+            _enemy = GetComponentInParent<Enemy>();
+
             foreach (var ability in _abilities) {
-                ability.Initialize(gameObject);
+                ability.Initialize(_enemy.gameObject, gameObject);
             }
         }
 
@@ -46,7 +49,6 @@ namespace BulletHell.Enemies
             return false;
         }
 
-        [ContextMenu("TEST")]
         public void CastOrderedAbility()
         {
             foreach (var ability in _abilities) {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters;
+using BulletHell.Stats;
 
 namespace BulletHell
 {
@@ -15,5 +16,6 @@ namespace BulletHell
         public RuntimeAnimatorController Animator;
         public float Scale = 1;
         public Color Color = Color.white;
+        public float CollisionRadius;
     }
 }
