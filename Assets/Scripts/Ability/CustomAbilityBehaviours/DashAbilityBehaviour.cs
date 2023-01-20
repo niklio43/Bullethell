@@ -14,7 +14,7 @@ namespace BulletHell.Abilities
         BulletHell.Player.PlayerController _player;
         [Header("VFX")]
         [SerializeField] VisualEffectAsset _vfx;
-        public override void Perform(GameObject owner)
+        public override void Perform(GameObject owner, GameObject host)
         {
             _player = owner.GetComponent<BulletHell.Player.PlayerController>();
             Dash(owner);

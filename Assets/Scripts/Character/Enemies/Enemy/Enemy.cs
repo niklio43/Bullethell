@@ -18,14 +18,8 @@ public class Enemy : Character
     public EnemyAim Aim;
 
     [SerializeField] EnemyBrain _brain;
-    [SerializeField] Transform _damagePopupPrefab;
     EnemyDetection _detection;
     EnemyMovement _enemyMovement;
-    
-
-    //[SerializeField] Transform _damagePopupPrefab;
-
-    ObjectPool<DamagePopup> _damagePopupPool;
 
     public enum EnemyMovmentType
     {
@@ -47,8 +41,6 @@ public class Enemy : Character
 
         _brain = Instantiate(_brain);
         _brain.Initialize(this);
-
-        //_damagePopupPool = new ObjectPool<DamagePopup>(CreateDamagePopup, 10, "DamagePopupPool");
     }
 
     private void Update()
@@ -74,23 +66,11 @@ public class Enemy : Character
         if(CanMove) _enemyMovement.Move();
     }
 
-    /*DamagePopup CreateDamagePopup()
-    {
-        DamagePopup damagePopup = Instantiate(_damagePopupPrefab, transform.position, Quaternion.identity).GetComponent<DamagePopup>();
-
-        damagePopup.Pool = _damagePopupPool;
-
-        return damagePopup;
-    }*/
-
     public override void TakeDamage(DamageInfo damage)
     {
         base.TakeDamage(damage);
 
-        /*DamagePopup damagePopup = _damagePopupPool.Get();
-        damagePopup.gameObject.SetActive(true);
-
-        damagePopup.Setup(amount, transform.position);*/
+        DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
     }
 
     public void SetTarget(Transform target)

@@ -48,7 +48,7 @@ namespace BulletHell.Abilities
 
             foreach (BaseAbilityBehaviour behaviour in behaviours)
             {
-                behaviour.Initialize(this, owner);
+                behaviour.Initialize(this, owner, _host);
             }
         }
         public void Uninitialize()
@@ -79,7 +79,7 @@ namespace BulletHell.Abilities
 
             foreach (BaseAbilityBehaviour behaviour in behaviours)
             {
-                behaviour.Perform(_owner);
+                behaviour.Perform(_owner, _host);
             }
         }
 
