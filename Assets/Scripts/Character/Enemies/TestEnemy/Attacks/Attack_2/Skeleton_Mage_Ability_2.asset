@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skeleton_Mage_Ability_2
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _name: 
+  _name: Mage2
   _description: 
   _maxAmount: 1
   _coolDownTime: 5.5

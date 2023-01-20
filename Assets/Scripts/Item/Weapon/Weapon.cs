@@ -8,29 +8,29 @@ public abstract class Weapon : Item
 {
     Pool _pool;
     [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
+    private List<Ability> Abilities = new List<Ability>();
     public AnimatorController animatorController;
 
     public Pool Pool { get { return _pool; } set { _pool = value; } }
 
-    public List<Ability> AbilitySlot { get { return _abilitySlot; } set { _abilitySlot = value; } }
+    public List<Ability> AbilitySlot { get { return Abilities; } set { _abilitySlot = value; } }
 
     public void Initialize(GameObject owner)
     {
-        List<Ability> tempAbilities = new List<Ability>();
-        foreach (Ability ability in _abilitySlot)
+        Debug.Log("weapon init");
+        for (int i = 0; i < _abilitySlot.Count; i++)
         {
-            Ability _ability = Instantiate(ability);
-            _ability.Initialize(owner);
-            tempAbilities.Add(_ability);
+            Ability ab = Instantiate(_abilitySlot[i]);
+            ab.Initialize(owner);
+            Abilities.Add(ab);
         }
-        _abilitySlot = tempAbilities;
     }
 
     public void Uninitialize()
     {
-        foreach (Ability ability in _abilitySlot)
+        for (int i = 0; i < _abilitySlot.Count; i++)
         {
-            ability.Uninitialize();
+            _abilitySlot[i].Uninitialize();
         }
     }
 

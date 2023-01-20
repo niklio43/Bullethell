@@ -63,6 +63,6 @@ public class Character : MonoBehaviour
             Destroy(gameObject, _animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
             return;
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
