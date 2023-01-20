@@ -17,3 +17,8 @@ MonoBehaviour:
   Animator: {fileID: 9100000, guid: f8ad612027543594ab7371cbf62e3462, type: 2}
   Scale: 2
   Color: {r: 1, g: 1, b: 1, a: 1}
+  CollisionRadius: 0.5
+  CollisionTags:
+  - Player
+  - Obstacle
+  - GroundObstacle

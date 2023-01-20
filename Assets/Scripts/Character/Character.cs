@@ -5,7 +5,7 @@ using BulletHell.Stats;
 
 public class Character : MonoBehaviour
 {
-    public CharacterStats Stats;
+    public Stats Stats;
     protected SpriteRenderer _spriteRenderer;
     protected Animator _animator;
     private void Start()

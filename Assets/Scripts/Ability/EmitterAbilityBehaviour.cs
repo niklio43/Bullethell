@@ -15,6 +15,7 @@ namespace BulletHell.Abilities
 
         public override void Initialize(Ability ability, GameObject owner, GameObject host)
         {
+            _emitterObjects = new List<Emitter>();
             _emitterObjects.Clear();
 
             foreach (EmitterData emitterData in _emitters) {
@@ -23,7 +24,6 @@ namespace BulletHell.Abilities
                 emitter.transform.localPosition = Vector3.zero;
                 emitter.Data = emitterData;
                 emitter.AutoFire = false;
-                emitter.SetHitTags(new List<string>() { "Player" });
                 _emitterObjects.Add(emitter);
             }
         }

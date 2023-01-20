@@ -17,5 +17,7 @@ namespace BulletHell
         public float Scale = 1;
         public Color Color = Color.white;
         public float CollisionRadius;
+
+        public List<string> CollisionTags = new List<string>();
     }
 }

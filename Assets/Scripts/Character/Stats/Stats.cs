@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 namespace BulletHell.Stats
 {
     [System.Serializable]
-    public class CharacterStats
+    public class Stats
     {
         public Stat this[string key] { get {
                 if (!_stats.ContainsKey(key)) return default(Stat);
