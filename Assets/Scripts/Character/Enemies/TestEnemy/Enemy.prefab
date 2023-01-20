@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333538167}
+  - component: {fileID: 839990684}
   m_Layer: 7
   m_Name: Aim
   m_TagString: Untagged
@@ -24,13 +25,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333538166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.425, y: 1.063, z: 0}
+  m_LocalPosition: {x: 0.435, y: 1.115, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8461412192270030068}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &839990684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333538166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e309e15a2260c8847bed0bab322cbcc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3363137492877783320
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,13 +207,13 @@ MonoBehaviour:
       Value: 100
     - Name: MoveSpeed
       Value: 3
-  _brain: {fileID: 11400000, guid: 37c9d09971a128a42abd57b7f443573f, type: 2}
-  MovementType: 0
+  MovementType: 1
   Target: {fileID: 0}
   CanMove: 0
-  _damagePopupPrefab: {fileID: 0}
-  PreferredDistance: 4.16
-  AttackDistance: 4.43
+  Aim: {fileID: 839990684}
+  _brain: {fileID: 11400000, guid: 37c9d09971a128a42abd57b7f443573f, type: 2}
+  PreferredDistance: 3.38
+  AttackDistance: 3.49
 --- !u!114 &8461412192270030075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,8 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawGizmos: 1
-  DetectionRadius: 4.86
-  ObstacleDetectionRadius: 1.8
+  DetectionRadius: 4.46
+  ObstacleDetectionRadius: 1.49
 --- !u!114 &8461412192270030072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,12 +243,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DrawGizmos: 1
   _agentSteering:
-    Collider: {fileID: 0}
+    AvoidanceRadius: 1
     Directions: []
     _resolution: 16
     _behaviours:
     - {fileID: 11400000, guid: 6e27e9802452eca47a75242fb3d56a64, type: 2}
     - {fileID: 11400000, guid: 8a421364e60503945bb613885c0197e0, type: 2}
+    - {fileID: 11400000, guid: 38d7da8ed0ede8543aa06fb64bafab04, type: 2}
 --- !u!50 &8461412192270030077
 Rigidbody2D:
   serializedVersion: 4
