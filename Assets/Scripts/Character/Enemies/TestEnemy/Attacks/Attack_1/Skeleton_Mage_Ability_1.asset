@@ -17,6 +17,6 @@ MonoBehaviour:
   _description: 
   _maxAmount: 1
   _coolDownTime: 3
-  behaviours:
+  _behaviours:
   - {fileID: 11400000, guid: 0c36d1f6f6a5562499979e416cd5668e, type: 2}
   _clip: {fileID: 0}
