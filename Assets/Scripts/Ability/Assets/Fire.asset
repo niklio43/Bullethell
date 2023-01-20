@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 928c8b0a5e078df478385f7e8c6480b3, type: 3}
-  m_Name: Swing
+  m_Name: Fire
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 5dd458211f98d34449346ab07cf41d53, type: 3}
-  _name: Swing
-  _description: Small slash
+  _name: Fire
+  _description: m4 fire
   _maxAmount: 1
-  _coolDownTime: 0.2
+  _coolDownTime: 0
   behaviours:
-  - {fileID: 11400000, guid: 6e55704eaf99e1a4cbc852a09cab0685, type: 2}
-  _clip: {fileID: 7400000, guid: 3b61dc5520f28914a98a34abe6bfe2fa, type: 2}
+  - {fileID: 11400000, guid: 16d60e30261d09c479ba191317a155ec, type: 2}
+  _clip: {fileID: 7400000, guid: a0413323fc218164fb1827f0ad5f34d8, type: 2}

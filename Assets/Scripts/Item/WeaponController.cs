@@ -22,10 +22,10 @@ public class WeaponController : MonoBehaviour
 
         foreach (Ability ability in weapon.AbilitySlot)
         {
-            GetComponent<AbilityHolder>().abilities.Add(ability);
+            GetComponent<AbilityHolder>().AddAbility(ability);
         }
 
-        var playerSM = transform.GetComponentInParent<Player>();
+        var playerSM = transform.GetComponentInParent<PlayerController>();
         playerSM.Weapon = weapon;
     }
 
@@ -34,11 +34,11 @@ public class WeaponController : MonoBehaviour
         weapon.Uninitialize();
         GetComponent<SpriteRenderer>().sprite = null;
 
-        GetComponent<AbilityHolder>().abilities.Clear();
+        GetComponent<AbilityHolder>().AddAbility(null);
 
         GetComponent<Animator>().runtimeAnimatorController = null;
 
-        var playerSM = transform.GetComponentInParent<Player>();
+        var playerSM = transform.GetComponentInParent<PlayerController>();
         playerSM.Weapon = null;
     }
 

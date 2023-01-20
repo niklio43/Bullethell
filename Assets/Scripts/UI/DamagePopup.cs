@@ -2,24 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using BulletHell;
 
-public class DamagePopup : MonoBehaviour
+public class DamagePopup : MonoBehaviour, IPoolable
 {
     TextMeshPro _textMesh;
     float _disappearTimer;
-    Color _textColor;
+    Color _textColor, _savedColor;
     Vector3 _moveVector;
 
     const float DISAPPEAR_TIMER_MAX = 1f;
 
     static int sortingOrder;
 
+    public ObjectPool<DamagePopup> Pool;
+
     void Awake()
     {
         _textMesh = GetComponent<TextMeshPro>();
     }
-    public void Setup(float damageAmount)
+
+    public void ResetObject()
     {
+        _textMesh.color = _savedColor;
+
+        gameObject.SetActive(false);
+        Pool.Release(this);
+    }
+
+    public void Setup(float damageAmount, Vector2 startPos)
+    {
+        transform.position = startPos;
+        _savedColor = _textMesh.color;
+
         _textMesh.SetText(damageAmount.ToString());
 
         _disappearTimer = DISAPPEAR_TIMER_MAX;
@@ -34,28 +49,20 @@ public class DamagePopup : MonoBehaviour
         transform.position += _moveVector * Time.deltaTime;
         _moveVector -= _moveVector * 8f * Time.deltaTime;
 
-        if(_disappearTimer > DISAPPEAR_TIMER_MAX * .5f)
-        {
-            float increaseScaleAmount = 1f;
-            transform.localScale += Vector3.one * increaseScaleAmount * Time.deltaTime;
-        }
+        if (_disappearTimer > DISAPPEAR_TIMER_MAX * .5f)
+            transform.localScale += Vector3.one * 1f * Time.deltaTime;
         else
-        {
-            float decreaseScaleAmount = 1f;
-            transform.localScale -= Vector3.one * decreaseScaleAmount * Time.deltaTime;
-        }
+            transform.localScale -= Vector3.one * 1f * Time.deltaTime;
 
         _disappearTimer -= Time.deltaTime;
-        if(_disappearTimer <= 0)
+        if (_disappearTimer <= 0)
         {
-            float disappearSpeed = 3f;
-            _textColor.a -= disappearSpeed * Time.deltaTime;
+            _textColor.a -= 3f * Time.deltaTime;
             _textMesh.color = _textColor;
-            if(_textColor.a <= 0)
+            if (_textColor.a <= 0)
             {
-                Destroy(gameObject);
+                ResetObject();
             }
         }
     }
-
 }

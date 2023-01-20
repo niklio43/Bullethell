@@ -7,7 +7,7 @@ public class SlotListener : MonoBehaviour
 {
     public Inventory Inventory;
     public Inventory Equipment;
-    [SerializeField] Player _player;
+    [SerializeField] PlayerController _player;
     [SerializeField] WeaponController _weaponController;
 
     void Start()
