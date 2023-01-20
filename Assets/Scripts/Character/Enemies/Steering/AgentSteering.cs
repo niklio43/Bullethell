@@ -8,10 +8,8 @@ namespace BulletHell.Enemies.Steering
     [System.Serializable]
     public class AgentSteering
     {
-        [HideInInspector] public BoxCollider2D Collider;
+        [Range(0, 10)] public float AvoidanceRadius = 2;
         [HideInInspector] public Vector2[] Directions;
-
-        public EnemyMovement Owner { get; private set; }
 
         [SerializeField] int _resolution = 16;
         [SerializeField] List<SteeringBehaviour> _behaviours = new List<SteeringBehaviour>();
@@ -19,11 +17,8 @@ namespace BulletHell.Enemies.Steering
         public ContextMap Interest;
         public ContextMap Danger;
 
-        public void Initialize(EnemyMovement owner)
+        public void Initialize()
         {
-            Owner = owner;
-            Collider = Owner.GetComponent<BoxCollider2D>();
-
             Interest = new ContextMap(_resolution);
             Danger = new ContextMap(_resolution);
             CreateDirections(_resolution);
@@ -53,17 +48,20 @@ namespace BulletHell.Enemies.Steering
             }
         }
 
-        public void OnDrawGizmos()
+        public void OnDrawGizmos(Transform transform)
         {
-            if(!Application.isPlaying || Owner == null) { return; } 
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, AvoidanceRadius);
+
+            if(!Application.isPlaying) { return; } 
             Gizmos.color = new Color(.495f, .788f, .478f);
            
             if (Interest != null && Danger != null) {
                 for (int i = 0; i < Directions.Length; i++) {
                     Gizmos.color = Color.green;
-                    Gizmos.DrawLine(Owner.transform.position, (Vector2)Owner.transform.position + Directions[i] * Interest[i]);
+                    Gizmos.DrawLine(transform.position, (Vector2)transform.position + Directions[i] * Interest[i]);
                     Gizmos.color = Color.red;
-                    Gizmos.DrawLine(Owner.transform.position, (Vector2)Owner.transform.position + Directions[i] * Danger[i]);
+                    Gizmos.DrawLine(transform.position, (Vector2)transform.position + Directions[i] * Danger[i]);
                 }
             }
         }

@@ -28,7 +28,7 @@ namespace BulletHell.Enemies.Detection
             data.Add("Players", DetectEntities("Player", DetectionRadius));
             data.Add("Enemies", DetectEntities("Enemy", DetectionRadius));
             data.Add("Obstacles", DetectEntities("Obstacle", ObstacleDetectionRadius));
-
+            
             if(_enemy.MovementType == Enemy.EnemyMovmentType.Grounded) {
                 data.Add("Obstacles", DetectEntities("GroundObstacle", ObstacleDetectionRadius));
             }

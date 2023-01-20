@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+
 
 namespace BulletHell.Abilities
 {
@@ -21,9 +20,7 @@ namespace BulletHell.Abilities
         [SerializeField] List<BaseAbilityBehaviour> _behaviours;
 
         [Header("Animation")]
-        [SerializeField] AnimationClip _clip;
-
-        #region Getters
+        [SerializeField] AnimationClip _clip;        #region Getters
         public bool CanCast() => (_currentAmount > 0);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
         public int GetCurrentAmount => _currentAmount;
@@ -70,8 +67,7 @@ namespace BulletHell.Abilities
 
         void DoAbility()
         {
-            if (_clip != null)
-            {
+            if (_clip != null) {
                 PlayAnimation(_clip.name);
                 MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
             }
@@ -81,10 +77,7 @@ namespace BulletHell.Abilities
             }
         }
 
-        void PlayAnimation(string name)
-        {
-            _owner.GetComponent<Animator>().Play(name);
-        }
+        void PlayAnimation(string name)        {            _owner.GetComponent<Animator>().Play(name);        }
 
         public void UpdateAbility(float dt)
         {
@@ -93,11 +86,9 @@ namespace BulletHell.Abilities
 
         void UpdateTimers(float dt)
         {
-            for (int i = 0; i < _timers.Count; i++)
-            {
+            for (int i = 0; i < _timers.Count; i++) {
                 _timers[i] -= dt;
-                if (_timers[i] <= 0)
-                {
+                if (_timers[i] <= 0) {
                     _currentAmount++;
                     _timers.RemoveAt(i);
                     i--;

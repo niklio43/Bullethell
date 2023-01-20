@@ -14,7 +14,7 @@ namespace BulletHell.Enemies.Steering
 
         public override void GetSteering(AgentSteering steering, Enemy enemy)
         {
-            Transform transform = steering.Owner.transform;
+            Transform transform = enemy.transform;
             if(enemy.Target == null) { return; }
 
             float distance = Vector2.Distance(enemy.Target.position, transform.position);

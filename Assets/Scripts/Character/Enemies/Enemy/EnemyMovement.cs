@@ -18,7 +18,7 @@ namespace BulletHell.Enemies
         {
             _enemy = GetComponent<Enemy>();
             _rb = GetComponent<Rigidbody2D>();
-            _agentSteering.Initialize(this);
+            _agentSteering.Initialize();
 
             InvokeRepeating(nameof(EvaluateSteering), 0, 0.05f);
         }
@@ -35,10 +35,10 @@ namespace BulletHell.Enemies
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _enemy.Stats["MoveSpeed"].Get());
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
-            if (_agentSteering != null)
-                _agentSteering.OnDrawGizmos();
+            if (_agentSteering != null && DrawGizmos)
+                _agentSteering.OnDrawGizmos(transform);
         }
     }
 }

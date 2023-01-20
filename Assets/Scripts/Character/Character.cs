@@ -24,8 +24,6 @@ public class Character : MonoBehaviour
     {
         Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
 
-        Debug.Log(Stats["Hp"].Value);
-
         CameraShake.Shake(0.1f, 0.3f);
 
         if (Stats["Hp"].Value <= 0)
