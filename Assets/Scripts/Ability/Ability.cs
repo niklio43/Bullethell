@@ -43,7 +43,7 @@ namespace BulletHell.Abilities
             _host = (host == null) ? owner : host;
 
             _timers = new List<float>();
-            _currentAmount = 1;
+            _currentAmount = _maxAmount;
             for (int i = 0; i < _behaviours.Count; i++) {
                 _behaviours[i] = Instantiate(_behaviours[i]);
                 _behaviours[i].Initialize(this, owner, _host);
