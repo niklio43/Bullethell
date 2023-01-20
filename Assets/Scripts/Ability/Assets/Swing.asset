@@ -17,6 +17,6 @@ MonoBehaviour:
   _description: Small slash
   _maxAmount: 1
   _coolDownTime: 0.2
-  behaviours:
+  _behaviours:
   - {fileID: 11400000, guid: 6e55704eaf99e1a4cbc852a09cab0685, type: 2}
   _clip: {fileID: 7400000, guid: 3b61dc5520f28914a98a34abe6bfe2fa, type: 2}

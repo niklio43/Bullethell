@@ -17,6 +17,6 @@ MonoBehaviour:
   _description: Travel a short distance
   _maxAmount: 3
   _coolDownTime: 3
-  behaviours:
+  _behaviours:
   - {fileID: 11400000, guid: 596f0bf9d1b48b7439e457f44948829d, type: 2}
   _clip: {fileID: 0}
