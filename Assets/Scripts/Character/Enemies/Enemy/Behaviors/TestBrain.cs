@@ -18,6 +18,8 @@ namespace BulletHell.Enemies
         }
         public override void Initialize(Enemy enemy)
         {
+            ability_1 = Instantiate(ability_1);
+            ability_2 = Instantiate(ability_2);
             ability_1.Initialize(enemy.gameObject, enemy.Aim.gameObject);
             ability_2.Initialize(enemy.gameObject, enemy.Aim.gameObject);
 

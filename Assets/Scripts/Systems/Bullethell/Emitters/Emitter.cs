@@ -9,7 +9,6 @@ namespace BulletHell.Emitters
         public bool AutoFire = true;
         public EmitterData Data;
 
-        List<string> _hitTags = new List<string>();
         DamageInfo _damage;
 
         EmitterGroupsManager _emitterGroups;
@@ -27,17 +26,11 @@ namespace BulletHell.Emitters
             _pool = new ObjectPool<Projectile>(CreateProjectile, Data.MaxProjectiles, name);
             _emitterGroups = new EmitterGroupsManager(transform);
         }
-        public void SetHitTags(List<string> hitTags)
-        {
-            _hitTags = hitTags;
-
-        }
 
         public void SetDamage(DamageInfo damage)
         {
             _damage = damage;
         }
-
 
         private void FixedUpdate()
         {
@@ -130,7 +123,7 @@ namespace BulletHell.Emitters
 
             Collider2D[] hits = Physics2D.OverlapCircleAll(projectile.Position, projectile.Data.CollisionRadius, 1 << LayerMask.NameToLayer("Entity"));
             foreach (var item in hits) {
-                if (_hitTags.Contains(item.tag)) {
+                if (projectile.Data.CollisionTags.Contains(item.tag)) {
                     if(item.TryGetComponent(out Character character)) {
                         character.TakeDamage(projectile.Damage);
                     }

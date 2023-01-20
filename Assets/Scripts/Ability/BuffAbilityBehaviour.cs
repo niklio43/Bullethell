@@ -24,7 +24,7 @@ namespace BulletHell.Abilities
         {
             if(!owner.TryGetComponent(out Character stats)) { Debug.LogWarning($"Could not apply buff. {owner.name} does not inherit from Character."); }
 
-            CharacterStats characterStats = stats.Stats;
+            Stats.Stats characterStats = stats.Stats;
 
             foreach (StatModifier buff in _buffs) {
                 switch (_durationPolicy) {

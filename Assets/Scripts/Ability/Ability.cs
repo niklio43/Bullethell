@@ -16,7 +16,7 @@ namespace BulletHell.Abilities
         [SerializeField] float _coolDownTime;
 
         [Header("Ability Behaviours")]
-        [SerializeField] List<BaseAbilityBehaviour> behaviours;
+        [SerializeField] List<BaseAbilityBehaviour> _behaviours;
 
         [Header("Animation")]
         [SerializeField] AnimationClip _clip;
@@ -37,18 +37,20 @@ namespace BulletHell.Abilities
         public void Initialize(GameObject owner, GameObject host = null)
         {
             _owner = owner;
-            
             _host = (host == null) ? owner : host;
 
             _timers = new List<float>();
             _currentAmount = 1;
-            foreach (BaseAbilityBehaviour behaviour in behaviours) {
-                behaviour.Initialize(this, owner, _host);
+            for (int i = 0; i < _behaviours.Count; i++) {
+                _behaviours[i] = Instantiate(_behaviours[i]);
+                _behaviours[i].Initialize(this, owner, _host);
             }
         }
         public void Uninitialize()
         {
-            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+            _timers = null;
+            _currentAmount = 0;
+            foreach (BaseAbilityBehaviour behaviour in _behaviours) {
                 behaviour.Uninitialize();
             }
         }
@@ -70,7 +72,7 @@ namespace BulletHell.Abilities
                 MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
             }
 
-            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+            foreach (BaseAbilityBehaviour behaviour in _behaviours) {
                 behaviour.Perform(_owner, _host);
             }
         }
