@@ -76,7 +76,7 @@ namespace BulletHell.Abilities
                 MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
             }
 
-            foreach (BaseAbilityBehaviour behaviour in behaviours) {
+            foreach (BaseAbilityBehaviour behaviour in _behaviours) {
                 behaviour.Perform(_owner, _host);
             }
         }
