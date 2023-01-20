@@ -16,10 +16,14 @@ public abstract class Weapon : Item
 
     public void Initialize(GameObject owner)
     {
-        foreach(Ability ability in _abilitySlot)
+        List<Ability> tempAbilities = new List<Ability>();
+        foreach (Ability ability in _abilitySlot)
         {
-            ability.Initialize(owner);
+            Ability _ability = Instantiate(ability);
+            _ability.Initialize(owner);
+            tempAbilities.Add(_ability);
         }
+        _abilitySlot = tempAbilities;
     }
 
     public void Uninitialize()

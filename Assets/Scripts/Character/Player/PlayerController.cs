@@ -43,7 +43,8 @@ namespace BulletHell.Player
 
             foreach (Ability ability in _abilities)
             {
-                ability.Initialize(gameObject);
+                Ability _ability = Instantiate(ability);
+                _ability.Initialize(gameObject);
             }
 
             _rb = GetComponent<Rigidbody2D>();

@@ -17,6 +17,6 @@ MonoBehaviour:
   _description: m4 fire
   _maxAmount: 1
   _coolDownTime: 0
-  behaviours:
+  _behaviours:
   - {fileID: 11400000, guid: 16d60e30261d09c479ba191317a155ec, type: 2}
   _clip: {fileID: 7400000, guid: a0413323fc218164fb1827f0ad5f34d8, type: 2}
