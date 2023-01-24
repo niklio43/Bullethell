@@ -7,6 +7,7 @@ namespace BulletHell.Abilities
     [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/New Ability")]
     public sealed class Ability : ScriptableObject
     {
+        public int Id = -1;
         [Header("General")]
         [SerializeField] Sprite _icon;
         [SerializeField] string _name;
@@ -36,17 +37,16 @@ namespace BulletHell.Abilities
         List<float> _timers;
         public void Initialize(GameObject owner, GameObject host = null)
         {
-            Debug.Log(_name);
             _owner = owner;
             _host = (host == null) ? owner : host;
 
             _timers = new List<float>();
             _currentAmount = _maxAmount;
-            Debug.Log(_behaviours.Count);
+
             for (int i = 0; i < _behaviours.Count; i++)
             {
-                BaseAbilityBehaviour behaviour = Instantiate(_behaviours[i]);
-                behaviour.Initialize(this, owner, _host);
+                _behaviours[i] = Instantiate(_behaviours[i]);
+                _behaviours[i].Initialize(this, owner, _host);
             }
         }
         public void Uninitialize()        {
@@ -77,9 +77,9 @@ namespace BulletHell.Abilities
                 MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
             }
 
-            foreach (BaseAbilityBehaviour behaviour in _behaviours)
+            for (int i = 0; i < _behaviours.Count; i++)
             {
-                behaviour.Perform(_owner, _host);
+                _behaviours[i].Perform(_owner, _host);
             }
         }
 

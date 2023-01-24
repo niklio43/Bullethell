@@ -59,7 +59,6 @@ public class SlotListener : MonoBehaviour
                 }
                 if (slot.GetItemData.ItemType == ItemType.Weapon && slot == Equipment.GetSlots[3])
                 {
-                    Debug.Log("UI");
                     _weaponController.AssignWeapon(Equipment.GetSlots[3].GetItemData as Weapon);
                 }
                 break;

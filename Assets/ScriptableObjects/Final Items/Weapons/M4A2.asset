@@ -24,6 +24,7 @@ MonoBehaviour:
   _abilitySlot:
   - {fileID: 11400000, guid: 1619840c3bc11f54ea5e0183f6184660, type: 2}
   animatorController: {fileID: 9100000, guid: 557e37f490ccd8a4eb9b9fe7887ec2aa, type: 2}
+  database: {fileID: 11400000, guid: d1c92bf548e2e194ea1b7091ac1b436e, type: 2}
   sprite: {fileID: 1176194004, guid: 02d0ee5e667ffeb48879cf85a0b587fa, type: 3}
   itemName: M4A2
   pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}
