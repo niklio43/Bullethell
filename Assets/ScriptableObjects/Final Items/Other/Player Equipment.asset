@@ -37,18 +37,10 @@ MonoBehaviour:
       Amount: 0
     - AllowedItems: 00000000
       Item:
-        Name: Katana
-        Id: 3
-        buffs:
-        - Stat: Str
-          Id: Glory
-          type: 1
-          Value: 0.1
-        - Stat: DashDistance
-          Id: Speed
-          type: 0
-          Value: 1
-      Amount: 1
+        Name: 
+        Id: -1
+        buffs: []
+      Amount: 0
     - AllowedItems: 00000000
       Item:
         Name: 

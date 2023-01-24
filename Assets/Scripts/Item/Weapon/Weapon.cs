@@ -1,14 +1,13 @@
 using BulletHell.Abilities;
 using BulletHell.Emitters;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public abstract class Weapon : Item
 {
     Pool _pool;
     [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
-    public AnimatorController animatorController;
+    public AnimatorOverrideController AnimatorController;
     public AbilityDatabase database;
     public Pool Pool { get { return _pool; } set { _pool = value; } }
 
