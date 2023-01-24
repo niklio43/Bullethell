@@ -14,10 +14,10 @@ namespace BulletHell.Abilities
         BulletHell.Player.PlayerController _player;
         [Header("VFX")]
         [SerializeField] VisualEffectAsset _vfx;
-        public override void Perform(GameObject owner, GameObject host)
+        protected override void Perform()
         {
-            _player = owner.GetComponent<BulletHell.Player.PlayerController>();
-            Dash(owner);
+            _player = _ability.Owner.GetComponent<BulletHell.Player.PlayerController>();
+            Dash(_ability.Owner);
         }
 
         public void Dash(GameObject owner)

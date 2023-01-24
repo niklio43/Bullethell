@@ -125,6 +125,7 @@ namespace BulletHell.Emitters
             foreach (var item in hits) {
                 if (projectile.Data.CollisionTags.Contains(item.tag)) {
                     if(item.TryGetComponent(out Character character)) {
+                        if(_damage != null)
                         character.TakeDamage(projectile.Damage);
                     }
                     projectile.ResetObject();

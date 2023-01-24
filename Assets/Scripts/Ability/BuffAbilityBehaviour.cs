@@ -20,9 +20,9 @@ namespace BulletHell.Abilities
 
         [SerializeField] List<StatModifier> _buffs;
 
-        public override void Perform(GameObject owner, GameObject host)
+        protected override void Perform()
         {
-            if(!owner.TryGetComponent(out Character stats)) { Debug.LogWarning($"Could not apply buff. {owner.name} does not inherit from Character."); }
+            if(!_ability.Owner.TryGetComponent(out Character stats)) { Debug.LogWarning($"Could not apply buff. {_ability.Owner.name} does not inherit from Character."); }
 
             Stats.Stats characterStats = stats.Stats;
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BulletHell.Abilities
@@ -7,8 +8,87 @@ namespace BulletHell.Abilities
     [System.Serializable]
     public abstract class BaseAbilityBehaviour : ScriptableObject
     {
-        public virtual void Initialize(Ability ability, GameObject owner, GameObject host) { }
+        [SerializeField] float _waitTime;
+        [SerializeField] float _castTime = 0;
+
+        [Header("Animation")]
+        [SerializeField] List<AbilityAnimation> _animations;
+
+
+        AbilityBehaviourState _state = AbilityBehaviourState.Idle;
+        float _currentCastTime = 0;
+
+        protected Ability _ability;
+
+        private enum AbilityBehaviourState
+        {
+            Idle,
+            Channeling,
+            Casting
+        }
+
+        public float GetCastTime() => _castTime;
+        public float GetWaitTime() => _waitTime;
+        public float GetTotalTime() => _castTime + _waitTime;
+
+        protected virtual void Initialize() { }
         public virtual void Uninitialize() { }
-        public abstract void Perform(GameObject owner, GameObject host);
+        protected abstract void Perform();
+
+        public void InitializeBehaviour(Ability ability)
+        {
+            _ability = ability;
+
+            foreach (AbilityAnimation animation in _animations) {
+                animation.Initialize(ability);
+            }
+
+            Initialize();
+        }
+
+        public async Task Execute()
+        {
+            _state = AbilityBehaviourState.Channeling;
+
+            await Channel();
+            await Cast();
+
+            _currentCastTime = 0;
+        }
+
+        async Task Channel()
+        {
+            _state = AbilityBehaviourState.Channeling;
+
+            while (_currentCastTime < _waitTime) {
+                if (GameManager.GetCancellationToken().IsCancellationRequested) throw new System.Exception("Ability task cancelled");
+                await Task.Delay(Mathf.RoundToInt((Time.deltaTime) * 1000));
+            }
+
+            foreach (AbilityAnimation animation in _animations) {
+                animation.Play();
+            }
+
+        }
+
+        async Task Cast()
+        {
+            _state = AbilityBehaviourState.Casting;
+
+            while (_currentCastTime < _waitTime + _castTime) {
+                if (GameManager.GetCancellationToken().IsCancellationRequested) throw new System.Exception("Ability task cancelled");
+                await Task.Delay(Mathf.RoundToInt((Time.deltaTime) * 1000));
+            }
+
+            Perform();
+            _state = AbilityBehaviourState.Idle;
+        }
+
+
+        public void UpdateBehaviour(float dt)
+        {
+            if(_state == AbilityBehaviourState.Channeling || _state == AbilityBehaviourState.Casting)
+                _currentCastTime += dt;
+        }
     }
 }

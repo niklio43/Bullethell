@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,9 @@ public class GameManager : Singleton<GameManager>
     public static event ChangeHandler onStateChange;
 
     [HideInInspector] public bool pause;
+
+    static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+    public static CancellationTokenSource GetCancellationToken() => cancellationTokenSource;
 
     void Awake()
     {
@@ -68,8 +72,15 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
         UnityEditor.EditorApplication.isPlaying = false;
 #else
+        
          Application.Quit();
 #endif
+
+    }
+
+    public void OnApplicationQuit()
+    {
+        cancellationTokenSource.Cancel();
     }
 
     public void SetTime(bool scale)

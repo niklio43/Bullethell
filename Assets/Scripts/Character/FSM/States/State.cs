@@ -54,7 +54,7 @@ namespace BulletHell.FiniteStateMachine
         public void Transition(string id)
         {
             var transition = GetTransition(id);
-            if (transition == null) return;
+            if (transition == null) { Debug.LogWarning("No such state found"); return; }
 
             ParentFsm.SetState(transition.Target);
         }

@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 
 namespace BulletHell.Abilities
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/New Ability")]
-    public sealed class Ability : ScriptableObject
+    public class Ability : ScriptableObject
     {
         [Header("General")]
         [SerializeField] Sprite _icon;
@@ -17,10 +20,7 @@ namespace BulletHell.Abilities
         [SerializeField] float _coolDownTime;
 
         [Header("Ability Behaviours")]
-        [SerializeField] List<BaseAbilityBehaviour> _behaviours;
-
-        [Header("Animation")]
-        [SerializeField] AnimationClip _clip;        #region Getters
+        [SerializeField] List<BaseAbilityBehaviour> _behaviours;        #region Getters
         public bool CanCast() => (_currentAmount > 0);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
         public int GetCurrentAmount => _currentAmount;
@@ -29,25 +29,35 @@ namespace BulletHell.Abilities
         public string GetDescription() => _description;
         #endregion
 
-        GameObject _owner;
-        GameObject _host;
+        AbilityState _abilityState = AbilityState.Idle;
+        public GameObject Owner { get; private set; }
+        public GameObject Host { get; private set; }
         int _currentAmount;
 
         List<float> _timers;
+
+        public enum AbilityState
+        {
+            Idle,
+            Channeling,
+            Casting,
+        }
+
         public void Initialize(GameObject owner, GameObject host = null)
         {
-            _owner = owner;
-            _host = (host == null) ? owner : host;
+            this.Owner = owner;
+            this.Host = (host == null) ? owner : host;
 
             _timers = new List<float>();
             _currentAmount = _maxAmount;
+
             for (int i = 0; i < _behaviours.Count; i++) {
                 _behaviours[i] = Instantiate(_behaviours[i]);
-                _behaviours[i].Initialize(this, owner, _host);
+                _behaviours[i].InitializeBehaviour(this);
             }
         }
-        public void Uninitialize()
-        {
+
+        public void Uninitialize()        {
             _timers = null;
             _currentAmount = 0;
             foreach (BaseAbilityBehaviour behaviour in _behaviours) {
@@ -55,33 +65,31 @@ namespace BulletHell.Abilities
             }
         }
 
-        public void Cast()
+        public async void Cast(Action castDelegate = null)
         {
-            if (_currentAmount <= 0) return;
-            DoAbility();
+            if (_currentAmount <= 0 || _abilityState == AbilityState.Channeling) return;
+            Debug.Log("Started Casting");
+            await DoAbility();
 
-            _currentAmount--;
-
-            _timers.Add(_coolDownTime);
+            _abilityState = AbilityState.Casting;
+            castDelegate?.Invoke();
+            _abilityState = AbilityState.Idle;
         }
 
-        void DoAbility()
-        {
-            if (_clip != null) {
-                PlayAnimation(_clip.name);
-                MonoInstance.GetInstance().Invoke(() => PlayAnimation("Idle"), _clip.length);
-            }
+        async Task DoAbility()
+        {            _abilityState = AbilityState.Channeling;            await Task.WhenAll(_behaviours.Select(i => i.Execute()));
+    
 
-            foreach (BaseAbilityBehaviour behaviour in _behaviours) {
-                behaviour.Perform(_owner, _host);
-            }
+            _currentAmount--;            _timers.Add(_coolDownTime);
         }
-
-        void PlayAnimation(string name)        {            _owner.GetComponent<Animator>().Play(name);        }
 
         public void UpdateAbility(float dt)
         {
             UpdateTimers(dt);
+
+            foreach (BaseAbilityBehaviour behaviour in _behaviours) {
+                behaviour.UpdateBehaviour(dt);
+            }
         }
 
         void UpdateTimers(float dt)

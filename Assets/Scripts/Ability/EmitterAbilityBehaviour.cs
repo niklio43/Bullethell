@@ -13,14 +13,14 @@ namespace BulletHell.Abilities
         [SerializeField] List<DamageValue> _damageValues;
         List<Emitter> _emitterObjects;
 
-        public override void Initialize(Ability ability, GameObject owner, GameObject host)
+        protected override void Initialize()
         {
             _emitterObjects = new List<Emitter>();
             _emitterObjects.Clear();
 
             foreach (EmitterData emitterData in _emitters) {
-                Emitter emitter = new GameObject($"{ability.GetName()} (Emitter)").AddComponent<Emitter>();
-                emitter.transform.SetParent(host.transform);
+                Emitter emitter = new GameObject($"{_ability.GetName()} (Emitter)").AddComponent<Emitter>();
+                emitter.transform.SetParent(_ability.Host.transform);
                 emitter.transform.localPosition = Vector3.zero;
                 emitter.Data = emitterData;
                 emitter.AutoFire = false;
@@ -34,15 +34,15 @@ namespace BulletHell.Abilities
             }
         }
 
-        public override void Perform(GameObject owner, GameObject host)
+        protected override void Perform()
         {
-            Character character = owner.GetComponent<Character>();
+            //Character character = owner.GetComponent<Character>();
 
-            DamageInfo damage = new DamageInfo(_damageValues);
-            damage = DamageCalculator.CalculateDamage(damage, character.Stats);
+            //DamageInfo damage = new DamageInfo(_damageValues);
+            //damage = DamageCalculator.CalculateDamage(damage, character.Stats);
 
             foreach (Emitter emitter in _emitterObjects) {
-                emitter.SetDamage(damage);
+                //emitter.SetDamage(damage);
                 emitter.FireProjectile();
             }
         }

@@ -12,9 +12,9 @@ namespace BulletHell.Abilities
     {
         [Header("VFX")]
         [SerializeField] VisualEffectAsset _vfx;
-        public override void Perform(GameObject owner, GameObject host)
+        protected override void Perform()
         {
-            DetectColliders(1, owner);
+            DetectColliders(1, _ability.Owner);
         }
 
         //TODO Add additional functionality.
