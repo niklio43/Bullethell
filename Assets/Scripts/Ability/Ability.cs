@@ -10,6 +10,7 @@ namespace BulletHell.Abilities
     [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/New Ability")]
     public class Ability : ScriptableObject
     {
+        public int Id = -1;
         [Header("General")]
         [SerializeField] Sprite _icon;
         [SerializeField] string _name;
@@ -60,8 +61,10 @@ namespace BulletHell.Abilities
         public void Uninitialize()        {
             _timers = null;
             _currentAmount = 0;
-            foreach (BaseAbilityBehaviour behaviour in _behaviours) {
-                behaviour.Uninitialize();
+
+            for (int i = 0; i < _behaviours.Count; i++)
+            {
+                _behaviours[i].Uninitialize();
             }
         }
 
@@ -94,9 +97,11 @@ namespace BulletHell.Abilities
 
         void UpdateTimers(float dt)
         {
-            for (int i = 0; i < _timers.Count; i++) {
+            for (int i = 0; i < _timers.Count; i++)
+            {
                 _timers[i] -= dt;
-                if (_timers[i] <= 0) {
+                if (_timers[i] <= 0)
+                {
                     _currentAmount++;
                     _timers.RemoveAt(i);
                     i--;

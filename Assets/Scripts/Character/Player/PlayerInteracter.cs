@@ -49,6 +49,7 @@ public class PlayerInteracter : MonoBehaviour
     {
         _slotListener.Inventory.Clear();
         _slotListener.Equipment.Clear();
+        _slotListener.Inventory.database.UpdateID();
     }
 
     private void OnDrawGizmos()

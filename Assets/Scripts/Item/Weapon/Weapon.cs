@@ -1,43 +1,42 @@
 using BulletHell.Abilities;
 using BulletHell.Emitters;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public abstract class Weapon : Item
 {
     Pool _pool;
     [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
-    public AnimatorController animatorController;
-
+    public AnimatorOverrideController AnimatorController;
+    public AbilityDatabase database;
     public Pool Pool { get { return _pool; } set { _pool = value; } }
 
     public List<Ability> AbilitySlot { get { return _abilitySlot; } set { _abilitySlot = value; } }
 
     public void Initialize(GameObject owner)
     {
-        List<Ability> tempAbilities = new List<Ability>();
-        foreach (Ability ability in _abilitySlot)
+        Debug.Log("weapon init");
+        for (int i = 0; i < _abilitySlot.Count; i++)
         {
-            Ability _ability = Instantiate(ability);
-            _ability.Initialize(owner);
-            tempAbilities.Add(_ability);
+            _abilitySlot[i] = database.abilities[_abilitySlot[i].Id];
+            _abilitySlot[i] = Instantiate(_abilitySlot[i]);
+            _abilitySlot[i].Initialize(owner);
         }
-        _abilitySlot = tempAbilities;
     }
 
     public void Uninitialize()
     {
-        foreach (Ability ability in _abilitySlot)
+        for (int i = 0; i < _abilitySlot.Count; i++)
         {
-            ability.Uninitialize();
+            _abilitySlot[i] = database.abilities[_abilitySlot[i].Id];
+            _abilitySlot[i].Uninitialize();
         }
     }
 
     public void AddAbility(Ability ability, Weapon weapon, GameObject owner)
     {
         if (_abilitySlot.Count >= 4) return;
-        if(_abilitySlot.Contains(ability)) { owner.GetComponent<WeaponController>().FillAbilitySlot(weapon); return; }
+        if (_abilitySlot.Contains(ability)) { owner.GetComponent<WeaponController>().FillAbilitySlot(weapon); return; }
         _abilitySlot.Add(ability);
         ability.Initialize(owner);
     }

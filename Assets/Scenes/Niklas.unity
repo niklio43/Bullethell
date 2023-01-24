@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 40932956}
   - component: {fileID: 40932957}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6909,7 +6909,7 @@ GameObject:
   - component: {fileID: 1181653737}
   - component: {fileID: 1181653736}
   - component: {fileID: 1181653735}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -6943,9 +6943,6 @@ MonoBehaviour:
     - Name: DashDistance
       Value: 32
   Weapon: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4
   _abilities:
   - {fileID: 11400000, guid: f0e435481c974864f928dbe1338bf354, type: 2}
   _afterImage: {fileID: -2138936094765007819, guid: 965500742adab4b45b904772870b9ef4, type: 3}
@@ -7289,7 +7286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1423690934}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: CircleOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7890,6 +7887,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8461412192270030068, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7978,7 +7979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1715967993}
   - component: {fileID: 1715967994}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: InventoryController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8144,7 +8145,7 @@ GameObject:
   - component: {fileID: 1992674397}
   - component: {fileID: 1992674396}
   - component: {fileID: 1992674395}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8494,6 +8495,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 552980804, guid: 15d37370597e52740a2ce13311669345, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 131
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648279147, guid: 15d37370597e52740a2ce13311669345, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 487
+      objectReference: {fileID: 0}
     - target: {fileID: 1280149869705643988, guid: 15d37370597e52740a2ce13311669345, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -27,7 +27,8 @@ MonoBehaviour:
       Value: 1
   _abilitySlot:
   - {fileID: 11400000, guid: a0070805f62fa0a40b3ed74bc947a6c6, type: 2}
-  animatorController: {fileID: 9100000, guid: 7c6eb181f7c798e4095faef650b0f921, type: 2}
+  AnimatorController: {fileID: 22100000, guid: c6719dd60da867449bf0b51b1a42df54, type: 2}
+  database: {fileID: 11400000, guid: d1c92bf548e2e194ea1b7091ac1b436e, type: 2}
   sprite: {fileID: 21300000, guid: 8374627da67e6a047a342ec4ed126d54, type: 3}
   itemName: Legendary Blood Katana
   pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}

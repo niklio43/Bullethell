@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928c8b0a5e078df478385f7e8c6480b3, type: 3}
   m_Name: Swing
   m_EditorClassIdentifier: 
+  Id: 0
   _icon: {fileID: 21300000, guid: 5dd458211f98d34449346ab07cf41d53, type: 3}
   _name: Swing
   _description: Small slash
   _maxAmount: 1
-  _coolDownTime: 0.2
+  _coolDownTime: 0.15
   _behaviours:
   - {fileID: 11400000, guid: 6e55704eaf99e1a4cbc852a09cab0685, type: 2}
   _animations: []

@@ -14,8 +14,13 @@ public class WeaponController : MonoBehaviour
 
     public void AssignWeapon(Weapon weapon)
     {
+        Debug.Log("Assign Weapon");
         weapon.Initialize(gameObject);
-        GetComponent<Animator>().runtimeAnimatorController = weapon.animatorController;
+
+        Animator animator = GetComponent<Animator>();
+
+        animator.runtimeAnimatorController = weapon.AnimatorController;
+
         GetComponent<Animator>().Play("Idle");
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
         gameObject.name = weapon.name;

@@ -53,9 +53,9 @@ namespace BulletHell.Emitters
 
         public EmitterModifier AddModifier()
         {
+#if UNITY_EDITOR
             EmitterModifier newModifier;
 
-#if UNITY_EDITOR
             newModifier = ScriptableObject.CreateInstance<EmitterModifier>();
 
             newModifier.guid = Guid.NewGuid().ToString();
@@ -64,9 +64,10 @@ namespace BulletHell.Emitters
 
             AssetDatabase.AddObjectToAsset(newModifier, this);
             AssetDatabase.SaveAssets();
-#endif
 
             return newModifier;
+#endif
+            return null;
         }
 
         public void DeleteModifier(int index)

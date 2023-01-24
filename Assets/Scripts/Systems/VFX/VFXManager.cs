@@ -57,6 +57,7 @@ namespace BulletHell.VFX
         {
             _pool = pool;
             _vfx = gameObject.AddComponent<VisualEffect>();
+            _vfx.GetComponent<Renderer>().sortingLayerID = SortingLayer.NameToID("Top");
         }
 
         public void PlayBurst(VisualEffectAsset asset, VFXAttribute[] vfxAttributes = null)

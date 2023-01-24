@@ -15,7 +15,6 @@ namespace BulletHell.Player
         bool _isInteracting = false;
         [HideInInspector] public Weapon Weapon;
 
-        [SerializeField] LayerMask layerMask;
         [SerializeField] List<Ability> _abilities = new List<Ability>();
 
         [SerializeField] PlayerAfterImageSprite _afterImage;
@@ -28,7 +27,6 @@ namespace BulletHell.Player
         public float AmountOfImages { get { return _amountOfImages; } }
         public float DashTime { get { return _dashTime; } }
         public Rigidbody2D Rb { get { return _rb; } }
-        public LayerMask LayerMaskPlayer { get { return layerMask; } }
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
         public bool IsInteracting { get { return _isInteracting; } set { _isInteracting = value; } }
         public Vector2 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
@@ -41,10 +39,10 @@ namespace BulletHell.Player
 
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, (int)_amountOfImages, "AfterImagePool");
 
-            foreach (Ability ability in _abilities)
+            for (int i = 0; i < _abilities.Count; i++)
             {
-                Ability _ability = Instantiate(ability);
-                _ability.Initialize(gameObject);
+                _abilities[i] = Instantiate(_abilities[i]);
+                _abilities[i].Initialize(gameObject);
             }
 
             _rb = GetComponent<Rigidbody2D>();
