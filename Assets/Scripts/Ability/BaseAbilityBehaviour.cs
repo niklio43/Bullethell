@@ -12,7 +12,7 @@ namespace BulletHell.Abilities
         [SerializeField] float _castTime = 0;
 
         [Header("Animation")]
-        [SerializeField] List<AbilityAnimation> _animations;
+        [SerializeField] protected List<AbilityAnimation> _animations;
 
 
         AbilityBehaviourState _state = AbilityBehaviourState.Idle;
@@ -65,10 +65,7 @@ namespace BulletHell.Abilities
                 await Task.Delay(Mathf.RoundToInt((Time.deltaTime) * 1000));
             }
 
-            foreach (AbilityAnimation animation in _animations) {
-                animation.Play();
-            }
-
+            WhenCompletedChannel();
         }
 
         async Task Cast()
@@ -90,5 +87,18 @@ namespace BulletHell.Abilities
             if(_state == AbilityBehaviourState.Channeling || _state == AbilityBehaviourState.Casting)
                 _currentCastTime += dt;
         }
+
+        protected virtual void WhenCompletedChannel()
+        {
+            PlayAnimation();
+        }
+
+        protected virtual void PlayAnimation()
+        {
+            foreach (AbilityAnimation animation in _animations) {
+                animation.Play();
+            }
+        }
+
     }
 }

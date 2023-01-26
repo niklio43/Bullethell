@@ -36,13 +36,14 @@ namespace BulletHell.Abilities
 
         protected override void Perform()
         {
-            //Character character = owner.GetComponent<Character>();
+            DamageInfo damage = new DamageInfo(_damageValues);
 
-            //DamageInfo damage = new DamageInfo(_damageValues);
-            //damage = DamageCalculator.CalculateDamage(damage, character.Stats);
+            if (_ability.Owner.TryGetComponent(out Character character)) {
+                damage = DamageCalculator.CalculateDamage(damage, character.Stats);
+            }
 
             foreach (Emitter emitter in _emitterObjects) {
-                //emitter.SetDamage(damage);
+                emitter.SetDamage(damage);
                 emitter.FireProjectile();
             }
         }

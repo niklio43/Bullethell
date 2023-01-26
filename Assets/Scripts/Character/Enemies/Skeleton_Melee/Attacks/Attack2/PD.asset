@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
   m_Name: PD
   m_EditorClassIdentifier: 
-  name: NewProjectileData
-  Sprite: {fileID: 0}
-  Animator: {fileID: 9100000, guid: f8ad612027543594ab7371cbf62e3462, type: 2}
+  name: Skeleton_Melee-SwingProjectile
+  Sprite: {fileID: -1117776656, guid: 7e115cef2c037f14a972e52077ee201e, type: 3}
+  Animator: {fileID: 0}
   Scale: 2
   Color: {r: 1, g: 1, b: 1, a: 1}
   collider:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.5, y: 0.5, z: 0}
+    m_Center: {x: 0, y: 0.24, z: 0}
+    m_Extent: {x: 1, y: 0.5, z: 0}
   CollisionTags:
   - Player

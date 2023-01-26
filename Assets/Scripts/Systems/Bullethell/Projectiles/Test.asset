@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   name: TestProjectile
-  Sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
-  Scale: 0.8
-  Color: {r: 0.5999012, g: 0, b: 1, a: 1}
+  Sprite: {fileID: 21300000, guid: c188d7afd8986aa4d918e5c56fbc61d5, type: 3}
+  Animator: {fileID: 0}
+  Scale: 1
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  CollisionRadius: 0
+  CollisionTags: []

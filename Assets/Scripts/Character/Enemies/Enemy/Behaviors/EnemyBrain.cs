@@ -4,6 +4,7 @@ using UnityEngine;
 using BulletHell.FiniteStateMachine;
 using BulletHell.Enemies.Detection;
 using BulletHell.Abilities;
+using BulletHell;
 
 namespace BulletHell.Enemies
 {
@@ -14,11 +15,14 @@ namespace BulletHell.Enemies
         public IFSM FSM { get; protected set; }
         Enemy _owner;
 
+        bool _canAttack = true;
+
         public enum EnemyStates
         {
             Idle,
             Chasing,
-            Attacking
+            Attacking,
+            Staggered
         }
 
         public virtual void Initialize(Enemy owner)
@@ -32,6 +36,7 @@ namespace BulletHell.Enemies
             .State(EnemyStates.Idle, (idle) => IdleState(idle))
             .State(EnemyStates.Chasing, (chase) => ChaseState(chase))
             .State(EnemyStates.Attacking, (attack) => AttackState(attack))
+            .State(EnemyStates.Staggered, (stagger) => StaggeredState(stagger))
             .Build();
         }
 
@@ -48,6 +53,7 @@ namespace BulletHell.Enemies
 
             return state;
         }
+
         public virtual StateBuilder ChaseState(StateBuilder state)
         {
             state.SetTransition("attack", EnemyStates.Attacking);
@@ -61,7 +67,7 @@ namespace BulletHell.Enemies
                     _owner.GetComponent<Animator>().Play("Idle");
                 }
 
-                if (_owner.TargetInAttackRange() && CanCastAbility()) {
+                if (_owner.TargetInAttackRange() && CanCastAbility() && _canAttack) {
                     action.Transition("attack");
                 }
             });
@@ -74,6 +80,7 @@ namespace BulletHell.Enemies
             state.SetTransition("idle", EnemyStates.Idle);
             state.Enter((action) => {
                 _owner.CanMove = false;
+                _canAttack = false;
                 Ability chosenAbility = null;
 
                 foreach (Ability ability in abilities) {
@@ -85,12 +92,29 @@ namespace BulletHell.Enemies
                 if(chosenAbility == null) { action.Transition("idle"); return; }
 
                 chosenAbility.Cast(() => action.Transition("idle"));
-
+                _owner.Invoke(() => _canAttack = true, 1f);
             });
 
             return state;
         }
 
+        public virtual StateBuilder StaggeredState(StateBuilder state) 
+        {
+            state.SetAnimationClip("Stagger");
+            state.Enter((action) => {
+                _owner.Invincible = true;
+                _owner.CanMove = false;
+
+                float waitTime = _owner.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
+               _owner.Invoke(() => SetState(EnemyStates.Idle), waitTime);
+            });
+            state.Exit((action) => {
+                _owner.Invincible = false;
+            });
+            return state;        
+        }
+
+  
 
         bool CanCastAbility()
         {
@@ -122,5 +146,8 @@ namespace BulletHell.Enemies
                 ability.UpdateAbility(Time.deltaTime);
             }
         }
+
+        public void SetState(EnemyStates state) => FSM.SetState(state);
+
     }
 }

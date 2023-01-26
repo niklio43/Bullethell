@@ -71,7 +71,6 @@ namespace BulletHell.Abilities
         public async void Cast(Action castDelegate = null)
         {
             if (_currentAmount <= 0 || _abilityState == AbilityState.Channeling) return;
-            Debug.Log("Started Casting");
             await DoAbility();
 
             _abilityState = AbilityState.Casting;

@@ -16,7 +16,7 @@ namespace BulletHell
         public RuntimeAnimatorController Animator;
         public float Scale = 1;
         public Color Color = Color.white;
-        public float CollisionRadius;
+        public Bounds collider;
 
         public List<string> CollisionTags = new List<string>();
     }

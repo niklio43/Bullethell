@@ -121,17 +121,6 @@ namespace BulletHell.Emitters
             projectile.Position += projectile.Velocity * dt;
             projectile.TimeToLive -= dt;
 
-            Collider2D[] hits = Physics2D.OverlapCircleAll(projectile.Position, projectile.Data.CollisionRadius, 1 << LayerMask.NameToLayer("Entity"));
-            foreach (var item in hits) {
-                if (projectile.Data.CollisionTags.Contains(item.tag)) {
-                    if(item.TryGetComponent(out Character character)) {
-                        if(_damage != null)
-                        character.TakeDamage(projectile.Damage);
-                    }
-                    projectile.ResetObject();
-                }
-            }
-
         }
 
         protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();

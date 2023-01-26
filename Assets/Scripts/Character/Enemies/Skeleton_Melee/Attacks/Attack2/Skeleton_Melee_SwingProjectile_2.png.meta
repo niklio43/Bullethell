@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 719c24b4dd04fec498e1c4ace3619678
+guid: 7e115cef2c037f14a972e52077ee201e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skeleton_Melee_Walk_0
+      name: Skeleton_Melee_SwingProjectile_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd86cc4d2ececb74f8dd676d5d29c631
-      internalID: -219221877
+      spriteID: 997a19d8142c6224db6d6c3f58eaf90e
+      internalID: -1117776656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_Melee_Walk_1
+      name: Skeleton_Melee_SwingProjectile_2_1
       rect:
         serializedVersion: 2
         x: 48
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c3a2ae6af625ee45a688e45978e1b66
-      internalID: 1868986007
+      spriteID: 937fc1d934a8f034aa3d2605b313cc21
+      internalID: 636363855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_Melee_Walk_2
+      name: Skeleton_Melee_SwingProjectile_2_2
       rect:
         serializedVersion: 2
         x: 96
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa30f4ddf682a3449ab236f142a76d2f
-      internalID: -2131946731
+      spriteID: 684cfa3fdf045a9418eb22f8194ecb98
+      internalID: 1658516495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_Melee_Walk_3
+      name: Skeleton_Melee_SwingProjectile_2_3
       rect:
         serializedVersion: 2
         x: 144
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 505aaefcf4be4c24186a96e14f69cb08
-      internalID: -2034111937
+      spriteID: 6b7e3106e59774446bae6bec4b647a20
+      internalID: 1034564074
       vertices: []
       indices: 
       edges: []
@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton_Melee_Walk_3: -2034111937
-      Skeleton_Melee_Walk_0: -219221877
-      Skeleton_Melee_Walk_1: 1868986007
-      Skeleton_Melee_Walk_2: -2131946731
+      Skeleton_Melee_SwingProjectile_2_2: 1658516495
+      Skeleton_Melee_SwingProjectile_2_3: 1034564074
+      Skeleton_Melee_SwingProjectile_2_1: 636363855
+      Skeleton_Melee_SwingProjectile_2_0: -1117776656
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

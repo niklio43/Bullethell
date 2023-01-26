@@ -23,6 +23,13 @@ namespace BulletHell
 
         [HideInInspector] public DamageInfo Damage;
 
+        [HideInInspector] public BoxCollider2D ProjectileCollider;
+
+
+        private void Awake()
+        {
+            ProjectileCollider = GetComponent<BoxCollider2D>();
+        }
 
         public void Initialize(ProjectileData data)
         {
@@ -34,6 +41,8 @@ namespace BulletHell
                 _animator.runtimeAnimatorController = data.Animator;
             }
 
+            ProjectileCollider.offset = Data.collider.center;
+            ProjectileCollider.size = Data.collider.size / 2;
 
             transform.localScale = Vector3.one * data.Scale;
             _spriteRenderer.color = data.Color;
@@ -57,5 +66,15 @@ namespace BulletHell
             gameObject.SetActive(false);
             Pool.Release(this);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(!Data.CollisionTags.Contains(other.gameObject.tag)) { return; }
+            if(other.TryGetComponent(out Character character)) {
+                if (Damage != null)
+                    character.TakeDamage(Damage);
+            }
+        }
+
     }
 }

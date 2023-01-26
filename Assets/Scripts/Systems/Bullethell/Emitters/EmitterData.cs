@@ -20,7 +20,7 @@ namespace BulletHell.Emitters
         public ProjectileData ProjectileData;
         public float TimeToLive = 5;
         [Range(0.01f, 100f)] public float Speed = 1;
-        [Range(0.01f, 100f)] public float Acceleration = 1;
+        [Range(-100f, 100f)] public float Acceleration = 1;
         public float Gravity = 0;
         public Vector2 GravityPoint = Vector2.zero;
 

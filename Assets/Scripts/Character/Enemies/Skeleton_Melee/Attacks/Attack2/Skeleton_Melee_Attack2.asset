@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540aecb31c82c4c4e87ae8ad17540e4f, type: 3}
-  m_Name: Skeleton_Melee_Brain
+  m_Script: {fileID: 11500000, guid: 928c8b0a5e078df478385f7e8c6480b3, type: 3}
+  m_Name: Skeleton_Melee_Attack2
   m_EditorClassIdentifier: 
-  abilities:
-  - {fileID: 11400000, guid: cb20bdbc15c37014d8bce806440f2614, type: 2}
-  - {fileID: 11400000, guid: c866a24c9852ccf4193d0f6f2dd0b7d8, type: 2}
+  Id: -1
+  _icon: {fileID: 0}
+  _name: 
+  _description: 
+  _maxAmount: 1
+  _coolDownTime: 6
+  _behaviours:
+  - {fileID: 11400000, guid: 21168247ad928084fb5ec702899583c8, type: 2}
