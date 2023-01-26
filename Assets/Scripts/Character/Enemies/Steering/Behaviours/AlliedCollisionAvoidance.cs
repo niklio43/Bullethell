@@ -18,15 +18,16 @@ namespace BulletHell.Enemies.Steering
             foreach(EntityData obstacle in enemy.DetectionData["Enemies"]) {
                 if (obstacle.gameObject == enemy.gameObject) { continue; }
 
-                Vector2 direction = obstacle.Collider.ClosestPoint(transform.position) - (Vector2)transform.position;
+                Vector2 direction = obstacle.transform.position - transform.position;
                 float distance = direction.magnitude;
 
-                float weight = collider.IsTouching(obstacle.Collider) ? 1 : Mathf.Clamp01(steering.AvoidanceRadius - distance) / steering.AvoidanceRadius;
+                float weight = collider.IsTouching(obstacle.Collider) ? 1 : Mathf.Clamp01(1.2f - distance / 1.2f);
                 weight = Mathf.Clamp01(weight);
-                Vector2 oppositeDirectionNormalized = direction.normalized * -1;
+                Vector2 awayVectorNormalized = direction.normalized * -1;
 
                 for (int i = 0; i < steering.Interest.Count; i++) {
-                    float result = Vector2.Dot(oppositeDirectionNormalized, steering.Directions[i]);
+                    float result = Vector2.Dot(awayVectorNormalized, steering.Directions[i]);
+                    result = 1 - Mathf.Abs(result - .65f);
                     float value = result * weight * .5f;
 
                     if(value > steering.Interest[i])

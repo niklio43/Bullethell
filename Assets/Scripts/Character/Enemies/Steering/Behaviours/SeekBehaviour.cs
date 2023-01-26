@@ -21,6 +21,7 @@ namespace BulletHell.Enemies.Steering
 
             Vector2 towardsVector = enemy.Target.position - transform.position;
 
+            float distanceWeight = Mathf.Clamp01(distance / 3);
             int towards = 0;
 
             if(Mathf.Abs(distance - enemy.PreferredDistance) > Margin) {
@@ -29,7 +30,7 @@ namespace BulletHell.Enemies.Steering
 
             for (int i = 0; i < steering.Directions.Length; i++) {
                 float result = Vector2.Dot(towardsVector.normalized * towards, steering.Directions[i]);
-                result *= Weight;
+                result = result * Weight * distanceWeight;
 
                 result = Mathf.Clamp01(result);
 
