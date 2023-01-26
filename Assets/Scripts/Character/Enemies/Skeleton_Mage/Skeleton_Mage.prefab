@@ -107,6 +107,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   CanMove: 0
   Aim: {fileID: 839990684}
+  Weapon: {fileID: 0}
   _brain: {fileID: 11400000, guid: f095d9666b0d9d24aa3a3903dcbbe46b, type: 2}
   PreferredDistance: 3.38
   AttackDistance: 3.49
@@ -186,7 +187,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: d87c529e4b8fa0c469e2e88290540600, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
