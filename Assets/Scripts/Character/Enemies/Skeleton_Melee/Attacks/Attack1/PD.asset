@@ -17,6 +17,8 @@ MonoBehaviour:
   Animator: {fileID: 0}
   Scale: 2
   Color: {r: 1, g: 1, b: 1, a: 1}
-  CollisionRadius: 2
+  collider:
+    m_Center: {x: 0, y: 0.04, z: 0}
+    m_Extent: {x: 0.5, y: 0.3, z: 0}
   CollisionTags:
   - Player

@@ -31,12 +31,6 @@ namespace BulletHell
             ProjectileCollider = GetComponent<BoxCollider2D>();
         }
 
-        [ContextMenu("Test")]
-        public void Test()
-        {
-            Initialize(Data);
-        }
-
         public void Initialize(ProjectileData data)
         {
             Data = data;
