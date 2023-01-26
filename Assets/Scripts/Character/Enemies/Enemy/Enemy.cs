@@ -1,3 +1,4 @@
+using BulletHell;
 using BulletHell.Enemies;
 using BulletHell.Enemies.Detection;
 using BulletHell.Stats;
@@ -20,6 +21,7 @@ public class Enemy : Character
     EnemyDetection _detection;
     EnemyMovement _enemyMovement;
 
+    public bool Invincible { get; set; } = false;
     bool _flipped = false;
     Vector3 _defaultScale;
 
@@ -59,9 +61,20 @@ public class Enemy : Character
 
     public override void TakeDamage(DamageInfo damage)
     {
-        base.TakeDamage(damage);
+        if(Invincible) { return; }
 
-        DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
+        Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
+
+        Camera.main.Shake(0.1f, 0.3f);
+
+        if (Stats["Hp"].Value <= 0) {
+            OnDeath();
+        }
+
+        _brain.SetState(EnemyBrain.EnemyStates.Staggered);
+
+
+        //DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
     }
 
     public void UpdateDirection()

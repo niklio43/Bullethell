@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Stats;
+using BulletHell;
 
 public class Character : MonoBehaviour
 {
     public Stats Stats;
     protected SpriteRenderer _spriteRenderer;
     protected Animator _animator;
+
     private void Start()
     {
         Initialize();
@@ -24,7 +26,7 @@ public class Character : MonoBehaviour
     {
         Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
 
-        CameraShake.Shake(0.1f, 0.3f);
+        Camera.main.Shake(0.1f, 0.3f);
 
         if (Stats["Hp"].Value <= 0)
         {

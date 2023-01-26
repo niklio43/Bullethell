@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928c8b0a5e078df478385f7e8c6480b3, type: 3}
   m_Name: Skeleton_Melee_Attack1
   m_EditorClassIdentifier: 
+  Id: -1
   _icon: {fileID: 0}
   _name: 
   _description: 
   _maxAmount: 1
   _coolDownTime: 1
   _behaviours:
-  - {fileID: 11400000, guid: 7f028fd25fdaa5747a4292d0832cb51d, type: 2}
+  - {fileID: 11400000, guid: 18525e84a4b241b4185ad0024e527050, type: 2}

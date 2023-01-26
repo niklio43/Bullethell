@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: EnemySwingBehaviour
   m_EditorClassIdentifier: 
   _waitTime: 0
-  _castTime: 0.4
+  _castTime: 0
   _animations:
   - _animationHost: 1
     _clip: {fileID: 7400000, guid: 854faca61fd2ecb47b860453ec5596f3, type: 2}
-  _vfx: {fileID: 8926484042661614526, guid: 5d7155e1f6a9c424899b50fa7fdc44ef, type: 3}
+  - _animationHost: 1
+    _clip: {fileID: 7400000, guid: 9cda76cb3aed4c145a7c7edcf66daca7, type: 2}
+  _emitterData: {fileID: 11400000, guid: 4b764f23e59778e448b3ac40906f19aa, type: 2}
+  _damageValues:
+  - Type: 0
+    Value: 10

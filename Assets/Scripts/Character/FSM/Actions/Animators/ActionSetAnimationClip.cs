@@ -23,6 +23,7 @@ namespace BulletHell.FiniteStateMachine
         protected override void OnEnter()
         {
             _animator.Play(_clipName);
+            _animator.Update(Time.deltaTime);
         }
     }
 }
