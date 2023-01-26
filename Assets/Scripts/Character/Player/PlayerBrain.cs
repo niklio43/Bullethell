@@ -26,7 +26,6 @@ namespace BulletHell.Player
                Default.SetTransition("interacting", PlayerStates.Interacting);
                Default.SetTransition("dashing", PlayerStates.Dashing)
                .Update((action) => {
-                   //conditiong for transition
                    if (_player.IsDashing)
                    {
                        action.Transition("dashing");
@@ -40,7 +39,6 @@ namespace BulletHell.Player
            .State(PlayerStates.Interacting, (interacting) => {
                interacting.SetTransition("default", PlayerStates.Default)
                .Update((action) => {
-                   //conditiong for transition
                    if (_player.IsInteracting) return;
                    action.Transition("default");
                });
