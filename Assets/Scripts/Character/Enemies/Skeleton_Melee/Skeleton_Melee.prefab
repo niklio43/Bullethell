@@ -260,7 +260,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -347,6 +347,10 @@ PrefabInstance:
     - target: {fileID: 2859304183926166685, guid: d3200ea34826a544aa12630f21e3d300, type: 3}
       propertyPath: m_Name
       value: weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081799749064397723, guid: d3200ea34826a544aa12630f21e3d300, type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9105318318262002928, guid: d3200ea34826a544aa12630f21e3d300, type: 3}
       propertyPath: m_LocalScale.x
