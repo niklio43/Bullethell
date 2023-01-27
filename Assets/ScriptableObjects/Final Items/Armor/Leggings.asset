@@ -25,7 +25,7 @@ MonoBehaviour:
       Id: Cripple
       type: 0
       Value: -2
-  sprite: {fileID: -538765877, guid: aa04c1d8ca98f1e4fa6283fa20baf934, type: 3}
+  sprite: {fileID: 21300000, guid: 3aafee69f299e9b4094577d027736322, type: 3}
   itemName: Rare Legwear
   rarity: 1
   itemType: 3

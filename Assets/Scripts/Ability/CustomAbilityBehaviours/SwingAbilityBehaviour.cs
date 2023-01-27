@@ -14,7 +14,7 @@ namespace BulletHell.Abilities
         [SerializeField] VisualEffectAsset _vfx;
         protected override void Perform()
         {
-            DetectColliders(1, _ability.Owner);
+            DetectColliders(20, _ability.Owner);
         }
 
         //TODO Add additional functionality.
@@ -30,7 +30,7 @@ namespace BulletHell.Abilities
                 GameObject other = collider.gameObject;
                 if (other.CompareTag("Enemy"))
                 {
-                    List<DamageValue> _damage = new List<DamageValue>() { new DamageValue(DamageType.rawDamage, 1) };
+                    List<DamageValue> _damage = new List<DamageValue>() { new DamageValue(DamageType.rawDamage, damage) };
 
                     other.GetComponent<Enemy>().TakeDamage(new DamageInfo(_damage));
                 }

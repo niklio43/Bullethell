@@ -13,13 +13,13 @@ namespace BulletHell.Player
         Vector2 _movementInput;
         bool _isDashing = false;
         bool _isInteracting = false;
-        [HideInInspector] public Weapon Weapon;
 
         [SerializeField] List<Ability> _abilities = new List<Ability>();
 
         [SerializeField] PlayerAfterImageSprite _afterImage;
         [SerializeField] float _amountOfImages = 4;
         [SerializeField] float _dashTime = .1f;
+        public PlayerAimWeapon Aim;
 
         ObjectPool<PlayerAfterImageSprite> _afterImagePool;
 
@@ -34,8 +34,6 @@ namespace BulletHell.Player
         void Awake()
         {
             Initialize();
-
-            Weapon = null;
 
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, (int)_amountOfImages, "AfterImagePool");
 
@@ -65,14 +63,6 @@ namespace BulletHell.Player
 
             if (_movementInput == Vector2.zero) { _animator.Play("Idle"); return; }
             _animator.Play("Walking");
-        }
-
-        public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
-        {
-            if (Weapon == null) { Debug.Log("No Weapon Error"); return; }
-            if (abilityIndex > Weapon.AbilitySlot.Count - 1 || Weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
-
-            Weapon.AbilitySlot[abilityIndex].Cast();
         }
 
         public void Move(InputAction.CallbackContext context)

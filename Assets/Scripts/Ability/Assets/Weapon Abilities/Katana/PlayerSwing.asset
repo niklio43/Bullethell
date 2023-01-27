@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ec55ab16fa74a45a5f235f80f7d285, type: 3}
+  m_Name: PlayerSwing
+  m_EditorClassIdentifier: 
+  _waitTime: 0
+  _castTime: 0
+  _animations:
+  - _animationHost: 1
+    _clip: {fileID: 7400000, guid: 3b61dc5520f28914a98a34abe6bfe2fa, type: 2}
+  _emitterData: {fileID: 11400000, guid: 2cf287de298164845b3054bd5d96b9ca, type: 2}
+  _damageValues:
+  - Type: 0
+    Value: 20

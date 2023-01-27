@@ -2,6 +2,7 @@ using BulletHell.Emitters;
 using BulletHell.Stats;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.Player;
 
 namespace BulletHell.Abilities
 {
@@ -18,8 +19,14 @@ namespace BulletHell.Abilities
         protected override void Initialize()
         {
             _emitterObject = new GameObject($"{_ability.GetName()} (Emitter)").AddComponent<Emitter>();
-            _emitterObject.transform.SetParent(_ability.Owner.GetComponent<Enemy>().Aim.transform);
+
+            if (_ability.Owner.TryGetComponent(out Enemy enemy))
+                _emitterObject.transform.SetParent(enemy.Aim.transform);
+            else if (_ability.Owner.TryGetComponent(out PlayerController player))
+                _emitterObject.transform.SetParent(player.Aim.transform);
+
             _emitterObject.transform.localPosition = Vector3.zero;
+            _emitterObject.transform.rotation = new Quaternion(0, 0, 0, 0);
             _emitterObject.Data = _emitterData;
             _emitterObject.AutoFire = false;
         }
@@ -32,9 +39,10 @@ namespace BulletHell.Abilities
         {
             DamageInfo damage = new DamageInfo(_damageValues);
 
-            if (_ability.Owner.TryGetComponent(out Character character)) {
+            if (_ability.Owner.TryGetComponent(out Character character))
+            {
                 damage = DamageCalculator.CalculateDamage(damage, character.Stats);
-            
+
             }
 
             _emitterObject.SetDamage(damage);

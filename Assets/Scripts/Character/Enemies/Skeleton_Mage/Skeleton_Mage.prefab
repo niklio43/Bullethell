@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 5960100090503568517}
   - component: {fileID: 8461412192270030077}
   - component: {fileID: 6864627796607931774}
+  - component: {fileID: 3470284688201309823}
   m_Layer: 7
   m_Name: Skeleton_Mage
   m_TagString: Enemy
@@ -109,6 +110,13 @@ MonoBehaviour:
   Aim: {fileID: 839990684}
   Weapon: {fileID: 0}
   _brain: {fileID: 11400000, guid: f095d9666b0d9d24aa3a3903dcbbe46b, type: 2}
+  _dropTable:
+  - Item: {fileID: 11400000, guid: 50341da266b037e4fba199f25d005ee0, type: 2}
+    Chance: 0.203
+  - Item: {fileID: 11400000, guid: 2cc6a3e460061ab4fb78a27aeee193f5, type: 2}
+    Chance: 1
+  - Item: {fileID: 11400000, guid: 174aa667531533b44b2e1d4e1870af3c, type: 2}
+    Chance: 0.129
   PreferredDistance: 3.38
   AttackDistance: 3.49
 --- !u!114 &8461412192270030075
@@ -266,3 +274,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.15836906}
   m_EdgeRadius: 0
+--- !u!114 &3470284688201309823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461412192270030066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e67d786693d85d4e993f88f0b970de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

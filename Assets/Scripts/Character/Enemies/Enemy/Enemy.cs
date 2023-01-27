@@ -17,6 +17,7 @@ public class Enemy : Character
     public EnemyWeapon Weapon;
 
     [SerializeField] EnemyBrain _brain;
+    [SerializeField] List<ItemDrop> _dropTable = new List<ItemDrop>();
 
     EnemyDetection _detection;
     EnemyMovement _enemyMovement;
@@ -69,6 +70,7 @@ public class Enemy : Character
 
         if (Stats["Hp"].Value <= 0) {
             OnDeath();
+            GetComponent<DropRandomLoot>().DropItem(_dropTable);
         }
 
         _brain.SetState(EnemyBrain.EnemyStates.Staggered);
