@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSwing
   m_EditorClassIdentifier: 
   _waitTime: 0
-  _castTime: 0
+  _castTime: 0.183
   _animations:
   - _animationHost: 1
     _clip: {fileID: 7400000, guid: 3b61dc5520f28914a98a34abe6bfe2fa, type: 2}

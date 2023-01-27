@@ -38,7 +38,7 @@ public class WeaponController : MonoBehaviour
     public void UnAssignWeapon(Weapon weapon)
     {
         Debug.Log("testerobama");
-        //weapon.Uninitialize();
+        weapon.Uninitialize();
         GetComponent<SpriteRenderer>().sprite = null;
 
         GetComponent<AbilityHolder>().AddAbility(null);

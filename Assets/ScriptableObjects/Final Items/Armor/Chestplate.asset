@@ -17,7 +17,7 @@ MonoBehaviour:
     Name: Chestplate
     Id: 0
     buffs:
-    - Stat: Def
+    - Stat: Defense
       Id: Iron Skin
       type: 0
       Value: 10

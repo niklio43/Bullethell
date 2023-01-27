@@ -17,7 +17,7 @@ MonoBehaviour:
     Name: Helmet
     Id: 1
     buffs:
-    - Stat: Def
+    - Stat: Defense
       Id: Hard Headed
       type: 1
       Value: 0.1

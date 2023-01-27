@@ -9505,9 +9505,9 @@ MonoBehaviour:
       Value: 100
     - Name: MaxHp
       Value: 100
-    - Name: Def
-      Value: 10
-    - Name: Str
+    - Name: Defense
+      Value: 10000
+    - Name: Strength
       Value: 3
     - Name: MoveSpeed
       Value: 5
