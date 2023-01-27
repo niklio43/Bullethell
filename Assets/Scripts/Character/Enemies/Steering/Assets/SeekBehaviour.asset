@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c84b197f8cec041a85cbce61f37171, type: 3}
   m_Name: SeekBehaviour
   m_EditorClassIdentifier: 
-  Weight: 0.5
+  Weight: 0.3
   Margin: 0.3
