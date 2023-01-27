@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FoldOutGeneral: 1
   Delay: 1000
-  MaxProjectiles: 10
+  MaxProjectiles: 50
   RotationSpeed: 0
   FoldOutProjectile: 1
   ProjectileData: {fileID: 11400000, guid: 9c804f785f32dba4c979abf7a77a631e, type: 2}
-  TimeToLive: 2.2
+  TimeToLive: 3
   Speed: 10
   Acceleration: 1
-  Gravity: 0.2
+  Gravity: 0
   GravityPoint: {x: 0, y: 0}
   FoldOutEmitter: 1
   EmitterPoints: 10
