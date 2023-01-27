@@ -67,10 +67,10 @@ namespace BulletHell
             Pool.Release(this);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(!Data.CollisionTags.Contains(other.gameObject.tag)) { return; }
-            if(other.TryGetComponent(out Character character)) {
+            if (!Data.CollisionTags.Contains(collision.gameObject.tag)) { return; }
+            if (collision.TryGetComponent(out Character character)) {
                 if (Damage != null)
                     character.TakeDamage(Damage);
             }
