@@ -6,16 +6,19 @@ using BulletHell.Abilities;
 using UnityEngine.VFX;
 using System;
 using BulletHell.Player;
+using UnityEngine.InputSystem;
 
 public class WeaponController : MonoBehaviour
 {
     public Transform CircleOrigin;
     public float Radius;
+    Weapon _weapon;
+    [SerializeField] PlayerController player;
 
     public void AssignWeapon(Weapon weapon)
     {
         Debug.Log("Assign Weapon");
-        weapon.Initialize(gameObject);
+        weapon.Initialize(player.gameObject, gameObject);
 
         Animator animator = GetComponent<Animator>();
 
@@ -29,28 +32,39 @@ public class WeaponController : MonoBehaviour
         {
             GetComponent<AbilityHolder>().AddAbility(ability);
         }
-
-        var playerSM = transform.GetComponentInParent<PlayerController>();
-        playerSM.Weapon = weapon;
+        _weapon = weapon;
     }
 
     public void UnAssignWeapon(Weapon weapon)
     {
-        weapon.Uninitialize();
+        Debug.Log("testerobama");
+        //weapon.Uninitialize();
         GetComponent<SpriteRenderer>().sprite = null;
 
         GetComponent<AbilityHolder>().AddAbility(null);
 
         GetComponent<Animator>().runtimeAnimatorController = null;
-
-        var playerSM = transform.GetComponentInParent<PlayerController>();
-        playerSM.Weapon = null;
+        _weapon = null;
     }
 
     //TODO Add additional functionality.
     public void FillAbilitySlot(Weapon weapon)
     {
         weapon.AddAbility(weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)], weapon, gameObject);
+    }
+
+    public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
+    {
+        if (_weapon == null) { Debug.Log("No Weapon Error"); return; }
+        if (abilityIndex > _weapon.AbilitySlot.Count - 1 || _weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
+
+        _weapon.AbilitySlot[abilityIndex].Cast(ResetAnimation);
+    }
+
+    void ResetAnimation()
+    {
+        Debug.Log("obama");
+        GetComponent<Animator>().Play("Idle");
     }
 
     #region Component Caching

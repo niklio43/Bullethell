@@ -29,8 +29,7 @@ public class DropRandomLoot : MonoBehaviour, IDropLoot
         {
             GameObject droppedItem = new GameObject(item[i].ItemName);
 
-            droppedItem.transform.position = new Vector3(transform.position.x + Random.Range(-3f, 3f), transform.position.y + Random.Range(-3f, 3f));
-            droppedItem.transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+            droppedItem.transform.position = new Vector3(transform.position.x + Random.Range(-1.5f, 1.5f), transform.position.y + Random.Range(-3f, 3f));
 
             SpriteRenderer sr = droppedItem.AddComponent<SpriteRenderer>();
             sr.sprite = item[i].Sprite;
@@ -38,7 +37,11 @@ public class DropRandomLoot : MonoBehaviour, IDropLoot
             DroppedItem di = droppedItem.AddComponent<DroppedItem>();
             di._item = item[i];
 
+            Collider2D col = droppedItem.AddComponent<CircleCollider2D>();
+            col.isTrigger = true;
+
             droppedItem.layer = 6;
+            sr.sortingLayerID = SortingLayer.NameToID("Top");
         }
     }
 

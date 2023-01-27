@@ -21,7 +21,7 @@ MonoBehaviour:
       Id: Iron Skin
       type: 0
       Value: 10
-  sprite: {fileID: -1257856410, guid: aa04c1d8ca98f1e4fa6283fa20baf934, type: 3}
+  sprite: {fileID: 21300000, guid: 140af614e391bf142b8bb809d479fa51, type: 3}
   itemName: Common Chestwear
   rarity: 0
   itemType: 2

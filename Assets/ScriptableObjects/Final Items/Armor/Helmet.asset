@@ -21,7 +21,7 @@ MonoBehaviour:
       Id: Hard Headed
       type: 1
       Value: 0.1
-  sprite: {fileID: -434624252, guid: aa04c1d8ca98f1e4fa6283fa20baf934, type: 3}
+  sprite: {fileID: 21300000, guid: b5e9e30538895cc4e959de57d278ebf2, type: 3}
   itemName: Common Headgear
   rarity: 0
   itemType: 1

@@ -6,6 +6,7 @@ using BulletHell.Player;
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] PlayerUI _playerUI;
+    [SerializeField] WeaponController _weaponController;
     PlayerController _player;
     PlayerInputs _inputs;
     PlayerInteracter playerInteracter;
@@ -22,9 +23,9 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Dash.performed += ctx => _player.Dash(0, ctx);
 
         //Ability
-        _inputs.Player.AbilityQ.performed += ctx => _player.Attack(1, ctx);
-        _inputs.Player.AbilityE.performed += ctx => _player.Attack(2, ctx);
-        _inputs.Player.AbilityR.performed += ctx => _player.Attack(3, ctx);
+        _inputs.Player.AbilityQ.performed += ctx => _weaponController.Attack(1, ctx);
+        _inputs.Player.AbilityE.performed += ctx => _weaponController.Attack(2, ctx);
+        _inputs.Player.AbilityR.performed += ctx => _weaponController.Attack(3, ctx);
 
         //Move
         _inputs.Player.Move.performed += ctx => _player.Move(ctx);
@@ -35,7 +36,7 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Interact.performed += ctx => playerInteracter.Interact();
 
         //Fire
-        _inputs.Player.Fire.performed += ctx => _player.Attack(0, ctx);
+        _inputs.Player.Fire.performed += ctx => _weaponController.Attack(0, ctx);
         #endregion
     }
 

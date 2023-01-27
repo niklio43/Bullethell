@@ -13,14 +13,14 @@ public abstract class Weapon : Item
 
     public List<Ability> AbilitySlot { get { return _abilitySlot; } set { _abilitySlot = value; } }
 
-    public void Initialize(GameObject owner)
+    public void Initialize(GameObject owner, GameObject host)
     {
         Debug.Log("weapon init");
         for (int i = 0; i < _abilitySlot.Count; i++)
         {
             _abilitySlot[i] = database.abilities[_abilitySlot[i].Id];
             _abilitySlot[i] = Instantiate(_abilitySlot[i]);
-            _abilitySlot[i].Initialize(owner);
+            _abilitySlot[i].Initialize(owner, host);
         }
     }
 
