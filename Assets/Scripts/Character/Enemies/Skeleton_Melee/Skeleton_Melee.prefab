@@ -110,8 +110,8 @@ MonoBehaviour:
   Aim: {fileID: 4533019207069723459}
   Weapon: {fileID: 8265819423944410714}
   _brain: {fileID: 11400000, guid: 395b3f64103f3c94ea9dc95e99181437, type: 2}
-  PreferredDistance: 0.59
-  AttackDistance: 0.9
+  PreferredDistance: 0.8
+  AttackDistance: 1.2
 --- !u!114 &5441612227424731684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -329,6 +329,10 @@ PrefabInstance:
     - target: {fileID: 2859304183926166685, guid: d3200ea34826a544aa12630f21e3d300, type: 3}
       propertyPath: m_Name
       value: weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081799749064397723, guid: d3200ea34826a544aa12630f21e3d300, type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9105318318262002928, guid: d3200ea34826a544aa12630f21e3d300, type: 3}
       propertyPath: m_LocalScale.x
