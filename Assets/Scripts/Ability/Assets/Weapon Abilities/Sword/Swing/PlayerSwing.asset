@@ -16,7 +16,9 @@ MonoBehaviour:
   _castTime: 0.183
   _animations:
   - _animationHost: 1
-    _clip: {fileID: 7400000, guid: 854faca61fd2ecb47b860453ec5596f3, type: 2}
+    _clip: {fileID: 7400000, guid: e457b9ce808c93949b0ba0945e3d800d, type: 2}
+  - _animationHost: 1
+    _clip: {fileID: 7400000, guid: 4828ba8b845a3684a9185018d7bda922, type: 2}
   _emitterData: {fileID: 11400000, guid: 2cf287de298164845b3054bd5d96b9ca, type: 2}
   _damageValues:
   - Type: 0

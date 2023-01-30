@@ -26,8 +26,6 @@ public class Character : MonoBehaviour
     {
         Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
 
-        Camera.main.Shake(0.1f, 0.3f);
-
         if (Stats["Hp"].Value <= 0)
         {
             OnDeath();

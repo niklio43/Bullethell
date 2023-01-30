@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b37f240cf4959745b109d7160aee18d
+guid: fa1b05eedbe144641a055c1aa17a5d1d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skeleton_Mage_Staggert_0
+      name: Skeleton_Mage_Stagger_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc291161b6ae41244aa7dbc4d4bd4272
-      internalID: 232379243
+      spriteID: 0c789640ce4c5864ca9816097bfcc0eb
+      internalID: -462567449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_Mage_Staggert_1
+      name: Skeleton_Mage_Stagger_1
       rect:
         serializedVersion: 2
         x: 48
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38352a30864a4944787dee8745867cba
-      internalID: -1818275488
+      spriteID: 3c8378af0bcc42841921ebf6135d6efb
+      internalID: 443885955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_Mage_Staggert_2
+      name: Skeleton_Mage_Stagger_2
       rect:
         serializedVersion: 2
         x: 96
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c9fe2c5cc582e24b9fa42dc703585f7
-      internalID: 537261495
+      spriteID: d954d490e7939d842b46d66132b4249d
+      internalID: 1572570870
       vertices: []
       indices: 
       edges: []
@@ -178,9 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton_Mage_Staggert_1: -1818275488
-      Skeleton_Mage_Staggert_0: 232379243
-      Skeleton_Mage_Staggert_2: 537261495
+      Skeleton_Mage_Stagger_1: 443885955
+      Skeleton_Mage_Stagger_0: -462567449
+      Skeleton_Mage_Stagger_2: 1572570870
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

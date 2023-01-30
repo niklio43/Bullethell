@@ -58,13 +58,7 @@ public class WeaponController : MonoBehaviour
         if (_weapon == null) { Debug.Log("No Weapon Error"); return; }
         if (abilityIndex > _weapon.AbilitySlot.Count - 1 || _weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
 
-        _weapon.AbilitySlot[abilityIndex].Cast(ResetAnimation);
-    }
-
-    void ResetAnimation()
-    {
-        Debug.Log("obama");
-        GetComponent<Animator>().Play("Idle");
+        _weapon.AbilitySlot[abilityIndex].Cast();
     }
 
     #region Component Caching

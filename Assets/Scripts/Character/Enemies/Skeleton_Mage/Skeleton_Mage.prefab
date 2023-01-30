@@ -103,7 +103,7 @@ MonoBehaviour:
     - Name: MaxHp
       Value: 100
     - Name: MoveSpeed
-      Value: 3
+      Value: 2
   MovementType: 1
   Target: {fileID: 0}
   CanMove: 0

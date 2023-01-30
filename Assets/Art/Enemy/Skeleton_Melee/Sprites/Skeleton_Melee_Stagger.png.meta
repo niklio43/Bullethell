@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: afa61819c53ed5242b17c88c764770e8
+guid: d029dc9c75e18ea478f9103574aa57c8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skeleton_Melee_Stagger_0
+      name: Skeleton_Melee_Stagger 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd22a7d6f61238047aff7a6179e50d0b
-      internalID: -701769678
+      spriteID: c8cd30c199990d34196cf83b238a3ec5
+      internalID: -2071583070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_Melee_Stagger_1
+      name: Skeleton_Melee_Stagger 1_1
       rect:
         serializedVersion: 2
         x: 48
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19f6fca6cb6b30247a0683d5ea626ff5
-      internalID: -959212820
+      spriteID: 722ff869a8fea574ea34bd539931d494
+      internalID: -735313426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skeleton_Melee_Stagger_2
+      name: Skeleton_Melee_Stagger 1_2
       rect:
         serializedVersion: 2
         x: 96
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebbca7bb9441a9d4b8f935baaeaacd78
-      internalID: -1111010078
+      spriteID: d0422de774c9b024b8522d2bc267ab6a
+      internalID: -1832440363
       vertices: []
       indices: 
       edges: []
@@ -178,9 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton_Melee_Stagger_0: -701769678
-      Skeleton_Melee_Stagger_2: -1111010078
-      Skeleton_Melee_Stagger_1: -959212820
+      Skeleton_Melee_Stagger 1_1: -735313426
+      Skeleton_Melee_Stagger 1_0: -2071583070
+      Skeleton_Melee_Stagger 1_2: -1832440363
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

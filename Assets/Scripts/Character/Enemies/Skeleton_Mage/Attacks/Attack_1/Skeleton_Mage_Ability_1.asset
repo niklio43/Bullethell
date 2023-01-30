@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928c8b0a5e078df478385f7e8c6480b3, type: 3}
   m_Name: Skeleton_Mage_Ability_1
   m_EditorClassIdentifier: 
+  Id: 2
   _icon: {fileID: 0}
   _name: Mage1
   _description: 
   _maxAmount: 1
   _coolDownTime: 3
+  _screenShakeDuration: 0
+  _screenShakeAmplitude: 0
   _behaviours:
   - {fileID: 11400000, guid: 0c36d1f6f6a5562499979e416cd5668e, type: 2}
-  _animations:
-  - _animationHost: 0
-    _clip: {fileID: 7400000, guid: 721a82f39a141494d8f1f152a01cb271, type: 2}
