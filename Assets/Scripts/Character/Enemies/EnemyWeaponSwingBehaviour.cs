@@ -30,9 +30,10 @@ namespace BulletHell.Abilities
             _emitterObject.Data = _emitterData;
             _emitterObject.AutoFire = false;
         }
+
         public override void Uninitialize()
         {
-            MonoBehaviour.Destroy(_emitterObject.gameObject);
+            //MonoBehaviour.Destroy(_emitterObject.gameObject);
         }
 
         protected override void Perform()
