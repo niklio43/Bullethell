@@ -18,5 +18,7 @@ MonoBehaviour:
   _description: 
   _maxAmount: 1
   _coolDownTime: 6
+  _screenShakeDuration: 0
+  _screenShakeAmplitude: 0
   _behaviours:
   - {fileID: 11400000, guid: 21168247ad928084fb5ec702899583c8, type: 2}

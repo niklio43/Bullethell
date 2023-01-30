@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using BulletHell.Abilities;
+using BulletHell.Stats;
 
 namespace BulletHell.Player
 {
@@ -85,6 +86,14 @@ namespace BulletHell.Player
             afterImage.Pool = _afterImagePool;
 
             return afterImage;
+        }
+
+        public override void TakeDamage(DamageInfo damage)
+        {
+            base.TakeDamage(damage);
+
+            Camera.main.Shake(0.1f, 0.2f);
+
         }
 
         #region Component Caching

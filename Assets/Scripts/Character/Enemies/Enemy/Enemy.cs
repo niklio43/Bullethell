@@ -66,7 +66,7 @@ public class Enemy : Character
 
         Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
 
-        Camera.main.Shake(0.1f, 0.3f);
+        Camera.main.Shake(0.075f, 0.1f);
 
         if (Stats["Hp"].Value <= 0) {
             OnDeath();

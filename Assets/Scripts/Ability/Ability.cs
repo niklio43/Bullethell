@@ -20,6 +20,10 @@ namespace BulletHell.Abilities
         [SerializeField] int _maxAmount;
         [SerializeField] float _coolDownTime;
 
+        [Header("Screenshake")]
+        [SerializeField] float _screenShakeDuration = 0;
+        [SerializeField] float _screenShakeAmplitude = 0;
+
         [Header("Ability Behaviours")]
         [SerializeField] List<BaseAbilityBehaviour> _behaviours;        #region Getters
         public bool CanCast() => (_currentAmount > 0);
@@ -74,6 +78,7 @@ namespace BulletHell.Abilities
             await DoAbility();
 
             _abilityState = AbilityState.Casting;
+            Camera.main.Shake(_screenShakeDuration, _screenShakeAmplitude);
             castDelegate?.Invoke();
             _abilityState = AbilityState.Idle;
         }
