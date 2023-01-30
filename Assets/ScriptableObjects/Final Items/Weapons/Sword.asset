@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bcd0f6d5e6c47e4f8befedf53a971cc, type: 3}
-  m_Name: Katana
+  m_Name: Sword
   m_EditorClassIdentifier: 
   Stackable: 0
   data:
-    Name: Katana
+    Name: Sword
     Id: 3
     buffs:
     - Stat: Strength
@@ -27,10 +27,11 @@ MonoBehaviour:
       Value: 1
   _abilitySlot:
   - {fileID: 0}
+  - {fileID: 0}
   AnimatorController: {fileID: 22100000, guid: c6719dd60da867449bf0b51b1a42df54, type: 2}
   database: {fileID: 11400000, guid: d1c92bf548e2e194ea1b7091ac1b436e, type: 2}
-  sprite: {fileID: 21300000, guid: 8374627da67e6a047a342ec4ed126d54, type: 3}
-  itemName: Legendary Blood Katana
+  sprite: {fileID: 21300000, guid: 6e11ba03602bc3d4899ae5d656179702, type: 3}
+  itemName: fagsword
   pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}
   rarity: 3
   itemType: 0

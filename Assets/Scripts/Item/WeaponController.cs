@@ -37,14 +37,14 @@ public class WeaponController : MonoBehaviour
 
     public void UnAssignWeapon(Weapon weapon)
     {
-        Debug.Log("testerobama");
+        /*Debug.Log("testerobama");
         weapon.Uninitialize();
         GetComponent<SpriteRenderer>().sprite = null;
 
         GetComponent<AbilityHolder>().AddAbility(null);
 
         GetComponent<Animator>().runtimeAnimatorController = null;
-        _weapon = null;
+        _weapon = null;*/
     }
 
     //TODO Add additional functionality.
