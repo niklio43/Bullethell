@@ -49,10 +49,12 @@ namespace BulletHell.Player
 
         void Update()
         {
-            foreach(Ability ability in _abilities)
+            foreach (Ability ability in _abilities)
             {
                 ability.UpdateAbility(Time.deltaTime);
             }
+
+            if (_data != null) { _data.UpdateStatus(Time.deltaTime); }
         }
 
         void FixedUpdate()

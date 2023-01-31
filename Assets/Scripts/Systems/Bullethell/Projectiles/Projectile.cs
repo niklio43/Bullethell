@@ -25,6 +25,8 @@ namespace BulletHell
 
         [HideInInspector] public BoxCollider2D ProjectileCollider;
 
+        [SerializeField] StatusEffectData _data;
+
 
         private void Awake()
         {
@@ -71,6 +73,9 @@ namespace BulletHell
         {
             if (!Data.CollisionTags.Contains(collision.gameObject.tag)) { return; }
             if (collision.TryGetComponent(out Character character)) {
+                var effectable = collision.GetComponent<IEffectable>();
+                if (effectable != null)
+                    effectable.ApplyEffect(_data);
                 if (Damage != null)
                     character.TakeDamage(Damage);
             }

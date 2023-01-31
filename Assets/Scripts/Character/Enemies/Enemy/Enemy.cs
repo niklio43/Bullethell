@@ -51,6 +51,8 @@ public class Enemy : Character
 
     private void Update()
     {
+        if (_data != null) { _data.UpdateStatus(Time.deltaTime); }
+
         _brain.Update();
         DetectionData = _detection.Detect();
 
@@ -62,13 +64,14 @@ public class Enemy : Character
 
     public override void TakeDamage(DamageInfo damage)
     {
-        if(Invincible) { return; }
+        if (Invincible) { return; }
 
         Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
 
         Camera.main.Shake(0.075f, 0.1f);
 
-        if (Stats["Hp"].Value <= 0) {
+        if (Stats["Hp"].Value <= 0)
+        {
             OnDeath();
             GetComponent<DropRandomLoot>().DropItem(_dropTable);
         }
@@ -84,12 +87,14 @@ public class Enemy : Character
         if (Target == null) { return; }
         Vector2 targetDirection = Target.position - transform.position;
 
-        if(Vector2.Dot(targetDirection, Vector2.right) < 0 && !_flipped) {
+        if (Vector2.Dot(targetDirection, Vector2.right) < 0 && !_flipped)
+        {
             transform.localScale = new Vector3(_defaultScale.x * -1, _defaultScale.y, _defaultScale.z);
             _flipped = true;
             Aim.Flip();
         }
-        else if(Vector2.Dot(targetDirection, Vector2.right) > 0 && _flipped) {
+        else if (Vector2.Dot(targetDirection, Vector2.right) > 0 && _flipped)
+        {
             transform.localScale = _defaultScale;
             _flipped = false;
             Aim.Flip();
@@ -98,7 +103,8 @@ public class Enemy : Character
 
     public void UpdateTarget()
     {
-        if (DetectionData["Players"].Length > 0) {
+        if (DetectionData["Players"].Length > 0)
+        {
             Transform target = DetectionData["Players"].OrderBy(n => Vector2.Distance(transform.position, n.transform.position)).First().transform;
             SetTarget(target);
         }
@@ -129,12 +135,14 @@ public class Enemy : Character
     Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();
     public new T GetComponent<T>() where T : Component
     {
-        if (_cachedComponents.ContainsKey(typeof(T))) {
+        if (_cachedComponents.ContainsKey(typeof(T)))
+        {
             return (T)_cachedComponents[typeof(T)];
         }
 
         var component = base.GetComponent<T>();
-        if (component != null) {
+        if (component != null)
+        {
             _cachedComponents.Add(typeof(T), component);
         }
         return component;

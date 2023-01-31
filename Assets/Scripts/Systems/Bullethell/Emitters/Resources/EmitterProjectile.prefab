@@ -58,6 +58,7 @@ MonoBehaviour:
   Acceleration: 0
   Speed: 0
   ProjectileCollider: {fileID: 0}
+  _data: {fileID: 11400000, guid: f157de6c3edf20342b90290430d9e351, type: 2}
 --- !u!61 &8516594727224331802
 BoxCollider2D:
   m_ObjectHideFlags: 0
