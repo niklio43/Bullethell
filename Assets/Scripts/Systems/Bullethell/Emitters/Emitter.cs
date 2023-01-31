@@ -1,130 +1,73 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Stats;
+using BulletHell.Emitters.Projectiles;
 
 namespace BulletHell.Emitters
 {
-    public class Emitter : MonoBehaviour
+    public class Emitter
     {
-        public bool AutoFire = true;
-        public EmitterData Data;
-
-        DamageInfo _damage;
-
+        GameObject _owner;
+        Transform _transform;
+        EmitterData _data;
+        List<EmitterProjectile> _activeProjectiles;
         EmitterGroupsManager _emitterGroups;
-        public ObjectPool<Projectile> _pool { get; private set; }
-        float _interval = 0;
 
-        private void Start()
+        public Emitter(GameObject owner, EmitterData data)
         {
-            Initialize();
+            _owner = owner;
+            _data = data;
+
+            _transform = _owner.transform;
+            _activeProjectiles = new List<EmitterProjectile>();
+            _emitterGroups = new EmitterGroupsManager(owner.transform, _data);
         }
 
-        public void Initialize()
-        {
-            Data = Instantiate(Data);
-            _pool = new ObjectPool<Projectile>(CreateProjectile, Data.MaxProjectiles, name);
-            _emitterGroups = new EmitterGroupsManager(transform);
-        }
-
-        public void SetDamage(DamageInfo damage)
-        {
-            _damage = damage;
-        }
-
-        private void FixedUpdate()
-        {
-            Data.CenterRotation += Time.fixedDeltaTime * Data.RotationSpeed * 10;
-            Data.ParentRotation = transform.rotation.eulerAngles.z;
-            _emitterGroups.UpdateGroups(Data, Data.Modifiers);
-            UpdateEmitter(Time.fixedDeltaTime);
-        }
+        public void Uninitialize() => ClearAllProjectiles();
 
         public void UpdateEmitter(float dt)
         {
-            if (_interval > 0) {
-                _interval -= dt;
-            }
-
-
-            UpdateProjectiles(dt);
-            if (AutoFire && _interval <= 0) {
-                _interval += Data.Delay / 1000f;
-                FireProjectile();
-            }
-        }
-
-        Projectile CreateProjectile()
-        {
-            Projectile projectile = Instantiate(Data.ProjectilePrefab);
-            projectile.Pool = _pool;
-
-            return projectile;
+            _emitterGroups.UpdateGroups();
         }
 
         public void SetDirection(Vector2 direction)
         {
-            Data.Direction = direction;
-            _emitterGroups.UpdateGroups(Data, Data.Modifiers);
+            _data.Direction = direction;
+            _emitterGroups.UpdateGroups();
         }
 
-        public virtual void FireProjectile()
+        public virtual void FireProjectile(Character projectileOwner = null, DamageInfo damage = null)
         {
-            for (int i = 0; i < Mathf.Clamp(Data.EmitterPoints, 0, Data.MaxProjectiles); i++) {
-                Projectile projectile = _pool.Get();
+            for (int i = 0; i < Mathf.Clamp(_data.EmitterPoints, 0, _data.MaxProjectiles); i++) {
+                EmitterProjectile projectile = ProjectileManager.Instance.Get();
+                _activeProjectiles.Add(projectile);
 
-                EmitterModifier modifier = _emitterGroups[i].Modifier;
+                RuntimeEmitterProjectileData runTimeData = new RuntimeEmitterProjectileData();
 
-                ProjectileData projectileData = Data.ProjectileData;
-                float speed = Data.Speed;
-                float timeToLive = Data.TimeToLive;
-                float gravity = Data.Gravity;
-                float acceleration = Data.Acceleration;
-                Vector2 gravityPoint = Data.GravityPoint;
+                runTimeData.Position = _emitterGroups[i].Position;
+                runTimeData.Direction = _emitterGroups[i].Direction;
 
-                if (modifier != null) {
-                    if (modifier.ProjectileData != null) {
-                        projectileData = modifier.ProjectileData;
-                    }
+                runTimeData.Speed = _data.Speed;
+                runTimeData.Acceleration = _data.Acceleration;
+                runTimeData.Velocity = runTimeData.Direction * runTimeData.Speed;
 
-                    gravity = modifier.Gravity;
-                    gravityPoint = modifier.GravityPoint;
-                    speed = modifier.Speed;
-                    acceleration = modifier.Acceleration;
-                }
-
-                projectile.transform.position = _emitterGroups[i].Position;
-                projectile.Position = _emitterGroups[i].Position;
-                projectile.TimeToLive = timeToLive;
-                projectile.Speed = speed;
-                projectile.Acceleration = acceleration;
-                projectile.Gravity = gravity;
-                projectile.GravityPoint = gravityPoint;
-                projectile.Direction = _emitterGroups[i].Direction;
-                projectile.Velocity = _emitterGroups[i].Direction * speed;
-                projectile.Damage = _damage;
-                projectile.Initialize(projectileData);
+                runTimeData.Gravity = _data.Gravity;
+                runTimeData.GravityPoint = _data.GravityPoint;
+                runTimeData.TimeToLive = _data.TimeToLive;
+                
+                projectile.Initialize(_data.ProjectileData, runTimeData);
+                projectile.SetOwner(projectileOwner);
+                projectile.SetDamage(damage);
             }
         }
 
-        protected virtual void UpdateProjectiles(float dt)
+        protected void ReturnProjectile(EmitterProjectile projectile) => projectile.ResetObject();
+        public void ClearAllProjectiles()
         {
-            for (int i = 0; i < _pool.Active.Count; i++) {
-                UpdateProjectile(_pool.Members[_pool.Active[i]], dt);
+            foreach (EmitterProjectile projectile in _activeProjectiles) {
+                projectile.ResetObject();
             }
         }
 
-        protected virtual void UpdateProjectile(Projectile projectile, float dt)
-        {
-            Vector2 gravity = (((Vector2)transform.position + projectile.GravityPoint) - projectile.Position).normalized * projectile.Gravity;
-            projectile.Velocity += (projectile.Direction * projectile.Acceleration * dt) + gravity;
-            projectile.Position += projectile.Velocity * dt;
-            projectile.TimeToLive -= dt;
-
-        }
-
-        protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();
-        public void ClearAllProjectiles() => _pool.Dispose();
-        private void OnDisable() => ClearAllProjectiles();
     }
 }

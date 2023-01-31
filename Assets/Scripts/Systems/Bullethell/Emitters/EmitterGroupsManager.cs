@@ -10,19 +10,20 @@ namespace BulletHell.Emitters
         public EmitterGroup this[int i] => _emitterGroups[i];
 
         List<EmitterGroup> _emitterGroups;
-
+        EmitterData _emitterData;
         Transform _transform;
 
-        public EmitterGroupsManager(Transform transform)
+        public EmitterGroupsManager(Transform transform, EmitterData emitterData)
         {
+            _emitterData = emitterData;
             _transform = transform;
             _emitterGroups = new List<EmitterGroup>();
         }
 
-        public void UpdateGroups(EmitterData emitterData, List<EmitterModifier> modifiers)
+        public void UpdateGroups()
         {
-            CreateGroups(emitterData.EmitterPoints);
-            RefreshGroups(emitterData, modifiers);
+            CreateGroups(_emitterData.EmitterPoints);
+            RefreshGroups();
         }
 
         public void CreateGroups(int amount)
@@ -35,37 +36,20 @@ namespace BulletHell.Emitters
                 _emitterGroups.Add(new EmitterGroup());
             }
         }
-        public void RefreshGroups(EmitterData emitterData, List<EmitterModifier> modifiers)
+        public void RefreshGroups()
         {
-            for (int n = 0; n < emitterData.EmitterPoints; n++) {
+            for (int n = 0; n < _emitterData.EmitterPoints; n++) {
 
-                _emitterGroups[n].ClearModifier();
-                EmitterModifier activeModifier = null;
+                float spread = n * _emitterData.Spread;
+                float pitch = _emitterData.Pitch;
+                float offset = _emitterData.Offset;
+                //float centerSpread = (Mathf.CeilToInt((emitterData.EmitterPoints - 1) / 2f)) * emitterData.Spread;
 
-                float spread = n * emitterData.Spread;
-                float pitch = emitterData.Pitch;
-                float offset = emitterData.Offset;
-                float centerSpread = (Mathf.CeilToInt((emitterData.EmitterPoints - 1) / 2f)) * emitterData.Spread;
+                float rotation = spread + _emitterData.CenterRotation + _emitterData.ParentRotation;
+                Vector2 positon = (Rotate(_emitterData.Direction, rotation).normalized * offset) + (Vector2)_transform.position;
+                Vector2 direction = Rotate(_transform.up, rotation + pitch).normalized;
 
-                for (int i = 0; i < modifiers.Count; i++) {
-                    if(!modifiers[i].Enabled) { continue; }
-                    if (((n + 1 + modifiers[i].Count) % modifiers[i].Factor) > 0) { continue; }
-
-                    activeModifier = modifiers[i];
-                    pitch = modifiers[i].Pitch;
-                    offset = modifiers[i].Offset;
-                    spread = n * emitterData.Spread;
-
-                    if(spread != centerSpread && modifiers[i].NarrowSpread != 0) {
-                        spread += Mathf.Sign(centerSpread - spread) * modifiers[i].NarrowSpread;
-                    }
-                }
-
-                float rotation = spread + emitterData.CenterRotation + emitterData.ParentRotation;
-                Vector2 positon = (Rotate(emitterData.Direction, rotation).normalized * offset) + (Vector2)_transform.position;
-                Vector2 direction = Rotate(emitterData.Direction, rotation + pitch).normalized;
-
-                _emitterGroups[n].Set(positon, direction, activeModifier);
+                _emitterGroups[n].Set(positon, direction);
             }
         }
     }

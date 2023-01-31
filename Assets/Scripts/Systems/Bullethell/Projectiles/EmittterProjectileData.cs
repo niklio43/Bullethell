@@ -5,15 +5,14 @@ using UnityEngine;
 using BulletHell.Emitters;
 using BulletHell.Stats;
 
-namespace BulletHell
+namespace BulletHell.Emitters.Projectiles
 {
     [CreateAssetMenu(fileName = "ProjectileData", menuName = "Emitters/ProjectileData")]
-    public class ProjectileData : ScriptableObject
+    public class EmittterProjectileData : ScriptableObject
     {
         public new string name = "NewProjectileData";
 
         public Sprite Sprite;
-        public RuntimeAnimatorController Animator;
         public float Scale = 1;
         public Color Color = Color.white;
         public Bounds collider;
