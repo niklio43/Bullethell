@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1943916754374656653}
-  - component: {fileID: 925088985354330676}
+  - component: {fileID: 1933210533740274540}
   - component: {fileID: 8516594727224331802}
   m_Layer: 0
   m_Name: EmitterProjectile
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &925088985354330676
+--- !u!114 &1933210533740274540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,22 +43,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2905024789166066893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c82167585c718144ca04b56d66710e8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 86a5cf7e4a5c3d34993a963bc55e1956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 0}
-  _spriteRenderer: {fileID: 8803372606578490048}
-  _animator: {fileID: 7154926116548339578}
-  Position: {x: 0, y: 0}
-  Velocity: {x: 0, y: 0}
-  Direction: {x: 0, y: 0}
-  GravityPoint: {x: 0, y: 0}
-  Gravity: 0
-  TimeToLive: 0
-  Acceleration: 0
-  Speed: 0
-  ProjectileCollider: {fileID: 0}
-  _data: {fileID: 11400000, guid: f157de6c3edf20342b90290430d9e351, type: 2}
 --- !u!61 &8516594727224331802
 BoxCollider2D:
   m_ObjectHideFlags: 0
