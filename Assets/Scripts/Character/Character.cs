@@ -4,16 +4,18 @@ using UnityEngine;
 using BulletHell.Stats;
 using BulletHell;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IEffectable
 {
     public Stats Stats;
     protected SpriteRenderer _spriteRenderer;
     protected Animator _animator;
+    protected StatusEffectData _data;
 
     private void Start()
     {
         Initialize();
     }
+
     public void Initialize()
     {
         Stats.TranslateListToDictionary();
@@ -64,5 +66,25 @@ public class Character : MonoBehaviour
             return;
         }
         Destroy(gameObject);
+    }
+
+    public void ApplyEffect(StatusEffectData data)
+    {
+        if (_data == null || _data.Stackable)
+        {
+            data.Initialize(this);
+            this._data = data;
+            _data.Perform();
+        }
+        else
+        {
+            _data.ResetAbility();
+        }
+    }
+
+    public void RemoveEffect()
+    {
+        Debug.Log("Removed Status Effect: " + _data.Name);
+        _data = null;
     }
 }
