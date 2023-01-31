@@ -19,10 +19,10 @@ namespace BulletHell.Emitters
             _emitterGroups = new List<EmitterGroup>();
         }
 
-        public void UpdateGroups(EmitterData emitterData, List<EmitterModifier> modifiers)
+        public void UpdateGroups(EmitterData emitterData)
         {
             CreateGroups(emitterData.EmitterPoints);
-            RefreshGroups(emitterData, modifiers);
+            RefreshGroups(emitterData);
         }
 
         public void CreateGroups(int amount)
@@ -35,7 +35,7 @@ namespace BulletHell.Emitters
                 _emitterGroups.Add(new EmitterGroup());
             }
         }
-        public void RefreshGroups(EmitterData emitterData, List<EmitterModifier> modifiers)
+        public void RefreshGroups(EmitterData emitterData)
         {
             for (int n = 0; n < emitterData.EmitterPoints; n++) {
 
@@ -45,21 +45,7 @@ namespace BulletHell.Emitters
                 float spread = n * emitterData.Spread;
                 float pitch = emitterData.Pitch;
                 float offset = emitterData.Offset;
-                float centerSpread = (Mathf.CeilToInt((emitterData.EmitterPoints - 1) / 2f)) * emitterData.Spread;
-
-                for (int i = 0; i < modifiers.Count; i++) {
-                    if(!modifiers[i].Enabled) { continue; }
-                    if (((n + 1 + modifiers[i].Count) % modifiers[i].Factor) > 0) { continue; }
-
-                    activeModifier = modifiers[i];
-                    pitch = modifiers[i].Pitch;
-                    offset = modifiers[i].Offset;
-                    spread = n * emitterData.Spread;
-
-                    if(spread != centerSpread && modifiers[i].NarrowSpread != 0) {
-                        spread += Mathf.Sign(centerSpread - spread) * modifiers[i].NarrowSpread;
-                    }
-                }
+                //float centerSpread = (Mathf.CeilToInt((emitterData.EmitterPoints - 1) / 2f)) * emitterData.Spread;
 
                 float rotation = spread + emitterData.CenterRotation + emitterData.ParentRotation;
                 Vector2 positon = (Rotate(emitterData.Direction, rotation).normalized * offset) + (Vector2)_transform.position;

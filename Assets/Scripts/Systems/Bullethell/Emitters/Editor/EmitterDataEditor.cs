@@ -26,7 +26,6 @@ namespace BulletHell.Emitters.Editor
         {
             CreateRoot();
             CreateDefaltInspector();
-            CreateModifierInspectors();
         }
 
         private void CreateRoot()
@@ -37,12 +36,6 @@ namespace BulletHell.Emitters.Editor
             _root.styleSheets.Add(sheet);
             TemplateContainer treeAsset = original.CloneTree();
             _root.Add(treeAsset);
-
-            Button addModifierBtn = _root.Query<Button>("button_add_modifier");
-            addModifierBtn.clicked += () => { AddNewModifier(); };
-
-            Button clearModifierBtn = _root.Query<Button>("button_clear_modifier");
-            clearModifierBtn.clicked += () => { ClearModifiers(); };
         }
 
         void CreateDefaltInspector()
@@ -96,70 +89,6 @@ namespace BulletHell.Emitters.Editor
             dataRoot.Add(emissionFoldout);
             #endregion
 
-        }
-
-        void CreateModifierInspectors()
-        {
-            List<EmitterModifier> modifiers = _target.Modifiers;
-            ScrollView modifierList = _root.Query<ScrollView>("modifiers_list").First();
-            modifierList.Clear();
-
-            for (int i = 0; i < modifiers.Count; i++) {
-                modifierList.Add(CreateModifierFoldout(modifiers[i]));
-            }
-        }
-
-        VisualElement CreateModifierFoldout(EmitterModifier modifier)
-        {
-            Editor editor = CreateEditor(modifier);
-
-            VisualElement modifierRoot = editor.CreateInspectorGUI();
-
-            GroupBox header = modifierRoot.Query<GroupBox>("modifier-header");
-            Button moveUpBtn = modifierRoot.Query<Button>("move-up");
-            Button moveDownBtn = modifierRoot.Query<Button>("move-down");
-            Button deleteBtn = modifierRoot.Query<Button>("delete-modifier");
-
-            moveUpBtn.clicked += () => { MoveUpModifier(modifier); };
-            moveDownBtn.clicked += () => { MoveDownModifier(modifier); };
-            deleteBtn.clicked += () => { RemoveModifier(modifier); };
-
-            return modifierRoot;
-        }
-
-        void AddNewModifier()
-        {
-            _target.AddModifier();
-            EditorUtility.SetDirty(_target);
-            CreateModifierInspectors();
-        }
-
-        void RemoveModifier(EmitterModifier modifier)
-        {
-            _target.DeleteModifier(modifier);
-            EditorUtility.SetDirty(_target);
-            CreateModifierInspectors();
-        }
-
-        void MoveUpModifier(EmitterModifier modifier)
-        {
-            _target.MoveUpModifier(modifier);
-            EditorUtility.SetDirty(_target);
-            CreateModifierInspectors();
-        }
-
-        void MoveDownModifier(EmitterModifier modifier)
-        {
-            _target.MoveDownModifier(modifier);
-            EditorUtility.SetDirty(_target);
-            CreateModifierInspectors();
-        }
-
-        void ClearModifiers()
-        {
-            _target.ClearModifiers();
-            EditorUtility.SetDirty(_target);
-            CreateModifierInspectors();
         }
 
         private void OnEnable()

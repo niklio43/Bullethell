@@ -6,15 +6,5 @@
             <ui:VisualElement name="horizontal-line" style="flex-direction: row; border-top-width: 1px; border-top-color: rgb(0, 0, 0); margin-left: -15px; margin-bottom: 5px; margin-right: -6px; margin-top: 5px;" />
             <ui:GroupBox name="emitter-data" style="align-items: stretch; margin-top: 3px; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 12px; margin-left: 0; margin-right: 0;" />
         </ui:VisualElement>
-        <ui:VisualElement name="horizontal-line" style="flex-direction: row; border-top-width: 1px; border-top-color: rgb(0, 0, 0); margin-left: -15px; margin-bottom: 5px; margin-right: -6px; margin-top: 5px;" />
-        <ui:VisualElement name="modifiers" style="background-color: rgba(65, 65, 65, 0); max-height: none; min-height: 50px; width: 100%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-top-width: 0; border-top-color: rgb(0, 0, 0); border-left-width: 0; border-right-width: 0; border-bottom-width: 0;">
-            <ui:GroupBox name="modifier_buttons" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-direction: row; justify-content: flex-start;">
-                <ui:Label text="Modifiers" display-tooltip-when-elided="true" name="Label" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 12px; -unity-font-style: bold; margin-bottom: 0; -unity-text-align: middle-left; width: 75px;" />
-                <ui:Button text="Add new modifier" display-tooltip-when-elided="true" name="button_add_modifier" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; margin-left: 0; margin-right: 3px; margin-top: 0; margin-bottom: 0; -unity-font-style: bold; padding-top: 3px; padding-bottom: 3px;" />
-                <ui:Button text="Clear Modifiers" display-tooltip-when-elided="true" name="button_clear_modifier" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; margin-left: 3px; margin-right: 0; margin-top: 0; margin-bottom: 0; -unity-font-style: bold; padding-top: 3px; padding-bottom: 3px;" />
-            </ui:GroupBox>
-            <ui:VisualElement name="horizontal-line" style="flex-direction: row; border-top-width: 1px; border-top-color: rgb(0, 0, 0); margin-left: -15px; margin-bottom: 7px; margin-right: -6px; margin-top: 5px;" />
-            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="modifiers_list" horizontal-scroller-visibility="Hidden" focusable="false" horizontal-page-size="-1" style="max-width: none; max-height: 400px; overflow: visible;" />
-        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
