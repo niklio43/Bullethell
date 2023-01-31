@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using BulletHell.Emitters.Projectiles;
 
 namespace BulletHell.Emitters
 {
@@ -17,7 +18,7 @@ namespace BulletHell.Emitters
 
         //Projectile
         public bool FoldOutProjectile = false;
-        public ProjectileData ProjectileData;
+        public EmittterProjectileData ProjectileData;
         public float TimeToLive = 5;
         [Range(0.01f, 100f)] public float Speed = 1;
         [Range(-100f, 100f)] public float Acceleration = 1;

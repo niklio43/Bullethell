@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: PD
   m_EditorClassIdentifier: 
   name: NewProjectileData
-  Sprite: {fileID: 0}
-  Animator: {fileID: 9100000, guid: f8ad612027543594ab7371cbf62e3462, type: 2}
-  Scale: 2
+  Sprite: {fileID: 933130202, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
+  Scale: 1.5
   Color: {r: 1, g: 1, b: 1, a: 1}
   collider:
     m_Center: {x: 0, y: 0, z: 0}

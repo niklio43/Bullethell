@@ -1,29 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using BulletHell;
 
-public class ProjectileManager : Singleton<ProjectileManager>
+namespace BulletHell.Emitters.Projectiles
 {
-    [SerializeField] int _size = 1000;
-    
-    ObjectPool<Projectile> _pool;
-
-    Projectile _projectilePrefab;
-
-    protected override void OnAwake()
+    public class ProjectileManager : Singleton<ProjectileManager>
     {
-        _projectilePrefab = Resources.Load<Projectile>("EmitterProjectile");
-        _pool = new ObjectPool<Projectile>(CreateProjectile, _size, "Projectiles");
-    }
+        [SerializeField] int _size = 1000;
 
-    public Projectile Get() => _pool.Get();
+        ObjectPool<EmitterProjectile> _pool;
 
-    Projectile CreateProjectile()
-    {
-        Projectile projectile = Instantiate(_projectilePrefab);
-        projectile.Pool = _pool;
+        EmitterProjectile _projectilePrefab;
 
-        return projectile;
+        protected override void OnAwake()
+        {
+            _projectilePrefab = Resources.Load<EmitterProjectile>("EmitterProjectile");
+            _pool = new ObjectPool<EmitterProjectile>(CreateProjectile, _size, "Projectiles");
+        }
+
+        public ObjectPool<EmitterProjectile> GetPoolInstance() => _pool;
+        public EmitterProjectile Get() => _pool.Get();
+
+        EmitterProjectile CreateProjectile()
+        {
+            EmitterProjectile projectile = Instantiate(_projectilePrefab);
+            projectile.Pool = _pool;
+
+            return projectile;
+        }
     }
 }

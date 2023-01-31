@@ -35,6 +35,8 @@ namespace BulletHell.Abilities
         public virtual void Uninitialize() { }
         protected abstract void Perform();
 
+        protected virtual void OnUpdate(float dt) { }
+
         public void InitializeBehaviour(Ability ability)
         {
             _ability = ability;
@@ -86,6 +88,8 @@ namespace BulletHell.Abilities
         {
             if(_state == AbilityBehaviourState.Channeling || _state == AbilityBehaviourState.Casting)
                 _currentCastTime += dt;
+
+            OnUpdate(dt);
         }
 
         protected virtual void WhenCompletedChannel()

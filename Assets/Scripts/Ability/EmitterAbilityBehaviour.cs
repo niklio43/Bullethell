@@ -9,29 +9,24 @@ namespace BulletHell.Abilities
     [CreateAssetMenu(fileName = "EmitterAbilityBehaviour", menuName = "Abilities/New Emitter Ability Behaviour")]
     public class EmitterAbilityBehaviour : BaseAbilityBehaviour
     {
-        [SerializeField] List<EmitterData> _emitters;
-        [SerializeField] List<DamageValue> _damageValues;
-        List<Emitter> _emitterObjects;
+        [SerializeField] protected EmitterData _emitterData;
+        protected Emitter _emitterObject;
+        [SerializeField] protected List<DamageValue> _damageValues;
 
         protected override void Initialize()
         {
-            _emitterObjects = new List<Emitter>();
-            _emitterObjects.Clear();
-
-            foreach (EmitterData emitterData in _emitters) {
-                Emitter emitter = new GameObject($"{_ability.GetName()} (Emitter)").AddComponent<Emitter>();
-                emitter.transform.SetParent(_ability.Host.transform);
-                emitter.transform.localPosition = Vector3.zero;
-                emitter.Data = emitterData;
-                emitter.AutoFire = false;
-                _emitterObjects.Add(emitter);
-            }
+            _emitterObject = new Emitter(_ability.Host, _emitterData);
         }
+
+        protected override void OnUpdate(float dt)
+        {
+            _emitterObject.UpdateEmitter(dt);
+        }
+
         public override void Uninitialize()
         {
-            foreach (Emitter emitter in _emitterObjects) {
-                MonoBehaviour.Destroy(emitter.gameObject);
-            }
+            _emitterObject.Uninitialize();
+            _emitterObject = null;
         }
 
         protected override void Perform()
@@ -42,10 +37,7 @@ namespace BulletHell.Abilities
                 damage = DamageCalculator.CalculateDamage(damage, character.Stats);
             }
 
-            foreach (Emitter emitter in _emitterObjects) {
-                emitter.SetDamage(damage);
-                emitter.FireProjectile();
-            }
+            _emitterObject.FireProjectile(character, damage);
         }
     }
 }
