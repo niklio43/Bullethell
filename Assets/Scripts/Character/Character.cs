@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Stats;
 using BulletHell;
+using BulletHell.StatusSystem;
 
 public class Character : MonoBehaviour
 {
@@ -11,19 +12,26 @@ public class Character : MonoBehaviour
     protected SpriteRenderer _spriteRenderer;
     protected Animator _animator;
 
+    public void Initialize()
+    {
+        Stats.TranslateListToDictionary();
+
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _animator = GetComponentInChildren<Animator>();
+    }
+
     private void Start()
     {
         Initialize();
     }
 
-    public void Initialize()
+    private void Update()
     {
-        Stats.TranslateListToDictionary();
-        StatusEffect.TranslateListToDictionary();
-
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _animator = GetComponentInChildren<Animator>();
+        StatusEffect.UpdateEffects(Time.deltaTime);
+        OnUpdate();
     }
+
+    protected virtual void OnUpdate() { }
 
     public virtual void TakeDamage(float damage)
     {

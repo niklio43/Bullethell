@@ -49,7 +49,7 @@ public class Enemy : Character
         _defaultScale = transform.localScale;
     }
 
-    private void Update()
+    protected override void OnUpdate()
     {
         _brain.Update();
         DetectionData = _detection.Detect();

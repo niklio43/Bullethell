@@ -47,7 +47,7 @@ namespace BulletHell.Player
             _rb = GetComponent<Rigidbody2D>();
         }
 
-        void Update()
+        protected override void OnUpdate()
         {
             foreach (Ability ability in _abilities)
             {

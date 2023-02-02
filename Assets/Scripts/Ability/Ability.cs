@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine;
-
-
+using UnityEngine;
 namespace BulletHell.Abilities
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/New Ability")]
@@ -25,9 +23,7 @@ namespace BulletHell.Abilities
         [SerializeField] float _screenShakeAmplitude = 0;
 
         [Header("Ability Behaviours")]
-        [SerializeField] List<BaseAbilityBehaviour> _behaviours;
-
-        [Header("Status effect")]        [SerializeField] StatusEffectData _data;        #region Getters
+        [SerializeField] List<BaseAbilityBehaviour> _behaviours;        #region Getters
         public bool CanCast() => (_currentAmount > 0);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
         public int GetCurrentAmount => _currentAmount;

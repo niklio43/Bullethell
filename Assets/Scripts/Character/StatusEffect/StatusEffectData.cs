@@ -5,50 +5,45 @@ using UnityEngine.VFX;
 using BulletHell.Stats;
 using BulletHell;
 
-[System.Serializable]
-public class StatusEffectData
+
+namespace BulletHell.StatusSystem
 {
-    public Status this[string key]
+    [System.Serializable]
+    public class StatusEffectData
     {
-        get
+        public Dictionary<string, StatusEffect> _status = new Dictionary<string, StatusEffect>();
+
+        public StatusEffect this[string key]
         {
-            if (!_status.ContainsKey(key)) return default(Status);
+            get
+            {
+                if (!_status.ContainsKey(key)) return default(StatusEffect);
+                return _status[key];
+            }
+        }
+
+        public StatusEffect GetEffect(string key)
+        {
+            if (!_status.ContainsKey(key)) return null;
             return _status[key];
         }
-    }
 
-    public StatusEffect GetEffect(string key)
-    {
-        if (!_status.ContainsKey(key)) return null;
-        return _status[key].statusEffect;
-    }
-
-    [SerializeField] List<Status> _statusList = new List<Status>();
-
-    public Dictionary<string, Status> _status = new Dictionary<string, Status>();
-
-    public void TranslateListToDictionary()
-    {
-        _status = new Dictionary<string, Status>();
-
-        foreach (Status status in _statusList)
+        public void ApplyEffect(StatusEffect statusEffect)
         {
-            _status.Add(status.Name, Utilities.Copy(status));
+            _status.Add(statusEffect.Name, statusEffect);
         }
-    }
 
-    public void AddModifierToStatus(StatusModifier modifier, float time)
-    {
-        _status[modifier.Status].AddModifier(modifier, time);
-    }
+        public void RemoveEffect(StatusEffect statusEffect)
+        {
+            _status.Remove(statusEffect.Name);
+        }
 
-    public void AddModifierToStatus(StatusModifier modifier)
-    {
-        _status[modifier.Status].AddModifier(modifier);
-    }
-
-    public void RemoveModifierFromStatus(StatusModifier modifier)
-    {
-        _status[modifier.Status].RemoveModifier(modifier);
+        public void UpdateEffects(float dt)
+        {
+            foreach(StatusEffect statusEffect in _status.Values)
+            {
+                statusEffect.UpdateStatus(dt);
+            }
+        }
     }
 }
