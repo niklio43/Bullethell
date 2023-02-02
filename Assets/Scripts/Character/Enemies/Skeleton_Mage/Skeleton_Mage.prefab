@@ -97,7 +97,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stats:
-    _statsList: []
+    _statsList:
+    - Name: Hp
+      Value: 100
+    - Name: MaxHp
+      Value: 100
+    - Name: MoveSpeed
+      Value: 2
   MovementType: 1
   Target: {fileID: 0}
   CanMove: 0

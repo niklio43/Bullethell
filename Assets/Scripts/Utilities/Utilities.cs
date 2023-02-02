@@ -49,28 +49,5 @@ namespace BulletHell
             yield return new WaitForSeconds(delay);
             action();
         }
-
-
-        public static void Shake(this Camera camera, float duration, float amount)
-        {
-            MonoInstance.Instance.StartCoroutine(cShake(camera, duration, amount));
-        }
-
-        static IEnumerator cShake(Camera camera, float duration, float amount)
-        {
-            Vector3 startPosition = camera.transform.position;
-
-            float timeElapsed = 0;
-
-            while (timeElapsed < duration) {
-                yield return new WaitForEndOfFrame();
-                timeElapsed += Time.deltaTime;
-
-                camera.transform.position = startPosition + (Vector3)UnityEngine.Random.insideUnitCircle * amount;
-            }
-
-            camera.transform.position = startPosition;
-        }
-
     }
 }

@@ -68,7 +68,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5441612227424731691
 Transform:
   m_ObjectHideFlags: 0
@@ -98,7 +98,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stats:
-    _statsList: []
+    _statsList:
+    - Name: Hp
+      Value: 100
+    - Name: MaxHp
+      Value: 100
+    - Name: MoveSpeed
+      Value: 3
   MovementType: 1
   Target: {fileID: 0}
   CanMove: 0
@@ -110,8 +116,8 @@ MonoBehaviour:
     Chance: 1
   - Item: {fileID: 11400000, guid: ec5a4b4affe752f41b6b3cc10d20afff, type: 2}
     Chance: 0.507
-  PreferredDistance: 0.59
-  AttackDistance: 0.9
+  PreferredDistance: 0.8
+  AttackDistance: 1.2
 --- !u!114 &5441612227424731684
 MonoBehaviour:
   m_ObjectHideFlags: 0

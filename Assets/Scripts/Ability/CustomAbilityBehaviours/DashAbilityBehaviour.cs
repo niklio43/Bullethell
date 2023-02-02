@@ -5,6 +5,7 @@ using BulletHell.Player;
 using BulletHell;
 using UnityEngine.VFX;
 using BulletHell.VFX;
+using Bullet.CameraUtilities;
 
 namespace BulletHell.Abilities
 {
@@ -24,6 +25,8 @@ namespace BulletHell.Abilities
         {
             Vector2 dir = _player.MovementInput.normalized;
             if (dir == Vector2.zero) return;
+
+            Camera.main.Zoom(.2f, .5f);
 
             BulletHell.VFX.VFXManager.PlayBurst(_vfx, owner.transform.position, null, new VFXAttribute[] { new VFXFloat("Angle", Vector2.SignedAngle(new Vector2(dir.x, -dir.y), Vector2.left)) });
 
