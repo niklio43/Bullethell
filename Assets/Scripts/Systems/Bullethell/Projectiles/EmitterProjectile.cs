@@ -73,7 +73,6 @@ namespace BulletHell.Emitters.Projectiles
         {
             if (!_data.CollisionTags.Contains(collision.gameObject.tag) || _damage == null || collision.gameObject == _owner) { return; }
             if (collision.TryGetComponent(out Character character)) {
-                DamageHandler.SendDamage(_owner, character, _damage);
             }
             OnHit();
         }
