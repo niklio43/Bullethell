@@ -1,6 +1,6 @@
-using UnityEngine;
 using BulletHell.Stats;
-using BulletHell.Emitters;
+using BulletHell.VFX;
+using UnityEngine;
 
 namespace BulletHell.Emitters.Projectiles
 {
@@ -11,6 +11,7 @@ namespace BulletHell.Emitters.Projectiles
         public Pool<EmitterProjectile> Pool;
         EmittterProjectileData _data;
 
+        Animator _anim;
         SpriteRenderer _spriteRenderer;
         RuntimeEmitterProjectileData _runTimeData;
         BoxCollider2D _projectileCollider;
@@ -21,6 +22,7 @@ namespace BulletHell.Emitters.Projectiles
 
         private void Awake()
         {
+            _anim = GetComponent<Animator>();
             _projectileCollider = GetComponent<BoxCollider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _runTimeData = new RuntimeEmitterProjectileData();
@@ -36,9 +38,15 @@ namespace BulletHell.Emitters.Projectiles
             _projectileCollider.offset = _data.collider.center;
             _projectileCollider.size = _data.collider.size / 2;
 
-            _projectileCollider.size *= data.Scale;
             transform.localScale = Vector3.one * data.Scale;
             _spriteRenderer.color = data.Color;
+
+            if (data.AnimationClip == null)
+                _anim.enabled = false;
+            else {
+                _anim.enabled = true;
+                _anim.Play(data.AnimationClip.name);
+            }
 
             _runTimeData = runTimeData;
             _runTimeData.SetOwner(this);
@@ -65,9 +73,17 @@ namespace BulletHell.Emitters.Projectiles
         {
             if (!_data.CollisionTags.Contains(collision.gameObject.tag) || _damage == null || collision.gameObject == _owner) { return; }
             if (collision.TryGetComponent(out Character character)) {
-                    character.TakeDamage(_damage);
+                DamageHandler.SendDamage(_owner, character, _damage);
             }
+            OnHit();
         }
 
+        void OnHit()
+        {
+            if (_data.HitVFX != null)
+                VFXManager.PlayBurst(_data.HitVFX, transform.position);
+
+            Destroy(gameObject);
+        }
     }
 }

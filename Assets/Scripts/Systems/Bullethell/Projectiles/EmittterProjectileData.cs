@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters;
 using BulletHell.Stats;
+using UnityEngine.VFX;
 
 namespace BulletHell.Emitters.Projectiles
 {
@@ -13,6 +14,8 @@ namespace BulletHell.Emitters.Projectiles
         public new string name = "NewProjectileData";
 
         public Sprite Sprite;
+        public AnimationClip AnimationClip;
+        public VisualEffectAsset HitVFX;
         public float Scale = 1;
         public Color Color = Color.white;
         public Bounds collider;

@@ -7,7 +7,7 @@ using BulletHell.Stats;
 
 namespace BulletHell.Abilities
 {
-    [CreateAssetMenu(fileName = "SwingAbilityBehaviour", menuName = "Abilities/Custom Behaviours/New Swing Behaviour")]
+    //!!! Old file, not in use!!!
     public class SwingAbilityBehaviour : BaseAbilityBehaviour
     {
         [Header("VFX")]
@@ -32,7 +32,7 @@ namespace BulletHell.Abilities
                 {
                     List<DamageValue> _damage = new List<DamageValue>() { new DamageValue(DamageType.rawDamage, damage) };
 
-                    other.GetComponent<Enemy>().TakeDamage(new DamageInfo(_damage));
+                    //other.GetComponent<Enemy>().TakeDamage(new DamageInfo(_damage));
                 }
             }
         }

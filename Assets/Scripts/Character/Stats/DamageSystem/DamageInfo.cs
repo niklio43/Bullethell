@@ -16,6 +16,7 @@ namespace BulletHell.Stats
             }
         }
         public Dictionary<DamageType, float> _damages;
+
         public DamageInfo(List<DamageValue> damageList)
         {
             _damages = new Dictionary<DamageType, float>();
