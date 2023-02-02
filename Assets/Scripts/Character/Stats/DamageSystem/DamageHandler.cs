@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class DamageHandler
 {
-    public static void SendDamage(GameObject sender, Character receiver, DamageInfo damage)
+    public static void SendDamage(Character sender, Character receiver, DamageInfo damage)
     {
         float finilizedDamage = MitigateDamage(damage, receiver.Stats);
         receiver.TakeDamage(finilizedDamage);

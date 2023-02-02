@@ -6,6 +6,8 @@ namespace BulletHell.StatusSystem
 {
     public abstract class EffectBehaviour : ScriptableObject
     {
-        public abstract void DoEffect(StatusEffect statusEffect);
+        public virtual void OnStart(StatusEffect statusEffect) { }
+        public virtual void DoEffect(StatusEffect statusEffect) { }
+        public virtual void OnExit(StatusEffect statusEffect) { }
     }
 }

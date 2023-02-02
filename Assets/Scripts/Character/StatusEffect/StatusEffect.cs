@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 
 namespace BulletHell.StatusSystem
 {
+    [System.Serializable]
     public class StatusEffect
     {
         public string Name;
@@ -31,19 +32,27 @@ namespace BulletHell.StatusSystem
         public void ApplyEffect(Character reciever)
         {
             Reciever = reciever;
-            Reciever.StatusEffect.ApplyEffect(this);
+            Reciever.StatusEffect.AddEffect(this);
+            foreach (EffectBehaviour effect in Behaviours) {
+                effect.OnStart(this);
+            }
         }
 
-        public void ResetEffect()
+        public void EndEffect()
         {
-            _timer = 0f;
-            _nextTickTime = 0f;
+            _timer = 0;
+            _nextTickTime = 0;
+            foreach (EffectBehaviour effect in Behaviours) {
+                effect.OnExit(this);
+            }
+            Reciever.StatusEffect.RemoveEffect(this);
         }
+
 
         public void UpdateStatus(float dt)
         {
             _timer += dt;
-            if (_timer >= Lifetime) { _timer = 0; _nextTickTime = 0; Reciever.StatusEffect.RemoveEffect(this); }
+            if (_timer >= Lifetime) { EndEffect(); }
 
             if (_timer > _nextTickTime)
             {

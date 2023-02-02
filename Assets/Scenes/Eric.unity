@@ -562,7 +562,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e7861a990189c4b8c4f6fc8c988429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats: {fileID: 0}
+  Stats:
+    _statsList:
+    - Name: Hp
+      Value: 100
+    - Name: MaxHp
+      Value: 100
 --- !u!50 &1448856850
 Rigidbody2D:
   serializedVersion: 4
@@ -638,6 +643,34 @@ PrefabInstance:
     - target: {fileID: 8461412192270030068, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[0].Name
+      value: Hp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[1].Name
+      value: MaxHp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[2].Name
+      value: MoveSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[0].Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[1].Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
+      propertyPath: Stats._statsList.Array.data[2].Value
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}

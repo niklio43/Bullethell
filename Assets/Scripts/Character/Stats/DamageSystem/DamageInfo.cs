@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.StatusSystem;
+
 
 namespace BulletHell.Stats
 {
@@ -15,14 +17,13 @@ namespace BulletHell.Stats
                 _damages[type] = value;
             }
         }
-        public Dictionary<DamageType, float> _damages;
+        private Dictionary<DamageType, float> _damages;
 
-        public DamageInfo(List<DamageValue> damageList)
+        public DamageInfo(List<DamageValue> damageValues)
         {
             _damages = new Dictionary<DamageType, float>();
 
-
-            foreach (DamageValue damageValue in damageList) {
+            foreach (DamageValue damageValue in damageValues) {
                 if (!_damages.ContainsKey(damageValue.Type)) {
                     _damages.Add(damageValue.Type, 0f);
                 }

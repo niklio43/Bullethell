@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.VFX;
 using BulletHell.Stats;
 using BulletHell;
-
+using System.Linq;
 
 namespace BulletHell.StatusSystem
 {
@@ -28,7 +28,7 @@ namespace BulletHell.StatusSystem
             return _status[key];
         }
 
-        public void ApplyEffect(StatusEffect statusEffect)
+        public void AddEffect(StatusEffect statusEffect)
         {
             _status.Add(statusEffect.Name, statusEffect);
         }
@@ -40,9 +40,8 @@ namespace BulletHell.StatusSystem
 
         public void UpdateEffects(float dt)
         {
-            foreach(StatusEffect statusEffect in _status.Values)
-            {
-                statusEffect.UpdateStatus(dt);
+            for (int i = 0; i < _status.Count; i++) {
+                _status.ElementAt(i).Value.UpdateStatus(dt);
             }
         }
     }

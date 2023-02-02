@@ -66,6 +66,7 @@ public class Character : MonoBehaviour
 
     public virtual void OnDeath()
     {
+        return;
         Debug.Log("Dead");
         var stateID = Animator.StringToHash("OnDeath");
         if (_animator.HasState(0, stateID))
