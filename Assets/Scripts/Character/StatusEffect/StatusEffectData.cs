@@ -30,6 +30,8 @@ namespace BulletHell.StatusSystem
 
         public void AddEffect(StatusEffect statusEffect)
         {
+            if (_status.ContainsKey(statusEffect.Name)) { _status[statusEffect.Name].Multiple(); return; }
+
             _status.Add(statusEffect.Name, statusEffect);
         }
 

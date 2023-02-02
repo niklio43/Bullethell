@@ -14,6 +14,7 @@ namespace BulletHell.StatusSystem
         public float TickSpeed = 1;
         public float Lifetime;
         public bool Stackable;
+        public float MaxStacks = 5;
         public DamageInfo DamageInfo;
         public List<EffectBehaviour> Behaviours = new List<EffectBehaviour>();
         [HideInInspector] public Character Sender, Reciever;
@@ -21,6 +22,7 @@ namespace BulletHell.StatusSystem
         [SerializeField] List<DamageValue> _damageValues = new List<DamageValue>();
         float _nextTickTime = 0f;
         float _timer = 0f;
+        float _currentStacks = 1;
 
         public void Initialize(Character sender)
         {
@@ -33,8 +35,19 @@ namespace BulletHell.StatusSystem
         {
             Reciever = reciever;
             Reciever.StatusEffect.AddEffect(this);
-            foreach (EffectBehaviour effect in Behaviours) {
+            foreach (EffectBehaviour effect in Behaviours)
+            {
                 effect.OnStart(this);
+            }
+        }
+
+        public void Multiple()
+        {
+            if (!Stackable) { Lifetime = 0;  return; }
+
+            if (Stackable && _currentStacks < MaxStacks)
+            {
+                _currentStacks++;
             }
         }
 
@@ -42,7 +55,8 @@ namespace BulletHell.StatusSystem
         {
             _timer = 0;
             _nextTickTime = 0;
-            foreach (EffectBehaviour effect in Behaviours) {
+            foreach (EffectBehaviour effect in Behaviours)
+            {
                 effect.OnExit(this);
             }
             Reciever.StatusEffect.RemoveEffect(this);
@@ -57,9 +71,12 @@ namespace BulletHell.StatusSystem
             if (_timer > _nextTickTime)
             {
                 _nextTickTime += TickSpeed;
-                foreach(EffectBehaviour behaviour in Behaviours)
+                for (int i = 0; i < _currentStacks; i++)
                 {
-                    behaviour.DoEffect(this);
+                    foreach (EffectBehaviour behaviour in Behaviours)
+                    {
+                        behaviour.DoEffect(this);
+                    }
                 }
             }
         }
