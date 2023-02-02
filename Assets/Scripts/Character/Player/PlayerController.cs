@@ -90,7 +90,7 @@ namespace BulletHell.Player
             return afterImage;
         }
 
-        public override void TakeDamage(DamageInfo damage)
+        public override void TakeDamage(float damage)
         {
             base.TakeDamage(damage);
 

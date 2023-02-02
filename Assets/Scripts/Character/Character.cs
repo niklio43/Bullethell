@@ -24,9 +24,9 @@ public class Character : MonoBehaviour, IEffectable
         _animator = GetComponentInChildren<Animator>();
     }
 
-    public virtual void TakeDamage(DamageInfo damage)
+    public virtual void TakeDamage(float damage)
     {
-        Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
+        Stats["Hp"].Value -= damage;
 
         if (Stats["Hp"].Value <= 0)
         {
