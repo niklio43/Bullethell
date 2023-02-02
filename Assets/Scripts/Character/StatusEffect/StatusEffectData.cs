@@ -3,37 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using BulletHell.Stats;
+using BulletHell;
 
-public abstract class StatusEffectData : ScriptableObject
+[System.Serializable]
+public class StatusEffectData
 {
-    public string Name;
-    public Sprite Icon;
-    public VisualEffect Vfx;
-    public float TickSpeed = 1;
-    public float Lifetime;
-    public bool Stackable;
-
-    protected float _nextTickTime = 0f;
-    protected float timer = 0f;
-    protected Character _character;
-    protected SpriteRenderer _sr;
-    protected Transform _transform;
-    protected Stats _stats;
-
-    public abstract void Perform();
-    public abstract void UpdateStatus(float dt);
-
-    public void Initialize(Character owner)
+    public Status this[string key]
     {
-        _character = owner;
-        _sr = _character.GetComponent<SpriteRenderer>();
-        _transform = owner.transform;
-        _stats = owner.Stats;
+        get
+        {
+            if (!_status.ContainsKey(key)) return default(Status);
+            return _status[key];
+        }
     }
 
-    public void ResetAbility()
+    public StatusEffect GetEffect(string key)
     {
-        timer = 0f;
-        _nextTickTime = 0f;
+        if (!_status.ContainsKey(key)) return null;
+        return _status[key].statusEffect;
+    }
+
+    [SerializeField] List<Status> _statusList = new List<Status>();
+
+    public Dictionary<string, Status> _status = new Dictionary<string, Status>();
+
+    public void TranslateListToDictionary()
+    {
+        _status = new Dictionary<string, Status>();
+
+        foreach (Status status in _statusList)
+        {
+            _status.Add(status.Name, Utilities.Copy(status));
+        }
+    }
+
+    public void AddModifierToStatus(StatusModifier modifier, float time)
+    {
+        _status[modifier.Status].AddModifier(modifier, time);
+    }
+
+    public void AddModifierToStatus(StatusModifier modifier)
+    {
+        _status[modifier.Status].AddModifier(modifier);
+    }
+
+    public void RemoveModifierFromStatus(StatusModifier modifier)
+    {
+        _status[modifier.Status].RemoveModifier(modifier);
     }
 }

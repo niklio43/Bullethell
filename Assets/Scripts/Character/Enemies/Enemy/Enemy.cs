@@ -51,8 +51,6 @@ public class Enemy : Character
 
     private void Update()
     {
-        if (_data != null) { _data.UpdateStatus(Time.deltaTime); }
-
         _brain.Update();
         DetectionData = _detection.Detect();
 

@@ -9270,6 +9270,10 @@ MonoBehaviour:
       Value: 5
     - Name: DashDistance
       Value: 32
+  StatusEffect:
+    _statusList:
+    - Name: 
+      Value: 0
   _abilities:
   - {fileID: 11400000, guid: f0e435481c974864f928dbe1338bf354, type: 2}
   _afterImage: {fileID: -2138936094765007819, guid: 965500742adab4b45b904772870b9ef4, type: 3}
