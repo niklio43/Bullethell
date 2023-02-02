@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: PD
   m_EditorClassIdentifier: 
   name: NewProjectileData
-  Sprite: {fileID: 933130202, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
-  Scale: 1.5
+  Sprite: {fileID: -1957738154, guid: 8058ce569d827fa41a1fa4c12da2d78e, type: 3}
+  AnimationClip: {fileID: 7400000, guid: f894accc6af687a41b273c808a28ba6e, type: 2}
+  HitVFX: {fileID: 8926484042661614526, guid: 1ca1f99284b800f478ed1001b3151090, type: 3}
+  Scale: 3
   Color: {r: 1, g: 1, b: 1, a: 1}
   collider:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.25, y: 0.25, z: 0}
+    m_Center: {x: 0.01, y: -0.1, z: 0}
+    m_Extent: {x: 0.15, y: 0.3, z: 0}
   CollisionTags:
   - Player

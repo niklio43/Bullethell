@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 1448856847}
   - component: {fileID: 1448856846}
   - component: {fileID: 1448856849}
+  - component: {fileID: 1448856850}
   m_Layer: 7
   m_Name: Square (1)
   m_TagString: Player
@@ -542,7 +543,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448856845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.815, y: 5.839, z: 0}
+  m_LocalPosition: {x: -0.52, y: 6.68, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -561,14 +562,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e7861a990189c4b8c4f6fc8c988429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats:
-    _statsList:
-    - Name: Hp
-      Value: 100
-    - Name: MaxHp
-      Value: 100
-    - Name: Defense
-      Value: 100
+  Stats: {fileID: 0}
+--- !u!50 &1448856850
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448856845}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &8461412190976600945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -579,10 +594,6 @@ PrefabInstance:
     - target: {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_Name
       value: Skeleton_Mage
-      objectReference: {fileID: 0}
-    - target: {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8461412192270030068, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_RootOrder

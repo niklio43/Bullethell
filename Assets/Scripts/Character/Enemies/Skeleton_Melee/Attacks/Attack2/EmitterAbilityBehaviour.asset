@@ -17,6 +17,5 @@ MonoBehaviour:
   _animations:
   - _animationHost: 1
     _clip: {fileID: 7400000, guid: 0b62aecb45a840c41bad133c18457166, type: 2}
-  _emitters:
-  - {fileID: 11400000, guid: 8222245c22f271d45a5ec020cb62b6dd, type: 2}
+  _emitterData: {fileID: 11400000, guid: 8222245c22f271d45a5ec020cb62b6dd, type: 2}
   _damageValues: []

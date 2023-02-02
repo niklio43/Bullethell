@@ -34,7 +34,7 @@ namespace BulletHell.Abilities
             DamageInfo damage = new DamageInfo(_damageValues);
 
             if (_ability.Owner.TryGetComponent(out Character character)) {
-                damage = DamageCalculator.CalculateDamage(damage, character.Stats);
+                damage = DamageHandler.CalculateDamage(damage, character.Stats);
             }
 
             _emitterObject.FireProjectile(character, damage);

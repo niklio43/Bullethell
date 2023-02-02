@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PD
   m_EditorClassIdentifier: 
   name: Attack2
-  Sprite: {fileID: 933130202, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
-  Animator: {fileID: 9100000, guid: f8ad612027543594ab7371cbf62e3462, type: 2}
+  Sprite: {fileID: -1403164347, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
+  AnimationClip: {fileID: 7400000, guid: 3a8ef3ca4e74ac54c80112b85db6d93c, type: 2}
+  HitVFX: {fileID: 8926484042661614526, guid: 27e691e019db68e40bb5e830d7f86862, type: 3}
   Scale: 2
   Color: {r: 1, g: 1, b: 1, a: 1}
   collider:

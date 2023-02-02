@@ -25,7 +25,7 @@ namespace BulletHell.Emitters.Editor
         private void Redraw()
         {
             CreateRoot();
-            CreateDefaltInspector();
+            CreateDefualtInspector();
         }
 
         private void CreateRoot()
@@ -38,7 +38,7 @@ namespace BulletHell.Emitters.Editor
             _root.Add(treeAsset);
         }
 
-        void CreateDefaltInspector()
+        void CreateDefualtInspector()
         {
             Label emitterName = _root.Query<Label>("emitter-name").First();
             emitterName.text = _target.name;
