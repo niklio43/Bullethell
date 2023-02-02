@@ -8,7 +8,7 @@ public class BleedEffect : StatusEffect
 
     public void Perform()
     {
-        Debug.Log("Applied Effect: " + Name);
+        //Debug.Log("Applied Effect: " + Name);
         timer = 0;
         _nextTickTime = 0;
     }
