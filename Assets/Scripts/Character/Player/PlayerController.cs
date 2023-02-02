@@ -53,8 +53,6 @@ namespace BulletHell.Player
             {
                 ability.UpdateAbility(Time.deltaTime);
             }
-
-            if (_data != null) { _data.UpdateStatus(Time.deltaTime); }
         }
 
         void FixedUpdate()
