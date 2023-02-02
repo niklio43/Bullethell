@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters;
 using BulletHell.Stats;
+using BulletHell.StatusSystem;
 
 namespace BulletHell.Abilities
 {
@@ -12,7 +13,7 @@ namespace BulletHell.Abilities
         [SerializeField] protected EmitterData _emitterData;
         protected Emitter _emitterObject;
         [SerializeField] protected List<DamageValue> _damageValues;
-
+        [SerializeField] protected List<StatusEffect> _statusEffects;
         protected override void Initialize()
         {
             _emitterObject = new Emitter(_ability.Host, _emitterData);
@@ -34,10 +35,13 @@ namespace BulletHell.Abilities
             DamageInfo damage = new DamageInfo(_damageValues);
 
             if (_ability.Owner.TryGetComponent(out Character character)) {
+                foreach (StatusEffect effect in _statusEffects) {
+                    effect.Initialize(character);
+                }
                 damage = DamageHandler.CalculateDamage(damage, character.Stats);
             }
 
-            _emitterObject.FireProjectile(character, damage);
+            _emitterObject.FireProjectile(character, damage, _statusEffects);
         }
     }
 }

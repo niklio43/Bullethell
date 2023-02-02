@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Stats;
 using BulletHell.Emitters.Projectiles;
+using BulletHell.StatusSystem;
 
 namespace BulletHell.Emitters
 {
@@ -36,7 +37,7 @@ namespace BulletHell.Emitters
             _emitterGroups.UpdateGroups();
         }
 
-        public virtual void FireProjectile(Character projectileOwner = null, DamageInfo damage = null)
+        public virtual void FireProjectile(Character projectileOwner = null, DamageInfo damage = null, List<StatusEffect> statusEffects = null)
         {
             for (int i = 0; i < Mathf.Clamp(_data.EmitterPoints, 0, _data.MaxProjectiles); i++) {
                 EmitterProjectile projectile = ProjectileManager.Instance.Get();
@@ -58,6 +59,7 @@ namespace BulletHell.Emitters
                 projectile.Initialize(_data.ProjectileData, runTimeData);
                 projectile.SetOwner(projectileOwner);
                 projectile.SetDamage(damage);
+                projectile.SetStatusEffect(statusEffects);
             }
         }
 

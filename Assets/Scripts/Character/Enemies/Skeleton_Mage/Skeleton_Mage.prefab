@@ -54,7 +54,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8461412192270030068}
   - component: {fileID: 8461412192270030073}
-  - component: {fileID: 5375257517133954638}
   - component: {fileID: 8461412192270030075}
   - component: {fileID: 8461412192270030072}
   - component: {fileID: 9177600697870257623}
@@ -97,7 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de4780273cdc14bb1921d455a0faf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats: {fileID: 0}
+  Stats:
+    _statsList: []
   MovementType: 1
   Target: {fileID: 0}
   CanMove: 0
@@ -113,19 +113,6 @@ MonoBehaviour:
     Chance: 0.129
   PreferredDistance: 3.38
   AttackDistance: 3.49
---- !u!114 &5375257517133954638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8461412192270030066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512e362894d4a7541bfa572e2af6a80b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _statsList: []
 --- !u!114 &8461412192270030075
 MonoBehaviour:
   m_ObjectHideFlags: 0
