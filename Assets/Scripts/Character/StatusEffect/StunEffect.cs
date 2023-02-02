@@ -10,7 +10,12 @@ namespace BulletHell.StatusSystem
         public override void DoEffect(StatusEffect statusEffect)
         {
             statusEffect.Reciever.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            Debug.Log("test");
+        }
+
+        public override void OnExit(StatusEffect statusEffect)
+        {
+            statusEffect.Reciever.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            statusEffect.Reciever.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 }

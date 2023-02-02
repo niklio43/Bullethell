@@ -745,11 +745,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RedProjectile_4: -1192054761
+      RedProjectile_17: -1872383162
       RedProjectile_3: -1821724726
       RedProjectile_5: 429607165
       RedProjectile_25: -2088560415
-      RedProjectile_15: 1354040785
+      RedProjectile_4: -1192054761
       RedProjectile_21: 812861821
       RedProjectile_2: 2094241186
       RedProjectile_7: -661446548
@@ -774,7 +774,7 @@ TextureImporter:
       RedProjectile_9: 1278569658
       RedProjectile_27: 252916242
       RedProjectile_19: -1761720223
-      RedProjectile_17: -1872383162
+      RedProjectile_15: 1354040785
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
