@@ -60,11 +60,11 @@ public class Enemy : Character
         if (CanMove) _enemyMovement.Move();
     }
 
-    public override void TakeDamage(DamageInfo damage)
+    public override void TakeDamage(float damage)
     {
         if (Invincible) { return; }
 
-        Stats["Hp"].Value -= DamageCalculator.MitigateDamage(damage, Stats);
+        Stats["Hp"].Value -= damage;
 
         Camera.main.Shake(0.075f, 0.1f);
 
