@@ -3,29 +3,36 @@ using UnityEngine;
 
 namespace BulletHell.Player
 {
-    public class PlayerBrain : MonoBehaviour
+    public class PlayerBrain
     {
-        IFSM _FSM;
+        public IFSM _FSM;
         PlayerController _player;
 
         public enum PlayerStates
         {
             Default,
             Interacting,
-            Dashing
+            Dashing,
+            Staggered
         }
 
-        void Awake()
+        public PlayerBrain(PlayerController player)
         {
-            _player = GetComponent<PlayerController>();
+            _player = player;
+            Initialize();
+        }
 
+        void Initialize()
+        {
             _FSM = new FSMBuilder()
-           .Owner(gameObject)
+           .Owner(_player.gameObject)
            .Default(PlayerStates.Default)
-           .State(PlayerStates.Default, (Default) => {
+           .State(PlayerStates.Default, (Default) =>
+           {
                Default.SetTransition("interacting", PlayerStates.Interacting);
                Default.SetTransition("dashing", PlayerStates.Dashing)
-               .Update((action) => {
+               .Update((action) =>
+               {
                    if (_player.IsDashing)
                    {
                        action.Transition("dashing");
@@ -36,20 +43,38 @@ namespace BulletHell.Player
                    }
                });
            })
-           .State(PlayerStates.Interacting, (interacting) => {
+           .State(PlayerStates.Interacting, (interacting) =>
+           {
                interacting.SetTransition("default", PlayerStates.Default)
-               .Update((action) => {
+               .Update((action) =>
+               {
                    if (_player.IsInteracting) return;
                    action.Transition("default");
                });
            })
-           .State(PlayerStates.Dashing, (dashing) => {
+           .State(PlayerStates.Dashing, (dashing) =>
+           {
                dashing.SetTransition("default", PlayerStates.Default)
-               .Update((action) => {
+               .Update((action) =>
+               {
                    if (_player.IsDashing) return;
                    action.Transition("default");
                });
            })
+                      .State(PlayerStates.Staggered, (staggered) =>
+                      {
+                          staggered.SetTransition("default", PlayerStates.Default)
+                          .Enter((action) =>
+                          {
+                              _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                          })
+                          .Exit((action) =>
+                          {
+                              _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                              _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                              action.Transition("default");
+                          });
+                      })
            .Build();
         }
     }

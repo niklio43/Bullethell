@@ -17,7 +17,6 @@ public class WeaponController : MonoBehaviour
 
     public void AssignWeapon(Weapon weapon)
     {
-        Debug.Log("Assign Weapon");
         weapon.Initialize(player.gameObject, gameObject);
 
         Animator animator = GetComponent<Animator>();
@@ -37,7 +36,6 @@ public class WeaponController : MonoBehaviour
 
     public void UnAssignWeapon(Weapon weapon)
     {
-        Debug.Log("testerobama");
         weapon.Uninitialize();
         GetComponent<SpriteRenderer>().sprite = null;
 

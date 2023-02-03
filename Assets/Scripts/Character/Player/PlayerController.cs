@@ -15,16 +15,17 @@ namespace BulletHell.Player
         Vector2 _movementInput;
         bool _isDashing = false;
         bool _isInteracting = false;
+        ObjectPool<PlayerAfterImageSprite> _afterImagePool;
 
         [SerializeField] List<Ability> _abilities = new List<Ability>();
-
         [SerializeField] PlayerAfterImageSprite _afterImage;
         [SerializeField] float _amountOfImages = 4;
         [SerializeField] float _dashTime = .1f;
+
         public PlayerAimWeapon Aim;
+        public PlayerBrain PlayerBrain;
 
-        ObjectPool<PlayerAfterImageSprite> _afterImagePool;
-
+        #region getters & setters
         public ObjectPool<PlayerAfterImageSprite> AfterImagePool { get { return _afterImagePool; } }
         public float AmountOfImages { get { return _amountOfImages; } }
         public float DashTime { get { return _dashTime; } }
@@ -32,10 +33,13 @@ namespace BulletHell.Player
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
         public bool IsInteracting { get { return _isInteracting; } set { _isInteracting = value; } }
         public Vector2 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
+        #endregion
 
         void Awake()
         {
             Initialize();
+
+            PlayerBrain = new PlayerBrain(this);
 
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, (int)_amountOfImages, "AfterImagePool");
 

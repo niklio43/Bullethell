@@ -34,7 +34,6 @@ public class AbilityHolder : MonoBehaviour
 
     public void SetGraphic()
     {
-        Debug.Log("set");
         for (int i = 0; i < _abilities.Count; i++)
         {
             _abilityUI[i].name = _abilities[i].GetName();
@@ -44,7 +43,6 @@ public class AbilityHolder : MonoBehaviour
 
     public void RemoveGraphic()
     {
-        Debug.Log("remove");
         for (int i = 0; i < _abilityUI.Count; i++)
         {
             _abilityUI[i].name = "";

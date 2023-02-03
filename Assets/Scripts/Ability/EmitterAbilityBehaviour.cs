@@ -26,6 +26,7 @@ namespace BulletHell.Abilities
 
         public override void Uninitialize()
         {
+            if (_emitterObject == null) return;
             _emitterObject.Uninitialize();
             _emitterObject = null;
         }
