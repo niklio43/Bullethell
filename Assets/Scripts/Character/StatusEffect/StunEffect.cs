@@ -10,12 +10,7 @@ namespace BulletHell.StatusSystem
     {
         public override void DoEffect(StatusEffect statusEffect)
         {
-            //statusEffect.Reciever
-        }
-
-        public override void OnExit(StatusEffect statusEffect)
-        {
-            //statusEffect.Reciever.GetComponent<Character>().IsStaggered = false;
+            statusEffect.Reciever.Stun(statusEffect.Lifetime);
         }
     }
 }

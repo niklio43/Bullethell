@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     public UnityEvent<float> OnTakeDamageEvent;
     public UnityEvent OnDeathEvent;
     public UnityEvent<float> OnHealEvent;
+    public UnityEvent<float> OnStunEvent;
 
     private void Awake()
     {
@@ -40,6 +41,11 @@ public class Character : MonoBehaviour
     public void OnDeath()
     {
         OnDeathEvent?.Invoke();
+    }
+
+    public void Stun(float duration)
+    {
+        OnStunEvent?.Invoke(duration);
     }
 
     public virtual void Heal(float amount)

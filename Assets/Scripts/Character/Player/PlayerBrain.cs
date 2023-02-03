@@ -61,20 +61,19 @@ namespace BulletHell.Player
                    action.Transition("default");
                });
            })
-                      .State(PlayerStates.Staggered, (staggered) =>
-                      {
-                          staggered.SetTransition("default", PlayerStates.Default)
-                          .Enter((action) =>
-                          {
-                              _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-                          })
-                          .Exit((action) =>
-                          {
-                              _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-                              _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-                              action.Transition("default");
-                          });
-                      })
+           .State(PlayerStates.Staggered, (staggered) =>
+           {
+               staggered.SetTransition("default", PlayerStates.Default)
+               .Enter((action) =>
+               {
+                   _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+               })
+               .Exit((action) =>
+               {
+                   _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                   _player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+               });
+           })
            .Build();
         }
     }

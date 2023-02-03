@@ -25,7 +25,7 @@ namespace BulletHell.Player
 
         public Character Character;
         public PlayerAimWeapon Aim;
-        public PlayerBrain PlayerBrain;
+        PlayerBrain _playerBrain;
 
         #region getters & setters
         public ObjectPool<PlayerAfterImageSprite> AfterImagePool { get { return _afterImagePool; } }
@@ -39,6 +39,8 @@ namespace BulletHell.Player
 
         void Awake()
         {
+            _playerBrain = new PlayerBrain(this);
+
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, (int)_amountOfImages, "AfterImagePool");
 
             for (int i = 0; i < _abilities.Count; i++)
@@ -57,6 +59,8 @@ namespace BulletHell.Player
             {
                 ability.UpdateAbility(Time.deltaTime);
             }
+
+            Debug.Log(_playerBrain._FSM.CurrentState.Id);
         }
 
         void FixedUpdate()
@@ -90,6 +94,17 @@ namespace BulletHell.Player
             afterImage.Pool = _afterImagePool;
 
             return afterImage;
+        }
+
+        public void OnStun(float duration)
+        {
+            _playerBrain._FSM.SetState(PlayerBrain.PlayerStates.Staggered);
+            Invoke("ExitStun", duration);
+        }
+
+        public void ExitStun()
+        {
+            _playerBrain._FSM.SetState(PlayerBrain.PlayerStates.Default);
         }
 
         public void TakeDamage(float damage)

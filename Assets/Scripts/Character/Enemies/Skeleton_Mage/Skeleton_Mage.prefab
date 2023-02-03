@@ -135,6 +135,9 @@ MonoBehaviour:
   OnHealEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnStunEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8461412192270030073
 MonoBehaviour:
   m_ObjectHideFlags: 0
