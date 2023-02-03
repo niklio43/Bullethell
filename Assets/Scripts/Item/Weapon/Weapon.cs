@@ -15,7 +15,6 @@ public abstract class Weapon : Item
 
     public void Initialize(GameObject owner, GameObject host)
     {
-        Debug.Log("weapon init");
         for (int i = 0; i < _abilitySlot.Count; i++)
         {
             _abilitySlot[i] = database.abilities[_abilitySlot[i].Id];
