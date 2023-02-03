@@ -54,6 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5441612227424731691}
+  - component: {fileID: 655914166239779043}
   - component: {fileID: 5441612227424731686}
   - component: {fileID: 5441612227424731684}
   - component: {fileID: 5441612227424731687}
@@ -85,6 +86,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &655914166239779043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5441612227424731693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e7861a990189c4b8c4f6fc8c988429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stats:
+    _statsList:
+    - Name: Hp
+      Value: 100
+    - Name: MaxHp
+      Value: 100
+  OnTakeDamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5441612227424731686}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5441612227424731686}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHealEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5441612227424731686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,25 +149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de4780273cdc14bb1921d455a0faf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats:
-    _statsList:
-    - Name: Hp
-      Value: 100
-    - Name: MaxHp
-      Value: 100
-    - Name: MoveSpeed
-      Value: 3
   MovementType: 1
   Target: {fileID: 0}
   CanMove: 0
   Aim: {fileID: 4533019207069723459}
   Weapon: {fileID: 8265819423944410714}
   _brain: {fileID: 11400000, guid: 395b3f64103f3c94ea9dc95e99181437, type: 2}
-  _dropTable:
-  - Item: {fileID: 11400000, guid: 5ecf513abbd3a7a4a9c0ddb12b04cc0b, type: 2}
-    Chance: 1
-  - Item: {fileID: 11400000, guid: ec5a4b4affe752f41b6b3cc10d20afff, type: 2}
-    Chance: 0.507
   PreferredDistance: 0.8
   AttackDistance: 1.2
 --- !u!114 &5441612227424731684
@@ -146,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawGizmos: 0
+  _moveSpeed: 3
   _agentSteering:
     AvoidanceRadius: 1
     Directions: []
