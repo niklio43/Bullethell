@@ -16,13 +16,14 @@ namespace BulletHell.Player
         bool _isDashing = false;
         bool _isInteracting = false;
         Animator _animator;
-        public Character Character;
+        ObjectPool<PlayerAfterImageSprite> _afterImagePool;
 
         [SerializeField] List<Ability> _abilities = new List<Ability>();
         [SerializeField] PlayerAfterImageSprite _afterImage;
         [SerializeField] float _amountOfImages = 4;
         [SerializeField] float _dashTime = .1f;
 
+        public Character Character;
         public PlayerAimWeapon Aim;
         public PlayerBrain PlayerBrain;
 
@@ -38,8 +39,6 @@ namespace BulletHell.Player
 
         void Awake()
         {
-            Initialize();
-
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, (int)_amountOfImages, "AfterImagePool");
 
             for (int i = 0; i < _abilities.Count; i++)
@@ -96,6 +95,14 @@ namespace BulletHell.Player
         public void TakeDamage(float damage)
         {
             Camera.main.Shake(0.1f, 0.2f);
+        }
+
+        public void OnDeath()
+        {
+        }
+
+        public void OnHeal(float amount)
+        {
         }
 
         #region Component Caching

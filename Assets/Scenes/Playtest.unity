@@ -9229,14 +9229,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1181653743}
-  - component: {fileID: 1181653742}
-  - component: {fileID: 1181653741}
-  - component: {fileID: 1181653740}
-  - component: {fileID: 1181653738}
-  - component: {fileID: 1181653744}
+  - component: {fileID: 1181653745}
+  - component: {fileID: 1181653735}
   - component: {fileID: 1181653737}
   - component: {fileID: 1181653736}
-  - component: {fileID: 1181653735}
+  - component: {fileID: 1181653742}
+  - component: {fileID: 1181653741}
+  - component: {fileID: 1181653738}
+  - component: {fileID: 1181653740}
+  - component: {fileID: 1181653744}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -9256,25 +9257,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1e6732d04e4f8478d19ba610173d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats:
-    _statsList:
-    - Name: Hp
-      Value: 100
-    - Name: MaxHp
-      Value: 100
-    - Name: Defense
-      Value: 10000
-    - Name: Strength
-      Value: 3
-    - Name: MoveSpeed
-      Value: 5
-    - Name: DashDistance
-      Value: 32
   _abilities:
   - {fileID: 11400000, guid: f0e435481c974864f928dbe1338bf354, type: 2}
   _afterImage: {fileID: -2138936094765007819, guid: 965500742adab4b45b904772870b9ef4, type: 3}
   _amountOfImages: 4
   _dashTime: 0.1
+  Character: {fileID: 1181653745}
   Aim: {fileID: 40932957}
 --- !u!114 &1181653736
 MonoBehaviour:
@@ -9535,6 +9523,77 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1181653745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181653734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e7861a990189c4b8c4f6fc8c988429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stats:
+    _statsList:
+    - Name: Hp
+      Value: 100
+    - Name: MaxHp
+      Value: 100
+    - Name: Strength
+      Value: 10
+    - Name: Defense
+      Value: 100
+    - Name: DashDistance
+      Value: 24
+    - Name: MoveSpeed
+      Value: 6
+  OnTakeDamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1181653735}
+        m_TargetAssemblyTypeName: BulletHell.Player.PlayerController, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1181653735}
+        m_TargetAssemblyTypeName: BulletHell.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHealEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1181653735}
+        m_TargetAssemblyTypeName: BulletHell.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnHeal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1328133124 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1280149869705643988, guid: 15d37370597e52740a2ce13311669345, type: 3}
