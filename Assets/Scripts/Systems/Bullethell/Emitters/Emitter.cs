@@ -47,15 +47,17 @@ namespace BulletHell.Emitters
 
                 runTimeData.Position = _emitterGroups[i].Position;
                 runTimeData.Direction = _emitterGroups[i].Direction;
-
                 runTimeData.Speed = _data.Speed;
                 runTimeData.Acceleration = _data.Acceleration;
                 runTimeData.Velocity = runTimeData.Direction * runTimeData.Speed;
-
                 runTimeData.Gravity = _data.Gravity;
                 runTimeData.GravityPoint = _data.GravityPoint;
                 runTimeData.TimeToLive = _data.TimeToLive;
-                
+                runTimeData.FollowTarget = _data.FollowTarget;
+                runTimeData.FollowRange = _data.FollowRange;
+                runTimeData.FollowIntensity = _data.FollowIntensity;
+                runTimeData.MaxSpeed = _data.MaxSpeed;
+
                 projectile.Initialize(_data.ProjectileData, runTimeData);
                 projectile.SetOwner(projectileOwner);
                 projectile.SetDamage(damage);
@@ -70,6 +72,5 @@ namespace BulletHell.Emitters
                 projectile.ResetObject();
             }
         }
-
     }
 }
