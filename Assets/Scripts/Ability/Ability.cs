@@ -64,7 +64,7 @@ namespace BulletHell.Abilities
             _timers = null;
             _currentAmount = 0;
 
-            for (int i = 0; i < _behaviours.Count; i++)
+            for (int i = 0; i < _behaviours.Count - 1; i++)
             {
                 _behaviours[i].Uninitialize();
             }

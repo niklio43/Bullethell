@@ -11,7 +11,7 @@ namespace BulletHell.Emitters.Projectiles
         Character _owner;
 
         public Pool<EmitterProjectile> Pool;
-        EmittterProjectileData _data;
+        public EmittterProjectileData Data;
 
         Animator _anim;
         SpriteRenderer _spriteRenderer;
@@ -33,13 +33,13 @@ namespace BulletHell.Emitters.Projectiles
 
         public void Initialize(EmittterProjectileData data, RuntimeEmitterProjectileData runTimeData)
         {
-            _data = data;
+            Data = data;
             gameObject.SetActive(true);
             if (data.Sprite != null)
                 _spriteRenderer.sprite = data.Sprite;
 
-            _projectileCollider.offset = _data.collider.center;
-            _projectileCollider.size = _data.collider.size / 2;
+            _projectileCollider.offset = Data.collider.center;
+            _projectileCollider.size = Data.collider.size / 2;
 
             transform.localScale = Vector3.one * data.Scale;
             _spriteRenderer.color = data.Color;
@@ -67,7 +67,7 @@ namespace BulletHell.Emitters.Projectiles
 
         public void ResetObject()
         {
-            _data = null;
+            Data = null;
             transform.position = Vector3.zero;
             gameObject.SetActive(false);
             Pool.Release(this);
@@ -75,7 +75,7 @@ namespace BulletHell.Emitters.Projectiles
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!_data.CollisionTags.Contains(collision.gameObject.tag) || _damage == null || collision.gameObject == _owner) { return; }
+            if (!Data.CollisionTags.Contains(collision.gameObject.tag) || _damage == null || collision.gameObject == _owner) { return; }
             if (collision.TryGetComponent(out Character character)) {
                 if (_damage != null)
                     DamageHandler.SendDamage(_owner, character, _damage);
@@ -90,10 +90,16 @@ namespace BulletHell.Emitters.Projectiles
 
         void OnHit()
         {
-            if (_data.HitVFX != null)
-                VFXManager.PlayBurst(_data.HitVFX, transform.position);
+            if (Data.HitVFX != null)
+                VFXManager.PlayBurst(Data.HitVFX, transform.position);
 
             Destroy(gameObject);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, _runTimeData.FollowRange);
         }
     }
 }

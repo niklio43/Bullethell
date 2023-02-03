@@ -68,6 +68,7 @@ namespace BulletHell.Emitters.Editor
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("ProjectileData")));
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("TimeToLive")));
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Speed")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("MaxSpeed")));
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Acceleration")));
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Gravity")));
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("GravityPoint")));
@@ -87,6 +88,20 @@ namespace BulletHell.Emitters.Editor
             emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Offset")));
             emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Spread")));
             dataRoot.Add(emissionFoldout);
+            #endregion
+
+            #region Homeing Data Foldout
+            Foldout homeingFoldout = new Foldout();
+            homeingFoldout.value = _target.FoldOutHomeing;
+            homeingFoldout.name = "HomeingData_Foldout";
+            homeingFoldout.text = "Homeing";
+            homeingFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutHomeing = homeingFoldout.value);
+
+
+            homeingFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("FollowTarget")));
+            homeingFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("FollowIntensity")));
+            homeingFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("FollowRange")));
+            dataRoot.Add(homeingFoldout);
             #endregion
 
         }

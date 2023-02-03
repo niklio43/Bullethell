@@ -20,15 +20,19 @@ MonoBehaviour:
   ProjectileData: {fileID: 11400000, guid: 9c804f785f32dba4c979abf7a77a631e, type: 2}
   TimeToLive: 3
   Speed: 5
-  Acceleration: 1.5
+  MaxSpeed: 100
+  Acceleration: 0
   Gravity: 0
   GravityPoint: {x: 0, y: 0}
   FoldOutEmitter: 1
   EmitterPoints: 10
-  CenterRotation: 0
+  CenterRotation: -90
   Pitch: 0
   Offset: 0
   Spread: 36
   ParentRotation: 0
   Direction: {x: 0, y: 1}
-  Modifiers: []
+  FoldOutHomeing: 0
+  FollowTarget: 0
+  FollowIntensity: 0
+  FollowRange: 0
