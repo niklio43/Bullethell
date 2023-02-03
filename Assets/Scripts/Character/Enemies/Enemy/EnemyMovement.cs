@@ -9,7 +9,9 @@ namespace BulletHell.Enemies
     public class EnemyMovement : MonoBehaviour
     {
         public bool DrawGizmos = false;
+        [SerializeField] float _moveSpeed;
         [SerializeField] AgentSteering _agentSteering = new AgentSteering();
+
 
         Enemy _enemy;
         Rigidbody2D _rb;
@@ -31,8 +33,8 @@ namespace BulletHell.Enemies
         {
             Vector2 MoveDirection = ContextSolver.GetDirection(_agentSteering);
 
-            _rb.AddForce(MoveDirection * _enemy.Stats["MoveSpeed"].Get());
-            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _enemy.Stats["MoveSpeed"].Get());
+            _rb.AddForce(MoveDirection * _moveSpeed);
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _moveSpeed);
         }
 
         private void OnDrawGizmosSelected()

@@ -540,6 +540,15 @@ MonoBehaviour:
       Value: 100
     - Name: MaxHp
       Value: 100
+  OnTakeDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &1448856850
 Rigidbody2D:
   serializedVersion: 4

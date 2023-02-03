@@ -32,7 +32,7 @@ namespace BulletHell.Abilities
 
             _player.IsDashing = true;
 
-            _player.Rb.AddForce(dir * _player.Stats["DashDistance"].Value, ForceMode2D.Impulse);
+            _player.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
 
             for (int i = 0; i < _player.AmountOfImages; i++)
             {

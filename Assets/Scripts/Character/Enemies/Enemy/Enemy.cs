@@ -8,7 +8,7 @@ using System.Linq;
 using UnityEngine;
 using Bullet.CameraUtilities;
 
-public class Enemy : Character
+public class Enemy : MonoBehaviour
 {
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
     [HideInInspector] public Transform Target;
@@ -18,10 +18,10 @@ public class Enemy : Character
     public EnemyWeapon Weapon;
 
     [SerializeField] EnemyBrain _brain;
-    [SerializeField] List<ItemDrop> _dropTable = new List<ItemDrop>();
 
     EnemyDetection _detection;
     EnemyMovement _enemyMovement;
+    Character _character;
 
     public bool Invincible { get; set; } = false;
     bool _flipped = false;
@@ -42,15 +42,13 @@ public class Enemy : Character
         _detection = GetComponent<EnemyDetection>();
         _enemyMovement = GetComponent<EnemyMovement>();
 
-        Initialize();
-
         _brain = Instantiate(_brain);
         _brain.Initialize(this);
 
         _defaultScale = transform.localScale;
     }
 
-    protected override void OnUpdate()
+    private void Update()
     {
         _brain.Update();
         DetectionData = _detection.Detect();
@@ -61,25 +59,22 @@ public class Enemy : Character
         if (CanMove) _enemyMovement.Move();
     }
 
-    public override void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         if (Invincible) { return; }
 
-        Stats["Hp"].Value -= damage;
-
         Camera.main.Shake(0.075f, 0.1f);
-
-        if (Stats["Hp"].Value <= 0)
-        {
-            OnDeath();
-            GetComponent<DropRandomLoot>().DropItem(_dropTable);
-        }
 
         _brain.SetState(EnemyBrain.EnemyStates.Staggered);
 
-
         //DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
     }
+
+    public void OnDeath()
+    {
+        Destroy(gameObject);
+    }
+
 
     public void UpdateDirection()
     {
@@ -108,26 +103,22 @@ public class Enemy : Character
             SetTarget(target);
         }
     }
-
     public void SetTarget(Transform target)
     {
         Target = target;
     }
-
     public bool TargetInAttackRange()
     {
         float distance = Vector2.Distance(transform.position, Target.position);
 
         return (distance < AttackDistance);
     }
-
     public bool TargetTooClose()
     {
         float distance = Vector2.Distance(transform.position, Target.position);
 
         return (distance < PreferredDistance);
     }
-
 
     #region Component Caching
 

@@ -9,12 +9,14 @@ using Bullet.CameraUtilities;
 
 namespace BulletHell.Player
 {
-    public class PlayerController : Character
+    public class PlayerController : MonoBehaviour
     {
         Rigidbody2D _rb;
         Vector2 _movementInput;
         bool _isDashing = false;
         bool _isInteracting = false;
+        Animator _animator;
+        public Character Character;
 
         [SerializeField] List<Ability> _abilities = new List<Ability>();
 
@@ -35,8 +37,6 @@ namespace BulletHell.Player
 
         void Awake()
         {
-            Initialize();
-
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, (int)_amountOfImages, "AfterImagePool");
 
             for (int i = 0; i < _abilities.Count; i++)
@@ -45,10 +45,11 @@ namespace BulletHell.Player
                 _abilities[i].Initialize(gameObject);
             }
 
+            _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
         }
 
-        protected override void OnUpdate()
+        private void Update()
         {
             foreach (Ability ability in _abilities)
             {
@@ -69,7 +70,7 @@ namespace BulletHell.Player
 
         public void Move(InputAction.CallbackContext context)
         {
-            _movementInput = context.ReadValue<Vector2>() * Stats["MoveSpeed"].Value;
+            _movementInput = context.ReadValue<Vector2>() * Character.Stats["MoveSpeed"].Value;
         }
 
         public void Dash(int abilityIndex, InputAction.CallbackContext context)
@@ -89,12 +90,9 @@ namespace BulletHell.Player
             return afterImage;
         }
 
-        public override void TakeDamage(float damage)
+        public void TakeDamage(float damage)
         {
-            base.TakeDamage(damage);
-
             Camera.main.Shake(0.1f, 0.2f);
-
         }
 
         #region Component Caching
