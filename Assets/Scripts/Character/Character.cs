@@ -48,6 +48,13 @@ public class Character : MonoBehaviour
         OnStunEvent?.Invoke(duration);
     }
 
+    [ContextMenu("TESTSTUN")]
+    public void TestStun()
+    {
+        Stun(2f);
+    }
+
+
     public virtual void Heal(float amount)
     {
         Stats["Hp"].Value += amount;

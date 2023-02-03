@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Bullet.CameraUtilities;
+using BulletHell.VFX;
+using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
@@ -23,7 +25,6 @@ public class Enemy : MonoBehaviour
     EnemyMovement _enemyMovement;
     Character _character;
 
-    public bool Invincible { get; set; } = false;
     bool _flipped = false;
     Vector3 _defaultScale;
 
@@ -61,13 +62,18 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (Invincible) { return; }
-
         Camera.main.Shake(0.075f, 0.1f);
-
         _brain.SetState(EnemyBrain.EnemyStates.Staggered);
-
         //DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
+    }
+
+    public void OnStun(float duration)
+    {
+        _brain.SetState(EnemyBrain.EnemyStates.Stunned);
+        this.Invoke(() => _brain.SetState(EnemyBrain.EnemyStates.Idle), duration);
+
+
+        BulletHell.VFX.VFXManager.Play(Resources.Load<VisualEffectAsset>("StunnedEffect"), duration, Vector3.up / 2, transform, new VFXAttribute[] { new VFXFloat("Duration", duration) });
     }
 
     public void OnDeath()
