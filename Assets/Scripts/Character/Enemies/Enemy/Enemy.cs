@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     public EnemyAim Aim;
     public EnemyWeapon Weapon;
 
+    RuntimeVisualEffect _stunVFX = null;
 
     EnemyDetection _detection;
     Character _character;
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
 
         _character.OnTakeDamageEvent += TakeDamage;
         _character.OnStunEvent += OnStun;
+        _character.OnExitStunEvent += OnExitStun;
         _character.OnDeathEvent += OnDeath;
 
         _brain = Instantiate(_brain);
@@ -78,12 +80,15 @@ public class Enemy : MonoBehaviour
     {
         _brain.CurrentAbility?.Cancel();
         _brain.SetState(EnemyBrain.EnemyStates.Stunned);
-        Debug.Log("TEST1");
-        Debug.Log(duration);
-        this.Invoke(() => _brain.SetState(EnemyBrain.EnemyStates.Idle), duration);
 
+        _stunVFX = BulletHell.VFX.VFXManager.PlayUntilStopped(Resources.Load<VisualEffectAsset>("StunnedEffect"), Vector3.up / 2, transform);
+    }
 
-        BulletHell.VFX.VFXManager.Play(Resources.Load<VisualEffectAsset>("StunnedEffect"), duration, Vector3.up / 2, transform, new VFXAttribute[] { new VFXFloat("Duration", duration) });*/
+    public void OnExitStun()
+    {
+        _brain.SetState(EnemyBrain.EnemyStates.Idle);
+
+        _stunVFX.Stop();
     }
 
     public void OnDeath()
