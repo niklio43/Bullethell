@@ -17,7 +17,7 @@ namespace BulletHell.VFX
         }
         static ObjectPool<RuntimeVisualEffect> _pool;
 
-        public static void PlayBurst(VisualEffectAsset asset, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null)
+        public static RuntimeVisualEffect PlayBurst(VisualEffectAsset asset, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null)
         {
             RuntimeVisualEffect vfx = Pool.Get();
             vfx.gameObject.SetActive(true);
@@ -26,8 +26,9 @@ namespace BulletHell.VFX
 
             vfx.transform.localPosition = position;
             vfx.PlayBurst(asset, vfxAttributes);
+            return vfx;
         }
-        public static void Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null, bool waitForParticles = false)
+        public static RuntimeVisualEffect Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null, bool waitForParticles = false)
         {
             RuntimeVisualEffect vfx = Pool.Get();
             vfx.gameObject.SetActive(true);
@@ -36,6 +37,19 @@ namespace BulletHell.VFX
 
             vfx.transform.localPosition = position;
             vfx.Play(asset, time, vfxAttributes, waitForParticles);
+            return vfx;
+        }
+
+        public static RuntimeVisualEffect PlayUntilStopped(VisualEffectAsset asset, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null, bool waitForParticles = false)
+        {
+            RuntimeVisualEffect vfx = Pool.Get();
+            vfx.gameObject.SetActive(true);
+            if (parent != null)
+                vfx.transform.parent = parent;
+
+            vfx.transform.localPosition = position;
+            vfx.PlayUntilStopped(asset, vfxAttributes, waitForParticles);
+            return vfx;
         }
 
         RuntimeVisualEffect Create()
@@ -86,6 +100,24 @@ namespace BulletHell.VFX
 
             _vfx.Play();
             MonoInstance.Instance.StartCoroutine(PlayForSeconds(time, waitForParticles));
+        }
+
+        public void PlayUntilStopped(VisualEffectAsset asset, VFXAttribute[] vfxAttributes = null, bool waitForParticles = false)
+        {
+            _vfx.visualEffectAsset = asset;
+
+            if (vfxAttributes != null)
+                foreach (VFXAttribute attribute in vfxAttributes) {
+                    attribute.SetValue(_vfx);
+                }
+
+            _vfx.Play();
+        }
+
+        public void Stop()
+        {
+            _vfx?.Stop();
+            ResetObject();
         }
 
         public void ResetObject()
