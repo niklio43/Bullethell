@@ -407,10 +407,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Melee (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 5441612227424731693, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
 --- !u!1 &1448856845
