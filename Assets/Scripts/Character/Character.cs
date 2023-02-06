@@ -20,8 +20,11 @@ public class Character : MonoBehaviour
     public delegate void OnDeathDelegate();
     public OnDeathDelegate OnDeathEvent;
 
-    public delegate void OnStunDelegate(float duration);
+    public delegate void OnStunDelegate();
     public OnStunDelegate OnStunEvent;
+
+    public delegate void OnExitStunDelegate();
+    public OnStunDelegate OnExitStunEvent;
 
     private void Awake()
     {
@@ -50,17 +53,15 @@ public class Character : MonoBehaviour
         OnDeathEvent?.Invoke();
     }
 
-    public void Stun(float duration)
+    public void Stun()
     {
-        OnStunEvent?.Invoke(duration);
+        OnStunEvent?.Invoke();
     }
 
-    [ContextMenu("TESTSTUN")]
-    public void TestStun()
+    public void ExitStun()
     {
-        Stun(2f);
+        OnExitStunEvent?.Invoke();
     }
-
 
     public virtual void Heal(float amount)
     {

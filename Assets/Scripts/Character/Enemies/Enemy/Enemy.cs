@@ -73,13 +73,13 @@ public class Enemy : MonoBehaviour
         //DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
     }
 
-    public void OnStun(float duration)
+    public void OnStun()
     {
-        _brain.SetState(EnemyBrain.EnemyStates.Stunned);
+        /*_brain.SetState(EnemyBrain.EnemyStates.Stunned);
         this.Invoke(() => _brain.SetState(EnemyBrain.EnemyStates.Idle), duration);
 
 
-        BulletHell.VFX.VFXManager.Play(Resources.Load<VisualEffectAsset>("StunnedEffect"), duration, Vector3.up / 2, transform, new VFXAttribute[] { new VFXFloat("Duration", duration) });
+        BulletHell.VFX.VFXManager.Play(Resources.Load<VisualEffectAsset>("StunnedEffect"), duration, Vector3.up / 2, transform, new VFXAttribute[] { new VFXFloat("Duration", duration) });*/
     }
 
     public void OnDeath()

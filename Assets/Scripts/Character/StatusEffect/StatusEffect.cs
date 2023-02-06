@@ -13,11 +13,11 @@ namespace BulletHell.StatusSystem
         public Sprite Icon;
         public float TickSpeed = 1;
         public float Lifetime;
-        public bool Stackable;
         public float MaxStacks = 5;
         public DamageInfo DamageInfo;
         public List<EffectBehaviour> Behaviours = new List<EffectBehaviour>();
         [HideInInspector] public Character Sender, Reciever;
+        public StatusBehaviour statusBehaviour = StatusBehaviour.None;
 
         [SerializeField] List<DamageValue> _damageValues = new List<DamageValue>();
         float _nextTickTime = 0f;
@@ -43,11 +43,19 @@ namespace BulletHell.StatusSystem
 
         public void Multiple()
         {
-            if (!Stackable) { _timer = 0; _nextTickTime = 0; return; }
-
-            if (Stackable && _currentStacks < MaxStacks)
+            switch (statusBehaviour)
             {
-                _currentStacks++;
+                case StatusBehaviour.None:
+                    break;
+                case StatusBehaviour.Stackable:
+                    if (_currentStacks < MaxStacks)
+                    {
+                        _currentStacks++;
+                    }
+                    break;
+                case StatusBehaviour.Resetable:
+                    _timer = 0; _nextTickTime = 0;
+                    break;
             }
         }
 
@@ -80,5 +88,12 @@ namespace BulletHell.StatusSystem
                 }
             }
         }
+    }
+
+    public enum StatusBehaviour
+    {
+        None,
+        Stackable,
+        Resetable
     }
 }

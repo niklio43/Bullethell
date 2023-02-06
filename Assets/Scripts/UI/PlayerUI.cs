@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] PlayerInput _input;
     [SerializeField] GameObject[] _inventory;
+    [SerializeField] Slider _health, _stamina;
     bool inv = false;
 
     public bool TryGetCurrentInputForAction(string action, out string input)
@@ -20,7 +22,7 @@ public class PlayerUI : MonoBehaviour
     public void ToggleInventory()
     {
         inv = !inv;
-        foreach(GameObject obj in _inventory)
+        foreach (GameObject obj in _inventory)
             obj.SetActive(inv);
     }
 }

@@ -29,6 +29,7 @@ namespace BulletHell.Player
 
         #region getters & setters
         public ObjectPool<PlayerAfterImageSprite> AfterImagePool { get { return _afterImagePool; } }
+        public List<Ability> Abilities { get { return _abilities; } }
         public float DashTime { get { return _dashTime; } }
         public Rigidbody2D Rb { get { return _rb; } }
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
@@ -53,6 +54,7 @@ namespace BulletHell.Player
             Character.OnHealEvent += OnHeal;
             Character.OnDeathEvent += OnDeath;
             Character.OnStunEvent += OnStun;
+            Character.OnExitStunEvent += OnExitStun;
 
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
@@ -101,14 +103,13 @@ namespace BulletHell.Player
             return afterImage;
         }
 
-        public void OnStun(float duration)
+        public void OnStun()
         {
             if (_isInvincible) return;
             _playerBrain._FSM.SetState(PlayerBrain.PlayerStates.Staggered);
-            Invoke("ExitStun", duration);
         }
 
-        public void ExitStun()
+        public void OnExitStun()
         {
             _playerBrain._FSM.SetState(PlayerBrain.PlayerStates.Default);
         }
