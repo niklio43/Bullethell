@@ -34,14 +34,28 @@ namespace BulletHell.Abilities
 
             _player.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
 
-            for (int i = 0; i < _player.AmountOfImages; i++)
-            {
-                PlayerAfterImageSprite afterImage = _player.AfterImagePool.Get();
-                afterImage.gameObject.SetActive(true);
-                afterImage.Initialize(i);
-            }
+            MonoInstance.Instance.StartCoroutine(CreateAfterImages(0.02f));
 
             MonoInstance.Instance.Invoke(() => ResetDash(), _player.DashTime);
+        }
+
+        IEnumerator CreateAfterImages(float timeBetween)
+        {
+            float timeElapsed = 0;
+            float timeSinceLastImage = 0;
+            while(timeElapsed < _player.DashTime)
+            {
+                yield return new WaitForFixedUpdate();
+                timeElapsed += Time.fixedDeltaTime;
+                timeSinceLastImage += Time.deltaTime;
+                if(timeSinceLastImage > timeBetween)
+                {
+                    timeSinceLastImage = 0;
+                    PlayerAfterImageSprite afterImage = _player.AfterImagePool.Get();
+                    afterImage.gameObject.SetActive(true);
+                    afterImage.Initialize(_player.transform, _player.GetComponent<SpriteRenderer>().sprite);
+                }
+            }
         }
 
         void ResetDash()

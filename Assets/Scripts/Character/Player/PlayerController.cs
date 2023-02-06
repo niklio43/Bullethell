@@ -21,7 +21,6 @@ namespace BulletHell.Player
 
         [SerializeField] List<Ability> _abilities = new List<Ability>();
         [SerializeField] PlayerAfterImageSprite _afterImage;
-        [SerializeField] float _amountOfImages = 4;
         [SerializeField] float _dashTime = .1f;
 
         public Character Character;
@@ -30,7 +29,6 @@ namespace BulletHell.Player
 
         #region getters & setters
         public ObjectPool<PlayerAfterImageSprite> AfterImagePool { get { return _afterImagePool; } }
-        public float AmountOfImages { get { return _amountOfImages; } }
         public float DashTime { get { return _dashTime; } }
         public Rigidbody2D Rb { get { return _rb; } }
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
@@ -43,7 +41,7 @@ namespace BulletHell.Player
         {
             _playerBrain = new PlayerBrain(this);
 
-            _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, (int)_amountOfImages, "AfterImagePool");
+            _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, 10, "AfterImagePool");
 
             for (int i = 0; i < _abilities.Count; i++)
             {

@@ -43,7 +43,7 @@ namespace BulletHell.StatusSystem
 
         public void Multiple()
         {
-            if (!Stackable) { Lifetime = 0;  return; }
+            if (!Stackable) { _timer = 0; _nextTickTime = 0; return; }
 
             if (Stackable && _currentStacks < MaxStacks)
             {
