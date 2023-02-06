@@ -27,10 +27,12 @@ namespace BulletHell.Player
         public PlayerAimWeapon Aim;
         PlayerBrain _playerBrain;
 
+        [SerializeField] PlayerUI _ui;
+
         #region getters & setters
         public ObjectPool<PlayerAfterImageSprite> AfterImagePool { get { return _afterImagePool; } }
-        public List<Ability> Abilities { get { return _abilities; } }
         public float DashTime { get { return _dashTime; } }
+        public PlayerUI UI { get { return _ui; } }
         public Rigidbody2D Rb { get { return _rb; } }
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
         public bool IsInteracting { get { return _isInteracting; } set { _isInteracting = value; } }
@@ -43,6 +45,8 @@ namespace BulletHell.Player
             _playerBrain = new PlayerBrain(this);
 
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, 10, "AfterImagePool");
+
+            _ui.Health.maxValue = Character.Stats["MaxHealth"].Value;
 
             for (int i = 0; i < _abilities.Count; i++)
             {
@@ -91,6 +95,9 @@ namespace BulletHell.Player
             if (context.performed && !_isDashing)
             {
                 _abilities[abilityIndex].Cast();
+
+                _ui.Stamina.maxValue = _abilities[abilityIndex].MaxAmount;
+                _ui.Stamina.value = _abilities[abilityIndex].CurrentAmount;
             }
         }
 
@@ -118,6 +125,7 @@ namespace BulletHell.Player
         {
             if (_isInvincible) return;
             Camera.main.Shake(0.1f, 0.2f);
+            _ui.Health.value = Character.Stats["Health"].Value;
         }
 
         public void OnDeath()

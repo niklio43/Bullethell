@@ -9,7 +9,7 @@ public class PlayerUI : MonoBehaviour
 {
     [SerializeField] PlayerInput _input;
     [SerializeField] GameObject[] _inventory;
-    [SerializeField] Slider _health, _stamina;
+    public Slider Health, Stamina;
     bool inv = false;
 
     public bool TryGetCurrentInputForAction(string action, out string input)

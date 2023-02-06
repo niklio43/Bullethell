@@ -25,7 +25,9 @@ namespace BulletHell.Abilities
         [SerializeField] float _screenShakeAmplitude = 0;
 
         [Header("Ability Behaviours")]
-        [SerializeField] List<BaseAbilityBehaviour> _behaviours;        #region Getters
+        [SerializeField] List<BaseAbilityBehaviour> _behaviours;
+
+        int _currentAmount;        #region Getters
         public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
         public int GetCurrentAmount => _currentAmount;
@@ -37,7 +39,9 @@ namespace BulletHell.Abilities
         AbilityState _abilityState = AbilityState.Idle;
         public GameObject Owner { get; private set; }
         public GameObject Host { get; private set; }
-        int _currentAmount;
+
+        public int CurrentAmount { get { return _currentAmount; } }
+        public int MaxAmount { get { return _maxAmount; } }
 
         List<float> _timers;
 
