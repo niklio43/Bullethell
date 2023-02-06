@@ -8,10 +8,11 @@ namespace BulletHell.Enemies.Steering
     [CreateAssetMenu(fileName = "AlliedCollisionAvoidance", menuName = "Enemies/Steering/Allied Collision Avoidance", order = 1)]
     public class AlliedCollisionAvoidance : SteeringBehaviour
     {
-        public override void GetSteering(AgentSteering steering, Enemy enemy)
+        public override void GetSteering(AgentSteering steering, EnemyMovement movement)
         {
-            Transform transform = enemy.transform;
-            Collider2D collider = enemy.GetComponent<Collider2D>();
+            Transform transform = movement.transform;
+            Collider2D collider = movement.Collider;
+            Enemy enemy = movement.Enemy;
 
             if (enemy.DetectionData.Count("Enemies") == 0) { return; }
 

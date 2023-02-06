@@ -12,7 +12,11 @@ namespace BulletHell.Enemies
         public IFSM FSM { get; protected set; }
         Enemy _owner;
 
+        public Ability CurrentAbility = null;
         bool _canAttack = true;
+
+        float attackCoolDown = 1.5f;
+        float _currentAttackCoolDown = 0;
 
         public enum EnemyStates
         {
@@ -43,8 +47,11 @@ namespace BulletHell.Enemies
         {
             state.SetAnimationClip("Idle");
             state.SetTransition("chasePlayer", EnemyStates.Chasing);
-            state.Update((action) => {
 
+            state.Enter((action) => {
+                _canAttack = true;
+            });
+            state.Update((action) => {
                 if (_owner.Target != null) {
                     action.Transition("chasePlayer");
                 }
@@ -66,7 +73,7 @@ namespace BulletHell.Enemies
                     _owner.GetComponent<Animator>().Play("Idle");
                 }
 
-                if (_owner.TargetInAttackRange() && CanCastAbility() && _canAttack) {
+                if (_owner.TargetInAttackRange() && CanCastAbility() && _canAttack && _currentAttackCoolDown > attackCoolDown) {
                     action.Transition("attack");
                 }
             });
@@ -78,20 +85,19 @@ namespace BulletHell.Enemies
         {
             state.SetTransition("idle", EnemyStates.Idle);
             state.Enter((action) => {
+                _currentAttackCoolDown = 0;
                 _owner.CanMove = false;
                 _canAttack = false;
-                Ability chosenAbility = null;
+                CurrentAbility = null;
 
                 foreach (Ability ability in abilities) {
                     if (ability.CanCast()) {
-                        chosenAbility = ability;
+                        CurrentAbility = ability;
                     }
                 }
 
-                if (chosenAbility == null) { action.Transition("idle"); return; }
-
-                chosenAbility.Cast(() => action.Transition("idle"));
-                _owner.Invoke(() => _canAttack = true, 1f);
+                if (CurrentAbility == null) { action.Transition("idle"); return; }
+                CurrentAbility.Cast(() => { action.Transition("idle"); });
             });
 
             return state;
@@ -102,6 +108,7 @@ namespace BulletHell.Enemies
             state.SetAnimationClip("Stagger");
             state.Enter((action) => {
                 _owner.CanMove = false;
+                _canAttack = false;
 
                 float waitTime = _owner.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
                 _owner.Invoke(() => SetState(EnemyStates.Idle), waitTime);
@@ -114,8 +121,10 @@ namespace BulletHell.Enemies
             state.Enter((action) => {
                 _owner.GetComponent<Animator>().speed = 0;
                 _owner.CanMove = false;
+                _canAttack = false;
             });
             state.Exit((action) => {
+                Debug.Log("TEST2");
                 _owner.GetComponent<Animator>().speed = 1;
             });
             return state;
@@ -143,9 +152,11 @@ namespace BulletHell.Enemies
             }
         }
 
-        public virtual void Update()
+        public virtual void UpdateBrain(float dt)
         {
             FSM.Update();
+
+            _currentAttackCoolDown += dt;
 
             foreach (Ability ability in abilities) {
                 ability.UpdateAbility(Time.deltaTime);

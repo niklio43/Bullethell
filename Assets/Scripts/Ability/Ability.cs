@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine;using Bullet.CameraUtilities;
+using UnityEngine;using Bullet.CameraUtilities;using System.Threading;
+using Cysharp.Threading.Tasks;
+
 namespace BulletHell.Abilities
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/New Ability")]
@@ -24,7 +26,7 @@ namespace BulletHell.Abilities
 
         [Header("Ability Behaviours")]
         [SerializeField] List<BaseAbilityBehaviour> _behaviours;        #region Getters
-        public bool CanCast() => (_currentAmount > 0);
+        public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
         public int GetCurrentAmount => _currentAmount;
         public string GetName() => _name;
@@ -39,15 +41,20 @@ namespace BulletHell.Abilities
 
         List<float> _timers;
 
+        CancellationTokenSource _cancellationTokenSource;
+        public CancellationToken CancellationToken => _cancellationTokenSource.Token;
+
         public enum AbilityState
         {
             Idle,
             Channeling,
             Casting,
+            Canceled
         }
 
         public void Initialize(GameObject owner, GameObject host = null)
         {
+            _cancellationTokenSource = new CancellationTokenSource();
             this.Owner = owner;
             this.Host = (host == null) ? owner : host;
 
@@ -75,9 +82,11 @@ namespace BulletHell.Abilities
             if (_currentAmount <= 0 || _abilityState == AbilityState.Channeling) return;
             await DoAbility();
 
-            _abilityState = AbilityState.Casting;
-            Camera.main.Shake(_screenShakeDuration, _screenShakeAmplitude);
-            castDelegate?.Invoke();
+            if (_abilityState != AbilityState.Canceled) {
+                Camera.main.Shake(_screenShakeDuration, _screenShakeAmplitude);
+                _abilityState = AbilityState.Casting;
+                castDelegate?.Invoke();
+            }
             _abilityState = AbilityState.Idle;
         }
 
@@ -86,6 +95,14 @@ namespace BulletHell.Abilities
     
 
             _currentAmount--;            _timers.Add(_coolDownTime);
+        }
+
+        public void Cancel()
+        {
+            _abilityState = AbilityState.Canceled;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
+            _cancellationTokenSource = new CancellationTokenSource();
         }
 
         public void UpdateAbility(float dt)

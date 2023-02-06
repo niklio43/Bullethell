@@ -14,9 +14,6 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public bool pause;
 
-    static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-    public static CancellationTokenSource GetCancellationToken() => cancellationTokenSource;
-
     void Awake()
     {
         pauseGame.Enable();
@@ -76,11 +73,6 @@ public class GameManager : Singleton<GameManager>
          Application.Quit();
 #endif
 
-    }
-
-    public void OnApplicationQuit()
-    {
-        cancellationTokenSource.Cancel();
     }
 
     public void SetTime(bool scale)

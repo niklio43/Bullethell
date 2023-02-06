@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &166284077 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8461412192270030073, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-  m_PrefabInstance: {fileID: 8461412190976600945}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30de4780273cdc14bb1921d455a0faf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &798519394
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Melee (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5441612227424731693, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
 --- !u!1 &1448856845
@@ -439,7 +432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1448856846
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -551,18 +544,6 @@ MonoBehaviour:
       Value: 100
     - Name: MaxHp
       Value: 100
-  OnTakeDamageEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHealEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStunEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!50 &1448856850
 Rigidbody2D:
   serializedVersion: 4
@@ -591,34 +572,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3293970778827372522, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: OnStunEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293970778827372522, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: OnStunEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293970778827372522, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: OnStunEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 166284077}
-    - target: {fileID: 3293970778827372522, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: OnStunEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293970778827372522, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: OnStunEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnStun
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293970778827372522, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: OnStunEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Enemy, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293970778827372522, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: OnStunEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_Name
       value: Skeleton_Mage

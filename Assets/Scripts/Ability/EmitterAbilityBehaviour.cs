@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using BulletHell.Emitters;
 using BulletHell.Stats;
 using BulletHell.StatusSystem;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace BulletHell.Abilities
 {
