@@ -22,6 +22,11 @@ namespace BulletHell.Player
             Initialize();
         }
 
+        public void UpdateBrain()
+        {
+            _FSM.Update();
+        }
+
         void Initialize()
         {
             _FSM = new FSMBuilder()
@@ -55,11 +60,19 @@ namespace BulletHell.Player
            .State(PlayerStates.Dashing, (dashing) =>
            {
                dashing.SetTransition("default", PlayerStates.Default)
+               .Enter((action) =>
+               {
+                   _player.IsInvincible = true;
+               })
                .Update((action) =>
                {
                    if (_player.IsDashing) return;
                    action.Transition("default");
-               });
+               })
+               .Exit((action) =>
+                {
+                    _player.IsInvincible = false;
+                });
            })
            .State(PlayerStates.Staggered, (staggered) =>
            {

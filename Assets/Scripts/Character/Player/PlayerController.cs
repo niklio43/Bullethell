@@ -15,6 +15,7 @@ namespace BulletHell.Player
         Vector2 _movementInput;
         bool _isDashing = false;
         bool _isInteracting = false;
+        bool _isInvincible = false;
         Animator _animator;
         ObjectPool<PlayerAfterImageSprite> _afterImagePool;
 
@@ -34,6 +35,7 @@ namespace BulletHell.Player
         public Rigidbody2D Rb { get { return _rb; } }
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
         public bool IsInteracting { get { return _isInteracting; } set { _isInteracting = value; } }
+        public bool IsInvincible { get { return _isInvincible; } set { _isInvincible = value; } }
         public Vector2 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
         #endregion
 
@@ -65,7 +67,7 @@ namespace BulletHell.Player
                 ability.UpdateAbility(Time.deltaTime);
             }
 
-            Debug.Log(_playerBrain._FSM.CurrentState.Id);
+            _playerBrain.UpdateBrain();
         }
 
         void FixedUpdate()
@@ -103,6 +105,7 @@ namespace BulletHell.Player
 
         public void OnStun(float duration)
         {
+            if (_isInvincible) return;
             _playerBrain._FSM.SetState(PlayerBrain.PlayerStates.Staggered);
             Invoke("ExitStun", duration);
         }
@@ -114,6 +117,7 @@ namespace BulletHell.Player
 
         public void TakeDamage(float damage)
         {
+            if (_isInvincible) return;
             Camera.main.Shake(0.1f, 0.2f);
         }
 
