@@ -13,14 +13,15 @@ public class PlayerAfterImageSprite : MonoBehaviour, IPoolable
     [SerializeField] float _alphaMultiplierStart = .9f;
     float _alphaMultiplier;
 
-    Transform _player;
     SpriteRenderer _sr;
-    SpriteRenderer _playerSr;
     Color _color;
 
-    PlayerController _playerController;
-
     public ObjectPool<PlayerAfterImageSprite> Pool;
+
+    void Awake()
+    {
+        _sr = GetComponent<SpriteRenderer>();
+    }
 
     public void ResetObject()
     {
@@ -28,24 +29,17 @@ public class PlayerAfterImageSprite : MonoBehaviour, IPoolable
         Pool.Release(this);
     }
 
-    public void Initialize(float offset)
+    public void Initialize(Transform player, Sprite sprite)
     {
-        _sr = GetComponent<SpriteRenderer>();
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
-        _playerSr = _player.GetComponent<SpriteRenderer>();
-        _playerController = _player.GetComponent<PlayerController>();
-        Vector2 dir = _playerController.MovementInput.normalized;
-
         _alphaMultiplier = _alphaMultiplierStart;
-        _alphaMultiplier += offset / 100;
+        _alphaMultiplier += 2 / 100;
         Mathf.Clamp(_alphaMultiplier, 0, 1);
 
         _alpha = _alphaSet;
-        _sr.sprite = _playerSr.sprite;
-        transform.position = new Vector2
-            (_player.position.x + (dir.x * offset), _player.position.y + (dir.y * offset));
-        transform.rotation = _player.rotation;
-        transform.localScale = _player.localScale;
+        _sr.sprite = sprite;
+        transform.position = player.position;
+        transform.rotation = player.rotation;
+        transform.localScale = player.localScale;
         _timeActivated = Time.time;
     }
 
