@@ -44,6 +44,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e309e15a2260c8847bed0bab322cbcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5304554048927497912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4940711694315439855}
+  - component: {fileID: 1669646182689616081}
+  - component: {fileID: 2960934200889275608}
+  m_Layer: 7
+  m_Name: Steering
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4940711694315439855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304554048927497912}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.93, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8461412192270030068}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1669646182689616081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304554048927497912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42366b6a393dec94a97deb0e1e24ce39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DrawGizmos: 1
+  _moveSpeed: 2
+  _agentSteering:
+    AvoidanceRadius: 1
+    Directions: []
+    _resolution: 16
+    _behaviours:
+    - {fileID: 11400000, guid: 6e27e9802452eca47a75242fb3d56a64, type: 2}
+    - {fileID: 11400000, guid: 8a421364e60503945bb613885c0197e0, type: 2}
+    - {fileID: 11400000, guid: 38d7da8ed0ede8543aa06fb64bafab04, type: 2}
+  Enemy: {fileID: 0}
+  Rb: {fileID: 0}
+  Collider: {fileID: 0}
+--- !u!61 &2960934200889275608
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304554048927497912}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 0.48, y: 0.48}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.15836906}
+  m_EdgeRadius: 0
 --- !u!1 &8461412192270030066
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +140,6 @@ GameObject:
   - component: {fileID: 3293970778827372522}
   - component: {fileID: 8461412192270030073}
   - component: {fileID: 8461412192270030075}
-  - component: {fileID: 8461412192270030072}
   - component: {fileID: 9177600697870257623}
   - component: {fileID: 5960100090503568517}
   - component: {fileID: 8461412192270030077}
@@ -81,6 +164,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1333538167}
+  - {fileID: 4940711694315439855}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,42 +186,6 @@ MonoBehaviour:
       Value: 100
     - Name: MaxHp
       Value: 100
-  OnTakeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8461412192270030073}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: TakeDamage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDeathEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8461412192270030073}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: OnDeath
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHealEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStunEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8461412192270030073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,11 +199,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementType: 1
+  _brain: {fileID: 11400000, guid: f095d9666b0d9d24aa3a3903dcbbe46b, type: 2}
+  _enemyMovement: {fileID: 1669646182689616081}
   Target: {fileID: 0}
   CanMove: 0
   Aim: {fileID: 839990684}
   Weapon: {fileID: 0}
-  _brain: {fileID: 11400000, guid: f095d9666b0d9d24aa3a3903dcbbe46b, type: 2}
   PreferredDistance: 3.38
   AttackDistance: 3.49
 --- !u!114 &8461412192270030075
@@ -173,28 +222,6 @@ MonoBehaviour:
   DrawGizmos: 1
   DetectionRadius: 4.46
   ObstacleDetectionRadius: 1.49
---- !u!114 &8461412192270030072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8461412192270030066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42366b6a393dec94a97deb0e1e24ce39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DrawGizmos: 1
-  _moveSpeed: 0
-  _agentSteering:
-    AvoidanceRadius: 1
-    Directions: []
-    _resolution: 16
-    _behaviours:
-    - {fileID: 11400000, guid: 6e27e9802452eca47a75242fb3d56a64, type: 2}
-    - {fileID: 11400000, guid: 8a421364e60503945bb613885c0197e0, type: 2}
-    - {fileID: 11400000, guid: 38d7da8ed0ede8543aa06fb64bafab04, type: 2}
 --- !u!212 &9177600697870257623
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -298,10 +325,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.91818047}
+  m_Offset: {x: 0, y: -0.40339804}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -312,5 +339,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.15836906}
+  m_Size: {x: 0.9, y: 1.1879339}
   m_EdgeRadius: 0

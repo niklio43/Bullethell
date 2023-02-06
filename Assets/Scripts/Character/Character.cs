@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using BulletHell.Stats;
-using BulletHell;
 using BulletHell.StatusSystem;
-using UnityEngine.Events;
+using UnityEngine;
 
 public class Character : MonoBehaviour
 {
@@ -39,8 +35,7 @@ public class Character : MonoBehaviour
 
         OnTakeDamageEvent?.Invoke(damage);
 
-        if (Stats["Hp"].Value <= 0)
-        {
+        if (Stats["Hp"].Value <= 0) {
             OnDeath();
         }
     }
@@ -66,8 +61,7 @@ public class Character : MonoBehaviour
     {
         Stats["Hp"].Value += amount;
 
-        if (Stats["Hp"].Value > Stats["MaxHp"].Value)
-        {
+        if (Stats["Hp"].Value > Stats["MaxHp"].Value) {
             Stats["Hp"].Value = Stats["MaxHp"].Value;
         }
 

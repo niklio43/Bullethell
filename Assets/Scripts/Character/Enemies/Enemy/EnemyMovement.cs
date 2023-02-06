@@ -5,36 +5,36 @@ using BulletHell.Enemies.Detection;
 
 namespace BulletHell.Enemies
 {
-    [RequireComponent(typeof(Enemy), typeof(Rigidbody2D))]
     public class EnemyMovement : MonoBehaviour
     {
         public bool DrawGizmos = false;
         [SerializeField] float _moveSpeed;
         [SerializeField] AgentSteering _agentSteering = new AgentSteering();
 
-
-        Enemy _enemy;
-        Rigidbody2D _rb;
-
-        void Start()
+        [HideInInspector] public Enemy Enemy;
+        [HideInInspector] public Rigidbody2D Rb;
+        [HideInInspector] public Collider2D Collider;
+        public void Initialize(Enemy enemy)
         {
-            _enemy = GetComponent<Enemy>();
-            _rb = GetComponent<Rigidbody2D>();
+            Enemy = enemy;
+            Rb = Enemy.GetComponent<Rigidbody2D>();
+            Collider = GetComponent<Collider2D>();
+
             _agentSteering.Initialize();
 
             InvokeRepeating(nameof(EvaluateSteering), 0, 0.05f);
         }
         public void EvaluateSteering()
         {
-            _agentSteering.EvaluateBehaviors(_enemy);
+            _agentSteering.EvaluateBehaviors(this);
         }
 
         public void Move()
         {
             Vector2 MoveDirection = ContextSolver.GetDirection(_agentSteering);
 
-            _rb.AddForce(MoveDirection * _moveSpeed);
-            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _moveSpeed);
+            Rb.AddForce(MoveDirection * _moveSpeed);
+            Rb.velocity = Vector3.ClampMagnitude(Rb.velocity, _moveSpeed);
         }
 
         private void OnDrawGizmosSelected()

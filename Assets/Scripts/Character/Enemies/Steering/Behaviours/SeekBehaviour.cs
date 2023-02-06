@@ -12,9 +12,12 @@ namespace BulletHell.Enemies.Steering
         public float Weight = 0;
         public float Margin = 0;
 
-        public override void GetSteering(AgentSteering steering, Enemy enemy)
+        public override void GetSteering(AgentSteering steering, EnemyMovement movement)
         {
-            Transform transform = enemy.transform;
+            Transform transform = movement.transform;
+            Collider2D collider = movement.Collider;
+            Enemy enemy = movement.Enemy;
+
             if(enemy.Target == null) { return; }
 
             float distance = Vector2.Distance(enemy.Target.position, transform.position);

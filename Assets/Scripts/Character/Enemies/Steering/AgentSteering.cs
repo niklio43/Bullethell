@@ -24,13 +24,13 @@ namespace BulletHell.Enemies.Steering
             CreateDirections(_resolution);
         }
 
-        public void EvaluateBehaviors(Enemy enemy)
+        public void EvaluateBehaviors(EnemyMovement movement)
         {
             Interest.Clear();
             Danger.Clear();
 
             foreach (SteeringBehaviour behaviour in _behaviours) {
-                behaviour.GetSteering(this, enemy);
+                behaviour.GetSteering(this, movement);
             }
         }
 

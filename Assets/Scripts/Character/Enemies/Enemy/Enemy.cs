@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
     [SerializeField] EnemyBrain _brain;
+    [SerializeField] EnemyMovement _enemyMovement;
 
     [HideInInspector] public Transform Target;
     [HideInInspector] public bool CanMove = true;
@@ -23,7 +24,6 @@ public class Enemy : MonoBehaviour
 
 
     EnemyDetection _detection;
-    EnemyMovement _enemyMovement;
     Character _character;
 
     bool _flipped = false;
@@ -43,7 +43,8 @@ public class Enemy : MonoBehaviour
     {
         _character = GetComponent<Character>();
         _detection = GetComponent<EnemyDetection>();
-        _enemyMovement = GetComponent<EnemyMovement>();
+
+        _enemyMovement.Initialize(this);
 
         _character.OnTakeDamageEvent += TakeDamage;
         _character.OnStunEvent += OnStun;
@@ -57,7 +58,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        _brain.Update();
+        _brain.UpdateBrain(Time.deltaTime);
         DetectionData = _detection.Detect();
 
         UpdateDirection();
@@ -75,7 +76,10 @@ public class Enemy : MonoBehaviour
 
     public void OnStun(float duration)
     {
+        _brain.CurrentAbility?.Cancel();
         _brain.SetState(EnemyBrain.EnemyStates.Stunned);
+        Debug.Log("TEST1");
+        Debug.Log(duration);
         this.Invoke(() => _brain.SetState(EnemyBrain.EnemyStates.Idle), duration);
 
 

@@ -1,5 +1,7 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -13,6 +15,8 @@ namespace BulletHell.Abilities
 
         [Header("Animation")]
         [SerializeField] protected List<AbilityAnimation> _animations;
+
+
 
 
         AbilityBehaviourState _state = AbilityBehaviourState.Idle;
@@ -61,10 +65,18 @@ namespace BulletHell.Abilities
         async Task Channel()
         {
             _state = AbilityBehaviourState.Channeling;
+            float timeElapsed = 0;
 
-            while (_currentCastTime < _waitTime) {
-                if (GameManager.GetCancellationToken().IsCancellationRequested) throw new System.Exception("Ability task cancelled");
-                await Task.Delay(Mathf.RoundToInt((Time.deltaTime) * 1000));
+            try {
+                while (timeElapsed < _waitTime) {
+                    await UniTask.WaitForEndOfFrame(MonoInstance.Instance, _ability.CancellationToken);
+                    timeElapsed += Time.deltaTime;
+                }
+            }
+            catch {
+                Debug.LogWarning("Ability Got Canceled");
+                AbilityCanceled();
+                return;
             }
 
             WhenCompletedChannel();
@@ -73,16 +85,29 @@ namespace BulletHell.Abilities
         async Task Cast()
         {
             _state = AbilityBehaviourState.Casting;
+            float timeElapsed = 0;
 
-            while (_currentCastTime < _waitTime + _castTime) {
-                if (GameManager.GetCancellationToken().IsCancellationRequested) throw new System.Exception("Ability task cancelled");
-                await Task.Delay(Mathf.RoundToInt((Time.deltaTime) * 1000));
+            try {
+                while (timeElapsed < _castTime) {
+                    await UniTask.WaitForEndOfFrame(MonoInstance.Instance, _ability.CancellationToken);
+                    timeElapsed += Time.deltaTime;
+                }
+            }
+            catch {
+                Debug.LogWarning("Ability Got Canceled");
+                AbilityCanceled();
+                return;
             }
 
             Perform();
             _state = AbilityBehaviourState.Idle;
         }
 
+        void AbilityCanceled()
+        {
+            _state = AbilityBehaviourState.Idle;
+            
+        }
 
         public void UpdateBehaviour(float dt)
         {

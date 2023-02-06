@@ -8,10 +8,12 @@ namespace BulletHell.Enemies.Steering
     [CreateAssetMenu(fileName = "ObstacleAvoidanceBehaviour", menuName = "Enemies/Steering/Obstacle Avoidance Behaviour", order = 1)]
     public class ObstacleAvoidanceBehaviour : SteeringBehaviour
     {
-        public override void GetSteering(AgentSteering steering, Enemy enemy)
+        public override void GetSteering(AgentSteering steering, EnemyMovement movement)
         {
-            Transform transform = enemy.transform;
-            Collider2D collider = enemy.GetComponent<Collider2D>();
+            Transform transform = movement.transform;
+            Collider2D collider = movement.Collider;
+            Enemy enemy = movement.Enemy;
+
             if (enemy.DetectionData.Count("Obstacles") == 0) { return; }
 
             foreach (EntityData obstacle in enemy.DetectionData["Obstacles"]) {
