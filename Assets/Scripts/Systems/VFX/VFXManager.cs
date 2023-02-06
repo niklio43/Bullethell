@@ -27,7 +27,7 @@ namespace BulletHell.VFX
             vfx.transform.localPosition = position;
             vfx.PlayBurst(asset, vfxAttributes);
         }
-        public static void Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null)
+        public static void Play(VisualEffectAsset asset, float time, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null, bool waitForParticles = false)
         {
             RuntimeVisualEffect vfx = Pool.Get();
             vfx.gameObject.SetActive(true);
@@ -35,7 +35,7 @@ namespace BulletHell.VFX
                 vfx.transform.parent = parent;
 
             vfx.transform.localPosition = position;
-            vfx.Play(asset, time, vfxAttributes);
+            vfx.Play(asset, time, vfxAttributes, waitForParticles);
         }
 
         RuntimeVisualEffect Create()
@@ -75,7 +75,7 @@ namespace BulletHell.VFX
             MonoInstance.Instance.StartCoroutine(PlayForSeconds(.5f));
         }
 
-        public void Play(VisualEffectAsset asset, float time, VFXAttribute[] vfxAttributes = null)
+        public void Play(VisualEffectAsset asset, float time, VFXAttribute[] vfxAttributes = null, bool waitForParticles = false)
         {
             _vfx.visualEffectAsset = asset;
 
@@ -85,7 +85,7 @@ namespace BulletHell.VFX
                 }
 
             _vfx.Play();
-            MonoInstance.Instance.StartCoroutine(PlayForSeconds(time));
+            MonoInstance.Instance.StartCoroutine(PlayForSeconds(time, waitForParticles));
         }
 
         public void ResetObject()
@@ -97,13 +97,15 @@ namespace BulletHell.VFX
             _pool.Release(this);
         }
 
-        IEnumerator PlayForSeconds(float time)
+        IEnumerator PlayForSeconds(float time, bool waitForParticles = false)
         {
             yield return new WaitForSeconds(time);
             _vfx.Stop();
-            while (_vfx.aliveParticleCount > 0) {
-                yield return new WaitForFixedUpdate();
-            }
+
+            if(waitForParticles)
+                while (_vfx.aliveParticleCount > 0) {
+                    yield return new WaitForFixedUpdate();
+                }
 
             ResetObject();
         }
