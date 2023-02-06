@@ -13,13 +13,14 @@ using UnityEngine.VFX;
 public class Enemy : MonoBehaviour
 {
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
+    [SerializeField] EnemyBrain _brain;
+
     [HideInInspector] public Transform Target;
     [HideInInspector] public bool CanMove = true;
     [HideInInspector] public DetectionData DetectionData = new DetectionData();
     public EnemyAim Aim;
     public EnemyWeapon Weapon;
 
-    [SerializeField] EnemyBrain _brain;
 
     EnemyDetection _detection;
     EnemyMovement _enemyMovement;
@@ -40,8 +41,13 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        _character = GetComponent<Character>();
         _detection = GetComponent<EnemyDetection>();
         _enemyMovement = GetComponent<EnemyMovement>();
+
+        _character.OnTakeDamageEvent += TakeDamage;
+        _character.OnStunEvent += OnStun;
+        _character.OnDeathEvent += OnDeath;
 
         _brain = Instantiate(_brain);
         _brain.Initialize(this);
@@ -80,7 +86,6 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
 
     public void UpdateDirection()
     {

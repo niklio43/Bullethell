@@ -9,12 +9,19 @@ using UnityEngine.Events;
 public class Character : MonoBehaviour
 {
     public Stats Stats;
-    public StatusEffectData StatusEffect;
+    [HideInInspector] public StatusEffectData StatusEffect;
 
-    public UnityEvent<float> OnTakeDamageEvent;
-    public UnityEvent OnDeathEvent;
-    public UnityEvent<float> OnHealEvent;
-    public UnityEvent<float> OnStunEvent;
+    public delegate void OnTakeDamageDelegate(float amount);
+    public OnTakeDamageDelegate OnTakeDamageEvent;
+
+    public delegate void OnHealDelegate(float amount);
+    public OnHealDelegate OnHealEvent;
+
+    public delegate void OnDeathDelegate();
+    public OnDeathDelegate OnDeathEvent;
+
+    public delegate void OnStunDelegate(float duration);
+    public OnStunDelegate OnStunEvent;
 
     private void Awake()
     {

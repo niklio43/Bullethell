@@ -49,6 +49,11 @@ namespace BulletHell.Player
                 _abilities[i].Initialize(gameObject);
             }
 
+            Character.OnTakeDamageEvent += TakeDamage;
+            Character.OnHealEvent += OnHeal;
+            Character.OnDeathEvent += OnDeath;
+            Character.OnStunEvent += OnStun;
+
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
         }
