@@ -22,14 +22,14 @@ MonoBehaviour:
   - Type: 0
     Value: 10
   _statusEffects:
-  - Name: Stun
-    Icon: {fileID: 0}
-    TickSpeed: 1
-    Lifetime: 1
-    MaxStacks: 5
-    Behaviours:
-    - {fileID: 11400000, guid: db8168f65f8f80c47a3815a3b41cd06b, type: 2}
-    Sender: {fileID: 0}
-    Reciever: {fileID: 0}
-    statusBehaviour: 1
-    _damageValues: []
+  - Name: Burn
+    Icon: {fileID: 21300000, guid: 7d62c17113203a241a3b64f6c6bf16b3, type: 3}
+    maxStacks: 5
+    _stackingBehaviour: 1
+    tickSpeed: 1
+    lifeTime: 3
+    _behaviours:
+    - {fileID: 11400000, guid: f157de6c3edf20342b90290430d9e351, type: 2}
+    _damageValues:
+    - Type: 0
+      Value: 5
