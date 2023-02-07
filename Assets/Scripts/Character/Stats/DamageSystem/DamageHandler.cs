@@ -19,7 +19,7 @@ public static class DamageHandler
     {
         if (statusEffects == null) { return; }
         foreach (StatusEffect effect in statusEffects) {
-            effect.ApplyEffect(receiver);
+            receiver.StatusEffect.AddEffect(effect);
         }
     }
 
