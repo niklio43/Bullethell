@@ -17,10 +17,13 @@ namespace BulletHell.Stats
                 _damages[type] = value;
             }
         }
-        private Dictionary<DamageType, float> _damages;
 
-        public DamageInfo(List<DamageValue> damageValues)
+        private Dictionary<DamageType, float> _damages;
+        public List<StatusEffect> StatusEffects = null;
+
+        public DamageInfo(List<DamageValue> damageValues, List<StatusEffect> statusEffects = null)
         {
+            StatusEffects = statusEffects;
             _damages = new Dictionary<DamageType, float>();
 
             foreach (DamageValue damageValue in damageValues) {

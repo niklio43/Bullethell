@@ -16,7 +16,6 @@ namespace BulletHell.FiniteStateMachine
             _transitions.Add(new Transition(change, id));
             return this;
         }
-
         public StateBuilder SetAnimationClip(string clipName)
         {
             return AddAction(new ActionSetAnimationClip(clipName));

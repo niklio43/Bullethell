@@ -32,7 +32,7 @@ namespace BulletHell.Abilities
 
         protected override void Perform()
         {
-            DamageInfo damage = new DamageInfo(_damageValues);
+            DamageInfo damage = new DamageInfo(_damageValues, _statusEffects);
 
             if (_ability.Owner.TryGetComponent(out Character character)) {
                 foreach (StatusEffect effect in _statusEffects) {
@@ -41,7 +41,7 @@ namespace BulletHell.Abilities
                 damage = DamageHandler.CalculateDamage(damage, character.Stats);
             }
 
-            _emitterObject.FireProjectile(character, damage, _statusEffects);
+            _emitterObject.FireProjectile(character, damage);
         }
     }
 }
