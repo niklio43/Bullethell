@@ -25,4 +25,14 @@ public class PlayerUI : MonoBehaviour
         foreach (GameObject obj in _inventory)
             obj.SetActive(inv);
     }
+
+    public void SetMaxValueHud(Slider slider, float value)
+    {
+        slider.maxValue = value;
+    }
+
+    public void SetValueHud(Slider slider, float value)
+    {
+        slider.value = value;
+    }
 }

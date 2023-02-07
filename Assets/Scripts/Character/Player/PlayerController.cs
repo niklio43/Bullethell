@@ -46,8 +46,6 @@ namespace BulletHell.Player
 
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, 10, "AfterImagePool");
 
-            _ui.Health.maxValue = Character.Stats["MaxHealth"].Value;
-
             for (int i = 0; i < _abilities.Count; i++)
             {
                 _abilities[i] = Instantiate(_abilities[i]);
@@ -64,6 +62,13 @@ namespace BulletHell.Player
             _rb = GetComponent<Rigidbody2D>();
         }
 
+        void Start()
+        {
+            //only temporary
+            _ui.SetMaxValueHud(_ui.Health, Character.Stats["MaxHp"].Get());
+            _ui.SetMaxValueHud(_ui.Stamina, _abilities[0].MaxAmount);
+        }
+
         private void Update()
         {
             foreach (Ability ability in _abilities)
@@ -72,6 +77,9 @@ namespace BulletHell.Player
             }
 
             _playerBrain.UpdateBrain();
+
+            //only temporary
+            _ui.SetValueHud(_ui.Stamina, _abilities[0].CurrentAmount);
         }
 
         void FixedUpdate()
@@ -95,9 +103,6 @@ namespace BulletHell.Player
             if (context.performed && !_isDashing)
             {
                 _abilities[abilityIndex].Cast();
-
-                _ui.Stamina.maxValue = _abilities[abilityIndex].MaxAmount;
-                _ui.Stamina.value = _abilities[abilityIndex].CurrentAmount;
             }
         }
 
@@ -125,7 +130,7 @@ namespace BulletHell.Player
         {
             if (_isInvincible) return;
             Camera.main.Shake(0.1f, 0.2f);
-            _ui.Health.value = Character.Stats["Health"].Value;
+            _ui.SetValueHud(_ui.Health, Character.Stats["Hp"].Get());
         }
 
         public void OnDeath()
