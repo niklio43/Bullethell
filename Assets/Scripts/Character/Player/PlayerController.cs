@@ -27,12 +27,9 @@ namespace BulletHell.Player
         public PlayerAimWeapon Aim;
         PlayerBrain _playerBrain;
 
-        [SerializeField] PlayerUI _ui;
-
         #region getters & setters
         public ObjectPool<PlayerAfterImageSprite> AfterImagePool { get { return _afterImagePool; } }
         public float DashTime { get { return _dashTime; } }
-        public PlayerUI UI { get { return _ui; } }
         public Rigidbody2D Rb { get { return _rb; } }
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
         public bool IsInteracting { get { return _isInteracting; } set { _isInteracting = value; } }
@@ -65,8 +62,8 @@ namespace BulletHell.Player
         void Start()
         {
             //only temporary
-            _ui.SetMaxValueHud(_ui.Health, Character.Stats["MaxHp"].Get());
-            _ui.SetMaxValueHud(_ui.Stamina, _abilities[0].MaxAmount);
+            PlayerUI.SetMaxValueHud(PlayerUI.Instance.Health, Character.Stats["MaxHp"].Get());
+            PlayerUI.SetMaxValueHud(PlayerUI.Instance.Stamina, _abilities[0].MaxAmount);
         }
 
         private void Update()
@@ -79,7 +76,7 @@ namespace BulletHell.Player
             _playerBrain.UpdateBrain();
 
             //only temporary
-            _ui.SetValueHud(_ui.Stamina, _abilities[0].CurrentAmount);
+            PlayerUI.SetValueHud(PlayerUI.Instance.Stamina, _abilities[0].CurrentAmount);
         }
 
         void FixedUpdate()
@@ -130,7 +127,7 @@ namespace BulletHell.Player
         {
             if (_isInvincible) return;
             Camera.main.Shake(0.1f, 0.2f);
-            _ui.SetValueHud(_ui.Health, Character.Stats["Hp"].Get());
+            PlayerUI.SetValueHud(PlayerUI.Instance.Health, Character.Stats["Hp"].Get());
         }
 
         public void OnDeath()
