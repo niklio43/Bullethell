@@ -30,9 +30,13 @@ namespace BulletHell.StatusSystem
 
         public void AddEffect(StatusEffect statusEffect)
         {
-            if (_status.ContainsKey(statusEffect.Name)) { _status[statusEffect.Name].Multiple(); return; }
-
-            _status.Add(statusEffect.Name, statusEffect);
+            if (!_status.ContainsKey(statusEffect.Name)) {
+                _status.Add(statusEffect.Name, statusEffect);
+                statusEffect.ApplyEffect();
+            }
+            else {
+                _status[statusEffect.Name].ApplyEffect();
+            }
         }
 
         public void RemoveEffect(StatusEffect statusEffect)
@@ -43,7 +47,7 @@ namespace BulletHell.StatusSystem
         public void UpdateEffects(float dt)
         {
             for (int i = 0; i < _status.Count; i++) {
-                _status.ElementAt(i).Value.UpdateStatus(dt);
+                _status.ElementAt(i).Value.Update(dt);
             }
         }
     }

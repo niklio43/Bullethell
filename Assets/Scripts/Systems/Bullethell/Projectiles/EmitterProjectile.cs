@@ -18,7 +18,6 @@ namespace BulletHell.Emitters.Projectiles
         RuntimeEmitterProjectileData _runTimeData;
         BoxCollider2D _projectileCollider;
         DamageInfo _damage;
-        List<StatusEffect> _statusEffects = new List<StatusEffect>();
 
         public float TimeToLive => _runTimeData.TimeToLive;
 
@@ -58,7 +57,6 @@ namespace BulletHell.Emitters.Projectiles
 
         public void SetOwner(Character owner) => _owner = owner;
         public void SetDamage(DamageInfo damage) => _damage = damage;
-        public void SetStatusEffect(List<StatusEffect> effects) => _statusEffects = effects;
 
         private void FixedUpdate()
         {
@@ -79,11 +77,6 @@ namespace BulletHell.Emitters.Projectiles
             if (collision.TryGetComponent(out Character character)) {
                 if (_damage != null)
                     DamageHandler.SendDamage(_owner, character, _damage);
-
-                if (_statusEffects != null)
-                    foreach (StatusEffect effect in _statusEffects) {
-                        effect.ApplyEffect(character);
-                    }
             }
             OnHit();
         }

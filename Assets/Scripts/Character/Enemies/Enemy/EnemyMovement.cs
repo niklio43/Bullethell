@@ -14,6 +14,7 @@ namespace BulletHell.Enemies
         [HideInInspector] public Enemy Enemy;
         [HideInInspector] public Rigidbody2D Rb;
         [HideInInspector] public Collider2D Collider;
+
         public void Initialize(Enemy enemy)
         {
             Enemy = enemy;
@@ -24,6 +25,7 @@ namespace BulletHell.Enemies
 
             InvokeRepeating(nameof(EvaluateSteering), 0, 0.05f);
         }
+
         public void EvaluateSteering()
         {
             _agentSteering.EvaluateBehaviors(this);
