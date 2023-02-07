@@ -45,7 +45,6 @@ public class PlayerUI : Singleton<PlayerUI>
     {
         Transform iconObj = Instantiate(_statusEffect, _statusEffectHolder).transform;
         iconObj.GetComponent<Image>().sprite = statusEffect.Icon;
-        //iconObj.GetChild(0).GetComponent<Image>().fillAmount = 1f;
 
         effects.Add(new StatusEffectIcon(statusEffect, iconObj.gameObject));
     }
@@ -71,8 +70,7 @@ public class PlayerUI : Singleton<PlayerUI>
         foreach (StatusEffectIcon icon in effects)
         {
             icon.Obj.transform.GetChild(1).GetComponent<TMP_Text>().text = icon.StatusEffect.GetStackCount().ToString();
-            //flip fill mode
-            icon.Obj.transform.GetChild(0).GetComponent<Image>().fillAmount = icon.StatusEffect.GetTimerCount() / icon.StatusEffect.LifeTime;
+            icon.Obj.transform.GetChild(0).GetComponent<Image>().fillAmount = 1 - (icon.StatusEffect.GetTimerCount() / icon.StatusEffect.LifeTime);
         }
     }
 
