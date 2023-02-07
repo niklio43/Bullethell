@@ -11,7 +11,6 @@ namespace BulletHell.StatusSystem
         public override void DoEffect(StatusEffect statusEffect)
         {
             DamageHandler.SendDamage(statusEffect.Sender, statusEffect.Reciever, statusEffect.DamageInfo);
-            PlayerUI.Instance.AddStatusEffect(3, 1, statusEffect.Icon);
         }
     }
 }

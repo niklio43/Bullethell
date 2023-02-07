@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using BulletHell.StatusSystem;
 
 public class PlayerUI : Singleton<PlayerUI>
 {
@@ -13,6 +14,8 @@ public class PlayerUI : Singleton<PlayerUI>
     [SerializeField] GameObject _statusEffect;
     public Slider Health, Stamina;
     bool inv = false;
+
+    List<StatusEffectIcon> effects = new List<StatusEffectIcon>();
 
     public bool TryGetCurrentInputForAction(string action, out string input)
     {
@@ -38,21 +41,51 @@ public class PlayerUI : Singleton<PlayerUI>
         slider.value = value;
     }
 
-    public void AddStatusEffect(float duration, float stacks, Sprite icon)
+    public void AddStatusEffect(StatusEffect statusEffect)
     {
         Transform iconObj = Instantiate(_statusEffect, _statusEffectHolder).transform;
-        iconObj.GetComponent<Image>().sprite = icon;
-        iconObj.GetChild(0).GetComponent<TMP_Text>().text = stacks.ToString();
-        MonoInstance.Instance.StartCoroutine(RemoveStatusEffect(stacks, duration, iconObj));
+        iconObj.GetComponent<Image>().sprite = statusEffect.Icon;
+        //iconObj.GetChild(0).GetComponent<Image>().fillAmount = 1f;
+
+        effects.Add(new StatusEffectIcon(statusEffect, iconObj.gameObject));
     }
 
-    IEnumerator RemoveStatusEffect(float stacks, float duration, Transform iconObj)
+    public void RemoveStatusEffect(StatusEffect statusEffect)
     {
-        yield return new WaitForSeconds(duration);
-
-        if (stacks <= 1) { Destroy(iconObj.gameObject); yield return null; }
-
-        iconObj.GetChild(0).GetComponent<TMP_Text>().text = (stacks - 1).ToString();
+        if (statusEffect.GetStackCount() <= 1)
+        {
+            foreach (StatusEffectIcon icon in effects)
+            {
+                if (icon.StatusEffect == statusEffect)
+                {
+                    effects.Remove(icon);
+                    Destroy(icon.Obj);
+                    return;
+                }
+            }
+        }
     }
 
+    void Update()
+    {
+        foreach (StatusEffectIcon icon in effects)
+        {
+            icon.Obj.transform.GetChild(1).GetComponent<TMP_Text>().text = icon.StatusEffect.GetStackCount().ToString();
+            //flip fill mode
+            icon.Obj.transform.GetChild(0).GetComponent<Image>().fillAmount = icon.StatusEffect.GetTimerCount() / icon.StatusEffect.LifeTime;
+        }
+    }
+
+}
+
+public class StatusEffectIcon
+{
+    public StatusEffect StatusEffect;
+    public GameObject Obj;
+
+    public StatusEffectIcon(StatusEffect statusEffect, GameObject iconObj)
+    {
+        StatusEffect = statusEffect;
+        Obj = iconObj;
+    }
 }

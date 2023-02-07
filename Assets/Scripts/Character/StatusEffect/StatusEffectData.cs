@@ -33,6 +33,7 @@ namespace BulletHell.StatusSystem
             if (!_status.ContainsKey(statusEffect.Name)) {
                 _status.Add(statusEffect.Name, statusEffect);
                 statusEffect.ApplyEffect();
+                PlayerUI.Instance.AddStatusEffect(statusEffect);
             }
             else {
                 _status[statusEffect.Name].ApplyEffect();
@@ -42,6 +43,7 @@ namespace BulletHell.StatusSystem
         public void RemoveEffect(StatusEffect statusEffect)
         {
             _status.Remove(statusEffect.Name);
+            PlayerUI.Instance.RemoveStatusEffect(statusEffect);
         }
 
         public void UpdateEffects(float dt)
