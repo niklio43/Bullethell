@@ -68,7 +68,6 @@ namespace BulletHell.Emitters.Projectiles
         public void ResetObject()
         {
             StopAllCoroutines();
-            Data = null;
             transform.position = Vector3.zero;
             gameObject.SetActive(false);
             Pool.Release(this);
@@ -102,6 +101,7 @@ namespace BulletHell.Emitters.Projectiles
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            Debug.Log(Data);
             if (!Data.CollisionTags.Contains(collision.gameObject.tag) || _damage == null || collision.gameObject == _owner) { return; }
             if (collision.TryGetComponent(out Character character)) {
                 if (_damage != null)
