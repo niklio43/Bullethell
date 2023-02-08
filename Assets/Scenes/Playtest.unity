@@ -456,7 +456,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -549.3093, y: -341.9147}
-  m_SizeDelta: {x: 483.5527, y: 50.5706}
+  m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &376546509
 MonoBehaviour:
@@ -480,7 +480,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -11188,7 +11188,7 @@ PrefabInstance:
     - target: {fileID: 1280149869705643992, guid: 15d37370597e52740a2ce13311669345, type: 3}
       propertyPath: _statusEffect
       value: 
-      objectReference: {fileID: 5971175716374197850, guid: 87daf0bb0ca698f4f873a41728d87f39, type: 3}
+      objectReference: {fileID: 4366269267372588347, guid: 335eda8e1f8db9641a1163d2aca6b5bd, type: 3}
     - target: {fileID: 1280149869705643992, guid: 15d37370597e52740a2ce13311669345, type: 3}
       propertyPath: _statusEffectHolder
       value: 

@@ -20,7 +20,7 @@ namespace BulletHell.StatusSystem
 
         [Header("Time")]
         [SerializeField] float tickSpeed = 1;
-        [SerializeField] float lifeTime = 1;
+        public float LifeTime = 1;
 
         [Header("Behaviours")]
         [SerializeField] List<EffectBehaviour> _behaviours = new List<EffectBehaviour>();
@@ -72,7 +72,7 @@ namespace BulletHell.StatusSystem
 
         public void AddStack()
         {
-            _stacks.Add(new StatusEffectStack(this, lifeTime, tickSpeed));
+            _stacks.Add(new StatusEffectStack(this, LifeTime, tickSpeed));
             foreach (EffectBehaviour effect in _behaviours)
             {
                 effect.OnStart(this);
@@ -109,14 +109,17 @@ namespace BulletHell.StatusSystem
             }
         }
 
+        public int GetStackCount() => _stacks.Count;
+        public float GetTimerCount() => _stacks[0].CurrentLifeTime;
+
 
         public class StatusEffectStack
         {
             readonly StatusEffect _owner;
             float _tickSpeed;
             float _nextTick;
-            float _lifeTime;
-            float _currentLifeTime;
+            public float _lifeTime;
+            public float CurrentLifeTime;
 
             public StatusEffectStack(StatusEffect owner, float lifeTime, float tickSpeed)
             {
@@ -127,21 +130,21 @@ namespace BulletHell.StatusSystem
 
             public void ResetTimer()
             {
-                _currentLifeTime = _lifeTime;
+                CurrentLifeTime = _lifeTime;
                 _nextTick = 0;
             }
 
             public void Update(float dt)
             {
-                _currentLifeTime -= dt;
-                if (_currentLifeTime <= 0)
+                CurrentLifeTime -= dt;
+                if (CurrentLifeTime <= 0)
                 {
                     _owner.RemoveStack(this);
                 }
-                if (_currentLifeTime >= _nextTick)
+                if (CurrentLifeTime >= _nextTick)
                 {
                     _owner.DoEffect();
-                    _nextTick = _currentLifeTime + _tickSpeed;
+                    _nextTick = CurrentLifeTime + _tickSpeed;
                 }
             }
         }
