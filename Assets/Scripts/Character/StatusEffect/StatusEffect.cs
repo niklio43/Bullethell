@@ -15,8 +15,8 @@ namespace BulletHell.StatusSystem
         public DamageInfo DamageInfo;
 
         [Header("Stacking Behaviour")]
-        [SerializeField] float maxStacks = 5;
         [SerializeField] StatusBehaviour _stackingBehaviour = StatusBehaviour.None;
+        [SerializeField] float maxStacks = 5;
 
         [Header("Time")]
         [SerializeField] float tickSpeed = 1;

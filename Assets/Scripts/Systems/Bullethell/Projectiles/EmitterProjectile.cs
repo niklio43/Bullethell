@@ -1,6 +1,7 @@
 using BulletHell.Stats;
 using BulletHell.StatusSystem;
 using BulletHell.VFX;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,7 +42,7 @@ namespace BulletHell.Emitters.Projectiles
             _projectileCollider.size = Data.collider.size / 2;
 
             transform.localScale = Vector3.one * data.Scale;
-            _spriteRenderer.color = data.Color;
+            _spriteRenderer.color = data.birth;
 
             if (data.AnimationClip == null)
                 _anim.enabled = false;
@@ -52,6 +53,7 @@ namespace BulletHell.Emitters.Projectiles
 
             _runTimeData = runTimeData;
             _runTimeData.SetOwner(this);
+            StartCoroutine(ChangeColorOverLife());
             _runTimeData.UpdateData(Time.fixedDeltaTime);
         }
 
@@ -65,11 +67,38 @@ namespace BulletHell.Emitters.Projectiles
 
         public void ResetObject()
         {
+            StopAllCoroutines();
             Data = null;
             transform.position = Vector3.zero;
             gameObject.SetActive(false);
             Pool.Release(this);
         }
+
+        IEnumerator ChangeColorOverLife()
+        {
+            float totalTime = _runTimeData.TimeToLive;
+
+            yield return LerpColors(totalTime/2, Data.midLife);
+            yield return LerpColors(totalTime / 2, Data.Death);
+        }
+
+
+        IEnumerator LerpColors(float time, Color target)
+        {
+            float timeElapsed = 0;
+            Color startColor = _spriteRenderer.color;
+
+            while(timeElapsed < time) {
+                yield return new WaitForEndOfFrame();
+                timeElapsed += Time.deltaTime;
+
+                _spriteRenderer.color = Color.Lerp(startColor, target, timeElapsed / time); 
+            }
+
+            _spriteRenderer.color = target;
+        }
+
+
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -86,7 +115,8 @@ namespace BulletHell.Emitters.Projectiles
             if (Data.HitVFX != null)
                 VFXManager.PlayBurst(Data.HitVFX, transform.position);
 
-            Destroy(gameObject);
+            if(Data.DestroyOnHit)
+                ResetObject();
         }
 
         private void OnDrawGizmos()
