@@ -16,6 +16,7 @@ namespace BulletHell.Player
         bool _isDashing = false;
         bool _isInteracting = false;
         bool _isInvincible = false;
+        bool _isParrying = false;
         Animator _animator;
         ObjectPool<PlayerAfterImageSprite> _afterImagePool;
 
@@ -34,6 +35,7 @@ namespace BulletHell.Player
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
         public bool IsInteracting { get { return _isInteracting; } set { _isInteracting = value; } }
         public bool IsInvincible { get { return _isInvincible; } set { _isInvincible = value; } }
+        public bool IsParrying { get { return _isParrying; } set { _isParrying = value; } }
         public Vector2 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
         #endregion
 
@@ -96,6 +98,14 @@ namespace BulletHell.Player
         }
 
         public void Dash(int abilityIndex, InputAction.CallbackContext context)
+        {
+            if (context.performed && !_isDashing)
+            {
+                _abilities[abilityIndex].Cast();
+            }
+        }
+
+        public void Parry(int abilityIndex, InputAction.CallbackContext context)
         {
             if (context.performed && !_isDashing)
             {

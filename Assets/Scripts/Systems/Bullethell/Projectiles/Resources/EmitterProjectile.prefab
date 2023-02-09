@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8516594727224331802}
   - component: {fileID: 2454262404383515336}
   - component: {fileID: 995363219421284937}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EmitterProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a5cf7e4a5c3d34993a963bc55e1956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Data: {fileID: 0}
 --- !u!61 &8516594727224331802
 BoxCollider2D:
   m_ObjectHideFlags: 0
