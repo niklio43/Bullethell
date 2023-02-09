@@ -6,14 +6,19 @@ namespace Bullet.CameraUtilities
 {
     public static class CameraExtensions
     {
+        static Coroutine CurrentShakeRoutine;
+        static Coroutine CurrentZoomRoutine;
+
         public static void Shake(this Camera camera, float duration, float amount)
         {
-            MonoInstance.Instance.StartCoroutine(cShake(camera, duration, amount));
+            if (CurrentShakeRoutine != null) { return; }
+            CurrentShakeRoutine = MonoInstance.Instance.StartCoroutine(cShake(camera, duration, amount));
         }
 
         public static void Zoom(this Camera camera, float duration, float amount)
         {
-            MonoInstance.Instance.StartCoroutine(ZoomInOut(camera, duration, amount));
+            if(CurrentZoomRoutine != null) { return; }
+            CurrentZoomRoutine = MonoInstance.Instance.StartCoroutine(ZoomInOut(camera, duration, amount));
         }
 
         static IEnumerator ZoomInOut(Camera camera, float duration, float amount)
@@ -24,6 +29,7 @@ namespace Bullet.CameraUtilities
             yield return cZoom(camera, duration / 2, startZoom + amount, startZoom);
 
             camera.orthographicSize = startZoom;
+            CurrentZoomRoutine = null;
         }
 
         static IEnumerator cZoom(Camera camera, float duration, float from, float to)
@@ -55,6 +61,7 @@ namespace Bullet.CameraUtilities
             }
 
             camera.transform.position = startPosition;
+            CurrentShakeRoutine = null;
         }
     }
 }

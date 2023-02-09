@@ -18,9 +18,10 @@ MonoBehaviour:
   RotationSpeed: 0
   FoldOutProjectile: 1
   ProjectileData: {fileID: 11400000, guid: bcb407d245074d24e8a532b55109366c, type: 2}
-  TimeToLive: 0.3
+  TimeToLive: 0.5
   Speed: 10
-  Acceleration: -40
+  MaxSpeed: 100
+  Acceleration: -10
   Gravity: 0
   GravityPoint: {x: 0, y: 0}
   FoldOutEmitter: 1
@@ -31,4 +32,7 @@ MonoBehaviour:
   Spread: 0
   ParentRotation: 0
   Direction: {x: 0, y: 1}
-  Modifiers: []
+  FoldOutHomeing: 0
+  FollowTarget: 0
+  FollowIntensity: 0
+  FollowRange: 0

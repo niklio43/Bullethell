@@ -15,8 +15,8 @@ namespace BulletHell.StatusSystem
         public DamageInfo DamageInfo;
 
         [Header("Stacking Behaviour")]
-        [SerializeField] float maxStacks = 5;
         [SerializeField] StatusBehaviour _stackingBehaviour = StatusBehaviour.None;
+        [SerializeField] float maxStacks = 5;
 
         [Header("Time")]
         [SerializeField] float tickSpeed = 1;
@@ -109,8 +109,16 @@ namespace BulletHell.StatusSystem
             }
         }
 
-        public int GetStackCount() => _stacks.Count;
-        public float GetTimerCount() => _stacks[0].CurrentLifeTime;
+        public int GetStackCount()
+        {
+            if(_stacks == null) { return 0; }
+            return _stacks.Count;
+        } 
+        public float GetTimerCount()
+        {
+            if (_stacks == null || _stacks.Count == 0) return 0;
+            return _stacks[0].CurrentLifeTime;
+        }
 
 
         public class StatusEffectStack

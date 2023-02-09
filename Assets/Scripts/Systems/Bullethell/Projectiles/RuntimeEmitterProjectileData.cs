@@ -28,6 +28,8 @@ namespace BulletHell.Emitters.Projectiles
         public void UpdateData(float dt)
         {
             Velocity *= (1 + Acceleration * dt);
+            Velocity = Vector2.ClampMagnitude(Velocity, MaxSpeed);
+
             if(FollowTarget) {
                 CheckForTargets();
                 Homeing(dt);

@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: PD
   m_EditorClassIdentifier: 
   name: Skeleton_Melee-SwingProjectile
+  Scale: 1
   Sprite: {fileID: -1117776656, guid: 7e115cef2c037f14a972e52077ee201e, type: 3}
-  Animator: {fileID: 0}
-  Scale: 2
-  Color: {r: 1, g: 1, b: 1, a: 1}
+  birth: {r: 1, g: 1, b: 1, a: 1}
+  midLife: {r: 1, g: 1, b: 1, a: 1}
+  Death: {r: 1, g: 1, b: 1, a: 1}
+  AnimationClip: {fileID: 0}
+  HitVFX: {fileID: 0}
+  DestroyOnHit: 0
   collider:
     m_Center: {x: 0, y: 0.24, z: 0}
     m_Extent: {x: 1, y: 0.5, z: 0}

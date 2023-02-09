@@ -24,8 +24,8 @@ MonoBehaviour:
   _statusEffects:
   - Name: Burn
     Icon: {fileID: 21300000, guid: 7d62c17113203a241a3b64f6c6bf16b3, type: 3}
-    maxStacks: 5
     _stackingBehaviour: 1
+    maxStacks: 5
     tickSpeed: 1
     lifeTime: 3
     _behaviours:
