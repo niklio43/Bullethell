@@ -21,6 +21,7 @@ public class PlayerControls : MonoBehaviour
 
         //Dash
         _inputs.Player.Dash.performed += ctx => _player.Dash(0, ctx);
+        _inputs.Player.Parry.performed += ctx => _player.Parry(1, ctx);
 
         //Ability
         _inputs.Player.AbilityQ.performed += ctx => _weaponController.Attack(1, ctx);
