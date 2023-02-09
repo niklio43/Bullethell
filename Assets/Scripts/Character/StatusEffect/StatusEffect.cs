@@ -99,8 +99,6 @@ namespace BulletHell.StatusSystem
                 behaviour.DoEffect(this);
             }
         }
-
-
         public void Update(float dt)
         {
             for (int i = 0; i < _stacks.Count; i++)
@@ -120,41 +118,6 @@ namespace BulletHell.StatusSystem
             return _stacks[0].CurrentLifeTime;
         }
 
-
-        public class StatusEffectStack
-        {
-            readonly StatusEffect _owner;
-            float _tickSpeed;
-            float _nextTick;
-            public float _lifeTime;
-            public float CurrentLifeTime;
-
-            public StatusEffectStack(StatusEffect owner, float lifeTime, float tickSpeed)
-            {
-                _owner = owner;
-                _lifeTime = lifeTime;
-                ResetTimer();
-            }
-
-            public void ResetTimer()
-            {
-                CurrentLifeTime = _lifeTime;
-                _nextTick = 0;
-            }
-
-            public void Update(float dt)
-            {
-                CurrentLifeTime -= dt;
-                if (CurrentLifeTime <= 0)
-                {
-                    _owner.RemoveStack(this);
-                }
-                if (CurrentLifeTime >= _nextTick)
-                {
-                    _owner.DoEffect();
-                    _nextTick = CurrentLifeTime + _tickSpeed;
-                }
-            }
-        }
+        public override string ToString() => Name;
     }
 }

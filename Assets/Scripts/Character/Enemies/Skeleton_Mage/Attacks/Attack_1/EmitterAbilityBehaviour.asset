@@ -19,17 +19,19 @@ MonoBehaviour:
     _clip: {fileID: 7400000, guid: 721a82f39a141494d8f1f152a01cb271, type: 2}
   _emitterData: {fileID: 11400000, guid: bb8c80c1485c2e041aa759f3eb59bb58, type: 2}
   _damageValues:
-  - Type: 0
+  - senderType: 0
+    Type: 0
     Value: 10
   _statusEffects:
   - Name: Burn
     Icon: {fileID: 21300000, guid: 7d62c17113203a241a3b64f6c6bf16b3, type: 3}
     _stackingBehaviour: 1
     maxStacks: 5
-    tickSpeed: 1
-    lifeTime: 3
+    tickSpeed: 0.3
+    LifeTime: 1
     _behaviours:
     - {fileID: 11400000, guid: f157de6c3edf20342b90290430d9e351, type: 2}
     _damageValues:
-    - Type: 0
+    - senderType: 0
+      Type: 0
       Value: 5

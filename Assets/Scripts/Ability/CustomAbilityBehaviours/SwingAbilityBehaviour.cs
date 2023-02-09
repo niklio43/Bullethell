@@ -5,7 +5,7 @@ using UnityEngine.VFX;
 using BulletHell.VFX;
 using BulletHell.Stats;
 
-namespace BulletHell.Abilities
+namespace BulletHell.Abilities.Old
 {
     //!!! Old file, not in use!!!
     public class SwingAbilityBehaviour : BaseAbilityBehaviour
@@ -30,7 +30,7 @@ namespace BulletHell.Abilities
                 GameObject other = collider.gameObject;
                 if (other.CompareTag("Enemy"))
                 {
-                    List<DamageValue> _damage = new List<DamageValue>() { new DamageValue(DamageType.rawDamage, damage) };
+                    //List<DamageValue> _damage = new List<DamageValue>() { new DamageValue(DamageType.rawDamage, damage) };
 
                     //other.GetComponent<Enemy>().TakeDamage(new DamageInfo(_damage));
                 }

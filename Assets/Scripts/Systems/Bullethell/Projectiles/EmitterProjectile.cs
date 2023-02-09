@@ -101,11 +101,10 @@ namespace BulletHell.Emitters.Projectiles
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log(Data);
             if (!Data.CollisionTags.Contains(collision.gameObject.tag) || _damage == null || collision.gameObject == _owner) { return; }
             if (collision.TryGetComponent(out Character character)) {
                 if (_damage != null)
-                    DamageHandler.SendDamage(_owner, character, _damage);
+                    DamageHandler.Send(_owner, character, _damage);
             }
             OnHit();
         }
