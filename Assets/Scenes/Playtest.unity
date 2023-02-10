@@ -372,7 +372,7 @@ MonoBehaviour:
   _target: {fileID: 1181653743}
   _threshold: 1
   _zoom: -10
-  _damping: 0.005
+  _damping: 2
 --- !u!1 &282669605
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.5
 --- !u!222 &282669608
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ namespace BulletHell.Abilities
             BulletHell.VFX.VFXManager.PlayBurst(_vfx, owner.transform.position, null, new VFXAttribute[] { new VFXFloat("Angle", Vector2.SignedAngle(new Vector2(dir.x, -dir.y), Vector2.left)) });
 
             _player.IsDashing = true;
-
+            Debug.Log(dir);
             _player.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
             _player.UsedStamina(1);
 

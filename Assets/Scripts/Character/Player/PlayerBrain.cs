@@ -7,7 +7,6 @@ namespace BulletHell.Player
     {
         public IFSM _FSM;
         PlayerController _player;
-        Rigidbody2D rb;
 
         public enum PlayerStates
         {
@@ -37,22 +36,20 @@ namespace BulletHell.Player
            {
                Default.SetTransition("interacting", PlayerStates.Interacting);
                Default.SetTransition("dashing", PlayerStates.Dashing)
-               .Enter((action) =>
-               {
-                   rb = _player.GetComponent<Rigidbody2D>();
-               })
                .Update((action) =>
                {
                    if (_player.IsDashing)
                    {
                        action.Transition("dashing");
+                       return;
                    }
                    if (_player.IsInteracting)
                    {
                        action.Transition("interacting");
+                       return;
                    }
 
-                   rb.velocity = _player.MovementInput;
+                   _player.Rb.velocity = _player.MovementInput;
                });
            })
            .State(PlayerStates.Interacting, (interacting) =>
