@@ -8,9 +8,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform _target;
     [SerializeField] float _threshold;
     [SerializeField, Range(-20, 0)] float _zoom;
-    [SerializeField, Range(0, 0.3f)] float _damping;
+    [SerializeField, Range(0, 5)] float _damping;
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPos = (_target.position + mousePos) / 2f;
@@ -18,6 +18,6 @@ public class CameraController : MonoBehaviour
         targetPos.x = Mathf.Clamp(targetPos.x, -_threshold + _target.position.x, _threshold + _target.position.x);
         targetPos.y = Mathf.Clamp(targetPos.y, -_threshold + _target.position.y, _threshold + _target.position.y);
 
-        transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, targetPos.y, _zoom), _damping);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, targetPos.y, _zoom), _damping * Time.fixedDeltaTime);
     }
 }

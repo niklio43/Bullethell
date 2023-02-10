@@ -38,6 +38,7 @@ namespace BulletHell.Player
                Default.SetTransition("dashing", PlayerStates.Dashing)
                .Update((action) =>
                {
+                   _rb.velocity = _movementInput;
                    if (_player.IsDashing)
                    {
                        action.Transition("dashing");
