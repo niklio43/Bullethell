@@ -60,12 +60,10 @@ namespace BulletHell.Player
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
         }
-
-        void Start()
+        private void Start()
         {
-            //only temporary
-            PlayerUI.SetMaxValueHud(PlayerUI.Instance.Health, Character.Stats["MaxHp"].Get());
-            PlayerUI.SetMaxValueHud(PlayerUI.Instance.Stamina, _abilities[0].MaxAmount);
+            PlayerUI.SetHealthSlider(Character.Stats["Hp"].Get());
+            PlayerUI.SetStaminaValue((int)Character.Stats["Stamina"].Get());
         }
 
         private void Update()
@@ -76,9 +74,6 @@ namespace BulletHell.Player
             }
 
             _playerBrain.UpdateBrain();
-
-            //only temporary
-            PlayerUI.SetValueHud(PlayerUI.Instance.Stamina, _abilities[0].CurrentAmount);
         }
 
         void FixedUpdate()
@@ -137,7 +132,7 @@ namespace BulletHell.Player
         {
             if (_isInvincible) return;
             Camera.main.Shake(0.1f, 0.2f);
-            PlayerUI.SetValueHud(PlayerUI.Instance.Health, Character.Stats["Hp"].Get());
+            PlayerUI.SetHealthSlider(Character.Stats["Hp"].Get());
         }
 
         public void OnDeath()
@@ -146,6 +141,12 @@ namespace BulletHell.Player
 
         public void OnHeal(float amount)
         {
+        }
+
+        public void UsedStamina(int amount)
+        {
+            Character.Stats["Stamina"].Value -= amount;
+            PlayerUI.SetStaminaValue((int)Character.Stats["Stamina"].Get());
         }
 
         #region Component Caching

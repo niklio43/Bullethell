@@ -12,10 +12,23 @@ public class PlayerUI : Singleton<PlayerUI>
     [SerializeField] GameObject[] _inventory;
     [SerializeField] Transform _statusEffectHolder;
     [SerializeField] GameObject _statusEffect;
-    public Slider Health, Stamina;
+
+    [SerializeField] Slider _healthSlider;
+    [SerializeField] StaminaBar _staminaBar;
+
+
+    public static Slider Health;
+    public static StaminaBar Stamina;
     bool inv = false;
 
     List<StatusEffectIcon> effects = new List<StatusEffectIcon>();
+
+    protected override void OnAwake()
+    {
+        Health = _healthSlider;
+        Stamina = _staminaBar;
+    }
+
 
     public bool TryGetCurrentInputForAction(string action, out string input)
     {
@@ -31,14 +44,15 @@ public class PlayerUI : Singleton<PlayerUI>
             obj.SetActive(inv);
     }
 
-    public static void SetMaxValueHud(Slider slider, float value)
+    public static void SetHealthSlider(float value)
     {
-        slider.maxValue = value;
+        if(value > Health.maxValue) { Health.maxValue = value; }
+        Health.value = value;
     }
 
-    public static void SetValueHud(Slider slider, float value)
+    public static void SetStaminaValue(int value)
     {
-        slider.value = value;
+        Stamina.UpdateBar(value);
     }
 
     public void AddStatusEffect(StatusEffect statusEffect)
@@ -69,6 +83,7 @@ public class PlayerUI : Singleton<PlayerUI>
     {
         foreach (StatusEffectIcon icon in effects)
         {
+            //TODO cache.
             icon.Obj.transform.GetChild(1).GetComponent<TMP_Text>().text = icon.StatusEffect.GetStackCount().ToString();
             icon.Obj.transform.GetChild(0).GetComponent<Image>().fillAmount = 1 - (icon.StatusEffect.GetTimerCount() / icon.StatusEffect.LifeTime);
         }

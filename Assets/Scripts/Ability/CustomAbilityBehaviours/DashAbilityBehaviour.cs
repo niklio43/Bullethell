@@ -18,6 +18,7 @@ namespace BulletHell.Abilities
         protected override void Perform()
         {
             _player = _ability.Owner.GetComponent<BulletHell.Player.PlayerController>();
+            if(_player.Character.Stats["Stamina"].Get() <= 0) { return; }
             Dash(_ability.Owner);
         }
 
@@ -33,6 +34,7 @@ namespace BulletHell.Abilities
             _player.IsDashing = true;
 
             _player.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
+            _player.UsedStamina(1);
 
             MonoInstance.Instance.StartCoroutine(CreateAfterImages(0.02f));
 
