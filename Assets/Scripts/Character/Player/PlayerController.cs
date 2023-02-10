@@ -19,6 +19,7 @@ namespace BulletHell.Player
         bool _isParrying = false;
         Animator _animator;
         ObjectPool<PlayerAfterImageSprite> _afterImagePool;
+        PlayerBrain _playerBrain;
 
         [SerializeField] List<Ability> _abilities = new List<Ability>();
         [SerializeField] PlayerAfterImageSprite _afterImage;
@@ -26,7 +27,6 @@ namespace BulletHell.Player
 
         public Character Character;
         public PlayerAimWeapon Aim;
-        PlayerBrain _playerBrain;
 
         #region getters & setters
         public ObjectPool<PlayerAfterImageSprite> AfterImagePool { get { return _afterImagePool; } }
@@ -72,16 +72,11 @@ namespace BulletHell.Player
             {
                 ability.UpdateAbility(Time.deltaTime);
             }
-
-            _playerBrain.UpdateBrain();
         }
 
         void FixedUpdate()
         {
-            if (!_isDashing)
-            {
-                _rb.velocity = _movementInput;
-            }
+            _playerBrain.UpdateBrain();
 
             if (_movementInput == Vector2.zero) { _animator.Play("Idle"); return; }
             _animator.Play("Walking");
