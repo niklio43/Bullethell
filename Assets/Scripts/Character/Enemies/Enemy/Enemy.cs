@@ -93,6 +93,7 @@ public class Enemy : MonoBehaviour
 
     public void OnDeath()
     {
+        _brain.CurrentAbility?.Cancel();
         Destroy(gameObject);
     }
 
