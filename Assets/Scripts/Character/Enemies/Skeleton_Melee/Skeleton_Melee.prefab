@@ -188,6 +188,8 @@ MonoBehaviour:
       Value: 100
     - Name: MaxHp
       Value: 100
+  StatusEffect:
+    _owner: {fileID: 0}
 --- !u!114 &5441612227424731686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +210,7 @@ MonoBehaviour:
   Aim: {fileID: 4533019207069723459}
   Weapon: {fileID: 8265819423944410714}
   PreferredDistance: 0.8
-  AttackDistance: 1.2
+  AttackDistance: 1.4
 --- !u!114 &5441612227424731684
 MonoBehaviour:
   m_ObjectHideFlags: 0

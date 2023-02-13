@@ -28,6 +28,10 @@ public class PlayerUI : Singleton<PlayerUI>
         Stamina = _staminaBar;
     }
 
+    private void Start()
+    {
+        _inventory.SetActive(false);
+    }
 
     public bool TryGetCurrentInputForAction(string action, out string input)
     {

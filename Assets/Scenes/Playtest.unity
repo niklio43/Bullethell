@@ -9317,6 +9317,8 @@ MonoBehaviour:
       Value: 6
     - Name: Stamina
       Value: 5
+  StatusEffect:
+    _owner: {fileID: 0}
 --- !u!1 &1423690933
 GameObject:
   m_ObjectHideFlags: 0
@@ -9868,14 +9870,6 @@ PrefabInstance:
     - target: {fileID: 282669606, guid: 15d37370597e52740a2ce13311669345, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 552980804, guid: 15d37370597e52740a2ce13311669345, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 265
-      objectReference: {fileID: 0}
-    - target: {fileID: 552980804, guid: 15d37370597e52740a2ce13311669345, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -444
       objectReference: {fileID: 0}
     - target: {fileID: 1280149869705643988, guid: 15d37370597e52740a2ce13311669345, type: 3}
       propertyPath: m_Pivot.x
