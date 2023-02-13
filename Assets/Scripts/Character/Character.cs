@@ -19,11 +19,15 @@ public class Character : MonoBehaviour
     public delegate void OnStunDelegate();
     public OnStunDelegate OnStunEvent;
 
+    public delegate void OnExitStunDelegate();
+    public OnStunDelegate OnExitStunEvent;
+
     public delegate void OnAppliedEffectDelegate(StatusEffect effect);
     public OnAppliedEffectDelegate OnAppliedEffectEvent;
 
-    public delegate void OnExitStunDelegate();
-    public OnStunDelegate OnExitStunEvent;
+    public delegate void OnRemovedEffectDelegate(StatusEffect effect);
+    public OnRemovedEffectDelegate OnRemovedEffectEvent;
+
 
     private void Awake()
     {
@@ -65,6 +69,11 @@ public class Character : MonoBehaviour
     public void OnAppliedStatusEffect(StatusEffect effect)
     {
         OnAppliedEffectEvent?.Invoke(effect);
+    }
+
+    public void OnRemovedStatusEffect(StatusEffect effect)
+    {
+        OnRemovedEffectEvent?.Invoke(effect);
     }
 
 

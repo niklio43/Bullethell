@@ -52,7 +52,7 @@ namespace BulletHell.StatusSystem
         public void RemoveEffect(StatusEffect statusEffect)
         {
             _status.Remove(statusEffect.Name);
-            PlayerUI.Instance.RemoveStatusEffect(statusEffect);
+            _owner.OnRemovedStatusEffect(statusEffect);
         }
 
         public void UpdateEffects(float dt)
