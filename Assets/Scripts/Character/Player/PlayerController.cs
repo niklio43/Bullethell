@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using BulletHell.Abilities;
 using BulletHell.Stats;
 using Bullet.CameraUtilities;
+using BulletHell.StatusSystem;
 
 namespace BulletHell.Player
 {
@@ -57,6 +58,7 @@ namespace BulletHell.Player
             Character.OnDeathEvent += OnDeath;
             Character.OnStunEvent += OnStun;
             Character.OnExitStunEvent += OnExitStun;
+            Character.OnAppliedEffectEvent += OnAppliedStatusEffect;
 
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
@@ -111,6 +113,11 @@ namespace BulletHell.Player
             afterImage.Pool = _afterImagePool;
 
             return afterImage;
+        }
+
+        public void OnAppliedStatusEffect(StatusEffect statusEffect)
+        {
+            PlayerUI.Instance.AddStatusEffect(statusEffect);
         }
 
         public void OnStun()

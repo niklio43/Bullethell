@@ -19,12 +19,16 @@ public class Character : MonoBehaviour
     public delegate void OnStunDelegate();
     public OnStunDelegate OnStunEvent;
 
+    public delegate void OnAppliedEffectDelegate(StatusEffect effect);
+    public OnAppliedEffectDelegate OnAppliedEffectEvent;
+
     public delegate void OnExitStunDelegate();
     public OnStunDelegate OnExitStunEvent;
 
     private void Awake()
     {
         Stats.TranslateListToDictionary();
+        StatusEffect.Initialize(this);
     }
 
     private void Update()
@@ -57,6 +61,12 @@ public class Character : MonoBehaviour
     {
         OnExitStunEvent?.Invoke();
     }
+
+    public void OnAppliedStatusEffect(StatusEffect effect)
+    {
+        OnAppliedEffectEvent?.Invoke(effect);
+    }
+
 
     public virtual void Heal(float amount)
     {

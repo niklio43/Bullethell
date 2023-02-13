@@ -11,6 +11,9 @@ namespace BulletHell.StatusSystem
     [System.Serializable]
     public class StatusEffectData
     {
+
+        public Character _owner;
+
         public Dictionary<string, StatusEffect> _status = new Dictionary<string, StatusEffect>();
 
         public StatusEffect this[string key]
@@ -20,6 +23,12 @@ namespace BulletHell.StatusSystem
                 if (!_status.ContainsKey(key)) return default(StatusEffect);
                 return _status[key];
             }
+        }
+
+
+        public void Initialize(Character owner)
+        {
+            _owner = owner;
         }
 
         public StatusEffect GetEffect(string key)
@@ -33,7 +42,7 @@ namespace BulletHell.StatusSystem
             if (!_status.ContainsKey(statusEffect.Name)) {
                 _status.Add(statusEffect.Name, statusEffect);
                 statusEffect.ApplyEffect();
-                PlayerUI.Instance.AddStatusEffect(statusEffect);
+                _owner.OnAppliedStatusEffect(statusEffect);
             }
             else {
                 _status[statusEffect.Name].ApplyEffect();
