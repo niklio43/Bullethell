@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StaminaBar : MonoBehaviour
 {
     [SerializeField] Image _image;
-    [SerializeField]float flashTime = 0;
+    [SerializeField]float _flashTime = 0;
     RectTransform _rectTransform;
     SpriteRenderer _spriteRenderer;
     int _currentStaminaCount;
@@ -32,10 +32,10 @@ public class StaminaBar : MonoBehaviour
     IEnumerator Flash()
     {
         float timeElapsed = 0;
-        while(timeElapsed < flashTime) {
+        while(timeElapsed < _flashTime) {
             yield return new WaitForEndOfFrame();
             timeElapsed += Time.deltaTime;
-            _image.material.SetFloat("_FlashAmount", timeElapsed / flashTime);
+            _image.material.SetFloat("_FlashAmount", timeElapsed / _flashTime);
         }
         _image.material.SetFloat("_FlashAmount", 0);
     }

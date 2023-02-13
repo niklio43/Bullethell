@@ -12,11 +12,11 @@ public class PlayerUI : Singleton<PlayerUI>
     [SerializeField] Transform _statusEffectHolder;
     [SerializeField] GameObject _statusEffect;
 
-    [SerializeField] Slider _healthSlider;
+    [SerializeField] HealthBar _healthBar;
     [SerializeField] StaminaBar _staminaBar;
 
 
-    public static Slider Health;
+    public static HealthBar Health;
     public static StaminaBar Stamina;
     bool inv = false;
 
@@ -24,7 +24,7 @@ public class PlayerUI : Singleton<PlayerUI>
 
     protected override void OnAwake()
     {
-        Health = _healthSlider;
+        Health = _healthBar;
         Stamina = _staminaBar;
     }
 
@@ -47,8 +47,7 @@ public class PlayerUI : Singleton<PlayerUI>
 
     public static void SetHealthSlider(float value)
     {
-        if (value > Health.maxValue) { Health.maxValue = value; }
-        Health.value = value;
+        Health.UpdateBar(value);
     }
 
     public static void SetStaminaValue(int value)
