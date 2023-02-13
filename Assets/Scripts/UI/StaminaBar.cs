@@ -1,41 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
-    [SerializeField] GameObject _staminaIconPrefab;
-    List<GameObject> _staminaIcons;
+    [SerializeField] Image _image;
+    [SerializeField]float flashTime = 0;
+    RectTransform _rectTransform;
+    SpriteRenderer _spriteRenderer;
+    int _currentStaminaCount;
+
 
     private void Awake()
     {
-        _staminaIcons = new List<GameObject>();
+        _rectTransform = _image.GetComponent<RectTransform>();
+        _rectTransform.sizeDelta = new Vector2(0, 0);
     }
 
     public void UpdateBar(int amount)
     {
-        int amountToAdd = amount - _staminaIcons.Count;
+        int amountToAdd = amount - _currentStaminaCount;
 
         if(amountToAdd == 0) { return; }
 
-        if(amountToAdd > 0) { AddStamina(amountToAdd); }
-        else if(amountToAdd < 0) { RemoveStamina(Mathf.Abs(amountToAdd)); }
+        _currentStaminaCount += amountToAdd;
+        _rectTransform.sizeDelta = new Vector2(100 * _currentStaminaCount, 100);
+        StartCoroutine(Flash());
     }
 
-    void AddStamina(int amount)
+    IEnumerator Flash()
     {
-        for (int i = 0; i < amount; i++) {
-            GameObject newIcon = Instantiate(_staminaIconPrefab);
-            newIcon.transform.parent = transform;
-            _staminaIcons.Add(newIcon);
+        float timeElapsed = 0;
+        while(timeElapsed < flashTime) {
+            yield return new WaitForEndOfFrame();
+            timeElapsed += Time.deltaTime;
+            _image.material.SetFloat("_FlashAmount", timeElapsed / flashTime);
         }
-    }
-
-    void RemoveStamina(int amount)
-    {
-        for (int i = 0; i < amount; i++) {
-            Destroy(_staminaIcons[i]);
-            _staminaIcons[i] = null;
-        }
+        _image.material.SetFloat("_FlashAmount", 0);
     }
 }

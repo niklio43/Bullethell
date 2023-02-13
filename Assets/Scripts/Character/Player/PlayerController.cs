@@ -145,6 +145,7 @@ namespace BulletHell.Player
             PlayerUI.SetStaminaValue((int)Character.Stats["Stamina"].Get());
         }
 
+
         #region Component Caching
 
         Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();
