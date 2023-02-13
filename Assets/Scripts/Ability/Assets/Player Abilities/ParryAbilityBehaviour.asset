@@ -15,9 +15,10 @@ MonoBehaviour:
   _waitTime: 0
   _castTime: 0
   _animations: []
-  _vfx: {fileID: 0}
-  _radius: 5
+  _parryVfx: {fileID: 8926484042661614526, guid: 43093e70506c1bf4fbceaec12f6a54d9, type: 3}
+  _dissipateVfx: {fileID: 8926484042661614526, guid: 29431330cdcd8ea4b99a73ab4ba10bc5, type: 3}
+  _radius: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 4096
-  _staminaCost: 10
+  _staminaCost: 1

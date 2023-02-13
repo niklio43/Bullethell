@@ -16,7 +16,7 @@ namespace BulletHell.Player
         bool _isDashing = false;
         bool _isInteracting = false;
         bool _isInvincible = false;
-        bool _isParrying = false;
+        [SerializeField] bool _isParrying = false;
         Animator _animator;
         ObjectPool<PlayerAfterImageSprite> _afterImagePool;
         PlayerBrain _playerBrain;
@@ -98,7 +98,7 @@ namespace BulletHell.Player
 
         public void Parry(int abilityIndex, InputAction.CallbackContext context)
         {
-            if (context.performed && !_isDashing)
+            if (context.performed && !_isParrying)
             {
                 _abilities[abilityIndex].Cast();
             }

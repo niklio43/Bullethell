@@ -12,7 +12,7 @@ namespace BulletHell.Abilities
     [CreateAssetMenu(fileName = "ParryAbilityBehaviour", menuName = "Abilities/Custom Behaviours/New Parry Behaviour")]
     public class ParryAbilityBehaviour : BaseAbilityBehaviour
     {
-        BulletHell.Player.PlayerController _player;
+        PlayerController _player;
         [Header("VFX")]
         [SerializeField] VisualEffectAsset _parryVfx;
         [SerializeField] VisualEffectAsset _dissipateVfx;
@@ -24,33 +24,35 @@ namespace BulletHell.Abilities
         [SerializeField, Range(0, 10)] int _staminaCost = 1;
         protected override void Perform()
         {
-            _player = _ability.Owner.GetComponent<BulletHell.Player.PlayerController>();
+            _player = _ability.Owner.GetComponent<PlayerController>();
 
             if (_player.Character.Stats["Stamina"].Get() < _staminaCost) { return; }
 
             _player.IsParrying = true;
 
-            BulletHell.VFX.VFXManager.PlayBurst(_parryVfx, _ability.Owner.transform.position, null);
+            _player.UsedStamina(_staminaCost);
+            VFX.VFXManager.PlayBurst(_parryVfx, _player.transform.position, null);
+            Camera.main.Zoom(.2f, .5f);
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(_player.transform.position, _radius, layerMask);
 
-            if (colliders == null) { return; }
-
-            Camera.main.Zoom(.2f, .5f);
+            if (colliders == null || colliders.Length == 0) { _player.IsParrying = false; return; }
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                BulletHell.VFX.VFXManager.PlayBurst(_dissipateVfx, _ability.Owner.transform.position, null);
-                Parry(colliders[i].gameObject);
+                VFX.VFXManager.PlayBurst(_dissipateVfx, colliders[i].gameObject.transform.position, null);
+                MonoInstance.Instance.StartCoroutine(Parry(colliders[i].gameObject, 0.4f));
             }
-
         }
 
-        void Parry(GameObject attackObj)
+        IEnumerator Parry(GameObject attackObj, float duration)
         {
             attackObj.SetActive(false);
-            _player.UsedStamina(_staminaCost);
             Debug.Log("Parried: " + attackObj.name);
+
+            yield return new WaitForSeconds(duration);
+
+            _player.IsParrying = false;
         }
     }
 }
