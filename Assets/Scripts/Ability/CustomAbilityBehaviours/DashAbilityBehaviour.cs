@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Player;
-using BulletHell;
 using UnityEngine.VFX;
 using BulletHell.VFX;
 using Bullet.CameraUtilities;
@@ -12,41 +10,41 @@ namespace BulletHell.Abilities
     [CreateAssetMenu(fileName = "DashAbilityBehaviour", menuName = "Abilities/Custom Behaviours/New Dash Behaviour")]
     public class DashAbilityBehaviour : BaseAbilityBehaviour
     {
-        BulletHell.Player.PlayerController _player;
+        PlayerController _player;
         [Header("VFX")]
         [SerializeField] VisualEffectAsset _vfx;
         [Header("Stamina Cost")]
         [SerializeField, Range(0, 10)] int _staminaCost = 1;
         protected override void Perform()
         {
-            _player = _ability.Owner.GetComponent<BulletHell.Player.PlayerController>();
+            _player = _ability.Owner.GetComponent<PlayerController>();
             if (_player.Character.Stats["Stamina"].Get() < _staminaCost) { return; }
             Dash(_ability.Owner);
         }
 
         public void Dash(GameObject owner)
         {
-            Vector2 dir = _player.MovementInput.normalized;
+            Vector2 dir = _player.PlayerMovement.MovementInput.normalized;
             if (dir == Vector2.zero) return;
 
             Camera.main.Zoom(.2f, .5f);
 
-            BulletHell.VFX.VFXManager.PlayBurst(_vfx, owner.transform.position, null, new VFXAttribute[] { new VFXFloat("Angle", Vector2.SignedAngle(new Vector2(dir.x, -dir.y), Vector2.left)) });
+            VFX.VFXManager.PlayBurst(_vfx, owner.transform.position, null, new VFXAttribute[] { new VFXFloat("Angle", Vector2.SignedAngle(new Vector2(dir.x, -dir.y), Vector2.left)) });
 
-            _player.IsDashing = true;
-            _player.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
+            _player.PlayerAbilities.IsDashing = true;
+            _player.PlayerMovement.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
             _player.UsedStamina(1);
 
             MonoInstance.Instance.StartCoroutine(CreateAfterImages(0.02f));
 
-            MonoInstance.Instance.Invoke(() => ResetDash(), _player.DashTime);
+            MonoInstance.Instance.Invoke(() => ResetDash(), _player.PlayerAbilities.DashTime);
         }
 
         IEnumerator CreateAfterImages(float timeBetween)
         {
             float timeElapsed = 0;
             float timeSinceLastImage = 0;
-            while(timeElapsed < _player.DashTime)
+            while(timeElapsed < _player.PlayerAbilities.DashTime)
             {
                 yield return new WaitForFixedUpdate();
                 timeElapsed += Time.fixedDeltaTime;
@@ -54,7 +52,7 @@ namespace BulletHell.Abilities
                 if(timeSinceLastImage > timeBetween)
                 {
                     timeSinceLastImage = 0;
-                    PlayerAfterImageSprite afterImage = _player.AfterImagePool.Get();
+                    PlayerAfterImageSprite afterImage = _player.PlayerAbilities.AfterImagePool.Get();
                     afterImage.gameObject.SetActive(true);
                     afterImage.Initialize(_player.transform, _player.GetComponent<SpriteRenderer>().sprite);
                 }
@@ -63,7 +61,7 @@ namespace BulletHell.Abilities
 
         void ResetDash()
         {
-            _player.IsDashing = false;
+            _player.PlayerAbilities.IsDashing = false;
         }
     }
 }

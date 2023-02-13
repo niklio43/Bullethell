@@ -26,9 +26,9 @@ namespace BulletHell.Abilities
         {
             _player = _ability.Owner.GetComponent<PlayerController>();
 
-            if (_player.Character.Stats["Stamina"].Get() < _staminaCost || _player.IsParrying) { return; }
+            if (_player.Character.Stats["Stamina"].Get() < _staminaCost || _player.PlayerAbilities.IsParrying) { return; }
 
-            _player.IsParrying = true;
+            _player.PlayerAbilities.IsParrying = true;
 
             _player.UsedStamina(_staminaCost);
             VFX.VFXManager.PlayBurst(_parryVfx, Vector3.zero, _player.transform);
@@ -56,7 +56,7 @@ namespace BulletHell.Abilities
         IEnumerator ResetAbility()
         {
             yield return new WaitForSeconds(0.4f);
-            _player.IsParrying = false;
+            _player.PlayerAbilities.IsParrying = false;
         }
     }
 }

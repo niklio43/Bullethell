@@ -20,8 +20,8 @@ public class PlayerControls : MonoBehaviour
         #region Input bindings
 
         //Dash
-        _inputs.Player.Dash.performed += ctx => _player.Dash(0, ctx);
-        _inputs.Player.Parry.performed += ctx => _player.Parry(1, ctx);
+        _inputs.Player.Dash.performed += ctx => _player.PlayerAbilities.Dash(0, ctx);
+        _inputs.Player.Parry.performed += ctx => _player.PlayerAbilities.Parry(1, ctx);
 
         //Ability
         _inputs.Player.AbilityQ.performed += ctx => _weaponController.Attack(1, ctx);
@@ -29,8 +29,8 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.AbilityR.performed += ctx => _weaponController.Attack(3, ctx);
 
         //Move
-        _inputs.Player.Move.performed += ctx => _player.Move(ctx);
-        _inputs.Player.Move.canceled += ctx => _player.Move(ctx);
+        _inputs.Player.Move.performed += ctx => _player.PlayerMovement.Move(ctx);
+        _inputs.Player.Move.canceled += ctx => _player.PlayerMovement.Move(ctx);
 
         //UI
         _inputs.Player.Inventory.performed += ctx => _playerUI.ToggleInventory();

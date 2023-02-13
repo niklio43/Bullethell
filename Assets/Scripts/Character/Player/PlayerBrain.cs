@@ -38,18 +38,18 @@ namespace BulletHell.Player
                Default.SetTransition("dashing", PlayerStates.Dashing)
                .Update((action) =>
                {
-                   if (_player.IsDashing)
+                   if (_player.PlayerAbilities.IsDashing)
                    {
                        action.Transition("dashing");
                        return;
                    }
-                   if (_player.IsInteracting)
+                   if (_player.PlayerAbilities.IsInteracting)
                    {
                        action.Transition("interacting");
                        return;
                    }
 
-                   _player.Rb.velocity = _player.MovementInput;
+                   _player.PlayerMovement.Rb.velocity = _player.PlayerMovement.MovementInput;
                });
            })
            .State(PlayerStates.Interacting, (interacting) =>
@@ -57,7 +57,7 @@ namespace BulletHell.Player
                interacting.SetTransition("default", PlayerStates.Default)
                .Update((action) =>
                {
-                   if (_player.IsInteracting) return;
+                   if (_player.PlayerAbilities.IsInteracting) return;
                    action.Transition("default");
                });
            })
@@ -66,16 +66,16 @@ namespace BulletHell.Player
                dashing.SetTransition("default", PlayerStates.Default)
                .Enter((action) =>
                {
-                   _player.IsInvincible = true;
+                   _player.PlayerAbilities.IsInvincible = true;
                })
                .Update((action) =>
                {
-                   if (_player.IsDashing) return;
+                   if (_player.PlayerAbilities.IsDashing) return;
                    action.Transition("default");
                })
                .Exit((action) =>
                 {
-                    _player.IsInvincible = false;
+                    _player.PlayerAbilities.IsInvincible = false;
                 });
            })
            .State(PlayerStates.Staggered, (staggered) =>
