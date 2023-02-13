@@ -24,6 +24,7 @@ namespace BulletHell.Player
         [SerializeField] List<Ability> _abilities = new List<Ability>();
         [SerializeField] PlayerAfterImageSprite _afterImage;
         [SerializeField] float _dashTime = .1f;
+        [SerializeField, Range(0, 10)] float _staminaRegenTime = 1f;
 
         public Character Character;
         public PlayerAimWeapon Aim;

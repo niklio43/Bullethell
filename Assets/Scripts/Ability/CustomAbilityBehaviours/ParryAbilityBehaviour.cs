@@ -14,42 +14,42 @@ namespace BulletHell.Abilities
     {
         BulletHell.Player.PlayerController _player;
         [Header("VFX")]
-        [SerializeField] VisualEffectAsset _vfx;
+        [SerializeField] VisualEffectAsset _parryVfx;
+        [SerializeField] VisualEffectAsset _dissipateVfx;
         [Header("Parry Radius")]
         [SerializeField, Range(0, 10)] float _radius = 5;
         [Header("Layers to parry")]
         [SerializeField] LayerMask layerMask;
         [Header("Stamina Cost")]
-        [SerializeField, Range(0, 100)] float _staminaCost = 10;
+        [SerializeField, Range(0, 10)] int _staminaCost = 1;
         protected override void Perform()
         {
             _player = _ability.Owner.GetComponent<BulletHell.Player.PlayerController>();
-            _player.IsParrying = true;
 
             if (_player.Character.Stats["Stamina"].Get() < _staminaCost) { return; }
 
-            //_player.GetComponent<Animator>().Play("Parry");
+            _player.IsParrying = true;
+
+            BulletHell.VFX.VFXManager.PlayBurst(_parryVfx, _ability.Owner.transform.position, null);
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(_player.transform.position, _radius, layerMask);
 
             if (colliders == null) { return; }
 
-            //BulletHell.VFX.VFXManager.PlayBurst(_vfx, _ability.Owner.transform.position, null);
             Camera.main.Zoom(.2f, .5f);
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                //colliders[i].GetComponent<Animator>().Play("Dissipate");
-                MonoInstance.Instance.StartCoroutine(Parry(colliders[i].gameObject, 0/*colliders[i].GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).Length*/));
+                BulletHell.VFX.VFXManager.PlayBurst(_dissipateVfx, _ability.Owner.transform.position, null);
+                Parry(colliders[i].gameObject);
             }
 
         }
 
-        IEnumerator Parry(GameObject attackObj, float time)
+        void Parry(GameObject attackObj)
         {
-            yield return new WaitForSeconds(time);
             attackObj.SetActive(false);
-            //_player.Character.Stats["Stamina"].Value -= _staminaCost;
+            _player.UsedStamina(_staminaCost);
             Debug.Log("Parried: " + attackObj.name);
         }
     }

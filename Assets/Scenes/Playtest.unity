@@ -9653,6 +9653,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ecefb23eb67218b449f18eac5ccb1a8a, type: 2}
   _afterImage: {fileID: -2138936094765007819, guid: 965500742adab4b45b904772870b9ef4, type: 3}
   _dashTime: 0.1
+  _staminaRegenTime: 1
   Character: {fileID: 1181653745}
   Aim: {fileID: 40932957}
 --- !u!114 &1181653736
@@ -9941,6 +9942,8 @@ MonoBehaviour:
     - Name: MoveSpeed
       Value: 6
     - Name: Stamina
+      Value: 4
+    - Name: MaxStamina
       Value: 4
 --- !u!224 &1328133124 stripped
 RectTransform:

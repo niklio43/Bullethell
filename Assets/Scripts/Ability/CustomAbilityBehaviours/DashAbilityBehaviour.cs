@@ -15,10 +15,12 @@ namespace BulletHell.Abilities
         BulletHell.Player.PlayerController _player;
         [Header("VFX")]
         [SerializeField] VisualEffectAsset _vfx;
+        [Header("Stamina Cost")]
+        [SerializeField, Range(0, 10)] int _staminaCost = 1;
         protected override void Perform()
         {
             _player = _ability.Owner.GetComponent<BulletHell.Player.PlayerController>();
-            if(_player.Character.Stats["Stamina"].Get() <= 0) { return; }
+            if (_player.Character.Stats["Stamina"].Get() < _staminaCost) { return; }
             Dash(_ability.Owner);
         }
 
@@ -32,7 +34,6 @@ namespace BulletHell.Abilities
             BulletHell.VFX.VFXManager.PlayBurst(_vfx, owner.transform.position, null, new VFXAttribute[] { new VFXFloat("Angle", Vector2.SignedAngle(new Vector2(dir.x, -dir.y), Vector2.left)) });
 
             _player.IsDashing = true;
-            Debug.Log(dir);
             _player.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
             _player.UsedStamina(1);
 
