@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerUI : Singleton<PlayerUI>
 {
     [SerializeField] PlayerInput _input;
-    [SerializeField] GameObject[] _inventory;
+    [SerializeField] GameObject _inventory;
     [SerializeField] Transform _statusEffectHolder;
     [SerializeField] GameObject _statusEffect;
 
@@ -38,9 +38,7 @@ public class PlayerUI : Singleton<PlayerUI>
 
     public void ToggleInventory()
     {
-        inv = !inv;
-        foreach (GameObject obj in _inventory)
-            obj.SetActive(inv);
+        _inventory.SetActive(!_inventory.activeSelf);
     }
 
     public static void SetHealthSlider(float value)
