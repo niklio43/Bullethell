@@ -59,6 +59,7 @@ namespace BulletHell.Player
             Character.OnStunEvent += OnStun;
             Character.OnExitStunEvent += OnExitStun;
             Character.OnAppliedEffectEvent += OnAppliedStatusEffect;
+            Character.OnRemovedEffectEvent += OnRemovedStatusEffect;
 
             _animator = GetComponent<Animator>();
             _rb = GetComponent<Rigidbody2D>();
@@ -118,6 +119,11 @@ namespace BulletHell.Player
         public void OnAppliedStatusEffect(StatusEffect statusEffect)
         {
             PlayerUI.Instance.AddStatusEffect(statusEffect);
+        }
+
+        public void OnRemovedStatusEffect(StatusEffect statusEffect)
+        {
+            PlayerUI.Instance.RemoveStatusEffect(statusEffect);
         }
 
         public void OnStun()
