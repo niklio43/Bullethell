@@ -9319,6 +9319,35 @@ MonoBehaviour:
       Value: 5
   StatusEffect:
     _owner: {fileID: 0}
+--- !u!114 &1181653746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181653734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b262a9a6eac2545afa059ce6470986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1181653747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181653734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb5e2a013586a74981d83c2ac17dc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilities:
+  - {fileID: 11400000, guid: f0e435481c974864f928dbe1338bf354, type: 2}
+  - {fileID: 11400000, guid: ecefb23eb67218b449f18eac5ccb1a8a, type: 2}
+  _afterImage: {fileID: -2138936094765007819, guid: 965500742adab4b45b904772870b9ef4, type: 3}
+  _dashTime: 0.1
 --- !u!1 &1423690933
 GameObject:
   m_ObjectHideFlags: 0
@@ -9602,7 +9631,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.48, y: 0.48}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

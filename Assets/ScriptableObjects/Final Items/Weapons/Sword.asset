@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcd0f6d5e6c47e4f8befedf53a971cc, type: 3}
+  m_Name: Sword
+  m_EditorClassIdentifier: 
+  Stackable: 0
+  data:
+    Name: Sword
+    Id: 3
+    buffs:
+    - Stat: Strength
+      Id: 
+      type: 0
+      Value: 15
+  _abilitySlot:
+  - {fileID: 11400000, guid: a0070805f62fa0a40b3ed74bc947a6c6, type: 2}
+  AnimatorController: {fileID: 22100000, guid: c6719dd60da867449bf0b51b1a42df54, type: 2}
+  database: {fileID: 11400000, guid: d1c92bf548e2e194ea1b7091ac1b436e, type: 2}
+  sprite: {fileID: 21300000, guid: e37e1fad0d0f7c24ca9b68a9e0aa06bb, type: 3}
+  itemName: Sword
+  pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}
+  rarity: 3
+  itemType: 0
