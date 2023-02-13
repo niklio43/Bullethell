@@ -237,11 +237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aimLength: 0.3
---- !u!1 &91811582 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5116334100615264615, guid: 15d37370597e52740a2ce13311669345, type: 3}
-  m_PrefabInstance: {fileID: 1280149869959008572}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &230056738
 GameObject:
   m_ObjectHideFlags: 0
@@ -9358,11 +9353,6 @@ Transform:
   m_Father: {fileID: 1992674392}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1456113299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5116334100154133558, guid: 15d37370597e52740a2ce13311669345, type: 3}
-  m_PrefabInstance: {fileID: 1280149869959008572}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1482201617
 GameObject:
   m_ObjectHideFlags: 0
@@ -9621,15 +9611,9 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
 --- !u!1 &1934147992 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5116334100154133558, guid: 15d37370597e52740a2ce13311669345, type: 3}
-=======
---- !u!1 &1938533987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5116334101406660663, guid: 15d37370597e52740a2ce13311669345, type: 3}
->>>>>>> main
   m_PrefabInstance: {fileID: 1280149869959008572}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1992674391
@@ -9681,15 +9665,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityUI:
-<<<<<<< HEAD
   - {fileID: 757018882}
   - {fileID: 306801657}
   - {fileID: 1934147992}
-=======
-  - {fileID: 91811582}
-  - {fileID: 1938533987}
-  - {fileID: 1456113299}
->>>>>>> main
   _abilities: []
 --- !u!95 &1992674396
 Animator:
