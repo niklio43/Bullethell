@@ -16,7 +16,7 @@ namespace BulletHell.Player
         bool _isDashing = false;
         bool _isInteracting = false;
         bool _isInvincible = false;
-        [SerializeField] bool _isParrying = false;
+        bool _isParrying = false;
         Animator _animator;
         ObjectPool<PlayerAfterImageSprite> _afterImagePool;
         PlayerBrain _playerBrain;

@@ -26,32 +26,36 @@ namespace BulletHell.Abilities
         {
             _player = _ability.Owner.GetComponent<PlayerController>();
 
-            if (_player.Character.Stats["Stamina"].Get() < _staminaCost) { return; }
+            if (_player.Character.Stats["Stamina"].Get() < _staminaCost || _player.IsParrying) { return; }
 
             _player.IsParrying = true;
 
             _player.UsedStamina(_staminaCost);
-            VFX.VFXManager.PlayBurst(_parryVfx, _player.transform.position, null);
+            VFX.VFXManager.PlayBurst(_parryVfx, Vector3.zero, _player.transform);
             Camera.main.Zoom(.2f, .5f);
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(_player.transform.position, _radius, layerMask);
 
-            if (colliders == null || colliders.Length == 0) { _player.IsParrying = false; return; }
+            if (colliders == null || colliders.Length == 0) { MonoInstance.Instance.StartCoroutine(ResetAbility()); return; }
 
             for (int i = 0; i < colliders.Length; i++)
             {
                 VFX.VFXManager.PlayBurst(_dissipateVfx, colliders[i].gameObject.transform.position, null);
-                MonoInstance.Instance.StartCoroutine(Parry(colliders[i].gameObject, 0.4f));
+                Parry(colliders[i].gameObject);
             }
         }
 
-        IEnumerator Parry(GameObject attackObj, float duration)
+        void Parry(GameObject attackObj)
         {
             attackObj.SetActive(false);
             Debug.Log("Parried: " + attackObj.name);
 
-            yield return new WaitForSeconds(duration);
+            MonoInstance.Instance.StartCoroutine(ResetAbility());
+        }
 
+        IEnumerator ResetAbility()
+        {
+            yield return new WaitForSeconds(0.4f);
             _player.IsParrying = false;
         }
     }
