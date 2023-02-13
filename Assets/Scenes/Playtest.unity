@@ -384,11 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a697e06946fc3844d905a76078db793c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &306801657 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5116334101406660663, guid: 15d37370597e52740a2ce13311669345, type: 3}
-  m_PrefabInstance: {fileID: 1280149869959008572}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &415336426
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,11 +2366,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &757018882 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5116334100615264615, guid: 15d37370597e52740a2ce13311669345, type: 3}
-  m_PrefabInstance: {fileID: 1280149869959008572}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1065938606
 GameObject:
   m_ObjectHideFlags: 0
@@ -9027,6 +9017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1e6732d04e4f8478d19ba610173d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isParrying: 0
   _abilities:
   - {fileID: 11400000, guid: f0e435481c974864f928dbe1338bf354, type: 2}
   - {fileID: 11400000, guid: ecefb23eb67218b449f18eac5ccb1a8a, type: 2}
@@ -9321,7 +9312,7 @@ MonoBehaviour:
     - Name: MoveSpeed
       Value: 6
     - Name: Stamina
-      Value: 5
+      Value: 100
 --- !u!1 &1423690933
 GameObject:
   m_ObjectHideFlags: 0
@@ -9611,11 +9602,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1934147992 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5116334100154133558, guid: 15d37370597e52740a2ce13311669345, type: 3}
-  m_PrefabInstance: {fileID: 1280149869959008572}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1992674391
 GameObject:
   m_ObjectHideFlags: 0
@@ -9665,9 +9651,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityUI:
-  - {fileID: 757018882}
-  - {fileID: 306801657}
-  - {fileID: 1934147992}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _abilities: []
 --- !u!95 &1992674396
 Animator:
@@ -9868,14 +9854,6 @@ PrefabInstance:
     - target: {fileID: 282669606, guid: 15d37370597e52740a2ce13311669345, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 552980804, guid: 15d37370597e52740a2ce13311669345, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 264
-      objectReference: {fileID: 0}
-    - target: {fileID: 552980804, guid: 15d37370597e52740a2ce13311669345, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -444
       objectReference: {fileID: 0}
     - target: {fileID: 1280149869705643988, guid: 15d37370597e52740a2ce13311669345, type: 3}
       propertyPath: m_Pivot.x
