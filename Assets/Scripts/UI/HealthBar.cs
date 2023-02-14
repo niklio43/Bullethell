@@ -13,6 +13,7 @@ public class HealthBar : MonoBehaviour
     private void Awake()
     {
         _slider = GetComponent<Slider>();
+        _fill.material = Instantiate(_fill.material);
     }
 
     public void UpdateBar(float value)

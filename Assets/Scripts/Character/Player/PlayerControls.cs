@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using BulletHell.Emitters;
 using BulletHell.Player;
+using BulletHell.UI;
 
 public class PlayerControls : MonoBehaviour
 {

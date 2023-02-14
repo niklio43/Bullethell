@@ -16,6 +16,7 @@ public class StaminaBar : MonoBehaviour
     {
         _rectTransform = _image.GetComponent<RectTransform>();
         _rectTransform.sizeDelta = new Vector2(0, 0);
+        _image.material = Instantiate(_image.material);
     }
 
     public void UpdateBar(int amount)

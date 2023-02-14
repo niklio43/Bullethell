@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Bullet.CameraUtilities;
 using BulletHell.StatusSystem;
+using BulletHell.UI;
 
 namespace BulletHell.Player
 {
@@ -53,7 +54,6 @@ namespace BulletHell.Player
 
         public void OnRemovedStatusEffect(StatusEffect statusEffect)
         {
-            PlayerUI.Instance.RemoveStatusEffect(statusEffect);
         }
 
         public void OnStun()
