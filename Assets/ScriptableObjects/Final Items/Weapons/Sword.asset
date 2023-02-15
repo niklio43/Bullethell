@@ -18,9 +18,9 @@ MonoBehaviour:
     Id: 3
     buffs:
     - Stat: Strength
-      Id: 
+      Id: BasicSword_Strength_Buff
       type: 0
-      Value: 15
+      _value: 10
   _abilitySlot:
   - {fileID: 11400000, guid: a0070805f62fa0a40b3ed74bc947a6c6, type: 2}
   AnimatorController: {fileID: 22100000, guid: c6719dd60da867449bf0b51b1a42df54, type: 2}

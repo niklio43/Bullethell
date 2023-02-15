@@ -159,7 +159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8461412192270030066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -183,9 +183,9 @@ MonoBehaviour:
   Stats:
     _statsList:
     - Name: Hp
-      Value: 100
+      _value: 100
     - Name: MaxHp
-      Value: 100
+      _value: 100
   StatusEffect:
     _owner: {fileID: 0}
 --- !u!114 &8461412192270030073

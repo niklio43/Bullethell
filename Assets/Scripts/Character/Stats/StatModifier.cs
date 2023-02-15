@@ -9,10 +9,11 @@ namespace BulletHell.Stats
     {
         public string Stat;
         public string Id;
-
         public ModifierType type = ModifierType.Add;
-        public float Value;
-
+        
+        [SerializeField] float _value;
+        public float Value { get => _value; set => _value = value; }
+        
         public enum ModifierType
         {
             Add,

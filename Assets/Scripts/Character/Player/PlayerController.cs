@@ -38,8 +38,7 @@ namespace BulletHell.Player
 
         private void Start()
         {
-            PlayerUI.SetHealthSlider(Character.Stats["Hp"].Get());
-            PlayerUI.SetStaminaValue((int)Character.Stats["Stamina"].Get());
+            PlayerUI.Instance.Initialize(Character.Stats);
         }
 
         void FixedUpdate()
@@ -71,7 +70,6 @@ namespace BulletHell.Player
         {
             if (_playerAbilities.IsInvincible) return;
             Camera.main.Shake(0.1f, 0.2f);
-            PlayerUI.SetHealthSlider(Character.Stats["Hp"].Get());
         }
 
         public void OnDeath()
@@ -85,7 +83,6 @@ namespace BulletHell.Player
         public void UsedStamina(int amount)
         {
             Character.Stats["Stamina"].Value -= amount;
-            PlayerUI.SetStaminaValue((int)Character.Stats["Stamina"].Get());
         }
 
 

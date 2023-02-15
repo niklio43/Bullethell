@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using BulletHell.Stats;
 
 namespace BulletHell.UI
 {
@@ -14,6 +15,7 @@ namespace BulletHell.UI
         [SerializeField] HealthBar _healthBar;
         [SerializeField] StaminaBar _staminaBar;
         [SerializeField] StatusEffectUIManager _statusEffectUIManager;
+        [SerializeField] StatManagerUI _statManagerUI;
 
         public static HealthBar Health;
         public static StaminaBar Stamina;
@@ -23,6 +25,13 @@ namespace BulletHell.UI
         {
             Health = _healthBar;
             Stamina = _staminaBar;
+        }
+
+        public void Initialize(Stats.Stats stats)
+        {
+            _statManagerUI.Initilize(stats);
+            Health.Initialize(stats["Hp"]);
+            Stamina.Initialize(stats["Stamina"]);
         }
 
         private void Start()
@@ -40,16 +49,6 @@ namespace BulletHell.UI
         public void ToggleInventory()
         {
             _inventory.SetActive(!_inventory.activeSelf);
-        }
-
-        public static void SetHealthSlider(float value)
-        {
-            Health.UpdateBar(value);
-        }
-
-        public static void SetStaminaValue(int value)
-        {
-            Stamina.UpdateBar(value);
         }
 
         public void AddStatusEffect(StatusEffect statusEffect)

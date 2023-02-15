@@ -2,36 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using BulletHell.Stats;
 
-public class HealthBar : MonoBehaviour
+namespace BulletHell.UI
 {
-    [SerializeField] Image _fill;
-    Slider _slider;
-
-    [SerializeField] float _flashTime = .1f;
-
-    private void Awake()
+    public class HealthBar : MonoBehaviour
     {
-        _slider = GetComponent<Slider>();
-        _fill.material = Instantiate(_fill.material);
-    }
+        [SerializeField] Image _fill;
+        [SerializeField] float _flashTime = .1f;
 
-    public void UpdateBar(float value)
-    {
-        if (value > _slider.maxValue) { _slider.maxValue = value; }
-        _slider.value = value;
+        Stat _healthStat;
+        Slider _slider;
 
-        StartCoroutine(Flash());
-    }
-
-    IEnumerator Flash()
-    {
-        float timeElapsed = 0;
-        while (timeElapsed < _flashTime) {
-            yield return new WaitForEndOfFrame();
-            timeElapsed += Time.deltaTime;
-            _fill.material.SetFloat("_FlashAmount", timeElapsed / _flashTime);
+        private void Awake()
+        {
+            _slider = GetComponent<Slider>();
+            _fill.material = Instantiate(_fill.material);
         }
-        _fill.material.SetFloat("_FlashAmount", 0);
+
+        public void Initialize(Stat stat)
+        {
+            _healthStat = stat;
+            _healthStat.OnValueChanged += UpdateBar;
+            UpdateBar();
+        }
+
+        void UpdateBar()
+        {
+            float value = _healthStat.Get();
+            if (value > _slider.maxValue) { _slider.maxValue = value; }
+            _slider.value = value;
+
+            StartCoroutine(Flash());
+        }
+
+        IEnumerator Flash()
+        {
+            float timeElapsed = 0;
+            while (timeElapsed < _flashTime) {
+                yield return new WaitForEndOfFrame();
+                timeElapsed += Time.deltaTime;
+                _fill.material.SetFloat("_FlashAmount", timeElapsed / _flashTime);
+            }
+            _fill.material.SetFloat("_FlashAmount", 0);
+        }
     }
 }

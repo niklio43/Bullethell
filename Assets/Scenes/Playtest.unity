@@ -9304,21 +9304,21 @@ MonoBehaviour:
   Stats:
     _statsList:
     - Name: Hp
-      Value: 100
+      _value: 100
     - Name: MaxHp
-      Value: 100
+      _value: 100
     - Name: Strength
-      Value: 10
+      _value: 10
     - Name: Defense
-      Value: 100
+      _value: 10
     - Name: DashDistance
-      Value: 24
+      _value: 24
     - Name: MoveSpeed
-      Value: 6
+      _value: 5
     - Name: Stamina
-      Value: 3
+      _value: 4
     - Name: MaxStamina
-      Value: 5
+      _value: 4
   StatusEffect:
     _owner: {fileID: 0}
 --- !u!114 &1181653746
