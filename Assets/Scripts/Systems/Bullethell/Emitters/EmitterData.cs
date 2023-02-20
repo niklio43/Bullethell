@@ -13,18 +13,12 @@ namespace BulletHell.Emitters
         //General
         public bool FoldOutGeneral = false;
         [Range(0, 5000)] public int Delay = 1000;
-        [Range(0, 1000)] public int MaxProjectiles = 10;
         [Range(0, 10)] public float RotationSpeed = 0;
 
         //Projectile
         public bool FoldOutProjectile = false;
-        public EmittterProjectileData ProjectileData;
-        public float TimeToLive = 5;
-        [Range(0, 100f)] public float Speed = 1;
-        [Range(0.01f, 100f)] public float MaxSpeed = 100;
-        [Range(-100f, 100f)] public float Acceleration = 0;
-        public float Gravity = 0;
-        public Vector2 GravityPoint = Vector2.zero;
+        public ProjectileData ProjectileData;
+        public float LifeTime = 5;
 
         //Emission
         public bool FoldOutEmitter = false;
@@ -36,12 +30,5 @@ namespace BulletHell.Emitters
 
         public float ParentRotation = 0;
         public Vector2 Direction = Vector2.up;
-
-        //Tracking
-        public bool FoldOutHomeing = false;
-        public bool FollowTarget = false;
-        public float FollowIntensity = 0;
-        public float FollowRange = 0;
-
     }
 }

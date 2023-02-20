@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BulletHell.EaseingUtility
+namespace BulletHell
 {
     public static class Easing
     {

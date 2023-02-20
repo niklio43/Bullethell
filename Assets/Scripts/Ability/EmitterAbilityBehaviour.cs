@@ -20,7 +20,7 @@ namespace BulletHell.Abilities
 
         protected override void OnUpdate(float dt)
         {
-            _emitterObject.UpdateEmitter(dt);
+            _emitterObject.UpdateEmitter();
         }
 
         public override void Uninitialize()

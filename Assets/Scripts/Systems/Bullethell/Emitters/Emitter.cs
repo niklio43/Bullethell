@@ -11,7 +11,7 @@ namespace BulletHell.Emitters
         GameObject _owner;
         Transform _transform;
         EmitterData _data;
-        List<EmitterProjectile> _activeProjectiles;
+        List<Projectile> _activeProjectiles;
         EmitterGroupsManager _emitterGroups;
 
         public Emitter(GameObject owner, EmitterData data)
@@ -20,13 +20,13 @@ namespace BulletHell.Emitters
             _data = data;
 
             _transform = _owner.transform;
-            _activeProjectiles = new List<EmitterProjectile>();
+            _activeProjectiles = new List<Projectile>();
             _emitterGroups = new EmitterGroupsManager(owner.transform, _data);
         }
 
         public void Uninitialize() => ClearAllProjectiles();
 
-        public void UpdateEmitter(float dt)
+        public void UpdateEmitter()
         {
             _emitterGroups.UpdateGroups();
         }
@@ -39,35 +39,27 @@ namespace BulletHell.Emitters
 
         public virtual void FireProjectile(Character projectileOwner = null, DamageInfo damage = null)
         {
-            for (int i = 0; i < Mathf.Clamp(_data.EmitterPoints, 0, _data.MaxProjectiles); i++) {
-                EmitterProjectile projectile = ProjectileManager.Instance.Get();
+            for (int i = 0; i < _data.EmitterPoints; i++) {
+                Projectile projectile = ProjectileManager.Instance.Get();
+                projectile.gameObject.SetActive(true);
                 _activeProjectiles.Add(projectile);
 
-                RuntimeEmitterProjectileData runTimeData = new RuntimeEmitterProjectileData();
 
-                runTimeData.Position = _emitterGroups[i].Position;
-                runTimeData.Direction = _emitterGroups[i].Direction;
-                runTimeData.Speed = _data.Speed;
-                runTimeData.Acceleration = _data.Acceleration;
-                runTimeData.Velocity = runTimeData.Direction * runTimeData.Speed;
-                runTimeData.Gravity = _data.Gravity;
-                runTimeData.GravityPoint = _data.GravityPoint;
-                runTimeData.TimeToLive = _data.TimeToLive;
-                runTimeData.FollowTarget = _data.FollowTarget;
-                runTimeData.FollowRange = _data.FollowRange;
-                runTimeData.FollowIntensity = _data.FollowIntensity;
-                runTimeData.MaxSpeed = _data.MaxSpeed;
+                //VEL
+                projectile.transform.position = _owner.transform.position;
+                projectile.Velocity = _emitterGroups[i].Direction;
+                projectile.LifeTime = _data.LifeTime;
 
-                projectile.Initialize(_data.ProjectileData, runTimeData);
+                projectile.Initialize(_data.ProjectileData);
                 projectile.SetOwner(projectileOwner);
-                projectile.SetDamage(damage);
+                //projectile.SetDamage(damage);
             }
         }
 
-        protected void ReturnProjectile(EmitterProjectile projectile) => projectile.ResetObject();
+        protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();
         public void ClearAllProjectiles()
         {
-            foreach (EmitterProjectile projectile in _activeProjectiles) {
+            foreach (Projectile projectile in _activeProjectiles) {
                 projectile.ResetObject();
             }
         }

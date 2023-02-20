@@ -55,9 +55,9 @@ public class DamageZone : MonoBehaviour, IPoolable
 
             float ratio = Mathf.Clamp01(timeElapsed / .2f);
 
-            float result = 1f/(1f + Mathf.Pow(2.7182f, -10f * (ratio - .5f)));
+            float result = Easing.EaseInOut(0, 1, ratio);
 
-            _spriteRenderer.material.SetFloat("_maskScale", Mathf.Clamp01(result));
+            _spriteRenderer.material.SetFloat("_maskScale", result);
         }
 
         _spriteRenderer.material.SetFloat("_maskScale", 0);
