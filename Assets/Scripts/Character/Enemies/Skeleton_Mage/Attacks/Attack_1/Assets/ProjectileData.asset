@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: NewProjectileData
   Scale: 1
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 1182841909, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
   Birth: {r: 1, g: 1, b: 1, a: 1}
   MidLife: {r: 1, g: 1, b: 1, a: 1}
   Death: {r: 1, g: 1, b: 1, a: 1}
-  Speed: 0
-  MaxSpeed: 0
+  Speed: 5
+  MaxSpeed: 10
   Acceleration: 0
-  Behaviours: []
+  Behaviours:
+  - {fileID: 11400000, guid: a6fabb8a478d9004aa6a69e7e2e7b955, type: 2}
   Collider:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}

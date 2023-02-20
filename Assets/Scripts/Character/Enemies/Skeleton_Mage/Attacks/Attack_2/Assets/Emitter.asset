@@ -14,16 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FoldOutGeneral: 1
   Delay: 1000
-  MaxProjectiles: 50
   RotationSpeed: 0
   FoldOutProjectile: 1
-  ProjectileData: {fileID: 11400000, guid: 9c804f785f32dba4c979abf7a77a631e, type: 2}
-  TimeToLive: 3
-  Speed: 5
-  MaxSpeed: 100
-  Acceleration: 0
-  Gravity: 0
-  GravityPoint: {x: 0, y: 0}
+  ProjectileData: {fileID: 11400000, guid: 171b574266159484c8b7c40bade2f0f4, type: 2}
+  LifeTime: 5
   FoldOutEmitter: 1
   EmitterPoints: 10
   CenterRotation: -90
@@ -32,7 +26,3 @@ MonoBehaviour:
   Spread: 36
   ParentRotation: 0
   Direction: {x: 0, y: 1}
-  FoldOutHomeing: 0
-  FollowTarget: 0
-  FollowIntensity: 0
-  FollowRange: 0

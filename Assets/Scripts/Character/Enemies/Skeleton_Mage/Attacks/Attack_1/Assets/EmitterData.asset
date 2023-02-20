@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068d6e9f944711144bd7d00cd15fca44, type: 3}
   m_Name: EmitterData
   m_EditorClassIdentifier: 
-  FoldOutGeneral: 0
+  FoldOutGeneral: 1
   Delay: 1000
   RotationSpeed: 0
-  FoldOutProjectile: 0
-  ProjectileData: {fileID: 0}
+  FoldOutProjectile: 1
+  ProjectileData: {fileID: 11400000, guid: f35e64602fca86f4faac08a6b755fc75, type: 2}
   LifeTime: 5
-  FoldOutEmitter: 0
+  FoldOutEmitter: 1
   EmitterPoints: 1
-  CenterRotation: 0
+  CenterRotation: -90
   Pitch: 0
   Offset: 0
   Spread: 0

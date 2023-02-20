@@ -22,13 +22,13 @@ namespace BulletHell.Emitters.Editor
             return _root;
         }
 
-        private void Redraw()
+        void Redraw()
         {
             CreateRoot();
             CreateDefualtInspector();
         }
 
-        private void CreateRoot()
+        void CreateRoot()
         {
             _root = new VisualElement();
             VisualTreeAsset original = Resources.Load<VisualTreeAsset>("EmitterInspector");

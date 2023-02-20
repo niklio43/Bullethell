@@ -7,7 +7,7 @@ using BulletHell.Emitters.Projectiles;
 
 namespace BulletHell.Emitters
 {
-    [CreateAssetMenu(fileName = "EmitterData", menuName = "Emitters/EmitterData", order = 1)]
+    [CreateAssetMenu(fileName = "EmitterData", menuName = "Emitters/New Emitter Data", order = 1)]
     public class EmitterData : ScriptableObject
     {
         //General

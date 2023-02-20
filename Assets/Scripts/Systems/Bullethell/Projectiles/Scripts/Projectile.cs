@@ -11,6 +11,10 @@ namespace BulletHell.Emitters.Projectiles
 
         ObjectPool<Projectile> _pool;
 
+        public Transform Target;
+        public float LifeTime;
+        public Vector2 Velocity;
+
         #region Setters
         public void SetOwner(Character owner) => _owner = owner;
         public void SetPool(ObjectPool<Projectile> pool) => _pool = pool;
@@ -19,10 +23,6 @@ namespace BulletHell.Emitters.Projectiles
         #region Getters
         public Character GetOwner() => _owner;
         #endregion
-
-        public Transform Target;
-        public float LifeTime;
-        public Vector2 Velocity;
 
         #region Components
         SpriteRenderer _spriteRenderer;
@@ -39,8 +39,8 @@ namespace BulletHell.Emitters.Projectiles
         {
             _data = data;
 
-            if(data.Sprite != null)
-                _spriteRenderer.sprite = data.Sprite;
+            if(_data.Sprite != null)
+                _spriteRenderer.sprite = _data.Sprite;
 
             _collider.offset = _data.Collider.center;
             _collider.size = _data.Collider.size / 2;
