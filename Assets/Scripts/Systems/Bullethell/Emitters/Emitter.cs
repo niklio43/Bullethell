@@ -37,7 +37,7 @@ namespace BulletHell.Emitters
             _emitterGroups.UpdateGroups();
         }
 
-        public virtual void FireProjectile(Character projectileOwner = null, DamageInfo damage = null, Transform target = null)
+        public virtual void FireProjectile(Character projectileOwner = null, Transform target = null)
         {
             for (int i = 0; i < _data.EmitterPoints; i++) {
                 Projectile projectile = ProjectileManager.Instance.Get();
@@ -47,12 +47,12 @@ namespace BulletHell.Emitters
 
                 //VEL
                 projectile.transform.position = _owner.transform.position;
+                projectile.Target = target;
                 projectile.Velocity = _emitterGroups[i].Direction;
                 projectile.LifeTime = _data.LifeTime;
 
-                projectile.Initialize(_data.ProjectileData);
                 projectile.SetOwner(projectileOwner);
-                //projectile.SetDamage(damage);
+                projectile.Initialize(_data.ProjectileData);
             }
         }
 

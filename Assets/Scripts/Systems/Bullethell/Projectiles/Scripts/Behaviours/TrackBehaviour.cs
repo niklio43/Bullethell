@@ -15,7 +15,7 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
         {
             if(projectile.Target == null) return;
 
-            Vector2 dir = projectile.Target.position - projectile.transform.position;
+            Vector3 dir = projectile.Target.position - projectile.transform.position;
             projectile.Velocity += (dir * TrackIntensity) * dt;
         }
     }

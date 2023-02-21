@@ -1,3 +1,4 @@
+using BulletHell.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,13 @@ namespace BulletHell.Emitters.Projectiles
     {
         ProjectileData _data;
         Character _owner;
+        DamageInfo _damage;
 
         ObjectPool<Projectile> _pool;
 
         public Transform Target;
         public float LifeTime;
-        public Vector2 Velocity;
+        public Vector3 Velocity;
 
         #region Setters
         public void SetOwner(Character owner) => _owner = owner;
@@ -47,8 +49,11 @@ namespace BulletHell.Emitters.Projectiles
             _collider.size = _data.Collider.size / 2;
 
             transform.localScale = Vector3.one * _data.Scale;
-            _spriteRenderer.color = _data.Birth;
 
+            _damage = new DamageInfo(_data.Damage, _data.StatusEffects);
+            _damage = DamageHandler.CalculateDamage(_damage, _owner.Stats);
+
+            _spriteRenderer.color = _data.Birth;
             //TODO implement color over life!!
 
             foreach (BaseProjectileBehaviour behaviour in _data.Behaviours) {
@@ -62,10 +67,9 @@ namespace BulletHell.Emitters.Projectiles
                 behaviour.UpdateBehaviour(this, _data, Time.fixedDeltaTime);
             }
 
-            Velocity = Vector2.ClampMagnitude(Velocity, _data.MaxSpeed);
             LifeTime -= Time.fixedDeltaTime;
 
-            transform.position += (Vector3)Velocity * Time.fixedDeltaTime;
+            transform.position += new Vector3(Velocity.x * Time.fixedDeltaTime, Velocity.y * Time.fixedDeltaTime + Velocity.z * Time.fixedDeltaTime);
 
             if (LifeTime <= 0)
                 ResetObject();
@@ -76,6 +80,7 @@ namespace BulletHell.Emitters.Projectiles
             gameObject.SetActive(false);
             transform.position = Vector2.zero;
             Velocity = Vector2.zero;
+            _damage = null;
             _data = null;
             _pool.Release(this);
         }

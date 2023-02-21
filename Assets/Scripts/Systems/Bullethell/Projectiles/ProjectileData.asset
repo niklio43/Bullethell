@@ -12,10 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db557ae2f6eca854ba24931d8c6c1879, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
-  FoldOutGeneral: 0
+  FoldOutGeneral: 1
   name: NewProjectileData
   Scale: 1
-  FoldOutSprite: 0
+  Damage: []
+  StatusEffects:
+  - Name: 
+    Icon: {fileID: 0}
+    _stackingBehaviour: 0
+    maxStacks: 0
+    tickSpeed: 0
+    LifeTime: 0
+    _behaviours: []
+    _damageValues: []
+  - Name: 
+    Icon: {fileID: 0}
+    _stackingBehaviour: 0
+    maxStacks: 0
+    tickSpeed: 0
+    LifeTime: 0
+    _behaviours: []
+    _damageValues: []
+  FoldOutSprite: 1
   Sprite: {fileID: 0}
   Birth: {r: 1, g: 1, b: 1, a: 1}
   MidLife: {r: 1, g: 1, b: 1, a: 1}

@@ -14,6 +14,8 @@ public class DamageZone : MonoBehaviour, IPoolable
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.material = Instantiate(_spriteRenderer.material);
+
+        transform.localScale = Vector3.zero;
     }
 
     public void Initialize(ObjectPool<DamageZone> pool)
@@ -24,7 +26,7 @@ public class DamageZone : MonoBehaviour, IPoolable
     public void Execute(float size)
     {
         _size = size;
-        transform.localScale = Vector3.one * size;
+        StartCoroutine(Animate(size, .35f));
     }
 
     public void Activate()
@@ -46,6 +48,18 @@ public class DamageZone : MonoBehaviour, IPoolable
         }
     }
 
+    IEnumerator Animate(float size, float duration)
+    {
+        float timeElapsed = 0;
+        while(timeElapsed < duration) {
+            yield return new WaitForEndOfFrame();
+            timeElapsed += Time.deltaTime;
+
+            transform.localScale = Vector3.one * Easing.EaseOutBack(0, size, timeElapsed / duration);
+        }
+        transform.localScale = Vector3.one * size;
+    }
+
     IEnumerator DamageRoutine()
     {
         float timeElapsed = 0;
@@ -54,9 +68,9 @@ public class DamageZone : MonoBehaviour, IPoolable
             timeElapsed += Time.deltaTime;
 
             float ratio = Mathf.Clamp01(timeElapsed / .2f);
-
+            
             float result = Easing.EaseInOut(0, 1, ratio);
-
+            transform.localScale = Vector3.one * Easing.EaseOutBack(_size, _size * 1.2f, ratio);
             _spriteRenderer.material.SetFloat("_maskScale", result);
         }
 
@@ -66,6 +80,7 @@ public class DamageZone : MonoBehaviour, IPoolable
 
     public void ResetObject()
     {
+        transform.localScale = Vector3.zero;
         transform.position = Vector3.zero;
         gameObject.SetActive(false);
         _pool.Release(this);

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters.Projectiles.Behaviours;
 using UnityEditor;
+using BulletHell.StatusSystem;
 
 namespace BulletHell.Emitters.Projectiles
 {
@@ -12,6 +13,8 @@ namespace BulletHell.Emitters.Projectiles
         public bool FoldOutGeneral = false;
         public new string name = "NewProjectileData";
         public float Scale = 1;
+        public List<DamageValue> Damage;
+        public List<StatusEffect> StatusEffects;
 
         //Sprite
         public bool FoldOutSprite = false;
@@ -19,6 +22,10 @@ namespace BulletHell.Emitters.Projectiles
         public Color Birth = Color.white;
         public Color MidLife = Color.white;
         public Color Death = Color.white;
+
+        //Animation
+        public bool FoldOutAnimation = false;
+        //TODO Implement animations :)
 
         //Behaviour
         public bool FoldOutBehaviour = false;
@@ -55,8 +62,6 @@ namespace BulletHell.Emitters.Projectiles
 #endif
         }
 
-
-
         public bool AlreadyHasBehaviour(BaseProjectileBehaviour behaviour)
         {
             foreach (BaseProjectileBehaviour existingBehaviour in Behaviours) {
@@ -65,7 +70,5 @@ namespace BulletHell.Emitters.Projectiles
 
             return false;
         }
-
-
     }
 }

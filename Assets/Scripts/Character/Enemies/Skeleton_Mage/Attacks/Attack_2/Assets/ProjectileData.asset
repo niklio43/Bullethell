@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db557ae2f6eca854ba24931d8c6c1879, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
-  FoldOutGeneral: 0
+  FoldOutGeneral: 1
   name: NewProjectileData
   Scale: 1
-  FoldOutSprite: 0
-  Sprite: {fileID: 0}
+  Damage: []
+  StatusEffects: []
+  FoldOutSprite: 1
+  Sprite: {fileID: -1403164347, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
   Birth: {r: 1, g: 1, b: 1, a: 1}
   MidLife: {r: 1, g: 1, b: 1, a: 1}
   Death: {r: 1, g: 1, b: 1, a: 1}
@@ -25,13 +27,13 @@ MonoBehaviour:
   MaxSpeed: 10
   Acceleration: 0
   Behaviours:
-  - {fileID: 7689640691739260373}
+  - {fileID: 7161925458072096959}
   FoldOutCollision: 0
   CollisionTags: []
   Collider:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
---- !u!114 &7689640691739260373
+--- !u!114 &7161925458072096959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -17,7 +17,6 @@ namespace BulletHell.Emitters.Projectiles.Editor
         Label _behavioursContext;
         GroupBox _behavioursList;
         
-
         public override VisualElement CreateInspectorGUI()
         {
             if (_target != null) {
@@ -60,6 +59,8 @@ namespace BulletHell.Emitters.Projectiles.Editor
 
             generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("name")));
             generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Scale")));
+            generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Damage")));
+            generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("StatusEffects")));
             dataRoot.Add(generalFoldout);
             #endregion
 
@@ -99,8 +100,6 @@ namespace BulletHell.Emitters.Projectiles.Editor
             behaviourFoldout.Add(_behavioursList);
             dataRoot.Add(behaviourFoldout);
             #endregion
-
-
 
             #region Collision Data Foldout
             Foldout collisionFoldout = new Foldout();

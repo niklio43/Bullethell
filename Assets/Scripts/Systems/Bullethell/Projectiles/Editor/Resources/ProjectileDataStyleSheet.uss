@@ -24,7 +24,26 @@
 	color: #D1D4FF;
 }
 
+.unity-scroll-view{
+	background-color: #353535;
+}
 
+#unity-text-input{
+	background-color: #353535;
+}
+
+#unity-list-view__footer, #unity-list-view__add-button, #unity-list-view__remove-button{
+	background-color: #353535;
+}
+
+.unity-list-view__scroll-view--with-footer #unity-content, .unity-list-view__scroll-view--with-footer #unity-list-view__foldout-header{
+	background-color: #3F3F3F;
+}
+
+.unity-list-view__scroll-view--with-footer .unity-foldout{
+	background-color: #353535;
+	margin-bottom:0px;
+}
 
 Label{
 	-unity-font-style: bold;

@@ -13,10 +13,8 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
 
         public override void UpdateBehaviour(Projectile projectile, ProjectileData data, float dt)
         {
-            Vector2 dir = (Vector3)_point - projectile.transform.position;
+            Vector3 dir = (Vector3)_point - projectile.transform.position;
             projectile.Velocity += (dir.normalized * amplitude) * dt;
-
-
         }
     }
 }
