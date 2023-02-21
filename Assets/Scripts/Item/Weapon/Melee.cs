@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Melee : Weapon
+namespace BulletHell.InventorySystem
 {
+    public class Melee : Weapon
+    {
+    }
 }

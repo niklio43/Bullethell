@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
-internal interface IInteractable
+namespace BulletHell.InventorySystem
 {
-    public void Interact(Inventory inventory);
+    internal interface IInteractable
+    {
+        public void Interact(InventorySystem inventory);
+    }
 }

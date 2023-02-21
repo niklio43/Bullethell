@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Abilities;
 
-[CreateAssetMenu(fileName = "New Ability Database", menuName = "Abilities/Database")]
+[CreateAssetMenu(fileName = "New Ability Database", menuName = "Abilities/AbilityDatabase")]
 public class AbilityDatabase : ScriptableObject, ISerializationCallbackReceiver
 {
     public Ability[] abilities;

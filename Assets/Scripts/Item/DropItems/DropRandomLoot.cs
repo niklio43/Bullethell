@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.InventorySystem;
 
 /* How to use:
  * add this script to object that needs to drop random loot
@@ -27,7 +28,7 @@ public class DropRandomLoot : MonoBehaviour, IDropLoot
 
         for (int i = 0; i < item.Count; i++)
         {
-            GameObject droppedItem = new GameObject(item[i].ItemName);
+            GameObject droppedItem = new GameObject(item[i].DisplayName);
 
             droppedItem.transform.position = new Vector3(transform.position.x + Random.Range(-1.5f, 1.5f), transform.position.y + Random.Range(-3f, 3f));
 
@@ -35,7 +36,7 @@ public class DropRandomLoot : MonoBehaviour, IDropLoot
             sr.sprite = item[i].Sprite;
 
             DroppedItem di = droppedItem.AddComponent<DroppedItem>();
-            di._item = item[i];
+            di.ItemData = item[i];
 
             Collider2D col = droppedItem.AddComponent<CircleCollider2D>();
             col.isTrigger = true;
@@ -45,9 +46,9 @@ public class DropRandomLoot : MonoBehaviour, IDropLoot
         }
     }
 
-    List<Item> SelectRandomItem(List<ItemDrop> dropTable)
+    List<InventoryItemData> SelectRandomItem(List<ItemDrop> dropTable)
     {
-        List<Item> itemsToDrop = new List<Item>();
+        List<InventoryItemData> itemsToDrop = new List<InventoryItemData>();
         for (int i = 0; i < dropTable.Count; i++)
         {
             if(Random.Range(0f, 1f) <= dropTable[i].Chance)

@@ -1,4 +1,7 @@
-﻿internal interface IPickUp: IInteractable
+﻿namespace BulletHell.InventorySystem
 {
-    public void AssignItem();
+    internal interface IPickUp : IInteractable
+    {
+        public void AssignItem();
+    }
 }

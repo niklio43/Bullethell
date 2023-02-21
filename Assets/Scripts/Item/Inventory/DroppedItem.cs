@@ -4,28 +4,39 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DroppedItem : MonoBehaviour, IPickUp, ISerializationCallbackReceiver
+namespace BulletHell.InventorySystem
 {
-    public Item _item;
-
-    public void AssignItem(){}
-
-    public void Interact(Inventory inventory)
+    public class DroppedItem : MonoBehaviour, IPickUp, ISerializationCallbackReceiver
     {
-        if(inventory.AddItem(new ItemObject(_item), 1))
+        public InventoryItemData ItemData;
+
+        public void AssignItem() { }
+
+        public void Initialize(InventoryItemData itemData)
         {
-            Destroy(gameObject);
+            ItemData = itemData;
+            gameObject.AddComponent<SpriteRenderer>().sprite = ItemData.Sprite;
+            gameObject.AddComponent<CircleCollider2D>().isTrigger = true;
+            gameObject.name = ItemData.name;
         }
-    }
 
-    public void OnBeforeSerialize()
-    {
+        public void Interact(InventorySystem inventory)
+        {
+            if (inventory.AddToInventory(ItemData, 1))
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public void OnBeforeSerialize()
+        {
 #if UNITY_EDITOR
-        GetComponent<SpriteRenderer>().sprite = _item.Sprite;
-        EditorUtility.SetDirty(GetComponent<SpriteRenderer>());
+            GetComponent<SpriteRenderer>().sprite = ItemData.Sprite;
+            EditorUtility.SetDirty(GetComponent<SpriteRenderer>());
 #endif
+        }
+
+
+        public void OnAfterDeserialize() { }
     }
-
-
-    public void OnAfterDeserialize(){}
 }

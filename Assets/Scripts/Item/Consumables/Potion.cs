@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Potion", menuName = "Inventory System/Consumables/Potion")]
-public class Potion : Consumables
+namespace BulletHell.InventorySystem
 {
-    [SerializeField] Sprite sprite;
-    [SerializeField] int restoreAmount;
-    [SerializeField] string itemName;
-    [SerializeField] ItemType itemType;
-
-    void OnEnable()
+    [CreateAssetMenu(fileName = "New Potion", menuName = "Inventory System/Consumables/Potion")]
+    public class Potion : Consumables
     {
-        Sprite = sprite;
-        RestoreAmount = restoreAmount;
-        ItemName = itemName;
-        ItemType = itemType;
+        [SerializeField] Sprite sprite;
+        [SerializeField] int restoreAmount;
+        [SerializeField] string itemName;
+        [SerializeField] ItemType itemType;
+
+        void OnEnable()
+        {
+            Sprite = sprite;
+            RestoreAmount = restoreAmount;
+            DisplayName = itemName;
+            ItemType = itemType;
+        }
     }
 }

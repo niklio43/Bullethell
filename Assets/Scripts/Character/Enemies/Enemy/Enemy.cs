@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     [Header("Distances")]
     [Range(0, 10)] public float PreferredDistance;
     [Range(0, 10)] public float AttackDistance;
+    [SerializeField] List<ItemDrop> _dropTable = new List<ItemDrop>();
 
     private void Awake()
     {
@@ -94,6 +95,7 @@ public class Enemy : MonoBehaviour
     public void OnDeath()
     {
         _brain.CurrentAbility?.Cancel();
+        GetComponent<DropRandomLoot>().DropItem(_dropTable);
         Destroy(gameObject);
     }
 

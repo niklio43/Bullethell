@@ -21,17 +21,7 @@ MonoBehaviour:
     _clip: {fileID: 7400000, guid: 4828ba8b845a3684a9185018d7bda922, type: 2}
   _emitterData: {fileID: 11400000, guid: 2cf287de298164845b3054bd5d96b9ca, type: 2}
   _damageValues:
-  - Type: 0
+  - senderType: 0
+    Type: 0
     Value: 20
-  _statusEffects:
-  - Name: Stun
-    Icon: {fileID: 0}
-    TickSpeed: 1
-    Lifetime: 1
-    Stackable: 0
-    MaxStacks: 1
-    Behaviours:
-    - {fileID: 11400000, guid: db8168f65f8f80c47a3815a3b41cd06b, type: 2}
-    Sender: {fileID: 0}
-    Reciever: {fileID: 0}
-    _damageValues: []
+  _statusEffects: []

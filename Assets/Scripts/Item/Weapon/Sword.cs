@@ -4,21 +4,30 @@ using UnityEngine;
 using BulletHell.Abilities;
 using BulletHell.Emitters;
 
-[CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Inventory System/Item/Weapon/Melee/Sword")]
-public class Sword : Melee
+namespace BulletHell.InventorySystem
 {
-    [SerializeField] Sprite sprite;
-    [SerializeField] string itemName;
-    [SerializeField] Pool pool;
-    [SerializeField] Rarity rarity;
-    [SerializeField] ItemType itemType;
-
-    void OnEnable()
+    [CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Inventory System/Item/Weapon/Melee/Sword")]
+    public class Sword : Melee
     {
-        Sprite = sprite;
-        ItemName = itemName;
-        Pool = pool;
-        Rarity = rarity;
-        ItemType = itemType;
+        [SerializeField] Sprite icon;
+        [SerializeField] Sprite sprite;
+        [SerializeField] string itemName;
+        [TextArea(4, 20), SerializeField] string description;
+        [SerializeField] int maxStackSize;
+        [SerializeField] Pool pool;
+        [SerializeField] Rarity rarity;
+        [SerializeField] ItemType itemType;
+
+        void OnEnable()
+        {
+            Icon = icon;
+            Sprite = sprite;
+            DisplayName = itemName;
+            Description = description;
+            MaxStackSize = maxStackSize;
+            Pool = pool;
+            Rarity = rarity;
+            ItemType = itemType;
+        }
     }
 }

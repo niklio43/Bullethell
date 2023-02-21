@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.InventorySystem;
 
 public class PlayerInteracter : MonoBehaviour
 {
     [SerializeField, Range(0, 10f)] float _interactRadius = 5f;
+    InventoryHolder _inventoryHolder;
 
     LayerMask _interactableMask => 1 << LayerMask.NameToLayer("Interactable");
     IInteractable _closestInteractable = null;
-    SlotListener _slotListener;
+
+    void Awake()
+    {
+        _inventoryHolder = GetComponent<InventoryHolder>();
+    }
 
     void FixedUpdate()
     {
-        _slotListener = GetComponentInChildren<SlotListener>();
         Collider2D hit = Physics2D.OverlapCircle(transform.position, _interactRadius, _interactableMask);
         if (hit != null)
         {
@@ -25,31 +30,10 @@ public class PlayerInteracter : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            _slotListener.Inventory.Save();
-            _slotListener.Equipment.Save();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            _slotListener.Inventory.Load();
-            _slotListener.Equipment.Load();
-        }
-    }
-
     public void Interact()
     {
         if (_closestInteractable == null) return;
-        _closestInteractable.Interact(_slotListener.Inventory);
-    }
-
-    void OnApplicationQuit()
-    {
-        _slotListener.Inventory.Clear();
-        _slotListener.Equipment.Clear();
-        _slotListener.Inventory.database.UpdateID();
+        _closestInteractable.Interact(_inventoryHolder.InventorySystem);
     }
 
     private void OnDrawGizmos()

@@ -1,18 +1,21 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Armor", menuName = "Inventory System/Item/Armor/Headgear")]
-public class Headgear : Armor
+namespace BulletHell.InventorySystem
 {
-    [SerializeField] Sprite sprite;
-    [SerializeField] string itemName;
-    [SerializeField] Rarity rarity;
-    [SerializeField] ItemType itemType;
-
-    void OnEnable()
+    [CreateAssetMenu(fileName = "New Armor", menuName = "Inventory System/Item/Armor/Headgear")]
+    public class Headgear : Armor
     {
-        Sprite = sprite;
-        ItemName = itemName;
-        Rarity = rarity;
-        ItemType = itemType;
+        [SerializeField] Sprite sprite;
+        [SerializeField] string itemName;
+        [SerializeField] Rarity rarity;
+        [SerializeField] ItemType itemType;
+
+        void OnEnable()
+        {
+            Sprite = sprite;
+            DisplayName = itemName;
+            Rarity = rarity;
+            ItemType = itemType;
+        }
     }
 }

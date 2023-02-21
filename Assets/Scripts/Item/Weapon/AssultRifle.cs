@@ -4,21 +4,24 @@ using UnityEngine;
 using BulletHell.Abilities;
 using BulletHell.Emitters;
 
-[CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/AssultRifle")]
-public class AssultRifle : Ranged
+namespace BulletHell.InventorySystem
 {
-    [SerializeField] Sprite sprite;
-    [SerializeField] string itemName;
-    [SerializeField] Pool pool;
-    [SerializeField] Rarity rarity;
-    [SerializeField] ItemType itemType;
-
-    void OnEnable()
+    [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/AssultRifle")]
+    public class AssultRifle : Ranged
     {
-        Sprite = sprite;
-        ItemName = itemName;
-        Pool = pool;
-        Rarity = rarity;
-        ItemType = itemType;
+        [SerializeField] Sprite sprite;
+        [SerializeField] string itemName;
+        [SerializeField] Pool pool;
+        [SerializeField] Rarity rarity;
+        [SerializeField] ItemType itemType;
+
+        void OnEnable()
+        {
+            Sprite = sprite;
+            DisplayName = itemName;
+            Pool = pool;
+            Rarity = rarity;
+            ItemType = itemType;
+        }
     }
 }

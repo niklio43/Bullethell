@@ -4,6 +4,9 @@ using UnityEngine;
 using BulletHell.Emitters;
 using BulletHell.Abilities;
 
-public class Ranged : Weapon
+namespace BulletHell.InventorySystem
 {
+    public class Ranged : Weapon
+    {
+    }
 }
