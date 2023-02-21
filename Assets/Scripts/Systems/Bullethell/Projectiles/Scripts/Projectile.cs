@@ -22,6 +22,7 @@ namespace BulletHell.Emitters.Projectiles
 
         #region Getters
         public Character GetOwner() => _owner;
+        public ObjectPool<Projectile> GetPool() => _pool;
         #endregion
 
         #region Components

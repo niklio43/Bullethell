@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-642329959986174358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e2ee8033fe8d54298f64d59175f973, type: 3}
+  m_Name: BasicBehaviour
+  m_EditorClassIdentifier: 
+  Owner: {fileID: 11400000}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,18 +25,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db557ae2f6eca854ba24931d8c6c1879, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
+  FoldOutGeneral: 0
   name: NewProjectileData
   Scale: 1
-  Sprite: {fileID: 1182841909, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
+  FoldOutSprite: 0
+  Sprite: {fileID: 0}
   Birth: {r: 1, g: 1, b: 1, a: 1}
   MidLife: {r: 1, g: 1, b: 1, a: 1}
   Death: {r: 1, g: 1, b: 1, a: 1}
+  FoldOutBehaviour: 1
   Speed: 5
   MaxSpeed: 10
   Acceleration: 0
   Behaviours:
-  - {fileID: 11400000, guid: a6fabb8a478d9004aa6a69e7e2e7b955, type: 2}
+  - {fileID: -642329959986174358}
+  FoldOutCollision: 0
+  CollisionTags: []
   Collider:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  CollisionTags: []

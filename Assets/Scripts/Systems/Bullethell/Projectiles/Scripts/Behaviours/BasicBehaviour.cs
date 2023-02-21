@@ -6,6 +6,8 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
 {
     public class BasicBehaviour : BaseProjectileBehaviour
     {
+        public override string Id() => "01";
+
         public override void Initialize(Projectile owner, ProjectileData data)
         {
             owner.Velocity *= data.Speed;

@@ -9,14 +9,14 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
     {
         [SerializeField] float TrackIntensity;
 
+        public override string Id() => "03";
+
         public override void UpdateBehaviour(Projectile projectile, ProjectileData data, float dt)
         {
             if(projectile.Target == null) return;
 
             Vector2 dir = projectile.Target.position - projectile.transform.position;
             projectile.Velocity += (dir * TrackIntensity) * dt;
-
-
         }
     }
 }

@@ -9,6 +9,8 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
         [SerializeField] Vector2 _point;
         [SerializeField] float amplitude;
 
+        public override string Id() => "02";
+
         public override void UpdateBehaviour(Projectile projectile, ProjectileData data, float dt)
         {
             Vector2 dir = (Vector3)_point - projectile.transform.position;

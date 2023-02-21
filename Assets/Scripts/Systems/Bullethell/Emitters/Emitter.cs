@@ -37,7 +37,7 @@ namespace BulletHell.Emitters
             _emitterGroups.UpdateGroups();
         }
 
-        public virtual void FireProjectile(Character projectileOwner = null, DamageInfo damage = null)
+        public virtual void FireProjectile(Character projectileOwner = null, DamageInfo damage = null, Transform target = null)
         {
             for (int i = 0; i < _data.EmitterPoints; i++) {
                 Projectile projectile = ProjectileManager.Instance.Get();

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Emitters.Projectiles.Behaviours;
+using UnityEditor;
 
 namespace BulletHell.Emitters.Projectiles
 {
@@ -30,6 +31,41 @@ namespace BulletHell.Emitters.Projectiles
         public bool FoldOutCollision = false;
         public List<string> CollisionTags = new List<string>();
         public Bounds Collider;
+
+        public void AddBehaviour(BaseProjectileBehaviour behaviour)
+        {
+            if (AlreadyHasBehaviour(behaviour)) return;
+#if UNITY_EDITOR
+            Behaviours.Add(behaviour);
+            behaviour.SetOwner(this);
+            AssetDatabase.AddObjectToAsset(behaviour, this);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+#endif
+        }
+
+        public void RemoveBehaviour(BaseProjectileBehaviour behaviour)
+        {
+            if (!Behaviours.Contains(behaviour)) return;
+#if UNITY_EDITOR
+            Behaviours.Remove(behaviour);
+            AssetDatabase.RemoveObjectFromAsset(behaviour);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+#endif
+        }
+
+
+
+        public bool AlreadyHasBehaviour(BaseProjectileBehaviour behaviour)
+        {
+            foreach (BaseProjectileBehaviour existingBehaviour in Behaviours) {
+                if (existingBehaviour.Id() == behaviour.Id()) return true;
+            }
+
+            return false;
+        }
+
 
     }
 }

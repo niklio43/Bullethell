@@ -30,17 +30,3 @@ MonoBehaviour:
   Collider:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
---- !u!114 &3575981088638640010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3f599b144ca5214ebe6bf3c2bfb673a, type: 3}
-  m_Name: GravityBehaviour
-  m_EditorClassIdentifier: 
-  _point: {x: 0, y: 0}
-  amplitude: 0

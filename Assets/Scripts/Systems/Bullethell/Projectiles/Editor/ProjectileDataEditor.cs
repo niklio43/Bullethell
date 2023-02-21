@@ -14,17 +14,25 @@ namespace BulletHell.Emitters.Projectiles.Editor
         VisualElement _root;
         ProjectileData _target;
 
+        Label _behavioursContext;
+        GroupBox _behavioursList;
+        
 
         public override VisualElement CreateInspectorGUI()
         {
-            if (_target != null)
+            if (_target != null) {
+                _root = new VisualElement();
                 Redraw();
+            }
 
             return _root;
         }
 
         void Redraw()
         {
+            if(_root != null)
+                _root.Clear();
+
             CreateRoot();
             CreateDefualtInspector();
         }
@@ -32,7 +40,6 @@ namespace BulletHell.Emitters.Projectiles.Editor
 
         void CreateRoot()
         {
-            _root = new VisualElement();
             VisualTreeAsset original = Resources.Load<VisualTreeAsset>("ProjectileDataInspector");
             StyleSheet sheet = Resources.Load<StyleSheet>("ProjectileDataStyleSheet");
             _root.styleSheets.Add(sheet);
@@ -81,24 +88,18 @@ namespace BulletHell.Emitters.Projectiles.Editor
             behaviourFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("MaxSpeed")));
             behaviourFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Acceleration")));
 
-            #region Behaviour Drop Down menu
-            Label contextMenu = new Label("Add New Behaviour");
-            contextMenu.AddManipulator(new ContextualMenuManipulator(BuildBehaviourContextMenu));
+            _behavioursContext = new Label();
+            _behavioursContext.name = "BehaviourData_ContextMenu";
+            RedrawBehaviourContext();
 
-            behaviourFoldout.Add(contextMenu);
-            #endregion
+            _behavioursList = new GroupBox();
+            RedrawBehavioursList();
 
+            behaviourFoldout.Add(_behavioursContext);
+            behaviourFoldout.Add(_behavioursList);
             dataRoot.Add(behaviourFoldout);
             #endregion
 
-            #region Behaviours List
-            GroupBox behaviourBox = new GroupBox();
-            behaviourBox.name = "Behaviour_Box";
-            for (int i = 0; i < _target.Behaviours.Count; i++) {
-                //VisualElement _behaviourRoot = Editor_target.Behaviours
-            }
-
-            #endregion
 
 
             #region Collision Data Foldout
@@ -114,6 +115,40 @@ namespace BulletHell.Emitters.Projectiles.Editor
             #endregion
         }
 
+        void RedrawBehaviours()
+        {
+            RedrawBehaviourContext();
+            RedrawBehavioursList();
+        }
+
+        void RedrawBehaviourContext()
+        {
+            _behavioursContext.Clear();
+            _behavioursContext.text = "Add New Behaviour";
+            _behavioursContext.AddManipulator(new ContextualMenuManipulator(BuildBehaviourContextMenu));
+        }
+
+        void RedrawBehavioursList()
+        {
+            _behavioursList.Clear();
+            _behavioursList.name = "Behaviour_Box";
+
+            foreach (BaseProjectileBehaviour behaviour in _target.Behaviours) {
+                Editor editor = CreateEditor(behaviour);
+                VisualElement behaviourRoot = editor.CreateInspectorGUI();
+
+                Button deleteBtn = behaviourRoot.Query<Button>("delete-button").First();
+
+                deleteBtn.clicked += () => {
+                    _target.RemoveBehaviour(behaviour);
+                    RedrawBehaviours();
+                };
+
+                _behavioursList.Add(behaviourRoot);
+            }
+        }
+
+
         void BuildBehaviourContextMenu(ContextualMenuPopulateEvent evt)
         {
             BaseProjectileBehaviour[] behaviours = Resources.LoadAll<BaseProjectileBehaviour>("ProjectileBehaviours/");
@@ -121,33 +156,18 @@ namespace BulletHell.Emitters.Projectiles.Editor
             for (int i = 0; i < behaviours.Length; i++) {
                 BaseProjectileBehaviour behaviour = behaviours[i];
 
+                if (_target.AlreadyHasBehaviour(behaviour)) continue;
+
                 evt.menu.AppendAction(behaviour.name, (action) => {
                     BaseProjectileBehaviour newBehaviour = Instantiate(behaviour);
                     newBehaviour.name = behaviour.name;
-                    newBehaviour.SetOwner(_target);
-                    AddAssetToDatabase(newBehaviour);
-                    _target.Behaviours.Add(newBehaviour);
+                    _target.AddBehaviour(newBehaviour);
+                    RedrawBehaviours();
                 });
             }
         
         }
         
-        void AddAssetToDatabase(Object objectToAdd)
-        {
-#if UNITY_EDITOR
-            Debug.Log(objectToAdd);
-            AssetDatabase.AddObjectToAsset(objectToAdd, _target);
-            UpdateAssetDatabase();
-#endif
-        }
-
-        void UpdateAssetDatabase()
-        {
-#if UNITY_EDITOR
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-#endif
-        }
 
 
         private void OnEnable()

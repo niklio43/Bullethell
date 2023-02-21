@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -53,8 +54,6 @@ namespace BulletHell.Emitters.Projectiles.Editor
                 }
                 while (prop.NextVisible(false));
             }
-
-
         }
 
         private void OnEnable()

@@ -8,14 +8,17 @@ namespace BulletHell.Emitters.Projectiles
 {
     public abstract class BaseProjectileBehaviour : ScriptableObject
     {
-        ProjectileData _owner;
+        [HideInInspector] public ProjectileData Owner;
 
-        public void SetOwner(ProjectileData owner) => _owner = owner;
-        
+        public void SetOwner(ProjectileData owner) => Owner = owner;
+
+        public abstract string Id();
+
+
         public void RemoveBehaviour()
         {
 #if UNITY_EDITOR
-            _owner.Behaviours.Remove(this);
+            Owner.Behaviours.Remove(this);
             AssetDatabase.RemoveObjectFromAsset(this);
             AssetDatabase.SaveAssets();
 #endif
