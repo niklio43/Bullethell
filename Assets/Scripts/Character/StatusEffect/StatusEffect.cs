@@ -37,6 +37,12 @@ namespace BulletHell.StatusSystem
 
         List<StatusEffectStack> _stacks;
 
+        public delegate void OnTickDelegate();
+        public event OnTickDelegate OnTick;
+
+        public delegate void OnExitDelegate();
+        public event OnExitDelegate OnExit;
+
         public void Initialize(Character sender)
         {
             Sender = sender;
@@ -88,12 +94,14 @@ namespace BulletHell.StatusSystem
             }
             if (_stacks.Count == 0)
             {
+                OnExit?.Invoke();
                 Reciever.StatusEffect.RemoveEffect(this);
             }
         }
 
         public void DoEffect()
         {
+            OnTick?.Invoke();
             foreach (EffectBehaviour behaviour in _behaviours)
             {
                 behaviour.DoEffect(this);

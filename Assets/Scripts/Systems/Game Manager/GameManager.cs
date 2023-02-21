@@ -16,10 +16,19 @@ public class GameManager : Singleton<GameManager>
 
     void Awake()
     {
+        //SetCursor();
         pauseGame.Enable();
 
         pauseGame.performed += ctx => PauseGame();
     }
+
+    //void SetCursor()
+    //{
+    //    Texture2D tex = Resources.Load<Texture2D>("crosshair");
+    //    Vector2 hotspot = new Vector2(tex.width / 2, tex.height / 2);
+    //    Cursor.SetCursor(tex, hotspot, CursorMode.ForceSoftware);
+    //}
+
 
     void OnEnable()
     {

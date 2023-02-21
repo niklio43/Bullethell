@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9a31c5a5b94affc42803208649e63c4b
+guid: 3048819e29df16440a40fcee540b328e
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Alagard
+  - EquipmentPro
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 2

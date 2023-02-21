@@ -8,12 +8,18 @@ namespace BulletHell.Stats
     public class Stat
     {
         public string Name = "NoName";
-        public float Value;
+
         Dictionary<string, StatModifier> _modifiers = new Dictionary<string, StatModifier>();
+
+        [SerializeField] float _value;
+        public float Value { get => _value; set { _value = value; OnValueChanged?.Invoke(); } }
+
+        public delegate void OnValueChangedDelegate();
+        public OnValueChangedDelegate OnValueChanged;
 
         public float Get()
         {
-            float total = Value;
+            float total = _value;
             float multiplier = 0;
 
             foreach (StatModifier modifier in _modifiers.Values) {
@@ -33,6 +39,8 @@ namespace BulletHell.Stats
 
             AddModifier(modifier);
             MonoInstance.GetInstance().Invoke(() => { RemoveModifier(modifier); }, time);
+
+            OnValueChanged?.Invoke();
         }
 
         public void AddModifier(StatModifier modifier)
@@ -43,11 +51,14 @@ namespace BulletHell.Stats
             }
 
             _modifiers.Add(modifier.Id, modifier);
+
+            OnValueChanged?.Invoke();
         }
 
         public void RemoveModifier(StatModifier modifier)
         {
             _modifiers.Remove(modifier.Id);
+            OnValueChanged?.Invoke();
         }
 
     }
