@@ -49,5 +49,5 @@ MonoBehaviour:
   Owner: {fileID: 11400000}
   gravity: 9.82
   impactSize: 1
-  offset: 0
+  offset: 1
   flightDuration: 2.07
