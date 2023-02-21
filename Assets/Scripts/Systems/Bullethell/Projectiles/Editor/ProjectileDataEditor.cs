@@ -72,7 +72,7 @@ namespace BulletHell.Emitters.Projectiles.Editor
 
             #region Behaviour Data Foldout
             Foldout behaviourFoldout = new Foldout();
-            behaviourFoldout.value = _target.FoldOutSprite;
+            behaviourFoldout.value = _target.FoldOutBehaviour;
             behaviourFoldout.name = "BehaviourData_Foldout";
             behaviourFoldout.text = "Behaviour";
             behaviourFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutBehaviour = behaviourFoldout.value);
@@ -91,9 +91,19 @@ namespace BulletHell.Emitters.Projectiles.Editor
             dataRoot.Add(behaviourFoldout);
             #endregion
 
+            #region Behaviours List
+            GroupBox behaviourBox = new GroupBox();
+            behaviourBox.name = "Behaviour_Box";
+            for (int i = 0; i < _target.Behaviours.Count; i++) {
+                //VisualElement _behaviourRoot = Editor_target.Behaviours
+            }
+
+            #endregion
+
+
             #region Collision Data Foldout
             Foldout collisionFoldout = new Foldout();
-            collisionFoldout.value = _target.FoldOutSprite;
+            collisionFoldout.value = _target.FoldOutCollision;
             collisionFoldout.name = "CollisionData_Foldout";
             collisionFoldout.text = "Collision";
             collisionFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutCollision = collisionFoldout.value);
