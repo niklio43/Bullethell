@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell;
+using System;
 
 public class DamageZone : MonoBehaviour, IPoolable
 {
@@ -29,23 +30,17 @@ public class DamageZone : MonoBehaviour, IPoolable
         StartCoroutine(Animate(size, .35f));
     }
 
-    public void Activate()
+    public Collider2D[] Activate()
     {
-        CheckDamage(_size);
         StartCoroutine(DamageRoutine());
+        return CheckDamage(_size);
     }
 
-    void CheckDamage(float size)
+    Collider2D[] CheckDamage(float size)
     {
         StartCoroutine(DamageRoutine());
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, size, 1 << LayerMask.NameToLayer("Entity"));
-        if(colliders.Length == 0) { return; }
-
-        foreach (Collider2D collider in colliders) {
-            if(collider.gameObject.TryGetComponent(out Character character)) {
-                Debug.Log(character.name + " was in the zone when it executed!");
-            }
-        }
+        return colliders;
     }
 
     IEnumerator Animate(float size, float duration)

@@ -23,9 +23,9 @@ namespace BulletHell.Emitters.Projectiles
         public Color MidLife = Color.white;
         public Color Death = Color.white;
 
-        //Animation
+        //Animation/VFX
         public bool FoldOutAnimation = false;
-        //TODO Implement animations :)
+        //TODO Implement animations/VFX :)
 
         //Behaviour
         public bool FoldOutBehaviour = false;
@@ -36,6 +36,8 @@ namespace BulletHell.Emitters.Projectiles
 
         //Collision
         public bool FoldOutCollision = false;
+        public bool HasCollision = true;
+        public bool DestroyOnCollision = true;
         public List<string> CollisionTags = new List<string>();
         public Bounds Collider;
 
@@ -44,7 +46,6 @@ namespace BulletHell.Emitters.Projectiles
             if (AlreadyHasBehaviour(behaviour)) return;
 #if UNITY_EDITOR
             Behaviours.Add(behaviour);
-            behaviour.SetOwner(this);
             AssetDatabase.AddObjectToAsset(behaviour, this);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

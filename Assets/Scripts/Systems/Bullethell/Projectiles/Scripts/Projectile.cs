@@ -1,6 +1,4 @@
 using BulletHell.Stats;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BulletHell.Emitters.Projectiles
@@ -9,13 +7,15 @@ namespace BulletHell.Emitters.Projectiles
     {
         ProjectileData _data;
         Character _owner;
-        DamageInfo _damage;
 
         ObjectPool<Projectile> _pool;
 
+        public DamageInfo Damage { get; private set; }
         public Transform Target;
         public float LifeTime;
         public Vector3 Velocity;
+
+        [HideInInspector] public bool hasCollision = true;
 
         #region Setters
         public void SetOwner(Character owner) => _owner = owner;
@@ -42,7 +42,7 @@ namespace BulletHell.Emitters.Projectiles
         {
             _data = data;
 
-            if(_data.Sprite != null)
+            if (_data.Sprite != null)
                 _spriteRenderer.sprite = _data.Sprite;
 
             _collider.offset = _data.Collider.center;
@@ -50,8 +50,8 @@ namespace BulletHell.Emitters.Projectiles
 
             transform.localScale = Vector3.one * _data.Scale;
 
-            _damage = new DamageInfo(_data.Damage, _data.StatusEffects);
-            _damage = DamageHandler.CalculateDamage(_damage, _owner.Stats);
+            Damage = new DamageInfo(_data.Damage, _data.StatusEffects);
+            Damage = DamageHandler.CalculateDamage(Damage, _owner.Stats);
 
             _spriteRenderer.color = _data.Birth;
             //TODO implement color over life!!
@@ -75,12 +75,34 @@ namespace BulletHell.Emitters.Projectiles
                 ResetObject();
         }
 
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!hasCollision) { return; }
+            DealDamage(collision);
+            if (_data.DestroyOnCollision) ResetObject();
+        }
+
+        public void DealDamage(Collider2D[] colliders)
+        {
+            foreach (Collider2D collider in colliders) {
+                DealDamage(collider);
+            }
+        }
+
+        public void DealDamage(Collider2D collision)
+        {
+            if (!_data.CollisionTags.Contains(collision.tag)) { return; }
+            if (!collision.gameObject.TryGetComponent(out Character receiver)) { return; }
+
+            DamageHandler.Send(_owner, receiver, Damage);
+        }
+
         public void ResetObject()
         {
             gameObject.SetActive(false);
             transform.position = Vector2.zero;
             Velocity = Vector2.zero;
-            _damage = null;
+            Damage = null;
             _data = null;
             _pool.Release(this);
         }

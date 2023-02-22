@@ -19,7 +19,7 @@ MonoBehaviour:
   ProjectileData: {fileID: 11400000, guid: f35e64602fca86f4faac08a6b755fc75, type: 2}
   LifeTime: 5
   FoldOutEmitter: 1
-  EmitterPoints: 3
+  EmitterPoints: 2
   CenterRotation: -90
   Pitch: 0
   Offset: 0

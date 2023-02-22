@@ -108,6 +108,8 @@ namespace BulletHell.Emitters.Projectiles.Editor
             collisionFoldout.text = "Collision";
             collisionFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutCollision = collisionFoldout.value);
 
+            collisionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("HasCollision")));
+            collisionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("DestroyOnCollision")));
             collisionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("CollisionTags")));
             collisionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Collider")));
             dataRoot.Add(collisionFoldout);

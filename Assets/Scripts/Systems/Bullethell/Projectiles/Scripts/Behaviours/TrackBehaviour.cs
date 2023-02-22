@@ -11,12 +11,12 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
 
         public override string Id() => "03";
 
-        public override void UpdateBehaviour(Projectile projectile, ProjectileData data, float dt)
+        public override void UpdateBehaviour(Projectile owner, ProjectileData data, float dt)
         {
-            if(projectile.Target == null) return;
+            if(owner.Target == null) return;
 
-            Vector3 dir = projectile.Target.position - projectile.transform.position;
-            projectile.Velocity += (dir * TrackIntensity) * dt;
+            Vector3 dir = owner.Target.position - owner.transform.position;
+            owner.Velocity += (dir * TrackIntensity) * dt;
         }
     }
 }

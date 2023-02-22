@@ -16,34 +16,21 @@ MonoBehaviour:
   name: NewProjectileData
   Scale: 1
   Damage: []
-  StatusEffects:
-  - Name: 
-    Icon: {fileID: 0}
-    _stackingBehaviour: 0
-    maxStacks: 0
-    tickSpeed: 0
-    LifeTime: 0
-    _behaviours: []
-    _damageValues: []
-  - Name: 
-    Icon: {fileID: 0}
-    _stackingBehaviour: 0
-    maxStacks: 0
-    tickSpeed: 0
-    LifeTime: 0
-    _behaviours: []
-    _damageValues: []
+  StatusEffects: []
   FoldOutSprite: 1
   Sprite: {fileID: 0}
   Birth: {r: 1, g: 1, b: 1, a: 1}
   MidLife: {r: 1, g: 1, b: 1, a: 1}
   Death: {r: 1, g: 1, b: 1, a: 1}
+  FoldOutAnimation: 0
   FoldOutBehaviour: 1
   Speed: 0
   MaxSpeed: 0
   Acceleration: 0
   Behaviours: []
-  FoldOutCollision: 0
+  FoldOutCollision: 1
+  HasCollision: 1
+  DestroyOnCollision: 1
   CollisionTags: []
   Collider:
     m_Center: {x: 0, y: 0, z: 0}

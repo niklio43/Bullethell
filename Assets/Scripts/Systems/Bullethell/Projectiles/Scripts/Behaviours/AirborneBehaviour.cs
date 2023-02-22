@@ -11,7 +11,7 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
         [SerializeField] float gravity = 9.8f;
         [SerializeField] float impactSize = 2;
         [SerializeField] float offset = 1;
-        [SerializeField, Range(1, 10)] float flightDuration;
+        [SerializeField, Range(.1f, 10)] float flightDuration;
         public override string Id() => "04";
 
         public override void Initialize(Projectile owner, ProjectileData data)
@@ -44,7 +44,7 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
                 owner.Velocity = velocity;
             }
 
-            zone.Activate();
+            owner.DealDamage(zone.Activate());
             owner.ResetObject();
         }
     }
