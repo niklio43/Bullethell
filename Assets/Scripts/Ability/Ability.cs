@@ -29,9 +29,10 @@ namespace BulletHell.Abilities
 
         int _currentAmount;
         public AbilityBehaviourDatabase database;        #region Getters
+        public string GetName() => _name;
+        public int GetCurrentAmount() => _currentAmount;
         public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
-        public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public Sprite GetIcon() => _icon;
         #endregion
 
@@ -39,7 +40,6 @@ namespace BulletHell.Abilities
         public GameObject Host { get; private set; }
         public CancellationToken CancellationToken => _cancellationTokenSource.Token;
         CancellationTokenSource _cancellationTokenSource;
-        public int CurrentAmount { get { return _currentAmount; } }
         public int MaxAmount { get { return _maxAmount; } }
         
         AbilityState _abilityState = AbilityState.Idle;
