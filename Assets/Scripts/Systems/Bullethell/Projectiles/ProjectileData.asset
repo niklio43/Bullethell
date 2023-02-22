@@ -9,10 +9,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18e11c3a38c614d408475b2966ff0cda, type: 3}
+  m_Script: {fileID: 11500000, guid: db557ae2f6eca854ba24931d8c6c1879, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
-  name: TestProjectile
-  Sprite: {fileID: 21300000, guid: 35b505427e3155e48a47026468384815, type: 3}
-  Scale: 0.2
-  Color: {r: 1, g: 1, b: 1, a: 1}
+  FoldOutGeneral: 1
+  name: Test
+  Scale: 1
+  Damage: []
+  StatusEffects: []
+  FoldOutSprite: 1
+  Sprite: {fileID: 0}
+  BirthColor: {r: 1, g: 1, b: 1, a: 1}
+  MidLifeColor: {r: 1, g: 1, b: 1, a: 1}
+  DeathColor: {r: 1, g: 1, b: 1, a: 1}
+  FoldOutAnimation: 1
+  BirthVFX: {fileID: 0}
+  DeathVFX: {fileID: 0}
+  FoldOutBehaviour: 1
+  Speed: 0
+  MaxSpeed: 0
+  Acceleration: 0
+  Behaviours: []
+  FoldOutCollision: 1
+  HasCollision: 1
+  DestroyOnCollision: 0
+  CollisionTags: []
+  Collider:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}

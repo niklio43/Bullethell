@@ -31,23 +31,21 @@ namespace BulletHell.Abilities
         public AbilityBehaviourDatabase database;        #region Getters
         public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
-        public int GetCurrentAmount => _currentAmount;
-        public string GetName() => _name;
+        public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public Sprite GetIcon() => _icon;
-        public string GetDescription() => _description;
         #endregion
 
-        AbilityState _abilityState = AbilityState.Idle;
         public GameObject Owner { get; private set; }
         public GameObject Host { get; private set; }
-
+        public CancellationToken CancellationToken => _cancellationTokenSource.Token;
+        CancellationTokenSource _cancellationTokenSource;
         public int CurrentAmount { get { return _currentAmount; } }
         public int MaxAmount { get { return _maxAmount; } }
-
+        
+        AbilityState _abilityState = AbilityState.Idle;
         List<float> _timers;
 
-        CancellationTokenSource _cancellationTokenSource;
-        public CancellationToken CancellationToken => _cancellationTokenSource.Token;
+        public Transform Target { get; private set; } = null;
 
         public enum AbilityState
         {
@@ -60,8 +58,8 @@ namespace BulletHell.Abilities
         public void Initialize(GameObject owner, GameObject host = null)
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            this.Owner = owner;
-            this.Host = (host == null) ? owner : host;
+            Owner = owner;
+            Host = (host == null) ? owner : host;
 
             _timers = new List<float>();
             _currentAmount = _maxAmount;
@@ -84,9 +82,10 @@ namespace BulletHell.Abilities
             }
         }
 
-        public async void Cast(Action castDelegate = null)
+        public async void Cast(Transform target = null, Action castDelegate = null)
         {
             if (_currentAmount <= 0 || _abilityState == AbilityState.Channeling) return;
+            Target = target;
             await DoAbility();
 
             if (_abilityState != AbilityState.Canceled) {

@@ -11,8 +11,6 @@ namespace BulletHell.Abilities
     {
         [SerializeField] protected EmitterData _emitterData;
         protected Emitter _emitterObject;
-        [SerializeField] protected List<DamageValue> _damageValues;
-        [SerializeField] protected List<StatusEffect> _statusEffects;
         protected override void Initialize()
         {
             _emitterObject = new Emitter(_ability.Host, _emitterData);
@@ -20,7 +18,7 @@ namespace BulletHell.Abilities
 
         protected override void OnUpdate(float dt)
         {
-            _emitterObject.UpdateEmitter(dt);
+            _emitterObject.UpdateEmitter();
         }
 
         public override void Uninitialize()
@@ -32,16 +30,12 @@ namespace BulletHell.Abilities
 
         protected override void Perform()
         {
-            DamageInfo damage = new DamageInfo(_damageValues, _statusEffects);
-
             if (_ability.Owner.TryGetComponent(out Character character)) {
-                foreach (StatusEffect effect in _statusEffects) {
-                    effect.Initialize(character);
-                }
-                damage = DamageHandler.CalculateDamage(damage, character.Stats);
+                _emitterObject.FireProjectile(character, Target);
             }
-
-            _emitterObject.FireProjectile(character, damage);
+            else {
+                Debug.LogError("Ability owner needs to be of type Character!");
+            }
         }
     }
 }

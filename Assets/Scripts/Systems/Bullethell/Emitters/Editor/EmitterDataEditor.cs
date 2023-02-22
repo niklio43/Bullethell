@@ -22,13 +22,13 @@ namespace BulletHell.Emitters.Editor
             return _root;
         }
 
-        private void Redraw()
+        void Redraw()
         {
             CreateRoot();
             CreateDefualtInspector();
         }
 
-        private void CreateRoot()
+        void CreateRoot()
         {
             _root = new VisualElement();
             VisualTreeAsset original = Resources.Load<VisualTreeAsset>("EmitterInspector");
@@ -53,7 +53,6 @@ namespace BulletHell.Emitters.Editor
             generalFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutGeneral = generalFoldout.value);
 
             generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Delay")));
-            generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("MaxProjectiles")));
             generalFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("RotationSpeed")));
             dataRoot.Add(generalFoldout);
             #endregion
@@ -66,12 +65,7 @@ namespace BulletHell.Emitters.Editor
             projectileFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutProjectile = projectileFoldout.value);
 
             projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("ProjectileData")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("TimeToLive")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Speed")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("MaxSpeed")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Acceleration")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Gravity")));
-            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("GravityPoint")));
+            projectileFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("LifeTime")));
             dataRoot.Add(projectileFoldout);
             #endregion
 
@@ -88,20 +82,6 @@ namespace BulletHell.Emitters.Editor
             emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Offset")));
             emissionFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Spread")));
             dataRoot.Add(emissionFoldout);
-            #endregion
-
-            #region Homeing Data Foldout
-            Foldout homeingFoldout = new Foldout();
-            homeingFoldout.value = _target.FoldOutHomeing;
-            homeingFoldout.name = "HomeingData_Foldout";
-            homeingFoldout.text = "Homeing";
-            homeingFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutHomeing = homeingFoldout.value);
-
-
-            homeingFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("FollowTarget")));
-            homeingFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("FollowIntensity")));
-            homeingFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("FollowRange")));
-            dataRoot.Add(homeingFoldout);
             #endregion
 
         }

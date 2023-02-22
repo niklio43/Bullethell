@@ -15,3 +15,4 @@ MonoBehaviour:
   abilities:
   - {fileID: 11400000, guid: cb20bdbc15c37014d8bce806440f2614, type: 2}
   - {fileID: 11400000, guid: c866a24c9852ccf4193d0f6f2dd0b7d8, type: 2}
+  CurrentAbility: {fileID: 0}

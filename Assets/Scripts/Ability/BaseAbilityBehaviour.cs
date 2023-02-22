@@ -17,14 +17,11 @@ namespace BulletHell.Abilities
         [Header("Animation")]
         [SerializeField] protected List<AbilityAnimation> _animations;
 
-
-
-
         AbilityBehaviourState _state = AbilityBehaviourState.Idle;
         float _currentCastTime = 0;
 
         protected Ability _ability;
-
+        protected Transform Target => _ability.Target;
         private enum AbilityBehaviourState
         {
             Idle,

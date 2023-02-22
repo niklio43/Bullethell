@@ -15,7 +15,7 @@ public class AbilityHolder : MonoBehaviour
         for (int i = 0; i < _abilities.Count; i++)
         {
             _abilities[i].UpdateAbility(Time.deltaTime);
-            _abilityUI[i].transform.GetChild(0).GetComponent<TMP_Text>().text = _abilities[i].GetCurrentAmount.ToString();
+            _abilityUI[i].transform.GetChild(0).GetComponent<TMP_Text>().text = _abilities[i].GetCurrentAmount().ToString();
         }
     }
 
