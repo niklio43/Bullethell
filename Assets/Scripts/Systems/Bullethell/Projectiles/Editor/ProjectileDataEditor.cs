@@ -72,10 +72,22 @@ namespace BulletHell.Emitters.Projectiles.Editor
             spriteFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutSprite = spriteFoldout.value);
 
             spriteFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Sprite")));
-            spriteFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Birth")));
-            spriteFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("MidLife")));
-            spriteFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Death")));
+            spriteFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("BirthColor")));
+            spriteFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("MidLifeColor")));
+            spriteFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("DeathColor")));
             dataRoot.Add(spriteFoldout);
+            #endregion
+
+            #region Animation/VFX Data Foldout
+            Foldout animationFoldout = new Foldout();
+            animationFoldout.value = _target.FoldOutAnimation;
+            animationFoldout.name = "AnimationData_Foldout";
+            animationFoldout.text = "Animation/VFX";
+            animationFoldout.RegisterCallback<ClickEvent>((changeEvent) => _target.FoldOutAnimation = animationFoldout.value);
+
+            animationFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("BirthVFX")));
+            animationFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("DeathVFX")));
+            dataRoot.Add(animationFoldout);
             #endregion
 
             #region Behaviour Data Foldout
@@ -125,7 +137,7 @@ namespace BulletHell.Emitters.Projectiles.Editor
         void RedrawBehaviourContext()
         {
             _behavioursContext.Clear();
-            _behavioursContext.text = "Add New Behaviour";
+            _behavioursContext.text = "Add New Behaviour (Right Click)";
             _behavioursContext.AddManipulator(new ContextualMenuManipulator(BuildBehaviourContextMenu));
         }
 

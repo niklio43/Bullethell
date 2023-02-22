@@ -3,6 +3,7 @@ using UnityEngine;
 using BulletHell.Emitters.Projectiles.Behaviours;
 using UnityEditor;
 using BulletHell.StatusSystem;
+using UnityEngine.VFX;
 
 namespace BulletHell.Emitters.Projectiles
 {
@@ -19,12 +20,14 @@ namespace BulletHell.Emitters.Projectiles
         //Sprite
         public bool FoldOutSprite = false;
         public Sprite Sprite;
-        public Color Birth = Color.white;
-        public Color MidLife = Color.white;
-        public Color Death = Color.white;
+        public Color BirthColor = Color.white;
+        public Color MidLifeColor = Color.white;
+        public Color DeathColor = Color.white;
 
         //Animation/VFX
         public bool FoldOutAnimation = false;
+        public VisualEffectAsset BirthVFX;
+        public VisualEffectAsset DeathVFX;
         //TODO Implement animations/VFX :)
 
         //Behaviour

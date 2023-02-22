@@ -44,8 +44,8 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
                 owner.Velocity = velocity;
             }
 
-            owner.DealDamage(zone.Activate());
-            owner.ResetObject();
+            Collider2D[] test = zone.Activate();
+            owner.CheckCollision(test);
         }
     }
 }

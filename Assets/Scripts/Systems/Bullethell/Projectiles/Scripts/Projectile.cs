@@ -1,5 +1,6 @@
 using BulletHell.Stats;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace BulletHell.Emitters.Projectiles
 {
@@ -53,12 +54,15 @@ namespace BulletHell.Emitters.Projectiles
             Damage = new DamageInfo(_data.Damage, _data.StatusEffects);
             Damage = DamageHandler.CalculateDamage(Damage, _owner.Stats);
 
-            _spriteRenderer.color = _data.Birth;
+            _spriteRenderer.color = _data.BirthColor;
             //TODO implement color over life!!
 
             foreach (BaseProjectileBehaviour behaviour in _data.Behaviours) {
                 behaviour.Initialize(this, _data);
             }
+
+            if (_data.BirthVFX != null)
+                PlayVFX(_data.BirthVFX, true);
         }
 
         private void FixedUpdate()
@@ -69,36 +73,59 @@ namespace BulletHell.Emitters.Projectiles
 
             LifeTime -= Time.fixedDeltaTime;
 
-            transform.position += new Vector3(Velocity.x * Time.fixedDeltaTime, Velocity.y * Time.fixedDeltaTime + Velocity.z * Time.fixedDeltaTime);
+            UpdatePosition();
 
             if (LifeTime <= 0)
                 ResetObject();
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        void UpdatePosition()
         {
-            if (!hasCollision) { return; }
-            DealDamage(collision);
-            if (_data.DestroyOnCollision) ResetObject();
+            float angle = Mathf.Atan2(Velocity.y, Velocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            if(_data.MaxSpeed != 0)
+                Velocity = Vector2.ClampMagnitude(Velocity, _data.MaxSpeed);
+            transform.position += new Vector3(Velocity.x * Time.fixedDeltaTime, Velocity.y * Time.fixedDeltaTime + Velocity.z * Time.fixedDeltaTime);
         }
 
-        public void DealDamage(Collider2D[] colliders)
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(!hasCollision) { return; }
+            CheckCollision(collision);
+        }
+
+        public void CheckCollision(Collider2D[] colliders)
         {
             foreach (Collider2D collider in colliders) {
-                DealDamage(collider);
+                CheckCollision(collider);
             }
         }
 
-        public void DealDamage(Collider2D collision)
-        {
+        public void CheckCollision(Collider2D collision) {
             if (!_data.CollisionTags.Contains(collision.tag)) { return; }
-            if (!collision.gameObject.TryGetComponent(out Character receiver)) { return; }
+            if (collision.gameObject.TryGetComponent(out Character receiver)) {
+                DealDamage(receiver);
+            }
+            if (_data.DestroyOnCollision) ResetObject();
+        }
 
+        public void DealDamage(Character receiver)
+        {
             DamageHandler.Send(_owner, receiver, Damage);
+        }
+
+        public void PlayVFX(VisualEffectAsset asset, bool playInWorldSpace = true)
+        {
+            if(asset == null) { return; }
+            Transform parent = playInWorldSpace ? null : transform;
+            BulletHell.VFX.VFXManager.PlayBurst(asset, transform.position, parent);
         }
 
         public void ResetObject()
         {
+            if(_data.DeathVFX != null)
+                PlayVFX(_data.DeathVFX, true);
             gameObject.SetActive(false);
             transform.position = Vector2.zero;
             Velocity = Vector2.zero;

@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
   FoldOutGeneral: 1
-  name: NewProjectileData
+  name: Test
   Scale: 1
   Damage: []
   StatusEffects: []
   FoldOutSprite: 1
   Sprite: {fileID: 0}
-  Birth: {r: 1, g: 1, b: 1, a: 1}
-  MidLife: {r: 1, g: 1, b: 1, a: 1}
-  Death: {r: 1, g: 1, b: 1, a: 1}
-  FoldOutAnimation: 0
+  BirthColor: {r: 1, g: 1, b: 1, a: 1}
+  MidLifeColor: {r: 1, g: 1, b: 1, a: 1}
+  DeathColor: {r: 1, g: 1, b: 1, a: 1}
+  FoldOutAnimation: 1
+  BirthVFX: {fileID: 0}
+  DeathVFX: {fileID: 0}
   FoldOutBehaviour: 1
   Speed: 0
   MaxSpeed: 0
@@ -30,7 +32,7 @@ MonoBehaviour:
   Behaviours: []
   FoldOutCollision: 1
   HasCollision: 1
-  DestroyOnCollision: 1
+  DestroyOnCollision: 0
   CollisionTags: []
   Collider:
     m_Center: {x: 0, y: 0, z: 0}

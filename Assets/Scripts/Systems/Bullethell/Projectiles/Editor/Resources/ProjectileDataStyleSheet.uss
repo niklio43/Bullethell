@@ -45,6 +45,10 @@
 	margin-bottom:0px;
 }
 
+.unity-object-field-display{
+	background-color: #353535;
+}
+
 Label{
 	-unity-font-style: bold;
 }
