@@ -53,25 +53,21 @@ namespace BulletHell.InventorySystem
 
         public void ClearSlot()
         {
-            _assignedInventorySlot?.ClearSlot();
             _itemSprite.sprite = null;
             _itemSprite.color = Color.clear;
             _itemCount.text = "";
+
+            _assignedInventorySlot?.ClearSlot();
         }
 
         public void OnDrop(PointerEventData eventData)
         {
-            OnUISlotRelease(eventData);
+            ParentDisplay?.SlotReleased(this, eventData);
         }
 
         public void OnUISlotClick()
         {
             ParentDisplay?.SlotClicked(this);
-        }
-
-        public void OnUISlotRelease(PointerEventData eventData)
-        {
-            ParentDisplay?.SlotReleased(this, eventData);
         }
 
         public void DropItem()
@@ -92,7 +88,19 @@ namespace BulletHell.InventorySystem
             DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
 
             currentObj.SetParent(draggableItem.parentAfterDrag);
+            currentObj.GetComponent<DraggableItem>().parentAfterDrag = draggableItem.parentAfterDrag;
             draggableItem.parentAfterDrag = transform;
+
+            UpdateAssignedVariables(draggableItem);
+            UpdateAssignedVariables(currentObj.GetComponent<DraggableItem>());
+        }
+
+        void UpdateAssignedVariables(DraggableItem item)
+        {
+            var slot = item.parentAfterDrag.GetComponent<InventorySlotUI>();
+
+            slot._itemSprite = item.GetComponent<Image>();
+            slot._itemCount = item.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         }
     }
 }

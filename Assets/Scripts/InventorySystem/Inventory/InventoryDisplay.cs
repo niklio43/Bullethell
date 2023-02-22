@@ -35,12 +35,9 @@ namespace BulletHell.InventorySystem
 
         public void SlotClicked(InventorySlotUI clickedUISlot)
         {
-            if (clickedUISlot.AssignedInventorySlot.ItemData != null && _mouseObj.AssignedInventorySlot.ItemData == null)
-            {
-                _mouseObj.UpdateMouseSlot(clickedUISlot.AssignedInventorySlot);
-                sender = clickedUISlot;
-                return;
-            }
+            _mouseObj.UpdateMouseSlot(clickedUISlot.AssignedInventorySlot);
+            sender = clickedUISlot;
+            return;
         }
 
         public void SlotReleased(InventorySlotUI targetUISlot, PointerEventData eventData)
@@ -59,25 +56,27 @@ namespace BulletHell.InventorySystem
                 targetUISlot.SwapItems(eventData);
             }
 
-
             _mouseObj.ClearSlot();
         }
 
         public void DropItem(InventorySlotUI invSlot)
         {
-            for (int i = 0; i < invSlot.AssignedInventorySlot.StackSize; i++)
+            InventorySlot temp = new InventorySlot();
+            temp.AssignItem(invSlot.AssignedInventorySlot);
+
+            invSlot.ClearSlot();
+            _mouseObj.ClearSlot();
+
+            for (int i = 0; i < temp.StackSize; i++)
             {
                 GameObject droppedItem = new GameObject();
                 droppedItem.AddComponent<DroppedItem>();
-                droppedItem.GetComponent<DroppedItem>().Initialize(invSlot.AssignedInventorySlot.ItemData);
+                droppedItem.GetComponent<DroppedItem>().Initialize(temp.ItemData);
 
                 //Temporary
                 Transform player = GameObject.FindGameObjectWithTag("Player").transform;
                 droppedItem.transform.position = new Vector2(player.position.x + Random.Range(-2, 2), player.position.y + Random.Range(-2, 2));
             }
-
-            _mouseObj.ClearSlot();
-            invSlot.ClearSlot();
         }
 
         public void ResetSlot()

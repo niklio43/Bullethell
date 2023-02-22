@@ -10,6 +10,11 @@ namespace BulletHell.InventorySystem
     {
         [HideInInspector] public Transform parentAfterDrag;
 
+        void Awake()
+        {
+            parentAfterDrag = transform.parent;
+        }
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             parentAfterDrag = transform.parent;
@@ -35,13 +40,15 @@ namespace BulletHell.InventorySystem
 
             foreach (string tag in tags)
             {
-                if (tag == "Inventory")
+                if(tag == "Slot") { GetComponent<Image>().raycastTarget = true; return; }
+
+                if (tags.Count > 0 && tags != null)
                 {
                     parentAfterDrag.GetComponent<InventorySlotUI>().ResetSlot();
                 }
             }
 
-            if (tags.Count <= 0)
+            if (tags.Count <= 0 || tags == null)
             {
                 parentAfterDrag.GetComponent<InventorySlotUI>().DropItem();
             }
@@ -57,7 +64,7 @@ namespace BulletHell.InventorySystem
             List<string> tags = new List<string>();
             for (int i = 0; i < results.Count; i++)
             {
-                if (!string.IsNullOrEmpty(results[i].gameObject.tag))
+                if (!string.IsNullOrEmpty(results[i].gameObject.tag) && results[i].gameObject.tag != "Untagged")
                     tags.Add(results[i].gameObject.tag);
             }
 
