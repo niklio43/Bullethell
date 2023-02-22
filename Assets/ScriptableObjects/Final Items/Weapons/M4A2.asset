@@ -15,7 +15,7 @@ MonoBehaviour:
   Stackable: 0
   data:
     Name: M4A2
-    Id: 4
+    Id: 3
     buffs:
     - Stat: Hp
       Id: Lilla Odjuret

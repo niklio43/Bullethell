@@ -211,6 +211,9 @@ MonoBehaviour:
   Weapon: {fileID: 8265819423944410714}
   PreferredDistance: 0.8
   AttackDistance: 1.4
+  _dropTable:
+  - Item: {fileID: 11400000, guid: 50341da266b037e4fba199f25d005ee0, type: 2}
+    Chance: 1
 --- !u!114 &5441612227424731684
 MonoBehaviour:
   m_ObjectHideFlags: 0

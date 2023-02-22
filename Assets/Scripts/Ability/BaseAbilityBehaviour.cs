@@ -10,6 +10,7 @@ namespace BulletHell.Abilities
     [System.Serializable]
     public abstract class BaseAbilityBehaviour : ScriptableObject
     {
+        public int Id = -1;
         [SerializeField] float _waitTime;
         [SerializeField] float _castTime = 0;
 

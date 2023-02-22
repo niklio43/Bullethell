@@ -27,9 +27,9 @@ namespace BulletHell.Abilities
         [Header("Ability Behaviours")]
         [SerializeField] List<BaseAbilityBehaviour> _behaviours;
 
-        int _currentAmount;        #region Getters
-        public string GetName() => _name;        public string GetDescription() => _description;
-        public int GetCurrentAmount() => _currentAmount;
+        int _currentAmount;
+        public AbilityBehaviourDatabase database;        #region Getters
+        public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];
         public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public Sprite GetIcon() => _icon;
@@ -65,6 +65,7 @@ namespace BulletHell.Abilities
             _currentAmount = _maxAmount;
 
             for (int i = 0; i < _behaviours.Count; i++) {
+                _behaviours[i] = database.Behaviours[_behaviours[i].Id];
                 _behaviours[i] = Instantiate(_behaviours[i]);
                 _behaviours[i].InitializeBehaviour(this);
             }
@@ -76,6 +77,7 @@ namespace BulletHell.Abilities
 
             for (int i = 0; i < _behaviours.Count; i++)
             {
+                _behaviours[i] = database.Behaviours[_behaviours[i].Id];
                 _behaviours[i].Uninitialize();
             }
         }
