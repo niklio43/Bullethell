@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BulletHell.InventorySystem
 {
@@ -8,9 +9,25 @@ namespace BulletHell.InventorySystem
     {
         public DynamicInventoryDisplay InventoryPanel;
 
-    void Update()
+        private void Awake()
         {
+            InventoryPanel.gameObject.SetActive(true);
+        }
 
+        private void OnEnable()
+        {
+            InventoryHolder.OnDynamicInventoryDisplayRequested += DisplayInventory;
+        }
+
+        private void OnDisable()
+        {
+            InventoryHolder.OnDynamicInventoryDisplayRequested -= DisplayInventory;
+        }
+
+        void DisplayInventory(InventorySystem invToDisplay)
+        {
+            InventoryPanel.gameObject.SetActive(true);
+            InventoryPanel.RefreshDynamicInventory(invToDisplay);
         }
     }
 }

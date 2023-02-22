@@ -10,14 +10,17 @@ namespace BulletHell.InventorySystem
     public class MouseObj : MonoBehaviour
     {
         public InventorySlot AssignedInventorySlot;
+        public InventorySlotUI Sender;
 
-        public void UpdateMouseSlot(InventorySlot invSlot)
+        public void UpdateMouseSlot(InventorySlotUI invSlotUI)
         {
-            AssignedInventorySlot?.AssignItem(invSlot);
+            Sender = invSlotUI;
+            AssignedInventorySlot?.AssignItem(invSlotUI.AssignedInventorySlot);
         }
 
         public void ClearSlot()
         {
+            Sender = null;
             AssignedInventorySlot = null;
         }
     }

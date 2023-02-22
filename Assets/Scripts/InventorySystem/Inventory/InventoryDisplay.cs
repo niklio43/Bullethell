@@ -8,7 +8,6 @@ namespace BulletHell.InventorySystem
     public abstract class InventoryDisplay : MonoBehaviour
     {
         [SerializeField] MouseObj _mouseObj;
-        private InventorySlotUI sender;
 
         protected InventorySystem _inventorySystem;
         protected Dictionary<InventorySlotUI, InventorySlot> _slotDictionary;
@@ -35,23 +34,22 @@ namespace BulletHell.InventorySystem
 
         public void SlotClicked(InventorySlotUI clickedUISlot)
         {
-            _mouseObj.UpdateMouseSlot(clickedUISlot.AssignedInventorySlot);
-            sender = clickedUISlot;
+            _mouseObj.UpdateMouseSlot(clickedUISlot);
             return;
         }
 
         public void SlotReleased(InventorySlotUI targetUISlot, PointerEventData eventData)
         {
-            if (_mouseObj.AssignedInventorySlot.ItemData != null)
+            if (_mouseObj.Sender != null)
             {
-                sender.AssignedInventorySlot?.ClearSlot();
+                _mouseObj.Sender.AssignedInventorySlot?.ClearSlot();
 
                 InventorySlot previous = new InventorySlot();
                 previous.AssignItem(targetUISlot.AssignedInventorySlot);
 
                 targetUISlot.AssignedInventorySlot.AssignItem(_mouseObj.AssignedInventorySlot);
 
-                sender.AssignedInventorySlot.AssignItem(previous);
+                _mouseObj.Sender.AssignedInventorySlot.AssignItem(previous);
 
                 targetUISlot.SwapItems(eventData);
             }
