@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryUIController : MonoBehaviour
+namespace BulletHell.InventorySystem
 {
-    void Update()
+    public class InventoryUIController : MonoBehaviour
     {
-        
+        public DynamicInventoryDisplay InventoryPanel;
+
+    void Update()
+        {
+
+        }
     }
 }
