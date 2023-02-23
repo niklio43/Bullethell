@@ -26,7 +26,6 @@ namespace BulletHell.InventorySystem
 
         void DisplayInventory(InventorySystem invToDisplay)
         {
-            InventoryPanel.gameObject.SetActive(true);
             InventoryPanel.RefreshDynamicInventory(invToDisplay);
         }
     }

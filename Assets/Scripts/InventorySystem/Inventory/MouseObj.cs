@@ -15,7 +15,7 @@ namespace BulletHell.InventorySystem
         public void UpdateMouseSlot(InventorySlotUI invSlotUI)
         {
             Sender = invSlotUI;
-            AssignedInventorySlot?.AssignItem(invSlotUI.AssignedInventorySlot);
+            AssignedInventorySlot?.AssignItem(Sender.AssignedInventorySlot.ItemData);
         }
 
         public void ClearSlot()

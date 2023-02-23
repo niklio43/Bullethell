@@ -42,30 +42,33 @@ namespace BulletHell.InventorySystem
         {
             if (_mouseObj.Sender != null)
             {
-                _mouseObj.Sender.AssignedInventorySlot?.ClearSlot();
+                if (_mouseObj.Sender.AssignedInventorySlot.ItemData.ItemType == targetUISlot.AllowedItems || targetUISlot.AllowedItems == ItemType.Default)
+                {
+                    _mouseObj.Sender.AssignedInventorySlot?.ClearSlot();
 
-                InventorySlot previous = new InventorySlot();
-                previous.AssignItem(targetUISlot.AssignedInventorySlot);
+                    InventorySlot previous = new InventorySlot();
+                    previous.AssignItem(targetUISlot.AssignedInventorySlot.ItemData);
 
-                targetUISlot.AssignedInventorySlot.AssignItem(_mouseObj.AssignedInventorySlot);
+                    targetUISlot.AssignedInventorySlot.AssignItem(_mouseObj.AssignedInventorySlot.ItemData);
 
-                _mouseObj.Sender.AssignedInventorySlot.AssignItem(previous);
+                    _mouseObj.Sender.AssignedInventorySlot.AssignItem(previous.ItemData);
 
-                targetUISlot.SwapItems(eventData);
+                    targetUISlot.SwapItems(eventData);
+                }
             }
 
-            _mouseObj.ClearSlot();
+            ResetSlot();
         }
 
         public void DropItem(InventorySlotUI invSlot)
         {
             InventorySlot temp = new InventorySlot();
-            temp.AssignItem(invSlot.AssignedInventorySlot);
+            temp.AssignItem(invSlot.AssignedInventorySlot.ItemData);
 
             invSlot.ClearSlot();
-            _mouseObj.ClearSlot();
+            ResetSlot();
 
-            for (int i = 0; i < temp.StackSize; i++)
+            for (int i = 0; i < temp.ItemData.StackSize; i++)
             {
                 GameObject droppedItem = new GameObject();
                 droppedItem.AddComponent<DroppedItem>();

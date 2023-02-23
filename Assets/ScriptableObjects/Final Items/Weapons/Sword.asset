@@ -23,4 +23,4 @@ MonoBehaviour:
   maxStackSize: 1
   pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}
   rarity: 3
-  itemType: 0
+  itemType: 1

@@ -38,14 +38,11 @@ namespace BulletHell.InventorySystem
 
             var tags = IsPointerOverUIObject(eventData);
 
-            foreach (string tag in tags)
-            {
-                if(tag == "Slot") { GetComponent<Image>().raycastTarget = true; return; }
+            if (tags.Contains("Slot")) { GetComponent<Image>().raycastTarget = true; return; }
 
-                if (tags.Count > 0 && tags != null)
-                {
-                    parentAfterDrag.GetComponent<InventorySlotUI>().ResetSlot();
-                }
+            if(tags.Count > 0 && tags != null)
+            {
+                parentAfterDrag.GetComponent<InventorySlotUI>().ResetSlot();
             }
 
             if (tags.Count <= 0 || tags == null)
@@ -64,7 +61,7 @@ namespace BulletHell.InventorySystem
             List<string> tags = new List<string>();
             for (int i = 0; i < results.Count; i++)
             {
-                if (!string.IsNullOrEmpty(results[i].gameObject.tag) && results[i].gameObject.tag != "Untagged")
+                if (!string.IsNullOrEmpty(results[i].gameObject.tag))
                     tags.Add(results[i].gameObject.tag);
             }
 

@@ -9,17 +9,18 @@ namespace BulletHell.InventorySystem
     public class InventorySlot
     {
         [SerializeField] InventoryItemData _itemData;
-        [SerializeField] int _stackSize;
+
+        public delegate void OnAssignItemDelegate(InventoryItemData item);
+        public event OnAssignItemDelegate OnAssignItem;
 
         #region Getter
         public InventoryItemData ItemData => _itemData;
-        public int StackSize => _stackSize;
         #endregion
 
         public InventorySlot(InventoryItemData source, int amount)
         {
             _itemData = source;
-            _stackSize = amount;
+            _itemData.StackSize = amount;
         }
 
         public InventorySlot()
@@ -30,41 +31,40 @@ namespace BulletHell.InventorySystem
         public void ClearSlot()
         {
             _itemData = null;
-            _stackSize = -1;
         }
 
-        public void AssignItem(InventorySlot invSlot)
+        public void AssignItem(InventoryItemData data)
         {
-            _itemData = invSlot.ItemData;
-            _stackSize = invSlot.StackSize;
+            _itemData = data;
+            OnAssignItem?.Invoke(data);
         }
 
         public void UpdateInventorySlot(InventoryItemData data, int amount)
         {
             _itemData = data;
-            _stackSize = amount;
+            _itemData.StackSize = amount;
         }
 
         public bool RoomLeftInStack(int amountToAdd, out int amountRemaining)
         {
-            amountRemaining = _itemData.MaxStackSize - _stackSize;
+            amountRemaining = _itemData.MaxStackSize - _itemData.StackSize;
             return RoomLeftInStack(amountToAdd);
         }
 
         public bool RoomLeftInStack(int amountToAdd)
         {
-            if (_stackSize + amountToAdd <= _itemData.MaxStackSize) { return true; }
+            if (_itemData.StackSize + amountToAdd <= _itemData.MaxStackSize) { return true; }
             return false;
         }
 
         public void AddToStack(int amount)
         {
-            _stackSize += amount;
+            _itemData.StackSize += amount;
         }
 
         public void RemoveFromStack(int amount)
         {
-            _stackSize -= amount;
+            _itemData.StackSize -= amount;
         }
     }
 }

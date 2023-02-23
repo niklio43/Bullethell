@@ -15,6 +15,21 @@ public class WeaponController : MonoBehaviour
     public float Radius;
     Weapon _weapon;
     [SerializeField] PlayerController player;
+    [SerializeField] List<InventorySlotUI> _inventorySlots = new List<InventorySlotUI>();
+
+    private void Start()
+    {
+        foreach (InventorySlotUI slotUI in _inventorySlots)
+        {
+            slotUI.AssignedInventorySlot.OnAssignItem += EquipWeapon;
+        }
+    }
+
+    void EquipWeapon(InventoryItemData item)
+    {
+        Debug.Log("test");
+        AssignWeapon(item as Weapon);
+    }
 
     public void AssignWeapon(Weapon weapon)
     {
