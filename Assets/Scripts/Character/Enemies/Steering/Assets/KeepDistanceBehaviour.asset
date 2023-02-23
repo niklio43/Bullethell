@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb5ab5c7148d6742ae0e0f168c9fd41, type: 3}
   m_Name: KeepDistanceBehaviour
   m_EditorClassIdentifier: 
-  Weight: 0
+  Weight: 0.5
+  Clamp: 0.2
