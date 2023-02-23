@@ -27,7 +27,7 @@ namespace BulletHell.Enemies.Detection
 
             data.Add("Players", DetectEntities("Player", DetectionRadius));
             data.Add("Enemies", DetectEntities("Enemy", DetectionRadius));
-            data.Add("Obstacles", DetectEntities("Obstacle", ObstacleDetectionRadius));
+            data.Add("Obstacles", DetectEntities("Obstacle", ObstacleDetectionRadius, 1 << LayerMask.NameToLayer("Obstacle")));
             
             if(_enemy.MovementType == Enemy.EnemyMovmentType.Grounded) {
                 data.Add("Obstacles", DetectEntities("GroundObstacle", ObstacleDetectionRadius));
@@ -36,11 +36,16 @@ namespace BulletHell.Enemies.Detection
             return data;
         }
 
-        EntityData[] DetectEntities(string tag, float radius = 1)
+        EntityData[] DetectEntities(string tag, float radius)
+        {
+            LayerMask defaultMask = 1 << LayerMask.NameToLayer("Entity");
+            return DetectEntities(tag, radius, defaultMask);
+        }
+
+        EntityData[] DetectEntities(string tag, float radius, LayerMask mask)
         {
             List<EntityData> entities = new List<EntityData>();
 
-            LayerMask mask = 1 << LayerMask.NameToLayer("Entity");
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, mask);
 
             foreach (var entity in colliders) {

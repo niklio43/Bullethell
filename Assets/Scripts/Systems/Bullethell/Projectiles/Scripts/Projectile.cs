@@ -103,7 +103,7 @@ namespace BulletHell.Emitters.Projectiles
         }
 
         public void CheckCollision(Collider2D collision) {
-            if (!_data.CollisionTags.Contains(collision.tag)) { return; }
+            if (collision == null || !_data.CollisionTags.Contains(collision.tag)) { return; }
             if (collision.gameObject.TryGetComponent(out Character receiver)) {
                 DealDamage(receiver);
             }

@@ -54,6 +54,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4940711694315439855}
   - component: {fileID: 1669646182689616081}
+  - component: {fileID: 5140993756046568941}
+  - component: {fileID: 3808603310637453500}
   - component: {fileID: 2960934200889275608}
   m_Layer: 7
   m_Name: Steering
@@ -99,9 +101,51 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6e27e9802452eca47a75242fb3d56a64, type: 2}
     - {fileID: 11400000, guid: 8a421364e60503945bb613885c0197e0, type: 2}
     - {fileID: 11400000, guid: 38d7da8ed0ede8543aa06fb64bafab04, type: 2}
+    - {fileID: 11400000, guid: 6c176a6bc41978142beea64688cd0dcb, type: 2}
   Enemy: {fileID: 0}
   Rb: {fileID: 0}
   Collider: {fileID: 0}
+  PathFinder: {fileID: 0}
+--- !u!114 &5140993756046568941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304554048927497912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec28ca219190f9d4db8725e93a985945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3808603310637453500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304554048927497912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!61 &2960934200889275608
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -207,8 +251,8 @@ MonoBehaviour:
   CanMove: 0
   Aim: {fileID: 839990684}
   Weapon: {fileID: 0}
-  PreferredDistance: 3.38
-  AttackDistance: 4
+  PreferredDistance: 3.29
+  AttackDistance: 4.17
   _dropTable:
   - Item: {fileID: 11400000, guid: 50341da266b037e4fba199f25d005ee0, type: 2}
     Chance: 1

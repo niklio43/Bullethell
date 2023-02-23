@@ -143,6 +143,21 @@ public class Enemy : MonoBehaviour
         return (distance < PreferredDistance);
     }
 
+
+    public bool TargetInLineOfSight(Vector3 origin)
+    {
+        Vector2 direction = Target.position - transform.position;
+        float distance = Vector2.Distance(transform.position, Target.position);
+        LayerMask mask = 1 << LayerMask.NameToLayer("Obstacle");
+
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, mask);
+
+        if (hit.collider == null) return true;
+        return false;
+
+    }
+
+
     #region Component Caching
 
     Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();

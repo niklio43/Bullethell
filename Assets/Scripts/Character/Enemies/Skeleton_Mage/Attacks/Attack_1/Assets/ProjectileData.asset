@@ -30,13 +30,13 @@ MonoBehaviour:
   DeathVFX: {fileID: 0}
   FoldOutBehaviour: 1
   Speed: 3
-  MaxSpeed: 6
-  Acceleration: 1
+  MaxSpeed: 0
+  Acceleration: 0
   Behaviours:
   - {fileID: 4788756649689817966}
   FoldOutCollision: 1
   HasCollision: 0
-  DestroyOnCollision: 1
+  DestroyOnCollision: 0
   CollisionTags:
   - Player
   Collider:
