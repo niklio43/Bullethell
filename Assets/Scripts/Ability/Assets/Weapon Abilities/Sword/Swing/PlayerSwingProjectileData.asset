@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db557ae2f6eca854ba24931d8c6c1879, type: 3}
+  m_Name: PlayerSwingProjectileData
+  m_EditorClassIdentifier: 
+  FoldOutGeneral: 1
+  name: Player_BasicSwing
+  Scale: 1.2
+  Damage:
+  - senderType: 0
+    Type: 0
+    Value: 10
+  StatusEffects:
+  - Name: Burn
+    Icon: {fileID: 0}
+    _stackingBehaviour: 2
+    maxStacks: 1
+    tickSpeed: 1
+    LifeTime: 3
+    _behaviours:
+    - {fileID: 11400000, guid: f157de6c3edf20342b90290430d9e351, type: 2}
+    _damageValues:
+    - senderType: 0
+      Type: 1
+      Value: 5
+  FoldOutSprite: 1
+  Sprite: {fileID: 21300000, guid: c188d7afd8986aa4d918e5c56fbc61d5, type: 3}
+  BirthColor: {r: 1, g: 1, b: 1, a: 1}
+  MidLifeColor: {r: 1, g: 1, b: 1, a: 1}
+  DeathColor: {r: 1, g: 1, b: 1, a: 1}
+  FoldOutAnimation: 0
+  BirthVFX: {fileID: 0}
+  DeathVFX: {fileID: 0}
+  FoldOutBehaviour: 1
+  Speed: 15
+  MaxSpeed: 20
+  Acceleration: -10
+  Behaviours:
+  - {fileID: 9160853515572831860}
+  FoldOutCollision: 1
+  HasCollision: 1
+  DestroyOnCollision: 0
+  CollisionTags:
+  - Enemy
+  Collider:
+    m_Center: {x: 0, y: 0.8, z: 0}
+    m_Extent: {x: 1, y: 0.6, z: 0}
+--- !u!114 &9160853515572831860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e2ee8033fe8d54298f64d59175f973, type: 3}
+  m_Name: BasicBehaviour
+  m_EditorClassIdentifier: 

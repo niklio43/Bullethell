@@ -12,9 +12,11 @@ namespace BulletHell.InventorySystem
         [SerializeField] Image _itemSprite;
         [SerializeField] TextMeshProUGUI _itemCount;
         [SerializeField] InventorySlot _assignedInventorySlot;
+        [SerializeField] ItemType _allowedItems;
 
         #region Getter
         public InventoryDisplay ParentDisplay { get; private set; }
+        public ItemType AllowedItems => _allowedItems;
         public InventorySlot AssignedInventorySlot => _assignedInventorySlot;
         #endregion
 
@@ -37,7 +39,7 @@ namespace BulletHell.InventorySystem
             {
                 _itemSprite.sprite = slot.ItemData.Icon;
                 _itemSprite.color = Color.white;
-                if (slot.StackSize > 1) { _itemCount.text = slot.StackSize.ToString(); }
+                if (slot.ItemData.StackSize > 1) { _itemCount.text = slot.ItemData.StackSize.ToString(); }
                 else { _itemCount.text = ""; }
             }
             else

@@ -8,7 +8,6 @@ namespace BulletHell.InventorySystem
     public abstract class InventoryDisplay : MonoBehaviour
     {
         [SerializeField] MouseObj _mouseObj;
-        private InventorySlotUI sender;
 
         protected InventorySystem _inventorySystem;
         protected Dictionary<InventorySlotUI, InventorySlot> _slotDictionary;
@@ -35,39 +34,41 @@ namespace BulletHell.InventorySystem
 
         public void SlotClicked(InventorySlotUI clickedUISlot)
         {
-            _mouseObj.UpdateMouseSlot(clickedUISlot.AssignedInventorySlot);
-            sender = clickedUISlot;
+            _mouseObj.UpdateMouseSlot(clickedUISlot);
             return;
         }
 
         public void SlotReleased(InventorySlotUI targetUISlot, PointerEventData eventData)
         {
-            if (_mouseObj.AssignedInventorySlot.ItemData != null)
+            if (_mouseObj.Sender != null)
             {
-                sender.AssignedInventorySlot?.ClearSlot();
+                if (_mouseObj.Sender.AssignedInventorySlot.ItemData.ItemType == targetUISlot.AllowedItems || targetUISlot.AllowedItems == ItemType.Default)
+                {
+                    _mouseObj.Sender.AssignedInventorySlot?.ClearSlot();
 
-                InventorySlot previous = new InventorySlot();
-                previous.AssignItem(targetUISlot.AssignedInventorySlot);
+                    InventorySlot previous = new InventorySlot();
+                    previous.AssignItem(targetUISlot.AssignedInventorySlot.ItemData);
 
-                targetUISlot.AssignedInventorySlot.AssignItem(_mouseObj.AssignedInventorySlot);
+                    targetUISlot.AssignedInventorySlot.AssignItem(_mouseObj.AssignedInventorySlot.ItemData);
 
-                sender.AssignedInventorySlot.AssignItem(previous);
+                    _mouseObj.Sender.AssignedInventorySlot.AssignItem(previous.ItemData);
 
-                targetUISlot.SwapItems(eventData);
+                    targetUISlot.SwapItems(eventData);
+                }
             }
 
-            _mouseObj.ClearSlot();
+            ResetSlot();
         }
 
         public void DropItem(InventorySlotUI invSlot)
         {
             InventorySlot temp = new InventorySlot();
-            temp.AssignItem(invSlot.AssignedInventorySlot);
+            temp.AssignItem(invSlot.AssignedInventorySlot.ItemData);
 
             invSlot.ClearSlot();
-            _mouseObj.ClearSlot();
+            ResetSlot();
 
-            for (int i = 0; i < temp.StackSize; i++)
+            for (int i = 0; i < temp.ItemData.StackSize; i++)
             {
                 GameObject droppedItem = new GameObject();
                 droppedItem.AddComponent<DroppedItem>();

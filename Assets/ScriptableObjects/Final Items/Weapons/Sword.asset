@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   _abilitySlot:
-  - {fileID: 11400000, guid: a0070805f62fa0a40b3ed74bc947a6c6, type: 2}
+  - {fileID: 0}
   AnimatorController: {fileID: 22100000, guid: c6719dd60da867449bf0b51b1a42df54, type: 2}
   database: {fileID: 11400000, guid: d1c92bf548e2e194ea1b7091ac1b436e, type: 2}
   icon: {fileID: 21300000, guid: 03c7fc2e19d16a8499bcf1fc8b4b0c22, type: 3}
@@ -23,4 +23,4 @@ MonoBehaviour:
   maxStackSize: 1
   pool: {fileID: 11400000, guid: d663265695a0b244fa812b5c16b3f471, type: 2}
   rarity: 3
-  itemType: 0
+  itemType: 1

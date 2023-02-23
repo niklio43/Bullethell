@@ -16,7 +16,7 @@ MonoBehaviour:
   Delay: 1000
   RotationSpeed: 0
   FoldOutProjectile: 1
-  ProjectileData: {fileID: 11400000, guid: 3bb419b6b0fcaf246ab2d8b6b94475ee, type: 2}
+  ProjectileData: {fileID: 11400000, guid: 079102506c8c6f7459ad4d39754db7f4, type: 2}
   LifeTime: 0.4
   FoldOutEmitter: 1
   EmitterPoints: 1

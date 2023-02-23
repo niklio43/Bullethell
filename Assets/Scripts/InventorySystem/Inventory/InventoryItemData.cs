@@ -13,6 +13,7 @@ namespace BulletHell.InventorySystem
         public Sprite Icon { get; set; }
         public Sprite Sprite { get; set; }
         public int MaxStackSize { get; set; }
+        public int StackSize { get; set; }
         public Rarity Rarity { get; set; }
         public ItemType ItemType { get; set; }
     }
@@ -26,6 +27,7 @@ namespace BulletHell.InventorySystem
 
     public enum ItemType
     {
+        Default,
         Weapon,
         Headgear,
         Chestgear,
