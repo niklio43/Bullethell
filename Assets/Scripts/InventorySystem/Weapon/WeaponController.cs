@@ -15,19 +15,9 @@ public class WeaponController : MonoBehaviour
     public float Radius;
     Weapon _weapon;
     [SerializeField] PlayerController player;
-    [SerializeField] List<InventorySlotUI> _inventorySlots = new List<InventorySlotUI>();
 
-    private void Start()
+    public void EquipWeapon(InventoryItemData item)
     {
-        foreach (InventorySlotUI slotUI in _inventorySlots)
-        {
-            slotUI.AssignedInventorySlot.OnAssignItem += EquipWeapon;
-        }
-    }
-
-    void EquipWeapon(InventoryItemData item)
-    {
-        Debug.Log("test");
         AssignWeapon(item as Weapon);
     }
 
@@ -43,7 +33,7 @@ public class WeaponController : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
         gameObject.name = weapon.name;
 
-        foreach (Ability ability in weapon.AbilitySlot)
+        foreach (Ability ability in weapon.Abilities)
         {
             GetComponent<AbilityHolder>().AddAbility(ability);
         }
@@ -69,9 +59,9 @@ public class WeaponController : MonoBehaviour
     public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
     {
         if (_weapon == null) { Debug.Log("No Weapon Error"); return; }
-        if (abilityIndex > _weapon.AbilitySlot.Count - 1 || _weapon.AbilitySlot[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
+        if (abilityIndex > _weapon.Abilities.Count - 1 || _weapon.Abilities[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
 
-        _weapon.AbilitySlot[abilityIndex].Cast();
+        _weapon.Abilities[abilityIndex].Cast();
     }
 
     #region Component Caching

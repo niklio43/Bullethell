@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace BulletHell.InventorySystem
 {
@@ -10,8 +11,7 @@ namespace BulletHell.InventorySystem
     {
         [SerializeField] InventoryItemData _itemData;
 
-        public delegate void OnAssignItemDelegate(InventoryItemData item);
-        public event OnAssignItemDelegate OnAssignItem;
+        public UnityEvent<InventoryItemData> OnAssign;
 
         #region Getter
         public InventoryItemData ItemData => _itemData;
@@ -36,7 +36,10 @@ namespace BulletHell.InventorySystem
         public void AssignItem(InventoryItemData data)
         {
             _itemData = data;
-            OnAssignItem?.Invoke(data);
+
+            if (data == null) { return; }
+
+            OnAssign?.Invoke(data);
         }
 
         public void UpdateInventorySlot(InventoryItemData data, int amount)

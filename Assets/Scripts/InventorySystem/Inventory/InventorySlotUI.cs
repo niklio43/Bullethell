@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 namespace BulletHell.InventorySystem
 {
@@ -29,7 +30,10 @@ namespace BulletHell.InventorySystem
 
         public void Initialize(InventorySlot slot)
         {
+            var unityEvent = _assignedInventorySlot.OnAssign;
             _assignedInventorySlot = slot;
+            _assignedInventorySlot.OnAssign = unityEvent;
+
             UpdateUISlot(slot);
         }
 

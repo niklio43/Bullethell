@@ -30,10 +30,12 @@ namespace BulletHell.Abilities
 
         protected override void Perform()
         {
-            if (_ability.Owner.TryGetComponent(out Character character)) {
+            if (_ability.Owner.TryGetComponent(out Character character))
+            {
                 _emitterObject.FireProjectile(character, Target);
             }
-            else {
+            else
+            {
                 Debug.LogError("Ability owner needs to be of type Character!");
             }
         }

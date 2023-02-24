@@ -9,39 +9,41 @@ namespace BulletHell.InventorySystem
     {
         Pool _pool;
         [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
+        List<Ability> _abilities = new List<Ability>();
         public AnimatorOverrideController AnimatorController;
-        public AbilityDatabase database;
         public Pool Pool { get { return _pool; } set { _pool = value; } }
 
-        public List<Ability> AbilitySlot { get { return _abilitySlot; } set { _abilitySlot = value; } }
+        public List<Ability> Abilities { get { return _abilities; } set { _abilities = value; } }
 
         public void Initialize(GameObject owner, GameObject host)
         {
+            _abilities.Clear();
             for (int i = 0; i < _abilitySlot.Count; i++)
             {
-                _abilitySlot[i] = database.abilities[_abilitySlot[i].Id];
-                _abilitySlot[i] = Instantiate(_abilitySlot[i]);
-                _abilitySlot[i].Initialize(owner, host);
+                var ab = Instantiate(_abilitySlot[i]);
+
+                ab.Initialize(owner, host);
+
+                _abilities.Add(ab);
             }
         }
 
         public void Uninitialize()
         {
-            for (int i = 0; i < _abilitySlot.Count; i++)
+            for (int i = 0; i < _abilities.Count; i++)
             {
-                _abilitySlot[i] = database.abilities[_abilitySlot[i].Id];
-                _abilitySlot[i].Uninitialize();
+                _abilities[i].Uninitialize();
             }
         }
 
         public void AddAbility(Ability ability, Weapon weapon, GameObject owner)
         {
-            if (_abilitySlot.Count >= 3) return;
-            for (int i = 0; i < _abilitySlot.Count; i++)
+            if (_abilities.Count >= 3) return;
+            for (int i = 0; i < _abilities.Count; i++)
             {
-                if (_abilitySlot[i].Id == ability.Id) { owner.GetComponent<WeaponController>().FillAbilitySlot(weapon); return; }
+                if (_abilities[i].Id == ability.Id) { owner.GetComponent<WeaponController>().FillAbilitySlot(weapon); return; }
             }
-            _abilitySlot.Add(ability);
+            _abilities.Add(ability);
             ability.Initialize(owner);
         }
     }
