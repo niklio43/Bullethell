@@ -27,7 +27,8 @@ namespace BulletHell.Abilities
         [Header("Ability Behaviours")]
         [SerializeField] List<BaseAbilityBehaviour> _behaviours;
 
-        int _currentAmount;        #region Getters
+        int _currentAmount;
+        #region Getters
         public string GetName() => _name;
         public int GetCurrentAmount() => _currentAmount;
         public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);

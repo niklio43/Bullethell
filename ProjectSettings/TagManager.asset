@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - GroundObstacle
   - Slot
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - Interactable
   - Entity
-  - 
+  - Obstacle
   - 
   - Post Processing
   - Room Border

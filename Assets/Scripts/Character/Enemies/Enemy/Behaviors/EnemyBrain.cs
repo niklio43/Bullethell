@@ -145,7 +145,6 @@ namespace BulletHell.Enemies
         {
             for (int i = 0; i < abilities.Count; i++) {
                 abilities[i] = Instantiate(abilities[i]);
-
                 GameObject host = (_owner.Weapon != null) ? _owner.Weapon.gameObject : _owner.Aim.gameObject;
 
                 abilities[i].Initialize(_owner.gameObject, host);

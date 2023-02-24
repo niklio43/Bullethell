@@ -14,13 +14,16 @@ namespace BulletHell.Enemies
         [HideInInspector] public Enemy Enemy;
         [HideInInspector] public Rigidbody2D Rb;
         [HideInInspector] public Collider2D Collider;
+        [HideInInspector] public EnemyPathFinder PathFinder;
 
         public void Initialize(Enemy enemy)
         {
             Enemy = enemy;
             Rb = Enemy.GetComponent<Rigidbody2D>();
             Collider = GetComponent<Collider2D>();
+            PathFinder = GetComponent<EnemyPathFinder>();
 
+            PathFinder.Initialize(enemy);
             _agentSteering.Initialize();
 
             InvokeRepeating(nameof(EvaluateSteering), 0, 0.05f);
