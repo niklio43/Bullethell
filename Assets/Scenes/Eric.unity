@@ -1318,10 +1318,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Melee (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 5441612227424731693, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
 --- !u!1 &1448856845
@@ -1709,22 +1705,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2960934200889275608, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: m_Size.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2960934200889275608, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 3808603310637453500, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: drawGizmos
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5304554048927497912, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_Name
       value: Skeleton_Mage
