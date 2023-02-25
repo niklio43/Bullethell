@@ -55,6 +55,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7468174017068559625}
   - component: {fileID: 13956960875878199}
+  - component: {fileID: 5676350747187522917}
+  - component: {fileID: 3460303823781318273}
   - component: {fileID: 8600086253289770781}
   m_Layer: 7
   m_Name: Steering
@@ -100,10 +102,54 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6e27e9802452eca47a75242fb3d56a64, type: 2}
     - {fileID: 11400000, guid: 8a421364e60503945bb613885c0197e0, type: 2}
     - {fileID: 11400000, guid: 38d7da8ed0ede8543aa06fb64bafab04, type: 2}
+    - {fileID: 11400000, guid: 6c176a6bc41978142beea64688cd0dcb, type: 2}
   Enemy: {fileID: 0}
   Rb: {fileID: 0}
   Collider: {fileID: 0}
   PathFinder: {fileID: 0}
+--- !u!114 &5676350747187522917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5149613371313608395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec28ca219190f9d4db8725e93a985945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetDistanceThreshold: 1
+  _waypointDistanceThreshold: 1
+  State: 0
+--- !u!114 &3460303823781318273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5149613371313608395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 0
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!61 &8600086253289770781
 BoxCollider2D:
   m_ObjectHideFlags: 0
