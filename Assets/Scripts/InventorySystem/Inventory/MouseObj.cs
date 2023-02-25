@@ -22,7 +22,8 @@ namespace BulletHell.InventorySystem
         public void ClearSlot()
         {
             Sender = null;
-            AssignedInventorySlot = null;
+            AssignedInventorySlot.ClearSlot();
+            AssignedInventorySlot.OnAssign = null;
         }
     }
 }
