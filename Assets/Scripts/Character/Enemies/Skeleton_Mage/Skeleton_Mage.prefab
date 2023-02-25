@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 5140993756046568941}
   - component: {fileID: 3808603310637453500}
   - component: {fileID: 2960934200889275608}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Steering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec28ca219190f9d4db8725e93a985945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetDistanceThreshold: 1
+  _waypointDistanceThreshold: 1
+  State: 0
 --- !u!114 &3808603310637453500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  drawGizmos: 1
+  drawGizmos: 0
   detailedGizmos: 0
   startEndModifier:
     addPoints: 0
@@ -159,7 +162,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.01}
+  m_Offset: {x: -0.03, y: -0.01}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -170,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.17}
+  m_Size: {x: 0.8, y: 0.17}
   m_EdgeRadius: 0
 --- !u!1 &8461412192270030066
 GameObject:

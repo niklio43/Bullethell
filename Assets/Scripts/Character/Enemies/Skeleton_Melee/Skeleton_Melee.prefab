@@ -103,6 +103,7 @@ MonoBehaviour:
   Enemy: {fileID: 0}
   Rb: {fileID: 0}
   Collider: {fileID: 0}
+  PathFinder: {fileID: 0}
 --- !u!61 &8600086253289770781
 BoxCollider2D:
   m_ObjectHideFlags: 0
