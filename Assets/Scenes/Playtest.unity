@@ -11223,6 +11223,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AssignedInventorySlot:
     _itemData: {fileID: 0}
+    OnAssign:
+      m_PersistentCalls:
+        m_Calls: []
   Sender: {fileID: 0}
 --- !u!114 &1181653750
 MonoBehaviour:
@@ -12102,8 +12105,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1992674392}
   - component: {fileID: 1992674398}
-  - component: {fileID: 1992674397}
   - component: {fileID: 1992674396}
+  - component: {fileID: 1992674397}
   - component: {fileID: 1992674395}
   m_Layer: 7
   m_Name: Weapon
@@ -12180,9 +12183,6 @@ MonoBehaviour:
   CircleOrigin: {fileID: 1423690934}
   Radius: 0.6
   player: {fileID: 1181653735}
-  _inventorySlots:
-  - {fileID: 4623565677192367360}
-  - {fileID: 4623565677636128914}
 --- !u!212 &1992674398
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16462,6 +16462,9 @@ MonoBehaviour:
   _itemCount: {fileID: 4002321155686051576}
   _assignedInventorySlot:
     _itemData: {fileID: 0}
+    OnAssign:
+      m_PersistentCalls:
+        m_Calls: []
   _allowedItems: 3
 --- !u!114 &4623565677023421839
 MonoBehaviour:
@@ -16479,6 +16482,9 @@ MonoBehaviour:
   _itemCount: {fileID: 4002321155536069240}
   _assignedInventorySlot:
     _itemData: {fileID: 0}
+    OnAssign:
+      m_PersistentCalls:
+        m_Calls: []
   _allowedItems: 4
 --- !u!114 &4623565677192367360
 MonoBehaviour:
@@ -16496,6 +16502,21 @@ MonoBehaviour:
   _itemCount: {fileID: 4002321155906341623}
   _assignedInventorySlot:
     _itemData: {fileID: 0}
+    OnAssign:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1992674397}
+          m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+          m_MethodName: EquipWeapon
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _allowedItems: 1
 --- !u!114 &4623565677636128914
 MonoBehaviour:
@@ -16513,6 +16534,21 @@ MonoBehaviour:
   _itemCount: {fileID: 4002321156552644453}
   _assignedInventorySlot:
     _itemData: {fileID: 0}
+    OnAssign:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1992674397}
+          m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+          m_MethodName: EquipWeapon
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _allowedItems: 1
 --- !u!114 &4623565678010538942
 MonoBehaviour:
@@ -16530,6 +16566,9 @@ MonoBehaviour:
   _itemCount: {fileID: 4002321154582305865}
   _assignedInventorySlot:
     _itemData: {fileID: 0}
+    OnAssign:
+      m_PersistentCalls:
+        m_Calls: []
   _allowedItems: 2
 --- !u!222 &4700459067961526070
 CanvasRenderer:

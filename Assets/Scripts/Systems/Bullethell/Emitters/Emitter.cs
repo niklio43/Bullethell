@@ -24,8 +24,6 @@ namespace BulletHell.Emitters
             _emitterGroups = new EmitterGroupsManager(owner.transform, _data);
         }
 
-        public void Uninitialize() => ClearAllProjectiles();
-
         public void UpdateEmitter()
         {
             _emitterGroups.UpdateGroups();
@@ -57,11 +55,5 @@ namespace BulletHell.Emitters
         }
 
         protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();
-        public void ClearAllProjectiles()
-        {
-            foreach (Projectile projectile in _activeProjectiles) {
-                projectile.ResetObject();
-            }
-        }
     }
 }

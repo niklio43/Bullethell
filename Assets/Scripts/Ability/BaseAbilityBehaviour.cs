@@ -46,7 +46,6 @@ namespace BulletHell.Abilities
             foreach (AbilityAnimation animation in _animations) {
                 animation.Initialize(ability);
             }
-
             Initialize();
         }
 
