@@ -37,9 +37,7 @@ namespace BulletHell.InventorySystem
         {
             _itemData = data;
 
-            if (data == null) { return; }
-
-            OnAssign?.Invoke(data);
+            OnAssign?.Invoke(_itemData);
         }
 
         public void UpdateInventorySlot(InventoryItemData data, int amount)

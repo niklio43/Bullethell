@@ -40,22 +40,27 @@ namespace BulletHell.InventorySystem
 
         public void SlotReleased(InventorySlotUI targetUISlot, PointerEventData eventData)
         {
-            if (_mouseObj.Sender != null)
+            if (_mouseObj.Sender != null && _mouseObj.Sender != targetUISlot)
             {
-                if (_mouseObj.Sender.AssignedInventorySlot.ItemData.ItemType == targetUISlot.AllowedItems || targetUISlot.AllowedItems == ItemType.Default)
+                if (_mouseObj.Sender.AssignedInventorySlot.ItemData.ItemType == targetUISlot.AllowedItems
+                    || targetUISlot.AllowedItems == ItemType.Default)
                 {
+                    targetUISlot.SwapItems(eventData);
+
                     _mouseObj.Sender.AssignedInventorySlot?.ClearSlot();
 
-                    InventorySlot previous = new InventorySlot();
-                    previous.AssignItem(targetUISlot.AssignedInventorySlot.ItemData);
+                    InventorySlot tempSlot1 = new InventorySlot();
+                    tempSlot1.AssignItem(targetUISlot.AssignedInventorySlot.ItemData);
 
-                    targetUISlot.AssignedInventorySlot.AssignItem(_mouseObj.AssignedInventorySlot.ItemData);
+                    InventorySlot tempSlot2 = new InventorySlot();
+                    tempSlot2.AssignItem(_mouseObj.AssignedInventorySlot.ItemData);
 
-                    _mouseObj.Sender.AssignedInventorySlot.AssignItem(previous.ItemData);
-
-                    targetUISlot.SwapItems(eventData);
+                    _mouseObj.Sender.AssignedInventorySlot.AssignItem(tempSlot1.ItemData);
+                    targetUISlot.AssignedInventorySlot.AssignItem(tempSlot2.ItemData);
                 }
             }
+
+
 
             ResetSlot();
         }
@@ -66,6 +71,7 @@ namespace BulletHell.InventorySystem
             temp.AssignItem(invSlot.AssignedInventorySlot.ItemData);
 
             invSlot.ClearSlot();
+            invSlot.AssignedInventorySlot.AssignItem(null);
             ResetSlot();
 
             for (int i = 0; i < temp.ItemData.StackSize; i++)

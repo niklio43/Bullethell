@@ -18,6 +18,13 @@ public class WeaponController : MonoBehaviour
 
     public void EquipWeapon(InventoryItemData item)
     {
+        if(item == null)
+        {
+            Debug.Log("UnEquip");
+            UnAssignWeapon();
+            return;
+        }
+        Debug.Log("Equip");
         AssignWeapon(item as Weapon);
     }
 
@@ -40,14 +47,14 @@ public class WeaponController : MonoBehaviour
         _weapon = weapon;
     }
 
-    public void UnAssignWeapon(Weapon weapon)
+    public void UnAssignWeapon()
     {
-        weapon.Uninitialize();
         GetComponent<SpriteRenderer>().sprite = null;
 
         GetComponent<AbilityHolder>().AddAbility(null);
 
         GetComponent<Animator>().runtimeAnimatorController = null;
+        _weapon.Uninitialize();
         _weapon = null;
     }
 

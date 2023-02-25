@@ -16,6 +16,7 @@ namespace BulletHell.InventorySystem
         {
             Sender = invSlotUI;
             AssignedInventorySlot?.AssignItem(Sender.AssignedInventorySlot.ItemData);
+            AssignedInventorySlot.OnAssign = Sender.AssignedInventorySlot.OnAssign;
         }
 
         public void ClearSlot()
