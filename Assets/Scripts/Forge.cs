@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BulletHell.InventorySystem;
 
-public class Forge : MonoBehaviour
+public class Forge : InteractableItem
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject _forgeUI;
+
+    void Awake()
     {
-        
+        _forgeUI.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Interact(InventorySystem inventory)
     {
-        
+        _forgeUI.SetActive(true);
     }
 }

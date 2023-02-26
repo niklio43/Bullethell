@@ -22,4 +22,3 @@ MonoBehaviour:
   _screenShakeAmplitude: 0
   _behaviours:
   - {fileID: 11400000, guid: f38c3f65278f7ae428542ab3be216c08, type: 2}
-  database: {fileID: 11400000, guid: ffdc5d5820d1ff94f8e9431fb62ba016, type: 2}

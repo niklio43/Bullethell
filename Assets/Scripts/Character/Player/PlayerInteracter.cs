@@ -21,8 +21,8 @@ public class PlayerInteracter : MonoBehaviour
         Collider2D hit = Physics2D.OverlapCircle(transform.position, _interactRadius, _interactableMask);
         if (hit != null)
         {
-            DroppedItem droppedItem = hit.GetComponent<DroppedItem>();
-            _closestInteractable = droppedItem;
+            InteractableItem interactableItem = hit.GetComponent<InteractableItem>();
+            _closestInteractable = interactableItem;
         }
         else
         {
