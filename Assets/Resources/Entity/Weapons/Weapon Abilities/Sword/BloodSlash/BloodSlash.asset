@@ -17,7 +17,7 @@ MonoBehaviour:
   _name: Blood Slash
   _description: Big slash of blood
   _maxAmount: 3
-  _coolDownTime: 10
+  _coolDownTime: 5
   _screenShakeDuration: 0
   _screenShakeAmplitude: 0
   _behaviours:

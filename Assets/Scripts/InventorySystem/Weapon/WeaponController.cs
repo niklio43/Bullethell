@@ -74,18 +74,21 @@ public class WeaponController : MonoBehaviour
         {
             if (ab.Id == ability.Id) { FillAbilitySlot(weapon); return; }
         }
+        foreach (Ability ab in weapon.AbilitySlot)
+        {
+            if (ab.Id == ability.Id) { FillAbilitySlot(weapon); return; }
+        }
 
         StartCoroutine(BeginUpgrade(weapon, ability, _player.gameObject, gameObject));
     }
 
     IEnumerator BeginUpgrade(Weapon weapon, Ability ability, GameObject owner, GameObject host)
     {
-        Debug.Log("test");
-        //ForgeUI.Instance.IsUpgrading = true;
+        ForgeUI.Instance.IsUpgrading = true;
         yield return new WaitForSeconds(1f);
-        //Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
-        //ForgeUI.Instance.IsUpgrading = false;
-        //weapon.AddAbility(ability, _player.gameObject, gameObject);
+        Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
+        ForgeUI.Instance.IsUpgrading = false;
+        weapon.AddAbility(ability, _player.gameObject, gameObject);
     }
 
     void FailedUpgrade()
