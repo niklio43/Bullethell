@@ -29,9 +29,12 @@ MonoBehaviour:
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
   FoldOutGeneral: 1
-  name: NewProjectileData
+  name: Skeleton_Brute_Slam
   Scale: 1
-  Damage: []
+  Damage:
+  - senderType: 3
+    Type: 0
+    Value: 30
   StatusEffects: []
   FoldOutSprite: 1
   Sprite: {fileID: 0}
@@ -45,6 +48,7 @@ MonoBehaviour:
   Speed: 0
   MaxSpeed: 0
   Acceleration: 0
+  InheritVelocity: 0
   Behaviours:
   - {fileID: -4820402408971454233}
   FoldOutCollision: 1

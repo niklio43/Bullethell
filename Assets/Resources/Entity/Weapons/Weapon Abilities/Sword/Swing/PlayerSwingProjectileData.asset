@@ -44,6 +44,7 @@ MonoBehaviour:
   Speed: 15
   MaxSpeed: 20
   Acceleration: -10
+  InheritVelocity: 1
   Behaviours:
   - {fileID: 9160853515572831860}
   FoldOutCollision: 1
