@@ -1270,10 +1270,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5441612227424731686, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
-      propertyPath: PreferredDistance
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 5441612227424731691, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1321,10 +1317,6 @@ PrefabInstance:
     - target: {fileID: 5441612227424731693, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
       propertyPath: m_Name
       value: Skeleton_Melee (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5676350747187522917, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
-      propertyPath: _targetDistanceThreshold
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
@@ -1713,10 +1705,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2885046983980586820, guid: 24b3e7a0400eb0c49a8f3e7237604895, type: 3}
-      propertyPath: _targetDistanceThreshold
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3263897386200201226, guid: 24b3e7a0400eb0c49a8f3e7237604895, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1774,10 +1762,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5140993756046568941, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-      propertyPath: _targetDistanceThreshold
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
       propertyPath: m_Name
       value: Skeleton_Mage

@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
     [SerializeField] EnemyBrain _brain;
     [SerializeField] EnemyMovement _enemyMovement;
-
+    [SerializeField] VisualEffectAsset _deathVFX;
     [HideInInspector] public Transform Target;
     [HideInInspector] public bool CanMove = true;
     [HideInInspector] public DetectionData DetectionData = new DetectionData();
@@ -71,7 +71,6 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Camera.main.Shake(0.075f, 0.1f);
         _brain.SetState(EnemyBrain.EnemyStates.Staggered);
         //DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
     }
@@ -94,7 +93,7 @@ public class Enemy : MonoBehaviour
     public void OnDeath()
     {
         _brain.CurrentAbility?.Cancel();
-        //GetComponent<DropRandomLoot>().DropItem(_dropTable);
+        BulletHell.VFX.VFXManager.Play(_deathVFX, 1, transform.position);
         Destroy(gameObject);
     }
 

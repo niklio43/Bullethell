@@ -22,8 +22,10 @@ namespace BulletHell.FiniteStateMachine
 
         protected override void OnEnter()
         {
-            _animator.Play(_clipName);
-            _animator.Update(Time.deltaTime);
+            if(_animator == null) { return; }
+
+            _animator?.Play(_clipName);
+            _animator?.Update(Time.deltaTime);
         }
     }
 }

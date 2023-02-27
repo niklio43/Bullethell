@@ -250,6 +250,7 @@ MonoBehaviour:
   MovementType: 0
   _brain: {fileID: 11400000, guid: f095d9666b0d9d24aa3a3903dcbbe46b, type: 2}
   _enemyMovement: {fileID: 1669646182689616081}
+  _deathVFX: {fileID: 8926484042661614526, guid: 2c75005ea8dd2c24daf1064fc62a87ae, type: 3}
   Target: {fileID: 0}
   CanMove: 0
   Aim: {fileID: 839990684}

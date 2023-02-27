@@ -29,7 +29,7 @@ namespace BulletHell.Enemies
 
         public void UpdateAbility(float dt) => Ability.UpdateAbility(dt);
 
-        public void Cancel() => Ability.Cancel();
+        public void Cancel() => Ability?.Cancel();
 
         public bool CanCast()
         {

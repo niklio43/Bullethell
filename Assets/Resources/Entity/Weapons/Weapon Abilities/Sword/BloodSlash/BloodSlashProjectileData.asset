@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FoldOutGeneral: 1
   name: NewProjectileData
-  Scale: 1
+  Scale: 0.6
   Damage:
   - senderType: 0
     Type: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     _damageValues:
     - senderType: 3
       Type: 1
-      Value: 5
+      Value: 10
   FoldOutSprite: 1
   Sprite: {fileID: 21300000, guid: 7e115cef2c037f14a972e52077ee201e, type: 3}
   BirthColor: {r: 1, g: 1, b: 1, a: 1}
@@ -44,16 +44,17 @@ MonoBehaviour:
   Speed: 6
   MaxSpeed: 10
   Acceleration: 1
-  InheritVelocity: 1
+  InheritVelocity: 0
   Behaviours:
   - {fileID: 325332023608694527}
   FoldOutCollision: 1
   HasCollision: 1
-  DestroyOnCollision: 1
-  CollisionTags: []
+  DestroyOnCollision: 0
+  CollisionTags:
+  - Enemy
   Collider:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: -0.1, z: 0}
+    m_Extent: {x: 1, y: 1.6, z: 0}
 --- !u!114 &325332023608694527
 MonoBehaviour:
   m_ObjectHideFlags: 0
