@@ -8,13 +8,14 @@ using System;
 using BulletHell.Player;
 using UnityEngine.InputSystem;
 using BulletHell.InventorySystem;
+using BulletHell.CameraUtilities;
 
 public class WeaponController : MonoBehaviour
 {
     public Transform CircleOrigin;
     public float Radius;
     Weapon _weapon;
-    [SerializeField] PlayerController player;
+    [SerializeField] PlayerController _player;
 
     public void EquipWeapon(InventoryItemData item)
     {
@@ -28,7 +29,7 @@ public class WeaponController : MonoBehaviour
 
     public void AssignWeapon(Weapon weapon)
     {
-        weapon.Initialize(player.gameObject, gameObject);
+        weapon.Initialize(_player.gameObject, gameObject);
 
         Animator animator = GetComponent<Animator>();
 
@@ -59,12 +60,13 @@ public class WeaponController : MonoBehaviour
     public void UpgradeWeapon(InventoryItemData item)
     {
         if (item == null) { return; }
+        Debug.Log("Attempting upgrade");
         FillAbilitySlot(item as Weapon);
     }
 
     public void FillAbilitySlot(Weapon weapon)
     {
-        if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); return; }
+        if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); FailedUpgrade();  return; }
 
         Ability ability = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
 
@@ -73,9 +75,22 @@ public class WeaponController : MonoBehaviour
             if (ab.Id == ability.Id) { FillAbilitySlot(weapon); return; }
         }
 
-        Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
+        StartCoroutine(BeginUpgrade(weapon, ability, _player.gameObject, gameObject));
+    }
 
-        weapon.AddAbility(ability, player.gameObject, gameObject);
+    IEnumerator BeginUpgrade(Weapon weapon, Ability ability, GameObject owner, GameObject host)
+    {
+        Debug.Log("test");
+        //ForgeUI.Instance.IsUpgrading = true;
+        yield return new WaitForSeconds(1f);
+        //Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
+        //ForgeUI.Instance.IsUpgrading = false;
+        //weapon.AddAbility(ability, _player.gameObject, gameObject);
+    }
+
+    void FailedUpgrade()
+    {
+        Camera.main.Shake(0.1f, 1f);
     }
 
     public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
