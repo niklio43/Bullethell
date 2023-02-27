@@ -8,6 +8,7 @@ using System;
 using BulletHell.Player;
 using UnityEngine.InputSystem;
 using BulletHell.InventorySystem;
+using BulletHell.CameraUtilities;
 
 public class WeaponController : MonoBehaviour
 {
@@ -79,16 +80,17 @@ public class WeaponController : MonoBehaviour
 
     IEnumerator BeginUpgrade(Weapon weapon, Ability ability, GameObject owner, GameObject host)
     {
-        ForgeUI.Instance.IsUpgrading = true;
+        Debug.Log("test");
+        //ForgeUI.Instance.IsUpgrading = true;
         yield return new WaitForSeconds(1f);
-        Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
-        ForgeUI.Instance.IsUpgrading = false;
-        weapon.AddAbility(ability, _player.gameObject, gameObject);
+        //Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
+        //ForgeUI.Instance.IsUpgrading = false;
+        //weapon.AddAbility(ability, _player.gameObject, gameObject);
     }
 
     void FailedUpgrade()
     {
-
+        Camera.main.Shake(0.1f, 1f);
     }
 
     public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
