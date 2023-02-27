@@ -6,22 +6,26 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] List<GameObject> _enemies = new List<GameObject>();
     [SerializeField, Range(0f, 100f)] float _spawnRadius = 5f;
+    [SerializeField, Range(0f, 100f)] float _instantiateRadius = 3f;
     [SerializeField] int _enemiesPerWave = 5;
-    Transform player;
+    [SerializeField] Transform player;
 
     bool spawned = false;
-
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
+    float timer = 0;
 
     void Update()
     {
-        if(Vector2.Distance(player.position, transform.position) <= _spawnRadius && !spawned)
+        if (Vector2.Distance(player.position, transform.position) <= _spawnRadius && !spawned)
         {
             StartWave();
             spawned = true;
+        }
+        timer += Time.deltaTime;
+
+        if(timer >= 60)
+        {
+            spawned = false;
+            timer = 0;
         }
     }
 
@@ -35,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
     bool GetPosition()
     {
-        Vector2 point = (Vector2)transform.position + (Random.insideUnitCircle * _spawnRadius);
+        Vector2 point = (Vector2)transform.position + (Random.insideUnitCircle * _instantiateRadius);
 
         if (!CalculateOverlap(point)) { GetPosition(); return false; }
 
@@ -55,8 +59,6 @@ public class EnemySpawner : MonoBehaviour
             if (hit[i].collider == null) { return true; }
 
             if (hit[i].collider.isTrigger) { return true; }
-
-            Debug.Log(hit[i].collider.name);
         }
 
         return true;
@@ -71,5 +73,6 @@ public class EnemySpawner : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _spawnRadius);
+        Gizmos.DrawWireSphere(transform.position, _instantiateRadius);
     }
 }
