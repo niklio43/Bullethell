@@ -18,13 +18,11 @@ public class WeaponController : MonoBehaviour
 
     public void EquipWeapon(InventoryItemData item)
     {
-        if(item == null)
+        if (item == null)
         {
-            Debug.Log("UnEquip");
             UnAssignWeapon();
             return;
         }
-        Debug.Log("Equip");
         AssignWeapon(item as Weapon);
     }
 
@@ -58,15 +56,32 @@ public class WeaponController : MonoBehaviour
         _weapon = null;
     }
 
+    public void UpgradeWeapon(InventoryItemData item)
+    {
+        if (item == null) { return; }
+        FillAbilitySlot(item as Weapon);
+    }
+
     public void FillAbilitySlot(Weapon weapon)
     {
-        weapon.AddAbility(weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)], weapon, gameObject);
+        if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); return; }
+
+        Ability ability = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
+
+        foreach (Ability ab in weapon.Abilities)
+        {
+            if (ab.Id == ability.Id) { FillAbilitySlot(weapon); return; }
+        }
+
+        Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
+
+        weapon.AddAbility(ability, player.gameObject, gameObject);
     }
 
     public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
     {
-        if (_weapon == null) { Debug.Log("No Weapon Error"); return; }
-        if (abilityIndex > _weapon.Abilities.Count - 1 || _weapon.Abilities[abilityIndex] == null) { Debug.Log("Ability doesn't exist!"); return; }
+        if (_weapon == null) { return; }
+        if (abilityIndex > _weapon.Abilities.Count - 1 || _weapon.Abilities[abilityIndex] == null) { return; }
 
         _weapon.Abilities[abilityIndex].Cast();
     }

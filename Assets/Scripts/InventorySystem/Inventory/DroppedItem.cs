@@ -6,15 +6,19 @@ using UnityEngine.UI;
 
 namespace BulletHell.InventorySystem
 {
-    public class DroppedItem : MonoBehaviour, IPickUp, ISerializationCallbackReceiver
+    public class DroppedItem : InteractableItem
     {
         public InventoryItemData ItemData;
 
-        public void AssignItem() { }
+        void Awake()
+        {
+            if(ItemData == null) { return; }
+            Initialize(ItemData);
+        }
 
         public void Initialize(InventoryItemData itemData)
         {
-            ItemData = itemData;
+            ItemData = Instantiate(itemData);
             gameObject.AddComponent<SpriteRenderer>().sprite = ItemData.Sprite;
             gameObject.AddComponent<CircleCollider2D>().isTrigger = true;
             gameObject.name = ItemData.name;
@@ -22,23 +26,12 @@ namespace BulletHell.InventorySystem
             gameObject.layer = LayerMask.NameToLayer("Interactable");
         }
 
-        public void Interact(InventorySystem inventory)
+        public override void Interact(InventorySystem inventory)
         {
             if (inventory.AddToInventory(ItemData, 1))
             {
                 Destroy(gameObject);
             }
         }
-
-        public void OnBeforeSerialize()
-        {
-#if UNITY_EDITOR
-            GetComponent<SpriteRenderer>().sprite = ItemData.Sprite;
-            EditorUtility.SetDirty(GetComponent<SpriteRenderer>());
-#endif
-        }
-
-
-        public void OnAfterDeserialize() { }
     }
 }

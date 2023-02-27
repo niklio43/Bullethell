@@ -17,14 +17,9 @@ namespace BulletHell.InventorySystem
 
         public void Initialize(GameObject owner, GameObject host)
         {
-            _abilities.Clear();
             for (int i = 0; i < _abilitySlot.Count; i++)
             {
-                var ab = Instantiate(_abilitySlot[i]);
-
-                ab.Initialize(owner, host);
-
-                _abilities.Add(ab);
+                AddAbility(_abilitySlot[i], owner, host);
             }
         }
 
@@ -36,15 +31,22 @@ namespace BulletHell.InventorySystem
             }
         }
 
-        public void AddAbility(Ability ability, Weapon weapon, GameObject owner)
+        public void AddAbility(Ability ability, GameObject owner, GameObject host)
         {
-            if (_abilities.Count >= 3) return;
+            var ab = Instantiate(ability);
+
+            ab.Initialize(owner, host);
+
             for (int i = 0; i < _abilities.Count; i++)
             {
-                if (_abilities[i].Id == ability.Id) { owner.GetComponent<WeaponController>().FillAbilitySlot(weapon); return; }
+                if(_abilities[i].Id == ab.Id)
+                {
+                    _abilities.RemoveAt(i);
+                    _abilities.Insert(i, ab);
+                    return;
+                }
             }
-            _abilities.Add(ability);
-            ability.Initialize(owner);
+            _abilities.Add(ab);
         }
     }
 }

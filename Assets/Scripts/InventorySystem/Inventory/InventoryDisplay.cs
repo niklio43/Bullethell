@@ -59,9 +59,6 @@ namespace BulletHell.InventorySystem
                     targetUISlot.AssignedInventorySlot.AssignItem(tempSlot2.ItemData);
                 }
             }
-
-
-
             ResetSlot();
         }
 
