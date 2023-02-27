@@ -11,7 +11,7 @@ namespace BulletHell.UI
     public class PlayerUI : Singleton<PlayerUI>
     {
         [SerializeField] PlayerInput _input;
-        [SerializeField] GameObject _inventory;
+        public GameObject Inventory;
         [SerializeField] HealthBar _healthBar;
         [SerializeField] StaminaBar _staminaBar;
         [SerializeField] StatusEffectUIManager _statusEffectUIManager;
@@ -36,7 +36,7 @@ namespace BulletHell.UI
 
         private void Start()
         {
-            _inventory.SetActive(false);
+            Inventory.SetActive(false);
         }
 
         public bool TryGetCurrentInputForAction(string action, out string input)
@@ -48,7 +48,7 @@ namespace BulletHell.UI
 
         public void ToggleInventory()
         {
-            _inventory.SetActive(!_inventory.activeSelf);
+            Inventory.SetActive(!Inventory.activeSelf);
         }
 
         public void AddStatusEffect(StatusEffect statusEffect)

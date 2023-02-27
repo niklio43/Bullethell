@@ -3477,7 +3477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &850256596
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3612,7 +3612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5e8de96fae703439435716da5be45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forgeUI: {fileID: 1731201331}
+  ForgeUI: {fileID: 1731201333}
 --- !u!212 &928942587
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10830,8 +10830,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -55.5}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 0, y: -46.0817}
+  m_SizeDelta: {x: 160, y: 38.8365}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1079958660
 MonoBehaviour:
@@ -11417,7 +11417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1372492959
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12001,6 +12001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1731201332}
+  - component: {fileID: 1731201333}
   m_Layer: 5
   m_Name: Forge
   m_TagString: Untagged
@@ -12029,6 +12030,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1731201333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731201331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f437552a2a25145428d3ff18604aba9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProgressBar: {fileID: 1079958660}
+  IsUpgrading: 0
 --- !u!1001 &1862021276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12429,7 +12444,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CircleOrigin: {fileID: 1423690934}
   Radius: 0.6
-  player: {fileID: 1181653735}
+  _player: {fileID: 0}
+  _forge: {fileID: 0}
 --- !u!212 &1992674398
 SpriteRenderer:
   m_ObjectHideFlags: 0

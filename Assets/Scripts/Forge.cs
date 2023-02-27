@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.InventorySystem;
+using BulletHell.UI;
 
 public class Forge : InteractableItem
 {
-    [SerializeField] GameObject _forgeUI;
-
     void Awake()
     {
-        _forgeUI.SetActive(false);
+        ForgeUI.Instance.gameObject.SetActive(false);
     }
 
     public override void Interact(InventorySystem inventory)
     {
-        _forgeUI.SetActive(true);
+        ForgeUI.Instance.gameObject.SetActive(true);
+        PlayerUI.Instance.Inventory.SetActive(true);
     }
 }
