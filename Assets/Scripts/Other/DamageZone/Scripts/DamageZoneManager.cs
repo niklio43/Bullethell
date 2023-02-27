@@ -21,12 +21,16 @@ public class DamageZoneManager : Singleton<DamageZoneManager>
         return zone;
     }
 
-    public static DamageZone PlaceZone(Vector2 position)
+    public static DamageZone PlaceZone(Vector2 position, float size)
     {
         DamageZone zone = _zonePool.Get();
         zone.gameObject.SetActive(true);
         zone.transform.position = position;
+        zone.Indicate(size);
         return zone;
     }
+
+
+
 
 }

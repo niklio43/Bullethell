@@ -1,4 +1,5 @@
 using BulletHell.Stats;
+using BulletHell.StatusSystem;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -17,6 +18,9 @@ namespace BulletHell.Emitters.Projectiles
         public Vector3 Velocity;
 
         [HideInInspector] public bool hasCollision = true;
+
+        public delegate void OnUpdateDelegate();
+        public event OnUpdateDelegate OnUpdate;
 
         #region Setters
         public void SetOwner(Character owner) => _owner = owner;
@@ -43,19 +47,13 @@ namespace BulletHell.Emitters.Projectiles
         {
             _data = data;
 
-            if (_data.Sprite != null)
-                _spriteRenderer.sprite = _data.Sprite;
+            _spriteRenderer.sprite = _data.Sprite;
 
             _collider.offset = _data.Collider.center;
             _collider.size = _data.Collider.size / 2;
 
             transform.localScale = Vector3.one * _data.Scale;
-
-            Damage = new DamageInfo(_data.Damage, _data.StatusEffects);
-            Damage = DamageHandler.CalculateDamage(Damage, _owner.Stats);
-
             _spriteRenderer.color = _data.BirthColor;
-            //TODO implement color over life!!
 
             foreach (BaseProjectileBehaviour behaviour in _data.Behaviours) {
                 behaviour.Initialize(this, _data);
@@ -63,6 +61,18 @@ namespace BulletHell.Emitters.Projectiles
 
             if (_data.BirthVFX != null)
                 PlayVFX(_data.BirthVFX, true);
+
+            InitializeDamage();
+        }
+
+        void InitializeDamage()
+        {
+            foreach (StatusEffect statusEffect in _data.StatusEffects) {
+                statusEffect.Initialize(_owner);
+            }
+             
+            Damage = new DamageInfo(_data.Damage, _data.StatusEffects);
+            Damage = DamageHandler.CalculateDamage(Damage, _owner.Stats);
         }
 
         private void FixedUpdate()
@@ -74,6 +84,7 @@ namespace BulletHell.Emitters.Projectiles
             LifeTime -= Time.fixedDeltaTime;
 
             UpdatePosition();
+            OnUpdate?.Invoke();
 
             if (LifeTime <= 0)
                 ResetObject();
@@ -87,7 +98,6 @@ namespace BulletHell.Emitters.Projectiles
                 Velocity = Vector2.ClampMagnitude(Velocity, _data.MaxSpeed);
             transform.position += new Vector3(Velocity.x * Time.fixedDeltaTime, Velocity.y * Time.fixedDeltaTime + Velocity.z * Time.fixedDeltaTime);
         }
-
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -124,13 +134,17 @@ namespace BulletHell.Emitters.Projectiles
 
         public void ResetObject()
         {
-            if(_data.DeathVFX != null)
-                PlayVFX(_data.DeathVFX, true);
+            PlayVFX(_data.DeathVFX, true);
+
             gameObject.SetActive(false);
+
             transform.position = Vector2.zero;
             Velocity = Vector2.zero;
+            
+            OnUpdate = null;
             Damage = null;
             _data = null;
+            
             _pool.Release(this);
         }
     }

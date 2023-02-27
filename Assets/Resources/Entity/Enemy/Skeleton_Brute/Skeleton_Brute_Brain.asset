@@ -10,15 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 540aecb31c82c4c4e87ae8ad17540e4f, type: 3}
-  m_Name: Skeleton_Mage_Brain
+  m_Name: Skeleton_Brute_Brain
   m_EditorClassIdentifier: 
   abilities:
-  - Ability: {fileID: 11400000, guid: f2dfa72b1fde1634ea995c8807932b41, type: 2}
+  - Ability: {fileID: 11400000, guid: 9e3b64b681660994d8ecce6ab4d6afb8, type: 2}
     _minDist: 0
-    _maxDist: 3
-  - Ability: {fileID: 11400000, guid: 79ac9752ade28de46aca17bd3105df90, type: 2}
-    _minDist: 0
-    _maxDist: 4.2
+    _maxDist: 1.5
   CurrentAbility:
     Ability: {fileID: 0}
     _minDist: 0

@@ -22,9 +22,6 @@ namespace BulletHell.Enemies
 
         private void Draw()
         {
-            Handles.color = Color.red;
-            Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.AttackDistance);
-
             Handles.color = Color.green;
             Handles.DrawWireArc(_target.transform.position, Vector3.forward, Vector3.up, 360, _target.PreferredDistance);
         }

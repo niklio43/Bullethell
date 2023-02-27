@@ -35,8 +35,10 @@ namespace BulletHell.Emitters
             _emitterGroups.UpdateGroups();
         }
 
-        public virtual void FireProjectile(Character projectileOwner = null, Transform target = null)
+        public virtual Projectile[] FireProjectile(Character projectileOwner = null, Transform target = null)
         {
+            Projectile[] projectiles = new Projectile[_data.EmitterPoints];
+
             for (int i = 0; i < _data.EmitterPoints; i++) {
                 Projectile projectile = ProjectileManager.Instance.Get();
                 projectile.gameObject.SetActive(true);
@@ -51,7 +53,10 @@ namespace BulletHell.Emitters
 
                 projectile.SetOwner(projectileOwner);
                 projectile.Initialize(_data.ProjectileData);
+                projectiles[i] = projectile;
             }
+
+            return projectiles;
         }
 
         protected void ReturnProjectile(Projectile projectile) => projectile.ResetObject();

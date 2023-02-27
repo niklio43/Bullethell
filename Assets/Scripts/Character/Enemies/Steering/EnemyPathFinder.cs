@@ -49,6 +49,8 @@ namespace BulletHell.Enemies.Steering
         public void UpdatePathTraversal()
         {
             CheckPathValidity();
+            if(State == PathState.NoPath) { return; }
+
 
             float d = Vector2.Distance(transform.position, GetPathNode(_currentWaypoint));
             if (d <= _waypointDistanceThreshold) {
@@ -64,11 +66,13 @@ namespace BulletHell.Enemies.Steering
         void CheckPathValidity()
         {
             if (_owner.Target == null) { return; }
-            if (_currentPath == null) SeekNewPath();
+            if (_currentPath == null || State == PathState.NoPath) { 
+                SeekNewPath(); 
+                return; 
+            }
 
             Vector3 target = GetPathNode(_currentPath.vectorPath.Count - 1);
             float distance = Vector3.Distance(_owner.Target.position, target);
-
             if (distance > _targetDistanceThreshold) SeekNewPath();
         }
 
@@ -76,6 +80,7 @@ namespace BulletHell.Enemies.Steering
         {
             if (_owner.Target == null) { return; }
             if (_currentPath != null) _currentPath.Release(this);
+            _currentPath = null;
             State = PathState.NoPath;
             _seeker.StartPath(transform.position, _owner.Target.position, OnPathComplete);
         }
