@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine;using Bullet.CameraUtilities;using System.Threading;
+using UnityEngine;using BulletHell.CameraUtilities;using System.Threading;
 using Cysharp.Threading.Tasks;
 
 namespace BulletHell.Abilities

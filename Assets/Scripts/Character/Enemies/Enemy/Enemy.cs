@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Bullet.CameraUtilities;
+using BulletHell.CameraUtilities;
 using BulletHell.VFX;
 using UnityEngine.VFX;
 

@@ -5,7 +5,7 @@ using BulletHell.Player;
 using BulletHell;
 using UnityEngine.VFX;
 using BulletHell.VFX;
-using Bullet.CameraUtilities;
+using BulletHell.CameraUtilities;
 
 namespace BulletHell.Abilities
 {
