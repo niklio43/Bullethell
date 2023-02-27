@@ -8,11 +8,11 @@ namespace BulletHell.Enemies
     [CreateAssetMenu(fileName = "EnemyBrain", menuName = "Enemies/Brains/Default Brain", order = 1)]
     public class EnemyBrain : ScriptableObject
     {
-        [SerializeField] protected List<Ability> abilities = new List<Ability>();
+        [SerializeField] protected List<EnemyAbility> abilities = new List<EnemyAbility>();
         public IFSM FSM { get; protected set; }
         Enemy _owner;
 
-        public Ability CurrentAbility = null;
+        [HideInInspector] public EnemyAbility CurrentAbility = null;
         bool _canAttack = true;
 
         float attackCoolDown = 1.5f;
@@ -73,7 +73,7 @@ namespace BulletHell.Enemies
                     _owner.GetComponent<Animator>().Play("Idle");
                 }
 
-                if (_owner.TargetInAttackRange() && CanCastAbility() && _canAttack && _currentAttackCoolDown > attackCoolDown) {
+                if (CanCastAbility() && _canAttack && _currentAttackCoolDown > attackCoolDown) {
                     action.Transition("attack");
                 }
             });
@@ -90,7 +90,7 @@ namespace BulletHell.Enemies
                 _canAttack = false;
                 CurrentAbility = null;
 
-                foreach (Ability ability in abilities) {
+                foreach (EnemyAbility ability in abilities) {
                     if (ability.CanCast()) {
                         CurrentAbility = ability;
                     }
@@ -124,7 +124,6 @@ namespace BulletHell.Enemies
                 _canAttack = false;
             });
             state.Exit((action) => {
-                Debug.Log("TEST2");
                 _owner.GetComponent<Animator>().speed = 1;
             });
             return state;
@@ -132,7 +131,7 @@ namespace BulletHell.Enemies
 
         bool CanCastAbility()
         {
-            foreach (Ability ability in abilities) {
+            foreach (EnemyAbility ability in abilities) {
                 if (ability.CanCast()) {
                     return true;
                 }
@@ -144,10 +143,7 @@ namespace BulletHell.Enemies
         void InitializeAbilities()
         {
             for (int i = 0; i < abilities.Count; i++) {
-                abilities[i] = Instantiate(abilities[i]);
-                GameObject host = (_owner.Weapon != null) ? _owner.Weapon.gameObject : _owner.Aim.gameObject;
-
-                abilities[i].Initialize(_owner.gameObject, host);
+                abilities[i].Initialize(_owner);
             }
         }
 
@@ -157,7 +153,7 @@ namespace BulletHell.Enemies
 
             _currentAttackCoolDown += dt;
 
-            foreach (Ability ability in abilities) {
+            foreach (EnemyAbility ability in abilities) {
                 ability.UpdateAbility(Time.deltaTime);
             }
         }

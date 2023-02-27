@@ -103,7 +103,6 @@ namespace BulletHell.Abilities
         void AbilityCanceled()
         {
             _state = AbilityBehaviourState.Idle;
-            
         }
 
         public void UpdateBehaviour(float dt)

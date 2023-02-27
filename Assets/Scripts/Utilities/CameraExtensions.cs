@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Bullet.CameraUtilities
+namespace BulletHell.CameraUtilities
 {
     public static class CameraExtensions
     {

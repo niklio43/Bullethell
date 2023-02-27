@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Bullet.CameraUtilities;
+using BulletHell.CameraUtilities;
 using BulletHell.VFX;
 using UnityEngine.VFX;
 
@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
 
     [Header("Distances")]
     [Range(0, 10)] public float PreferredDistance;
-    [Range(0, 10)] public float AttackDistance;
     [SerializeField] List<ItemDrop> _dropTable = new List<ItemDrop>();
 
     private void Awake()
@@ -95,7 +94,7 @@ public class Enemy : MonoBehaviour
     public void OnDeath()
     {
         _brain.CurrentAbility?.Cancel();
-        GetComponent<DropRandomLoot>().DropItem(_dropTable);
+        //GetComponent<DropRandomLoot>().DropItem(_dropTable);
         Destroy(gameObject);
     }
 
@@ -130,19 +129,13 @@ public class Enemy : MonoBehaviour
     {
         Target = target;
     }
-    public bool TargetInAttackRange()
-    {
-        float distance = Vector2.Distance(transform.position, Target.position);
 
-        return (distance < AttackDistance);
-    }
     public bool TargetTooClose()
     {
         float distance = Vector2.Distance(transform.position, Target.position);
 
         return (distance < PreferredDistance);
     }
-
 
     public bool TargetInLineOfSight(Vector3 origin)
     {

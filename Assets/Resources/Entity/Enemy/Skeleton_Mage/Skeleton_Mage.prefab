@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de4780273cdc14bb1921d455a0faf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementType: 1
+  MovementType: 0
   _brain: {fileID: 11400000, guid: f095d9666b0d9d24aa3a3903dcbbe46b, type: 2}
   _enemyMovement: {fileID: 1669646182689616081}
   Target: {fileID: 0}
@@ -255,7 +255,6 @@ MonoBehaviour:
   Aim: {fileID: 839990684}
   Weapon: {fileID: 0}
   PreferredDistance: 3.29
-  AttackDistance: 4.17
   _dropTable:
   - Item: {fileID: 11400000, guid: 50341da266b037e4fba199f25d005ee0, type: 2}
     Chance: 1

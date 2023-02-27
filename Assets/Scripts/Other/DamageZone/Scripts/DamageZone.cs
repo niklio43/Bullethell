@@ -24,7 +24,7 @@ public class DamageZone : MonoBehaviour, IPoolable
         _pool = pool;
     }
 
-    public void Execute(float size)
+    public void Indicate(float size)
     {
         _size = size;
         StartCoroutine(Animate(size, .35f));

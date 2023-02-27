@@ -3,7 +3,7 @@ using UnityEngine;
 using BulletHell.Player;
 using UnityEngine.VFX;
 using BulletHell.VFX;
-using Bullet.CameraUtilities;
+using BulletHell.CameraUtilities;
 
 namespace BulletHell.Abilities
 {

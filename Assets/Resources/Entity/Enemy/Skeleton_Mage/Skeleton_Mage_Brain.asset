@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: Skeleton_Mage_Brain
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 11400000, guid: f2dfa72b1fde1634ea995c8807932b41, type: 2}
-  - {fileID: 11400000, guid: 79ac9752ade28de46aca17bd3105df90, type: 2}
+  - Ability: {fileID: 11400000, guid: f2dfa72b1fde1634ea995c8807932b41, type: 2}
+    _minDist: 0
+    _maxDist: 3
+  - Ability: {fileID: 11400000, guid: 79ac9752ade28de46aca17bd3105df90, type: 2}
+    _minDist: 0
+    _maxDist: 4.2
+  CurrentAbility:
+    Ability: {fileID: 0}
+    _minDist: 0
+    _maxDist: 0

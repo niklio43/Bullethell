@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b6096dd3f2adb459f51b81e6c8d83a, type: 3}
+  m_Name: EmitterAbilityBehaviour
+  m_EditorClassIdentifier: 
+  Id: -1
+  _waitTime: 0
+  _castTime: 0.6
+  _animations:
+  - _animationHost: 0
+    _clip: {fileID: 7400000, guid: bd5c51f687028474a9680b5da6eb4da0, type: 2}
+  _emitterData: {fileID: 11400000, guid: f76d6c2d5c66ea44fbad076b55d74ec8, type: 2}

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using Bullet.CameraUtilities;
+using BulletHell.CameraUtilities;
 using BulletHell.StatusSystem;
 using BulletHell.UI;
 

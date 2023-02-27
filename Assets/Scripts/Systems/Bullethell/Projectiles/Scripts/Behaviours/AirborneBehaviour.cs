@@ -28,8 +28,7 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
             float dist = Vector2.Distance(owner.transform.position, target);
             float speed = dist / flightDuration;
 
-            DamageZone zone = DamageZoneManager.PlaceZone(target);
-            zone.Execute(impactSize);
+            DamageZone zone = DamageZoneManager.PlaceZone(target, impactSize);
 
             float initalVerticalVelocity = flightDuration * (gravity / 2);
             Vector3 velocity = new Vector3(normalizedDir.x * speed, normalizedDir.y * speed, initalVerticalVelocity);

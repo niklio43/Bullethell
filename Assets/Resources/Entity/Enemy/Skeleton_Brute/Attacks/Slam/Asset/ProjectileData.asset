@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4820402408971454233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb803fb72d73ec45801bb2f6da26a40, type: 3}
+  m_Name: AirborneBehaviour
+  m_EditorClassIdentifier: 
+  gravity: 9.8
+  impactSize: 2
+  offset: 0
+  flightDuration: 0.6
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db557ae2f6eca854ba24931d8c6c1879, type: 3}
+  m_Name: ProjectileData
+  m_EditorClassIdentifier: 
+  FoldOutGeneral: 1
+  name: NewProjectileData
+  Scale: 1
+  Damage: []
+  StatusEffects: []
+  FoldOutSprite: 1
+  Sprite: {fileID: 0}
+  BirthColor: {r: 1, g: 1, b: 1, a: 1}
+  MidLifeColor: {r: 1, g: 1, b: 1, a: 1}
+  DeathColor: {r: 1, g: 1, b: 1, a: 1}
+  FoldOutAnimation: 1
+  BirthVFX: {fileID: 0}
+  DeathVFX: {fileID: 8926484042661614526, guid: 9fcbd3d7557fff94683c3a62e6886ac0, type: 3}
+  FoldOutBehaviour: 1
+  Speed: 0
+  MaxSpeed: 0
+  Acceleration: 0
+  Behaviours:
+  - {fileID: -4820402408971454233}
+  FoldOutCollision: 1
+  HasCollision: 0
+  DestroyOnCollision: 1
+  CollisionTags:
+  - Player
+  Collider:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
