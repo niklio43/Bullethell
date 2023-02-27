@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         var buildIndex = SceneManager.GetActiveScene().buildIndex;
@@ -45,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (gameState == GameStates.Playing) { pause = true; } else { pause = false; }
     }
+
 
     public void PauseGame()
     {

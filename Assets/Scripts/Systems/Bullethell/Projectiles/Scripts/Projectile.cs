@@ -144,6 +144,7 @@ namespace BulletHell.Emitters.Projectiles
 
             gameObject.SetActive(false);
 
+            _inheritedVelocity = Vector3.zero;
             transform.position = Vector2.zero;
             Velocity = Vector2.zero;
             
