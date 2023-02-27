@@ -9,11 +9,12 @@ namespace BulletHell.InventorySystem
     {
         Pool _pool;
         [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
-        List<Ability> _abilities = new List<Ability>();
+        [SerializeField] List<Ability> _abilities = new List<Ability>();
         public AnimatorOverrideController AnimatorController;
         public Pool Pool { get { return _pool; } set { _pool = value; } }
 
         public List<Ability> Abilities { get { return _abilities; } set { _abilities = value; } }
+        public List<Ability> AbilitySlot { get { return _abilitySlot; } }
 
         public void Initialize(GameObject owner, GameObject host)
         {
