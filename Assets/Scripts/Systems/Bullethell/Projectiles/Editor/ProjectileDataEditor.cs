@@ -100,6 +100,7 @@ namespace BulletHell.Emitters.Projectiles.Editor
             behaviourFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Speed")));
             behaviourFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("MaxSpeed")));
             behaviourFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("Acceleration")));
+            behaviourFoldout.Add(EditorExtensions.CreatePropertyField(serializedObject.FindProperty("InheritVelocity")));
 
             _behavioursContext = new Label();
             _behavioursContext.name = "BehaviourData_ContextMenu";

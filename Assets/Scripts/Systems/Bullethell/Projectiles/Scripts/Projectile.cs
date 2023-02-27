@@ -17,6 +17,8 @@ namespace BulletHell.Emitters.Projectiles
         public float LifeTime;
         public Vector3 Velocity;
 
+        Vector3 _inheritedVelocity = Vector3.zero;
+
         [HideInInspector] public bool hasCollision = true;
 
         #region Setters
@@ -43,6 +45,10 @@ namespace BulletHell.Emitters.Projectiles
         public void Initialize(ProjectileData data)
         {
             _data = data;
+
+            if (_data.InheritVelocity && _owner.TryGetComponent(out Rigidbody2D rb))
+                _inheritedVelocity = (Vector3)rb.velocity;
+
 
             _spriteRenderer.sprite = _data.Sprite;
 
@@ -92,7 +98,10 @@ namespace BulletHell.Emitters.Projectiles
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             if(_data.MaxSpeed != 0)
                 Velocity = Vector2.ClampMagnitude(Velocity, _data.MaxSpeed);
-            transform.position += new Vector3(Velocity.x * Time.fixedDeltaTime, Velocity.y * Time.fixedDeltaTime + Velocity.z * Time.fixedDeltaTime);
+
+            Vector3 i_v = _inheritedVelocity * Mathf.Clamp01(Vector3.Dot(_inheritedVelocity.normalized, Velocity)) * Time.fixedDeltaTime;
+
+            transform.position += new Vector3(Velocity.x * Time.fixedDeltaTime, Velocity.y * Time.fixedDeltaTime + Velocity.z * Time.fixedDeltaTime) + i_v;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

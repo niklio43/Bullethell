@@ -35,6 +35,7 @@ namespace BulletHell.Emitters.Projectiles
         public float Speed;
         public float MaxSpeed;
         public float Acceleration;
+        public bool InheritVelocity = false;
         public List<BaseProjectileBehaviour> Behaviours = new List<BaseProjectileBehaviour>();
 
         //Collision
