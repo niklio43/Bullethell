@@ -21,4 +21,4 @@ MonoBehaviour:
   _screenShakeDuration: 0
   _screenShakeAmplitude: 0
   _behaviours:
-  - {fileID: 11400000, guid: cd102e03da009de4792ad0238e146fcd, type: 2}
+  - {fileID: 11400000, guid: 36337f986ffcc9d4ab2673e8347016e9, type: 2}

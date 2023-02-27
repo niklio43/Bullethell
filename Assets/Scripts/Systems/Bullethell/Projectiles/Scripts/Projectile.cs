@@ -19,9 +19,6 @@ namespace BulletHell.Emitters.Projectiles
 
         [HideInInspector] public bool hasCollision = true;
 
-        public delegate void OnUpdateDelegate();
-        public event OnUpdateDelegate OnUpdate;
-
         #region Setters
         public void SetOwner(Character owner) => _owner = owner;
         public void SetPool(ObjectPool<Projectile> pool) => _pool = pool;
@@ -84,8 +81,7 @@ namespace BulletHell.Emitters.Projectiles
             LifeTime -= Time.fixedDeltaTime;
 
             UpdatePosition();
-            OnUpdate?.Invoke();
-
+            
             if (LifeTime <= 0)
                 ResetObject();
         }
@@ -141,7 +137,6 @@ namespace BulletHell.Emitters.Projectiles
             transform.position = Vector2.zero;
             Velocity = Vector2.zero;
             
-            OnUpdate = null;
             Damage = null;
             _data = null;
             

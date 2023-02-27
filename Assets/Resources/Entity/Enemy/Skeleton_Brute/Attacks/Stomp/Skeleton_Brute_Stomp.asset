@@ -16,8 +16,9 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _name: 
   _description: 
-  _maxAmount: 0
-  _coolDownTime: 0
+  _maxAmount: 1
+  _coolDownTime: 5
   _screenShakeDuration: 0
   _screenShakeAmplitude: 0
-  _behaviours: []
+  _behaviours:
+  - {fileID: 11400000, guid: debc968b06d6fe44cb6dc0ccf08b9720, type: 2}

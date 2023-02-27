@@ -15,7 +15,7 @@ MonoBehaviour:
   abilities:
   - Ability: {fileID: 11400000, guid: 9e3b64b681660994d8ecce6ab4d6afb8, type: 2}
     _minDist: 0
-    _maxDist: 1.5
+    _maxDist: 2
   CurrentAbility:
     Ability: {fileID: 0}
     _minDist: 0

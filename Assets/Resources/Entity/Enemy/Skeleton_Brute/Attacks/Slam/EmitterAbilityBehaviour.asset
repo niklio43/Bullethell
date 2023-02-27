@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: -1
   _waitTime: 0
-  _castTime: 0
-  _animations: []
-  _emitterData: {fileID: 0}
+  _castTime: 0.6
+  _animations:
+  - _animationHost: 0
+    _clip: {fileID: 7400000, guid: bd5c51f687028474a9680b5da6eb4da0, type: 2}
+  _emitterData: {fileID: 11400000, guid: f76d6c2d5c66ea44fbad076b55d74ec8, type: 2}

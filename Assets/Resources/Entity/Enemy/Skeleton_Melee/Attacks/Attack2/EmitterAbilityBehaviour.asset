@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b6096dd3f2adb459f51b81e6c8d83a, type: 3}
   m_Name: EmitterAbilityBehaviour
   m_EditorClassIdentifier: 
+  Id: -1
   _waitTime: 0
   _castTime: 0.1
   _animations:
   - _animationHost: 1
     _clip: {fileID: 7400000, guid: 0b62aecb45a840c41bad133c18457166, type: 2}
   _emitterData: {fileID: 11400000, guid: 8222245c22f271d45a5ec020cb62b6dd, type: 2}
-  _damageValues: []
