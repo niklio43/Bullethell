@@ -15,6 +15,7 @@ namespace BulletHell.Player
 
         public Character Character;
         public PlayerAimWeapon Aim;
+        float timer = 0;
 
         #region Getters & Setters
         public PlayerMovement PlayerMovement { get { return _playerMovement; } }
@@ -44,6 +45,20 @@ namespace BulletHell.Player
         void FixedUpdate()
         {
             _playerBrain.UpdateBrain();
+        }
+
+        private void Update()
+        {
+            //temporary
+            if (Character.Stats["Stamina"].Get() >= Character.Stats["MaxStamina"].Get()) { return; }
+
+            timer += Time.deltaTime;
+
+            if (timer >= 1)
+            {
+                Character.Stats["Stamina"].Value += 1;
+                timer = 0;
+            }
         }
 
         public void OnAppliedStatusEffect(StatusEffect statusEffect)
