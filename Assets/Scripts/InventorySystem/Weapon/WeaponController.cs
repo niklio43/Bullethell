@@ -68,6 +68,8 @@ public class WeaponController : MonoBehaviour
     {
         if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); FailedUpgrade();  return; }
 
+        if(_player.Character.Stats["Hp"].Get() <= 50) { Debug.Log("Not enough blood!"); FailedUpgrade(); return; }
+
         Ability ability = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
 
         foreach (Ability ab in weapon.Abilities)
@@ -88,6 +90,7 @@ public class WeaponController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
         ForgeUI.Instance.IsUpgrading = false;
+        _player.Character.TakeDamage(50);
         weapon.AddAbility(ability, _player.gameObject, gameObject);
     }
 

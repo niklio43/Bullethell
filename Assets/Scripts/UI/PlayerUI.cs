@@ -49,7 +49,7 @@ namespace BulletHell.UI
         public void ToggleInventory()
         {
             Inventory.SetActive(!Inventory.activeSelf);
-            ForgeUI.Instance.gameObject.SetActive(!ForgeUI.Instance.gameObject.activeSelf);
+            ForgeUI.Instance.gameObject.SetActive(false);
         }
 
         public void AddStatusEffect(StatusEffect statusEffect)
