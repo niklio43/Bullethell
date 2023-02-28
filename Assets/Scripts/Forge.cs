@@ -8,12 +8,12 @@ public class Forge : InteractableItem
 {
     void Awake()
     {
-        ForgeUI.Instance.gameObject.SetActive(false);
+        PlayerUI.Instance.Forge.SetActive(false);
     }
 
     public override void Interact(InventorySystem inventory)
     {
-        ForgeUI.Instance.gameObject.SetActive(true);
+        PlayerUI.Instance.Forge.SetActive(true);
         PlayerUI.Instance.Inventory.SetActive(true);
     }
 }

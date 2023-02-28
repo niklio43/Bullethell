@@ -924,12 +924,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistent: 1
-  _input: {fileID: 0}
+  _input: {fileID: 1181653738}
   Inventory: {fileID: 6570868405049808120}
   _healthBar: {fileID: 1978408359319193799}
   _staminaBar: {fileID: 1280149869574675003}
   _statusEffectUIManager: {fileID: 1280149871137548084}
   _statManagerUI: {fileID: 3562879671955119193}
+  Forge: {fileID: 1731201331}
+  _forgeProgressBar: {fileID: 1079958660}
+  _currentHealth: {fileID: 1372492960}
+  _playerController: {fileID: 1181653735}
+  IsUpgrading: 0
 --- !u!114 &289019621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6988,7 +6993,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7212,8 +7217,9 @@ Transform:
   - {fileID: 928942588}
   - {fileID: 251348743}
   - {fileID: 1545663949}
+  - {fileID: 1918095990}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1065938606
 GameObject:
@@ -14854,7 +14860,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1731201332}
-  - component: {fileID: 1731201333}
   m_Layer: 5
   m_Name: Forge
   m_TagString: Untagged
@@ -14883,23 +14888,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1731201333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731201331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f437552a2a25145428d3ff18604aba9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _persistent: 1
-  _progressBar: {fileID: 1079958660}
-  _currentHealth: {fileID: 1372492960}
-  _playerController: {fileID: 1181653735}
-  IsUpgrading: 0
 --- !u!1 &1860720265
 GameObject:
   m_ObjectHideFlags: 0
@@ -15197,8 +15185,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 1022607839}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1946243715 stripped
 Transform:
