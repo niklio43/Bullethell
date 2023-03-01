@@ -29,9 +29,6 @@ namespace BulletHell.InventorySystem
     {
         Default,
         Weapon,
-        Headgear,
-        Chestgear,
-        Legwear,
         Consumable
     }
 }

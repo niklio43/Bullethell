@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BulletHell.InventorySystem
 {
     [CreateAssetMenu(fileName = "New Potion", menuName = "Inventory System/Consumables/Potion")]
-    public class Potion : Consumables
+    public class Heart : Consumables
     {
         [SerializeField] Sprite sprite;
         [SerializeField] int restoreAmount;

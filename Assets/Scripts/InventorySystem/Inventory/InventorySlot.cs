@@ -11,7 +11,8 @@ namespace BulletHell.InventorySystem
     {
         [SerializeField] InventoryItemData _itemData;
 
-        public UnityEvent<InventoryItemData> OnAssign;
+        public delegate void OnAssignDelegate(InventoryItemData item);
+        public OnAssignDelegate OnAssign;
 
         #region Getter
         public InventoryItemData ItemData => _itemData;

@@ -30,9 +30,9 @@ namespace BulletHell.InventorySystem
 
         public void Initialize(InventorySlot slot)
         {
-            var unityEvent = _assignedInventorySlot.OnAssign;
+            var unityDelegate = _assignedInventorySlot.OnAssign;
             _assignedInventorySlot = slot;
-            _assignedInventorySlot.OnAssign = unityEvent;
+            _assignedInventorySlot.OnAssign = unityDelegate;
 
             UpdateUISlot(slot);
         }

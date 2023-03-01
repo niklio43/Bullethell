@@ -17,6 +17,15 @@ public class WeaponController : MonoBehaviour
     public float Radius;
     Weapon _weapon;
     [SerializeField] PlayerController _player;
+    [SerializeField] List<InventorySlotUI> _slots = new List<InventorySlotUI>();
+
+    private void Start()
+    {
+        foreach(InventorySlotUI slot in _slots)
+        {
+            slot.AssignedInventorySlot.OnAssign += EquipWeapon;
+        }
+    }
 
     public void EquipWeapon(InventoryItemData item)
     {
@@ -56,48 +65,6 @@ public class WeaponController : MonoBehaviour
         GetComponent<Animator>().runtimeAnimatorController = null;
         _weapon.Uninitialize();
         _weapon = null;
-    }
-
-    public void UpgradeWeapon(InventoryItemData item)
-    {
-        if (item == null) { return; }
-        Debug.Log("Attempting upgrade");
-        FillAbilitySlot(item as Weapon);
-    }
-
-    public void FillAbilitySlot(Weapon weapon)
-    {
-        if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); FailedUpgrade();  return; }
-
-        if(_player.Character.Stats["Hp"].Get() <= 50) { Debug.Log("Not enough blood!"); FailedUpgrade(); return; }
-
-        Ability ability = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
-
-        foreach (Ability ab in weapon.Abilities)
-        {
-            if (ab.Id == ability.Id) { FillAbilitySlot(weapon); return; }
-        }
-        foreach (Ability ab in weapon.AbilitySlot)
-        {
-            if (ab.Id == ability.Id) { FillAbilitySlot(weapon); return; }
-        }
-
-        StartCoroutine(BeginUpgrade(weapon, ability, _player.gameObject, gameObject));
-    }
-
-    IEnumerator BeginUpgrade(Weapon weapon, Ability ability, GameObject owner, GameObject host)
-    {
-        PlayerUI.Instance.IsUpgrading = true;
-        yield return new WaitForSeconds(1f);
-        Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
-        PlayerUI.Instance.IsUpgrading = false;
-        _player.Character.TakeDamage(50);
-        weapon.AddAbility(ability, _player.gameObject, gameObject);
-    }
-
-    void FailedUpgrade()
-    {
-        Camera.main.Shake(0.1f, 1f);
     }
 
     public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
