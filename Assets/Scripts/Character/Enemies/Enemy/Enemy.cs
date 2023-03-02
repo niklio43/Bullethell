@@ -62,15 +62,15 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
 
     public void Stun()
     {
-        Debug.Log("I GOT STUNNED");
         _brain.CurrentAbility?.Cancel();
         _brain.SetState(EnemyBrain.EnemyStates.Stunned);
+        _brain.LockState = true;
         _stunVFX = BulletHell.VFX.VFXManager.PlayUntilStopped(Resources.Load<VisualEffectAsset>("StunnedEffect"), Vector3.up / 2, transform);
     }
 
     public void ExitStun()
     {
-        Debug.Log("I GOT UN-STUNNED");
+        _brain.LockState = false;
         _brain.SetState(EnemyBrain.EnemyStates.Idle);
         _stunVFX.Stop();
     }

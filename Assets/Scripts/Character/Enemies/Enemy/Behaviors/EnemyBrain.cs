@@ -9,10 +9,11 @@ namespace BulletHell.Enemies
     public class EnemyBrain : ScriptableObject
     {
         [SerializeField] protected List<EnemyAbility> abilities = new List<EnemyAbility>();
+        [HideInInspector] public EnemyAbility CurrentAbility = null;
         public IFSM FSM { get; protected set; }
         Enemy _owner;
 
-        [HideInInspector] public EnemyAbility CurrentAbility = null;
+        [HideInInspector] public bool LockState = false;
         bool _canAttack = true;
 
         float attackCoolDown = 1.5f;
@@ -160,6 +161,7 @@ namespace BulletHell.Enemies
 
         public void SetState(EnemyStates state)
         {
+            if(LockState) { return; }
             FSM.SetState(state);
         }
 

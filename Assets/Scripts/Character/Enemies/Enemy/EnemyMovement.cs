@@ -36,6 +36,7 @@ namespace BulletHell.Enemies
 
         public void Move()
         {
+            if(!Enemy.CanMove) { return; }
             Vector2 MoveDirection = ContextSolver.GetDirection(_agentSteering);
 
             Rb.AddForce(MoveDirection * _moveSpeed);
