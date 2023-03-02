@@ -14,6 +14,8 @@ namespace BulletHell.Enemies
         {
             _health -= Damage.GetDamage();
 
+            GetComponent<IStaggerable>().Stagger();
+
             if(_health <= 0) {
                 GetComponent<IKillable>().Kill();
             }
