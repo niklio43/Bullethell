@@ -33,7 +33,7 @@ namespace BulletHell.Emitters
             _emitterGroups.UpdateGroups();
         }
 
-        public virtual Projectile[] FireProjectile(GameObject owner = null, Transform target = null)
+        public virtual Projectile[] FireProjectile(Vector3 target, GameObject owner = null)
         {
             Projectile[] projectiles = new Projectile[_data.EmitterPoints];
 

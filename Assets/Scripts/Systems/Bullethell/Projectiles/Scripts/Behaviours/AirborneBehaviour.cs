@@ -16,7 +16,7 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
 
         public override void Initialize(Projectile owner, ProjectileData data)
         {
-            Vector2 target = (Vector2)owner.Target.position + Random.insideUnitCircle * offset;
+            Vector2 target = (Vector2)owner.Target + Random.insideUnitCircle * offset;
             owner.StartCoroutine(ArcRoutine(target, owner, data));
         }
 

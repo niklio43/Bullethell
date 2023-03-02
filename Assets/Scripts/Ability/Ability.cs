@@ -45,7 +45,7 @@ namespace BulletHell.Abilities
         AbilityState _abilityState = AbilityState.Idle;
         List<float> _timers;
 
-        public Transform Target { get; private set; } = null;
+        public Vector3 Target { get; private set; } = default(Vector3);
 
         public enum AbilityState
         {
@@ -80,7 +80,7 @@ namespace BulletHell.Abilities
             }
         }
 
-        public async void Cast(Transform target = null, Action castDelegate = null)
+        public async void Cast(Vector3 target, Action castDelegate = null)
         {
             if (_currentAmount <= 0 || _abilityState == AbilityState.Channeling) return;
             Target = target;

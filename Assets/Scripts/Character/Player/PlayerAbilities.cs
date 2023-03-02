@@ -51,7 +51,7 @@ namespace BulletHell.Player
         {
             if (context.performed && !_isDashing)
             {
-                _abilities[abilityIndex].Cast();
+                _abilities[abilityIndex].Cast(Vector3.zero);
             }
         }
 
@@ -59,7 +59,7 @@ namespace BulletHell.Player
         {
             if (context.performed && !_isParrying)
             {
-                _abilities[abilityIndex].Cast();
+                _abilities[abilityIndex].Cast(Vector3.zero);
             }
         }
 
