@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   Id: 2
-  _icon: {fileID: 21300000, guid: 5dd458211f98d34449346ab07cf41d53, type: 3}
+  _icon: {fileID: 21300000, guid: ac04c4ac7f3105f4c8169bda59af4608, type: 3}
   _name: Fire
-  _description: m4 fire
+  _description: Bow fire
   _maxAmount: 1
   _coolDownTime: 0
   _screenShakeDuration: 0
   _screenShakeAmplitude: 0
   _behaviours:
   - {fileID: 11400000, guid: 16d60e30261d09c479ba191317a155ec, type: 2}
-  database: {fileID: 11400000, guid: ffdc5d5820d1ff94f8e9431fb62ba016, type: 2}

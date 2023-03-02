@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b6096dd3f2adb459f51b81e6c8d83a, type: 3}
   m_Name: FireAbilityBehaviour
   m_EditorClassIdentifier: 
-  _emitters:
-  - {fileID: 11400000, guid: c7e673d8e117a7a43a675f815ff6f4c0, type: 2}
-  _emitterObjects:
-  - {fileID: 0}
+  Id: -1
+  _waitTime: 0
+  _castTime: 0
+  _animations: []
+  _emitterData: {fileID: 11400000, guid: c7e673d8e117a7a43a675f815ff6f4c0, type: 2}

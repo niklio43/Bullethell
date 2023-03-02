@@ -7,8 +7,9 @@ using BulletHell.Emitters;
 namespace BulletHell.InventorySystem
 {
     [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/AssultRifle")]
-    public class AssultRifle : Ranged
+    public class Bow : Ranged
     {
+        [SerializeField] Sprite icon;
         [SerializeField] Sprite sprite;
         [SerializeField] string itemName;
         [SerializeField] Pool pool;
@@ -22,6 +23,7 @@ namespace BulletHell.InventorySystem
             Pool = pool;
             Rarity = rarity;
             ItemType = itemType;
+            Icon = icon;
         }
     }
 }
