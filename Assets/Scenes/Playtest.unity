@@ -929,7 +929,6 @@ MonoBehaviour:
   _healthBar: {fileID: 1978408359319193799}
   _staminaBar: {fileID: 1280149869574675003}
   _statusEffectUIManager: {fileID: 1280149871137548084}
-  _statManagerUI: {fileID: 3562879671955119193}
   Forge: {fileID: 1731201331}
   _forgeProgressBar: {fileID: 1079958660}
   _currentHealth: {fileID: 1372492960}
@@ -6667,7 +6666,7 @@ MonoBehaviour:
   _slotItem: {fileID: 2031068738}
   _button: {fileID: 850256597}
   _weapon: {fileID: 1992674397}
-  _player: {fileID: 1181653735}
+  _player: {fileID: 1181653753}
 --- !u!212 &928942587
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13282,19 +13281,20 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1181653743}
-  - component: {fileID: 1181653745}
   - component: {fileID: 1181653735}
   - component: {fileID: 1181653737}
   - component: {fileID: 1181653736}
   - component: {fileID: 1181653752}
   - component: {fileID: 1181653750}
+  - component: {fileID: 1181653749}
+  - component: {fileID: 1181653748}
+  - component: {fileID: 1181653753}
+  - component: {fileID: 1181653754}
   - component: {fileID: 1181653742}
   - component: {fileID: 1181653741}
   - component: {fileID: 1181653738}
   - component: {fileID: 1181653740}
   - component: {fileID: 1181653744}
-  - component: {fileID: 1181653749}
-  - component: {fileID: 1181653748}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -13314,7 +13314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1e6732d04e4f8478d19ba610173d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 1181653745}
   Aim: {fileID: 40932957}
 --- !u!114 &1181653736
 MonoBehaviour:
@@ -13330,7 +13329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactRadius: 1
   _outlineShader: {fileID: 2100000, guid: c7363aea88708a64f8462ff64b640d27, type: 2}
-  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 3}
 --- !u!114 &1181653737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13580,38 +13579,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1181653745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181653734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e7861a990189c4b8c4f6fc8c988429, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stats:
-    _statsList:
-    - Name: Hp
-      _value: 100
-    - Name: MaxHp
-      _value: 100
-    - Name: Strength
-      _value: 10
-    - Name: Defense
-      _value: 10
-    - Name: DashDistance
-      _value: 24
-    - Name: MoveSpeed
-      _value: 5
-    - Name: Stamina
-      _value: 4
-    - Name: MaxStamina
-      _value: 4
-  StatusEffect:
-    _owner: {fileID: 0}
 --- !u!114 &1181653748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13654,6 +13621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f464cc2042034b045921cba5730cf0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 5
 --- !u!114 &1181653752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13671,6 +13639,34 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ecefb23eb67218b449f18eac5ccb1a8a, type: 2}
   _afterImage: {fileID: -2138936094765007819, guid: 965500742adab4b45b904772870b9ef4, type: 3}
   _dashTime: 0.1
+--- !u!114 &1181653753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181653734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ccd045db856b74eb01b4528334896e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 100
+  MaxHealth: 100
+  Stamina: 5
+  MaxStamina: 5
+--- !u!114 &1181653754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181653734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc68d482482bb3d4db01bf5ee720fb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1260408845
 GameObject:
   m_ObjectHideFlags: 0
@@ -15680,8 +15676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477109703260bb24ba1c89545441bddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: {fileID: 8229525853529770647}
-  statName: Hp
 --- !u!222 &42910133653655273
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17176,8 +17170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477109703260bb24ba1c89545441bddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: {fileID: 834289894326069076}
-  statName: Defense
 --- !u!1 &1340741020121759378
 GameObject:
   m_ObjectHideFlags: 0
@@ -18358,10 +18350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f42ff43588dcfa440a96910a49a0ad9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statList:
-  - {fileID: 11749476274872577}
-  - {fileID: 6494362990067712697}
-  - {fileID: 1281305576398772332}
 --- !u!114 &3585827932633136558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19465,8 +19453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477109703260bb24ba1c89545441bddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: {fileID: 8789729597414965164}
-  statName: Strength
 --- !u!1 &6570868405049808120
 GameObject:
   m_ObjectHideFlags: 0

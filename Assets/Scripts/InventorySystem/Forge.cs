@@ -8,13 +8,14 @@ using TMPro;
 using BulletHell.Abilities;
 using BulletHell.Player;
 using BulletHell.CameraUtilities;
+using BulletHell;
 
 public class Forge : InteractableItem
 {
     [SerializeField] InventorySlotUI _slotItem;
     [SerializeField] Button _button;
     [SerializeField] WeaponController _weapon;
-    [SerializeField] PlayerController _player;
+    [SerializeField] PlayerResources _player;
     void Start()
     {
         PlayerUI.Instance.Forge.SetActive(false);
@@ -44,30 +45,30 @@ public class Forge : InteractableItem
     {
         if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); FailedUpgrade(); return; }
 
-        //if (_player.Character.Stats["Hp"].Get() <= 50) { Debug.Log("Not enough blood!"); FailedUpgrade(); return; }
+        if (_player.Health <= 50) { Debug.Log("Not enough blood!"); FailedUpgrade(); return; }
 
-        Ability ability = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
+        WeaponAbility weaponAbility = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
 
         foreach (Ability ab in weapon.Abilities)
         {
-            if (ab.Id == ability.Id) { FillAbilitySlot(weapon); return; }
+            if (ab.Id == weaponAbility.Ability.Id) { FillAbilitySlot(weapon); return; }
         }
         foreach (Ability ab in weapon.AbilitySlot)
         {
-            if (ab.Id == ability.Id) { FillAbilitySlot(weapon); return; }
+            if (ab.Id == weaponAbility.Ability.Id) { FillAbilitySlot(weapon); return; }
         }
 
-        StartCoroutine(BeginUpgrade(weapon, ability, _player.gameObject, _weapon.gameObject));
+        StartCoroutine(BeginUpgrade(weapon, weaponAbility, _player.gameObject, _weapon.gameObject));
     }
 
-    IEnumerator BeginUpgrade(Weapon weapon, Ability ability, GameObject owner, GameObject host)
+    IEnumerator BeginUpgrade(Weapon weapon, WeaponAbility weaponAbility, GameObject owner, GameObject host)
     {
         PlayerUI.Instance.IsUpgrading = true;
         yield return new WaitForSeconds(1f);
-        Debug.Log(string.Concat("Added ability: ", ability, " to weapon: ", weapon.DisplayName));
+        Debug.Log(string.Concat("Added ability: ", weaponAbility.Ability, " to weapon: ", weapon.DisplayName));
         PlayerUI.Instance.IsUpgrading = false;
-        //_player.Character.TakeDamage(50);
-        weapon.AddAbility(ability, owner, host);
+        _player.Damage(new DamageValue(DamageType.Unblockable, weaponAbility.Cost));
+        weapon.AddAbility(weaponAbility.Ability, owner, host);
     }
 
     void FailedUpgrade()

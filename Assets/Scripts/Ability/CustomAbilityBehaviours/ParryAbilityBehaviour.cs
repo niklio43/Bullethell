@@ -26,12 +26,14 @@ namespace BulletHell.Abilities
         {
             _player = _ability.Owner.GetComponent<PlayerController>();
 
-            //FIX if (_player.Character.Stats["Stamina"].Get() < _staminaCost || _player.PlayerAbilities.IsParrying) { return; }
+            if (_player.PlayerResources.Stamina < _staminaCost || _player.PlayerAbilities.IsParrying) { return; }
 
             _player.PlayerAbilities.IsParrying = true;
 
             VFX.VFXManager.PlayBurst(_parryVfx, Vector3.zero, _player.transform);
             Camera.main.Zoom(.2f, .5f);
+
+            _player.PlayerResources.UseStamina(_staminaCost);
 
             Collider2D[] colliders = Physics2D.OverlapCircleAll(_player.transform.position, _radius, layerMask);
 

@@ -13,13 +13,15 @@ namespace BulletHell.Player
         PlayerMovement _playerMovement;
         PlayerAbilities _playerAbilities;
         UnitStatusEffects _unitStatusEffects;
+        PlayerResources _playerResources;
 
         public PlayerAimWeapon Aim;
         float timer = 0;
 
         #region Getters & Setters
-        public PlayerMovement PlayerMovement { get { return _playerMovement; } }
-        public PlayerAbilities PlayerAbilities { get { return _playerAbilities; } }
+        public PlayerMovement PlayerMovement => _playerMovement;
+        public PlayerAbilities PlayerAbilities => _playerAbilities;
+        public PlayerResources PlayerResources => _playerResources;
         #endregion
 
         void Awake()
@@ -27,10 +29,16 @@ namespace BulletHell.Player
             _playerBrain = new PlayerBrain(this);
             _playerMovement = GetComponent<PlayerMovement>();
             _playerAbilities = GetComponent<PlayerAbilities>();
+            _playerResources = GetComponent<PlayerResources>();
 
             _unitStatusEffects = GetComponent<UnitStatusEffects>();
             _unitStatusEffects.OnAppliedStatusEffect += OnAppliedStatusEffect;
             _unitStatusEffects.OnRemovedStatusEffect += OnRemovedStatusEffect;
+        }
+
+        void Start()
+        {
+            PlayerUI.Initialize(this);
         }
 
         void FixedUpdate()

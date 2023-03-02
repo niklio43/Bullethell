@@ -29,7 +29,11 @@ namespace BulletHell.UI
         [SerializeField] PlayerController _playerController;
         [HideInInspector] public bool IsUpgrading = false;
 
-        bool inv = false;
+        public static void Initialize(PlayerController playerController)
+        {
+            Health.Initialize(playerController.PlayerResources);
+            Stamina.Initialize(playerController.PlayerResources);
+        }
 
         protected override void OnAwake()
         {

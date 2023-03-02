@@ -37,7 +37,7 @@ namespace BulletHell.Emitters.Projectiles
         public void Initialize(ProjectileData data, GameObject owner)
         {
             _data = data;
-
+            _owner = owner;
             if (_data.InheritVelocity && _owner.TryGetComponent(out Rigidbody2D rb))
                 _inheritedVelocity = (Vector3)rb.velocity;
 

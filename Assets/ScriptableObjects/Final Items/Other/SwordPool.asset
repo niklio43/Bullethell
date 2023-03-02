@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolName: Sword Pool
   _ability:
-  - {fileID: 11400000, guid: a0070805f62fa0a40b3ed74bc947a6c6, type: 2}
-  - {fileID: 11400000, guid: 7d9d5065b7fb53d45b8d1d7a72218c4c, type: 2}
+  - _ability: {fileID: 11400000, guid: 7d9d5065b7fb53d45b8d1d7a72218c4c, type: 2}
+    _cost: 45

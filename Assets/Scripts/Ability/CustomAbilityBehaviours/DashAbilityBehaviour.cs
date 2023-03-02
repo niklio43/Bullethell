@@ -15,10 +15,12 @@ namespace BulletHell.Abilities
         [SerializeField] VisualEffectAsset _vfx;
         [Header("Stamina Cost")]
         [SerializeField, Range(0, 10)] int _staminaCost = 1;
+        [Header("Dash Distance")]
+        [SerializeField, Range(0, 10)] int _dashDistance = 16;
         protected override void Perform()
         {
             _player = _ability.Owner.GetComponent<PlayerController>();
-            //FIX if (_player.Character.Stats["Stamina"].Get() < _staminaCost) { return; }
+            if (_player.PlayerResources.Stamina < _staminaCost) { return; }
             Dash(_ability.Owner);
         }
 
@@ -32,7 +34,9 @@ namespace BulletHell.Abilities
             VFX.VFXManager.PlayBurst(_vfx, owner.transform.position, null, new VFXAttribute[] { new VFXFloat("Angle", Vector2.SignedAngle(new Vector2(dir.x, -dir.y), Vector2.left)) });
 
             _player.PlayerAbilities.IsDashing = true;
-            //FIX _player.PlayerMovement.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
+            _player.PlayerMovement.Rb.AddForce(dir * _dashDistance, ForceMode2D.Impulse);
+
+            _player.PlayerResources.UseStamina(_staminaCost);
 
             MonoInstance.Instance.StartCoroutine(CreateAfterImages(0.02f));
 

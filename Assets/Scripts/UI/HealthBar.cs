@@ -9,6 +9,7 @@ namespace BulletHell.UI
     {
         [SerializeField] Image _fill;
         [SerializeField] float _flashTime = .1f;
+        PlayerResources _playerResources;
 
         Slider _slider;
 
@@ -18,13 +19,20 @@ namespace BulletHell.UI
             _fill.material = Instantiate(_fill.material);
         }
 
-        public void Initialize()
+        public void Initialize(PlayerResources playerResources)
         {
+            _playerResources = playerResources;
+            _playerResources.OnHealthChanged += UpdateBar;
             UpdateBar();
         }
 
         void UpdateBar()
         {
+            if(_playerResources.Health > _slider.maxValue)
+            {
+                _slider.maxValue = _playerResources.Health;
+            }
+            _slider.value = _playerResources.Health;
             StartCoroutine(Flash());
         }
 
