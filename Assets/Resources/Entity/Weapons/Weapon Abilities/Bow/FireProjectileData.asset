@@ -29,9 +29,8 @@ MonoBehaviour:
   name: FireProjectileData
   Scale: 0.5
   Damage:
-  - senderType: 0
-    Type: 0
-    Value: 10
+    _damageType: 0
+    _value: 15
   StatusEffects: []
   FoldOutSprite: 1
   Sprite: {fileID: 21300000, guid: 7e115cef2c037f14a972e52077ee201e, type: 3}

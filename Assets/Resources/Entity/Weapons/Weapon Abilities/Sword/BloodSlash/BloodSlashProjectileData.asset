@@ -16,22 +16,10 @@ MonoBehaviour:
   name: NewProjectileData
   Scale: 0.6
   Damage:
-  - senderType: 0
-    Type: 0
-    Value: 10
+    _damageType: 0
+    _value: 20
   StatusEffects:
-  - Name: Burn
-    Icon: {fileID: 0}
-    _stackingBehaviour: 2
-    maxStacks: 1
-    tickSpeed: 0.5
-    LifeTime: 2
-    _behaviours:
-    - {fileID: 11400000, guid: f157de6c3edf20342b90290430d9e351, type: 2}
-    _damageValues:
-    - senderType: 3
-      Type: 1
-      Value: 10
+  - {fileID: 0}
   FoldOutSprite: 1
   Sprite: {fileID: 21300000, guid: 7e115cef2c037f14a972e52077ee201e, type: 3}
   BirthColor: {r: 1, g: 1, b: 1, a: 1}
