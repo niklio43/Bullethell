@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 3263897386200201223}
   - component: {fileID: 6216910891364528795}
   - component: {fileID: 3263897386200201221}
+  - component: {fileID: 8551991472733565576}
   - component: {fileID: 105788379982192316}
   - component: {fileID: 8207610389014742947}
   - component: {fileID: 3263897386200201219}
@@ -222,6 +223,18 @@ MonoBehaviour:
   DrawGizmos: 1
   DetectionRadius: 4
   ObstacleDetectionRadius: 1.5
+--- !u!114 &8551991472733565576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263897386200201228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc68d482482bb3d4db01bf5ee720fb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &105788379982192316
 SpriteRenderer:
   m_ObjectHideFlags: 0

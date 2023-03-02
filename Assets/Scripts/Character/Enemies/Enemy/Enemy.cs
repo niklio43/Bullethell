@@ -10,7 +10,7 @@ using BulletHell.VFX;
 using UnityEngine.VFX;
 using BulletHell.EffectInterfaces;
 
-public class Enemy : MonoBehaviour, IKillable, IStaggerable
+public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
 {
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
     [SerializeField] EnemyBrain _brain;
@@ -60,18 +60,17 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable
         if (CanMove) _enemyMovement.Move();
     }
 
-    public void OnStun()
+    public void Stun()
     {
-        //FIX THIS IS NO LONGER BEING CALLED
+        Debug.Log("I GOT STUNNED");
         _brain.CurrentAbility?.Cancel();
         _brain.SetState(EnemyBrain.EnemyStates.Stunned);
-
         _stunVFX = BulletHell.VFX.VFXManager.PlayUntilStopped(Resources.Load<VisualEffectAsset>("StunnedEffect"), Vector3.up / 2, transform);
     }
 
-    public void OnExitStun()
+    public void ExitStun()
     {
-        //FIX SAME AS ABOVE
+        Debug.Log("I GOT UN-STUNNED");
         _brain.SetState(EnemyBrain.EnemyStates.Idle);
         _stunVFX.Stop();
     }
