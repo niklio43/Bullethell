@@ -1,4 +1,4 @@
-using BulletHell.Stats;
+using BulletHell.EffectInterfaces;
 using BulletHell.StatusSystem;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -8,11 +8,10 @@ namespace BulletHell.Emitters.Projectiles
     public class Projectile : MonoBehaviour, IPoolable
     {
         ProjectileData _data;
-        Character _owner;
+        GameObject _owner;
 
         ObjectPool<Projectile> _pool;
 
-        public DamageInfo Damage { get; private set; }
         public Transform Target;
         public float LifeTime;
         public Vector3 Velocity;
@@ -21,15 +20,8 @@ namespace BulletHell.Emitters.Projectiles
 
         [HideInInspector] public bool hasCollision = true;
 
-        #region Setters
-        public void SetOwner(Character owner) => _owner = owner;
         public void SetPool(ObjectPool<Projectile> pool) => _pool = pool;
-        #endregion
 
-        #region Getters
-        public Character GetOwner() => _owner;
-        public ObjectPool<Projectile> GetPool() => _pool;
-        #endregion
 
         #region Components
         SpriteRenderer _spriteRenderer;
@@ -42,7 +34,7 @@ namespace BulletHell.Emitters.Projectiles
             _collider = GetComponent<BoxCollider2D>();
         }
 
-        public void Initialize(ProjectileData data)
+        public void Initialize(ProjectileData data, GameObject owner)
         {
             _data = data;
 
@@ -64,18 +56,6 @@ namespace BulletHell.Emitters.Projectiles
 
             if (_data.BirthVFX != null)
                 PlayVFX(_data.BirthVFX, true);
-
-            InitializeDamage();
-        }
-
-        void InitializeDamage()
-        {
-            foreach (StatusEffect statusEffect in _data.StatusEffects) {
-                statusEffect.Initialize(_owner);
-            }
-             
-            Damage = new DamageInfo(_data.Damage, _data.StatusEffects);
-            Damage = DamageHandler.CalculateDamage(Damage, _owner.Stats);
         }
 
         private void FixedUpdate()
@@ -120,27 +100,28 @@ namespace BulletHell.Emitters.Projectiles
         public void CheckCollision(Collider2D collision) {
             if (collision == null) { return; }
             if (!_data.CollisionTags.Contains(collision.tag)) { return; }
-            if (collision.gameObject.TryGetComponent(out Character receiver)) {
-                DealDamage(receiver);
+            if(collision.TryGetComponent(out IDamageable entity)) {
+                entity.Damage(_data.Damage);
             }
-            if (_data.DestroyOnCollision) ResetObject();
-        }
+            if(collision.TryGetComponent(out UnitStatusEffects effectContainer)) {
+                foreach (StatusEffect effect in _data.StatusEffects) {
+                    effectContainer.ApplyEffect(effect);
+                }
+            }
 
-        public void DealDamage(Character receiver)
-        {
-            DamageHandler.Send(_owner, receiver, Damage);
+            if (_data.DestroyOnCollision) ResetObject();
         }
 
         public void PlayVFX(VisualEffectAsset asset, bool playInWorldSpace = true)
         {
-            if(asset == null) { return; }
             Transform parent = playInWorldSpace ? null : transform;
             BulletHell.VFX.VFXManager.PlayBurst(asset, transform.position, parent);
         }
 
         public void ResetObject()
         {
-            PlayVFX(_data.DeathVFX, true);
+            if(_data.DeathVFX != null) 
+                PlayVFX(_data.DeathVFX, true);
 
             gameObject.SetActive(false);
 
@@ -148,7 +129,6 @@ namespace BulletHell.Emitters.Projectiles
             transform.position = Vector2.zero;
             Velocity = Vector2.zero;
             
-            Damage = null;
             _data = null;
             
             _pool.Release(this);

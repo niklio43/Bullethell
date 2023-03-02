@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using BulletHell.Stats;
 
 namespace BulletHell.UI
 {
@@ -11,7 +10,6 @@ namespace BulletHell.UI
         [SerializeField] Image _fill;
         [SerializeField] float _flashTime = .1f;
 
-        Stat _healthStat;
         Slider _slider;
 
         private void Awake()
@@ -20,19 +18,13 @@ namespace BulletHell.UI
             _fill.material = Instantiate(_fill.material);
         }
 
-        public void Initialize(Stat stat)
+        public void Initialize()
         {
-            _healthStat = stat;
-            _healthStat.OnValueChanged += UpdateBar;
             UpdateBar();
         }
 
         void UpdateBar()
         {
-            float value = _healthStat.Get();
-            if (value > _slider.maxValue) { _slider.maxValue = value; }
-            _slider.value = value;
-
             StartCoroutine(Flash());
         }
 

@@ -26,11 +26,10 @@ namespace BulletHell.Abilities
         {
             _player = _ability.Owner.GetComponent<PlayerController>();
 
-            if (_player.Character.Stats["Stamina"].Get() < _staminaCost || _player.PlayerAbilities.IsParrying) { return; }
+            //FIX if (_player.Character.Stats["Stamina"].Get() < _staminaCost || _player.PlayerAbilities.IsParrying) { return; }
 
             _player.PlayerAbilities.IsParrying = true;
 
-            _player.UsedStamina(_staminaCost);
             VFX.VFXManager.PlayBurst(_parryVfx, Vector3.zero, _player.transform);
             Camera.main.Zoom(.2f, .5f);
 

@@ -13,7 +13,7 @@ namespace BulletHell.UI
         [SerializeField] Image _mask;
         [SerializeField] Image _statusIcon;
         [SerializeField] TMP_Text _counter;
-        StatusEffect _statusEffect;
+        ActiveStatusEffect _statusEffect;
 
         Pool<StatusEffectIcon> _pool;
         public void SetPool(Pool<StatusEffectIcon> pool) => _pool = pool;
@@ -23,11 +23,10 @@ namespace BulletHell.UI
             _statusIcon.material = Instantiate(_statusIcon.material);
         }
 
-        public void Initialize(StatusEffect statusEffect)
+        public void Initialize(ActiveStatusEffect statusEffect)
         {
             _statusEffect = statusEffect;
-            _statusIcon.sprite = statusEffect.Icon;
-            _statusEffect.OnExit += ResetObject;
+            _statusIcon.sprite = statusEffect.Effect.Icon;
             _statusEffect.OnTick += Tick;
             gameObject.SetActive(true);
         }
@@ -35,8 +34,8 @@ namespace BulletHell.UI
         private void Update()
         {
             if (_statusEffect == null) { return; }
-            _counter.text = _statusEffect.GetStackCount().ToString();
-            _mask.fillAmount = 1 - (_statusEffect.GetTimerCount() / _statusEffect.LifeTime);
+            _counter.text = $"{_statusEffect.CurrentStacks}";
+            _mask.fillAmount = 1 - _statusEffect.GetRemainingLifePercentage();
         }
 
         public void ResetObject()

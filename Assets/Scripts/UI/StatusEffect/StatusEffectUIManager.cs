@@ -8,6 +8,8 @@ namespace BulletHell.UI
 {
     public class StatusEffectUIManager : MonoBehaviour
     {
+        Dictionary<ActiveStatusEffect, StatusEffectIcon> _activeIcons = new Dictionary<ActiveStatusEffect, StatusEffectIcon>();
+
         [SerializeField] StatusEffectIcon _iconPrefab;
         Pool<StatusEffectIcon> _pool;
 
@@ -25,10 +27,18 @@ namespace BulletHell.UI
             return newIcon;
         }
 
-        public void AddStatusEffect(StatusEffect statusEffect)
+        public void AddStatusEffect(ActiveStatusEffect statusEffect)
         {
             StatusEffectIcon icon = _pool.Get();
             icon.Initialize(statusEffect);
+            _activeIcons.Add(statusEffect, icon);
+        }
+
+        public void RemoveStatusEffect(ActiveStatusEffect statusEffect)
+        {
+            if(!_activeIcons.ContainsKey(statusEffect)) { return; }
+            _activeIcons[statusEffect].ResetObject();
+            _activeIcons.Remove(statusEffect);
         }
     }
 }

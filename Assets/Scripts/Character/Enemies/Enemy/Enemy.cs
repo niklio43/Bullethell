@@ -1,7 +1,6 @@
 using BulletHell;
 using BulletHell.Enemies;
 using BulletHell.Enemies.Detection;
-using BulletHell.Stats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +24,6 @@ public class Enemy : MonoBehaviour
     RuntimeVisualEffect _stunVFX = null;
 
     EnemyDetection _detection;
-    Character _character;
 
     bool _flipped = false;
     Vector3 _defaultScale;
@@ -38,20 +36,12 @@ public class Enemy : MonoBehaviour
 
     [Header("Distances")]
     [Range(0, 10)] public float PreferredDistance;
-    [SerializeField] List<ItemDrop> _dropTable = new List<ItemDrop>();
 
     private void Awake()
     {
-        _character = GetComponent<Character>();
         _detection = GetComponent<EnemyDetection>();
 
         _enemyMovement.Initialize(this);
-
-        _character.OnTakeDamageEvent += TakeDamage;
-        _character.OnStunEvent += OnStun;
-        _character.OnExitStunEvent += OnExitStun;
-        _character.OnDeathEvent += OnDeath;
-
         _brain = Instantiate(_brain);
         _brain.Initialize(this);
 
@@ -71,12 +61,15 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        _brain.SetState(EnemyBrain.EnemyStates.Staggered);
+        //FIX
+        //_brain.SetState(EnemyBrain.EnemyStates.Staggered);
         //DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
     }
 
     public void OnStun()
     {
+
+        //FIX THIS IS NO LONGER BEING CALLED
         _brain.CurrentAbility?.Cancel();
         _brain.SetState(EnemyBrain.EnemyStates.Stunned);
 
@@ -85,6 +78,8 @@ public class Enemy : MonoBehaviour
 
     public void OnExitStun()
     {
+        //FIX SAME AS ABOVE
+
         _brain.SetState(EnemyBrain.EnemyStates.Idle);
 
         _stunVFX.Stop();
@@ -92,6 +87,7 @@ public class Enemy : MonoBehaviour
 
     public void OnDeath()
     {
+        //FIX THIS IS NO LONGER BEING CALLED
         _brain.CurrentAbility?.Cancel();
         BulletHell.VFX.VFXManager.Play(_deathVFX, 1, transform.position);
         Destroy(gameObject);

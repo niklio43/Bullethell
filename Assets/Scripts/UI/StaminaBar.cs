@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using BulletHell.Stats;
 
 namespace BulletHell.UI {
     public class StaminaBar : MonoBehaviour
@@ -10,7 +9,6 @@ namespace BulletHell.UI {
         [SerializeField] Image _image;
         [SerializeField] float _flashTime = 0;
 
-        Stat _staminaStat;
         int _currentStaminaCount;
 
         RectTransform _rectTransform;
@@ -23,22 +21,13 @@ namespace BulletHell.UI {
             _image.material = Instantiate(_image.material);
         }
 
-        public void Initialize(Stat stat)
+        public void Initialize()
         {
-            _staminaStat = stat;
-            _staminaStat.OnValueChanged += UpdateBar;
             UpdateBar();
         }
 
         void UpdateBar()
         {
-            int value = (int)_staminaStat.Get();
-            int amountToAdd = value - _currentStaminaCount;
-
-            if (amountToAdd == 0) { return; }
-
-            _currentStaminaCount += amountToAdd;
-            _rectTransform.sizeDelta = new Vector2(100 * _currentStaminaCount, 100);
             StartCoroutine(Flash());
         }
 

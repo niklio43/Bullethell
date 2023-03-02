@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using BulletHell.Stats;
 using BulletHell.Emitters.Projectiles;
-using BulletHell.StatusSystem;
 
 namespace BulletHell.Emitters
 {
@@ -35,7 +33,7 @@ namespace BulletHell.Emitters
             _emitterGroups.UpdateGroups();
         }
 
-        public virtual Projectile[] FireProjectile(Character projectileOwner = null, Transform target = null)
+        public virtual Projectile[] FireProjectile(GameObject owner = null, Transform target = null)
         {
             Projectile[] projectiles = new Projectile[_data.EmitterPoints];
 
@@ -51,8 +49,7 @@ namespace BulletHell.Emitters
                 projectile.Velocity = _emitterGroups[i].Direction;
                 projectile.LifeTime = _data.LifeTime;
 
-                projectile.SetOwner(projectileOwner);
-                projectile.Initialize(_data.ProjectileData);
+                projectile.Initialize(_data.ProjectileData, owner);
                 projectiles[i] = projectile;
             }
 

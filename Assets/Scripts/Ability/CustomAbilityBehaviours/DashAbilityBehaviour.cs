@@ -18,7 +18,7 @@ namespace BulletHell.Abilities
         protected override void Perform()
         {
             _player = _ability.Owner.GetComponent<PlayerController>();
-            if (_player.Character.Stats["Stamina"].Get() < _staminaCost) { return; }
+            //FIX if (_player.Character.Stats["Stamina"].Get() < _staminaCost) { return; }
             Dash(_ability.Owner);
         }
 
@@ -32,8 +32,7 @@ namespace BulletHell.Abilities
             VFX.VFXManager.PlayBurst(_vfx, owner.transform.position, null, new VFXAttribute[] { new VFXFloat("Angle", Vector2.SignedAngle(new Vector2(dir.x, -dir.y), Vector2.left)) });
 
             _player.PlayerAbilities.IsDashing = true;
-            _player.PlayerMovement.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
-            _player.UsedStamina(1);
+            //FIX _player.PlayerMovement.Rb.AddForce(dir * _player.Character.Stats["DashDistance"].Value, ForceMode2D.Impulse);
 
             MonoInstance.Instance.StartCoroutine(CreateAfterImages(0.02f));
 

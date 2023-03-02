@@ -1,7 +1,3 @@
-using BulletHell.Enemies.Detection;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace BulletHell.Enemies.Steering
@@ -16,16 +12,14 @@ namespace BulletHell.Enemies.Steering
             Transform transform = movement.transform;
             Enemy enemy = movement.Enemy;
 
-            if(enemy.Target == null) { return; }
-
-            EnemyPathFinder path = movement.PathFinder;
-            path.UpdatePathTraversal();
-
+            if (enemy.Target == null) { return; }
 
             float distance = Vector2.Distance(enemy.Target.position, transform.position);
 
             if (distance < enemy.PreferredDistance && enemy.TargetInLineOfSight(transform.position)) { return; }
 
+            EnemyPathFinder path = movement.PathFinder;
+            path.UpdatePathTraversal();
             Vector2 towardsVector = path.GetCurrentPathNode() - transform.position;
 
             float distanceWeight = Mathf.Clamp01(distance / 3);
@@ -36,7 +30,7 @@ namespace BulletHell.Enemies.Steering
 
                 result = Mathf.Clamp01(result);
 
-                if(result > steering.Interest[i])
+                if (result > steering.Interest[i])
                     steering.Interest[i] = result;
             }
         }
