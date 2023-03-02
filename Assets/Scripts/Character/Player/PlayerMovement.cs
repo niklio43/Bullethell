@@ -7,6 +7,7 @@ namespace BulletHell.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+        [SerializeField] float _moveSpeed = 5;
         Rigidbody2D _rb;
         Animator _animator;
         Vector2 _movementInput;
@@ -30,7 +31,7 @@ namespace BulletHell.Player
 
         public void Move(InputAction.CallbackContext context)
         {
-            _movementInput = context.ReadValue<Vector2>() * GetComponent<PlayerController>().Character.Stats["MoveSpeed"].Value;
+            _movementInput = context.ReadValue<Vector2>() * _moveSpeed;
         }
 
         #region Component Caching

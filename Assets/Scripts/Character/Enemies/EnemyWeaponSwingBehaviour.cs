@@ -1,5 +1,4 @@
 using BulletHell.Emitters;
-using BulletHell.Stats;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Player;

@@ -14,7 +14,7 @@ namespace BulletHell.Emitters.Projectiles
         public bool FoldOutGeneral = false;
         public new string name = "NewProjectileData";
         public float Scale = 1;
-        public List<DamageValue> Damage;
+        public DamageValue Damage;
         public List<StatusEffect> StatusEffects;
 
         //Sprite

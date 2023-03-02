@@ -21,7 +21,7 @@ namespace BulletHell.Enemies.Steering
         {
             NoPath,
             HasPath,
-            PathError
+            PathError,
         }
 
         private void Awake()

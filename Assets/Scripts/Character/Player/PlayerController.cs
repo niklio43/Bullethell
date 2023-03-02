@@ -12,8 +12,8 @@ namespace BulletHell.Player
         PlayerBrain _playerBrain;
         PlayerMovement _playerMovement;
         PlayerAbilities _playerAbilities;
+        UnitStatusEffects _unitStatusEffects;
 
-        public Character Character;
         public PlayerAimWeapon Aim;
         float timer = 0;
 
@@ -28,18 +28,9 @@ namespace BulletHell.Player
             _playerMovement = GetComponent<PlayerMovement>();
             _playerAbilities = GetComponent<PlayerAbilities>();
 
-            Character.OnTakeDamageEvent += TakeDamage;
-            Character.OnHealEvent += OnHeal;
-            Character.OnDeathEvent += OnDeath;
-            Character.OnStunEvent += OnStun;
-            Character.OnExitStunEvent += OnExitStun;
-            Character.OnAppliedEffectEvent += OnAppliedStatusEffect;
-            Character.OnRemovedEffectEvent += OnRemovedStatusEffect;
-        }
-
-        private void Start()
-        {
-            PlayerUI.Instance.Initialize(Character.Stats);
+            _unitStatusEffects = GetComponent<UnitStatusEffects>();
+            _unitStatusEffects.OnAppliedStatusEffect += OnAppliedStatusEffect;
+            _unitStatusEffects.OnRemovedStatusEffect += OnRemovedStatusEffect;
         }
 
         void FixedUpdate()
@@ -47,59 +38,41 @@ namespace BulletHell.Player
             _playerBrain.UpdateBrain();
         }
 
-        private void Update()
-        {
-            //temporary
-            if (Character.Stats["Stamina"].Get() >= Character.Stats["MaxStamina"].Get()) { return; }
-
-            timer += Time.deltaTime;
-
-            if (timer >= 1)
-            {
-                Character.Stats["Stamina"].Value += 1;
-                timer = 0;
-            }
-        }
-
-        public void OnAppliedStatusEffect(StatusEffect statusEffect)
+        public void OnAppliedStatusEffect(ActiveStatusEffect statusEffect)
         {
             PlayerUI.Instance.AddStatusEffect(statusEffect);
         }
 
-        public void OnRemovedStatusEffect(StatusEffect statusEffect)
+        public void OnRemovedStatusEffect(ActiveStatusEffect statusEffect)
         {
+            PlayerUI.Instance.RemoveStatusEffect(statusEffect);
         }
 
         public void OnStun()
         {
+            //FIX THIS IS NOT LONGER BEING CALLED
             if (_playerAbilities.IsInvincible) return;
             _playerBrain._FSM.SetState(PlayerBrain.PlayerStates.Staggered);
         }
 
         public void OnExitStun()
         {
+            //FIX SAME AS ABOVE
             _playerBrain._FSM.SetState(PlayerBrain.PlayerStates.Default);
         }
 
         public void TakeDamage(float damage)
         {
+            //FIX THIS IS NOT LONGER BEING CALLED
             if (_playerAbilities.IsInvincible) return;
             Camera.main.Shake(0.1f, 0.2f);
         }
 
-        public void OnDeath()
+        public void OnDestroy()
         {
+            _unitStatusEffects.OnAppliedStatusEffect -= OnAppliedStatusEffect;
+            _unitStatusEffects.OnRemovedStatusEffect -= OnRemovedStatusEffect;
         }
-
-        public void OnHeal(float amount)
-        {
-        }
-
-        public void UsedStamina(int amount)
-        {
-            Character.Stats["Stamina"].Value -= amount;
-        }
-
 
         #region Component Caching
 

@@ -9,16 +9,40 @@ namespace BulletHell.CameraUtilities
         static Coroutine CurrentShakeRoutine;
         static Coroutine CurrentZoomRoutine;
 
-        public static void Shake(this Camera camera, float duration, float amount)
+        public static void Shake(this Camera camera, float duration, float amount, float incrament = 0)
         {
             if (CurrentShakeRoutine != null) { return; }
-            CurrentShakeRoutine = MonoInstance.Instance.StartCoroutine(cShake(camera, duration, amount));
+            CurrentShakeRoutine = MonoInstance.Instance.StartCoroutine(cShake(camera, duration, amount, incrament));
         }
 
         public static void Zoom(this Camera camera, float duration, float amount)
         {
             if(CurrentZoomRoutine != null) { return; }
             CurrentZoomRoutine = MonoInstance.Instance.StartCoroutine(ZoomInOut(camera, duration, amount));
+        }
+
+        static IEnumerator cShake(Camera camera, float duration, float amount, float incrament)
+        {
+            Vector3 startPosition = camera.transform.position;
+
+            float timeElapsed = 0;
+
+            while (timeElapsed < duration) {
+
+                if(incrament == 0) {
+                    yield return new WaitForEndOfFrame();
+                    timeElapsed += Time.deltaTime;
+                }
+                else {
+                    yield return new WaitForSeconds(incrament);
+                    timeElapsed += incrament;
+                }
+
+                camera.transform.position = startPosition + (Vector3)UnityEngine.Random.insideUnitCircle * Easing.EaseInOut(0, amount, timeElapsed / duration);
+            }
+
+            camera.transform.position = startPosition;
+            CurrentShakeRoutine = null;
         }
 
         static IEnumerator ZoomInOut(Camera camera, float duration, float amount)
@@ -46,22 +70,5 @@ namespace BulletHell.CameraUtilities
             camera.orthographicSize = to;
         }
 
-
-        static IEnumerator cShake(Camera camera, float duration, float amount)
-        {
-            Vector3 startPosition = camera.transform.position;
-
-            float timeElapsed = 0;
-
-            while (timeElapsed < duration) {
-                yield return new WaitForEndOfFrame();
-                timeElapsed += Time.deltaTime;
-
-                camera.transform.position = startPosition + (Vector3)UnityEngine.Random.insideUnitCircle * amount;
-            }
-
-            camera.transform.position = startPosition;
-            CurrentShakeRoutine = null;
-        }
     }
 }

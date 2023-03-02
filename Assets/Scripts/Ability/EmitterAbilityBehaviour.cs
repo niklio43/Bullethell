@@ -1,7 +1,4 @@
 using BulletHell.Emitters;
-using BulletHell.Stats;
-using BulletHell.StatusSystem;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BulletHell.Abilities
@@ -29,14 +26,7 @@ namespace BulletHell.Abilities
 
         protected override void Perform()
         {
-            if (_ability.Owner.TryGetComponent(out Character character))
-            {
-                _emitterObject.FireProjectile(character, Target);
-            }
-            else
-            {
-                Debug.LogError("Ability owner needs to be of type Character!");
-            }
+            _emitterObject.FireProjectile(_ability.Owner, Target);
         }
     }
 }
