@@ -13329,7 +13329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactRadius: 1
   _outlineShader: {fileID: 2100000, guid: c7363aea88708a64f8462ff64b640d27, type: 2}
-  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 3}
+  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &1181653737
 MonoBehaviour:
   m_ObjectHideFlags: 0
