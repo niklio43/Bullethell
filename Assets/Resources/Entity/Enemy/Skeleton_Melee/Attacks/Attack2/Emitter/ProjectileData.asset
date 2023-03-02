@@ -29,9 +29,8 @@ MonoBehaviour:
   name: Skeleton_Melee_Attack2
   Scale: 0.5
   Damage:
-  - senderType: 0
-    Type: 0
-    Value: 10
+    _damageType: 0
+    _value: 10
   StatusEffects: []
   FoldOutSprite: 1
   Sprite: {fileID: 21300000, guid: 7e115cef2c037f14a972e52077ee201e, type: 3}
@@ -45,6 +44,7 @@ MonoBehaviour:
   Speed: 4
   MaxSpeed: 5
   Acceleration: 0
+  InheritVelocity: 0
   Behaviours:
   - {fileID: 1400265389473356014}
   - {fileID: -7630551228731858930}

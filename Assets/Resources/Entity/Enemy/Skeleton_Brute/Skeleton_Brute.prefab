@@ -141,6 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3263897386200201226}
   - component: {fileID: 3263897386200201223}
+  - component: {fileID: 6216910891364528795}
   - component: {fileID: 3263897386200201221}
   - component: {fileID: 105788379982192316}
   - component: {fileID: 8207610389014742947}
@@ -192,9 +193,20 @@ MonoBehaviour:
   Aim: {fileID: 6352125995053666658}
   Weapon: {fileID: 0}
   PreferredDistance: 0.8
-  _dropTable:
-  - Item: {fileID: 11400000, guid: 50341da266b037e4fba199f25d005ee0, type: 2}
-    Chance: 1
+--- !u!114 &6216910891364528795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263897386200201228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed4f33f0cbe68948afc0b136f4cb44f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 300
+  _maxHealth: 300
 --- !u!114 &3263897386200201221
 MonoBehaviour:
   m_ObjectHideFlags: 0

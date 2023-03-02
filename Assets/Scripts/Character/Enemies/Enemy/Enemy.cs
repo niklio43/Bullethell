@@ -8,8 +8,9 @@ using UnityEngine;
 using BulletHell.CameraUtilities;
 using BulletHell.VFX;
 using UnityEngine.VFX;
+using BulletHell.EffectInterfaces;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IKillable
 {
     public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
     [SerializeField] EnemyBrain _brain;
@@ -59,12 +60,6 @@ public class Enemy : MonoBehaviour
         if (CanMove) _enemyMovement.Move();
     }
 
-    public void TakeDamage(float damage)
-    {
-        //FIX
-        //_brain.SetState(EnemyBrain.EnemyStates.Staggered);
-        //DamagePopupManager.Instance.InsertIntoPool(1f, transform.position);
-    }
 
     public void OnStun()
     {
@@ -87,8 +82,6 @@ public class Enemy : MonoBehaviour
 
     public void OnDeath()
     {
-        //FIX THIS IS NO LONGER BEING CALLED
-        _brain.CurrentAbility?.Cancel();
         BulletHell.VFX.VFXManager.Play(_deathVFX, 1, transform.position);
         Destroy(gameObject);
     }
@@ -162,6 +155,11 @@ public class Enemy : MonoBehaviour
             _cachedComponents.Add(typeof(T), component);
         }
         return component;
+    }
+
+    public void Kill()
+    {
+        throw new NotImplementedException();
     }
 
     #endregion

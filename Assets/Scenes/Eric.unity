@@ -1331,8 +1331,9 @@ GameObject:
   - component: {fileID: 1448856848}
   - component: {fileID: 1448856847}
   - component: {fileID: 1448856846}
-  - component: {fileID: 1448856849}
   - component: {fileID: 1448856850}
+  - component: {fileID: 1448856852}
+  - component: {fileID: 1448856851}
   m_Layer: 7
   m_Name: Square (1)
   m_TagString: Player
@@ -1433,26 +1434,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1448856849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448856845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e7861a990189c4b8c4f6fc8c988429, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stats:
-    _statsList:
-    - Name: Hp
-      _value: 100
-    - Name: MaxHp
-      _value: 100
-  StatusEffect:
-    _owner: {fileID: 0}
 --- !u!50 &1448856850
 Rigidbody2D:
   serializedVersion: 4
@@ -1474,6 +1455,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1448856851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448856845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc68d482482bb3d4db01bf5ee720fb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1448856852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448856845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02adcfd438968b740a50441784cd977e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 100
 --- !u!1 &1575296287
 GameObject:
   m_ObjectHideFlags: 0

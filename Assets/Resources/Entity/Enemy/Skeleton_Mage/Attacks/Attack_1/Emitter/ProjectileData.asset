@@ -16,9 +16,8 @@ MonoBehaviour:
   name: NewProjectileData
   Scale: 2
   Damage:
-  - senderType: 0
-    Type: 0
-    Value: 10
+    _damageType: 0
+    _value: 10
   StatusEffects: []
   FoldOutSprite: 1
   Sprite: {fileID: -1403164347, guid: 84777e64b92d0554dbfa1402237c0ecd, type: 3}
@@ -32,6 +31,7 @@ MonoBehaviour:
   Speed: 3
   MaxSpeed: 0
   Acceleration: 0
+  InheritVelocity: 0
   Behaviours:
   - {fileID: 4788756649689817966}
   FoldOutCollision: 1
