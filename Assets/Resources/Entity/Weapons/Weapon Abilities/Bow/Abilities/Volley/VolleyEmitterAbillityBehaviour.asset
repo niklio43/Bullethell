@@ -16,4 +16,4 @@ MonoBehaviour:
   _waitTime: 0
   _castTime: 0
   _animations: []
-  _emitterData: {fileID: 0}
+  _emitterData: {fileID: 11400000, guid: a248c61af017aa74fb2d1a1aa06f9413, type: 2}

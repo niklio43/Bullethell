@@ -38,7 +38,7 @@ namespace BulletHell.Player
 
         public void Look(InputAction.CallbackContext context)
         {
-            _mousePosition = context.ReadValue<Vector2>();
+            _mousePosition += context.ReadValue<Vector2>();
         }
 
         #region Component Caching

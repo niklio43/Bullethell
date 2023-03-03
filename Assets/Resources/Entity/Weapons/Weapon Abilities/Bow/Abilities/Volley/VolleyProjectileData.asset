@@ -35,10 +35,9 @@ MonoBehaviour:
   Behaviours:
   - {fileID: 709642286112022707}
   FoldOutCollision: 1
-  HasCollision: 1
-  DestroyOnCollision: 1
-  CollisionTags:
-  - Enemy
+  HasCollision: 0
+  DestroyOnCollision: 0
+  CollisionTags: []
   Collider:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -54,7 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb803fb72d73ec45801bb2f6da26a40, type: 3}
   m_Name: AirborneBehaviour
   m_EditorClassIdentifier: 
-  gravity: 9.8
-  impactSize: 2
-  offset: 1
-  flightDuration: 0
+  _gravity: 9.8
+  _impactSize: 1
+  _offset: 1
+  _maxDistance: 4
+  flightDuration: 3

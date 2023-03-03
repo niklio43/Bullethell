@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolName: BowPool
   _ability:
-  - {fileID: 11400000, guid: 1619840c3bc11f54ea5e0183f6184660, type: 2}
+  - _ability: {fileID: 11400000, guid: c0b6dba5459409d49ade52c9e799d37e, type: 2}
+    _cost: 45
