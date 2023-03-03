@@ -17,14 +17,18 @@ public class DamagePopup : MonoBehaviour, IPoolable
 
     public ObjectPool<DamagePopup> Pool;
 
+    Vector2 _startScale;
+
     void Awake()
     {
         _textMesh = GetComponent<TextMeshPro>();
+        _startScale = transform.localScale;
     }
 
     public void ResetObject()
     {
         _textMesh.color = _savedColor;
+        transform.localScale = _startScale;
 
         gameObject.SetActive(false);
         Pool.Release(this);
