@@ -33,6 +33,9 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Move.performed += ctx => _player.PlayerMovement.Move(ctx);
         _inputs.Player.Move.canceled += ctx => _player.PlayerMovement.Move(ctx);
 
+        //Look
+        _inputs.Player.Look.performed += ctx => _player.PlayerMovement.Look(ctx);
+
         //UI
         _inputs.Player.Inventory.performed += ctx => _playerUI.ToggleInventory();
         _inputs.Player.Interact.performed += ctx => playerInteracter.Interact();

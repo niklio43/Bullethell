@@ -11,10 +11,12 @@ namespace BulletHell.Player
         Rigidbody2D _rb;
         Animator _animator;
         Vector2 _movementInput;
+        Vector2 _mousePosition;
 
         #region Getters & Setters
         public Rigidbody2D Rb { get { return _rb; } }
         public Vector2 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
+        public Vector2 MousePosition { get { return _mousePosition; } set { _mousePosition = value; } }
         #endregion
 
         void Awake()
@@ -32,6 +34,11 @@ namespace BulletHell.Player
         public void Move(InputAction.CallbackContext context)
         {
             _movementInput = context.ReadValue<Vector2>() * _moveSpeed;
+        }
+
+        public void Look(InputAction.CallbackContext context)
+        {
+            _mousePosition = context.ReadValue<Vector2>();
         }
 
         #region Component Caching

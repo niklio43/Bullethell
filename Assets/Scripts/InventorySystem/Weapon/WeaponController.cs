@@ -76,7 +76,7 @@ public class WeaponController : MonoBehaviour
     public void Attack()
     {
         if (_weapon == null) { return; }
-        _weapon.BaseAbility.Cast();
+        _weapon.BaseAbility.Cast(_player.PlayerMovement.MousePosition);
     }
 
     public void UseAbility(int abilityIndex)
@@ -84,8 +84,7 @@ public class WeaponController : MonoBehaviour
         if (_weapon == null) { return; }
         if (abilityIndex > _weapon.Abilities.Count - 1 || _weapon.Abilities[abilityIndex] == null) { return; }
 
-        //FIX SO THAT CURSOR IS THE TARGET
-        _weapon.Abilities[abilityIndex].Cast(Vector3.zero);
+        _weapon.Abilities[abilityIndex].Cast(_player.PlayerMovement.MousePosition);
     }
 
     #region Component Caching
