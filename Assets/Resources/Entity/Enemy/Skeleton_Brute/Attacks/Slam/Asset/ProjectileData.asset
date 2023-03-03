@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb803fb72d73ec45801bb2f6da26a40, type: 3}
   m_Name: AirborneBehaviour
   m_EditorClassIdentifier: 
-  gravity: 9.8
-  impactSize: 2
-  offset: 0
+  _gravity: 9.8
+  _impactSize: 1.5
+  _offset: 0
+  _maxDistance: 0.5
   flightDuration: 0.6
 --- !u!114 &11400000
 MonoBehaviour:
