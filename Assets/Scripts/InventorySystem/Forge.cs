@@ -16,6 +16,9 @@ public class Forge : InteractableItem
     [SerializeField] Button _button;
     [SerializeField] WeaponController _weapon;
     [SerializeField] PlayerResources _player;
+
+    WeaponAbility _abilityToAdd;
+
     void Start()
     {
         PlayerUI.Instance.Forge.SetActive(false);
@@ -32,6 +35,11 @@ public class Forge : InteractableItem
     public void AssignWeapon(InventoryItemData item)
     {
         _button.onClick.AddListener(delegate () { UpgradeWeapon(item); });
+
+        if(item == null) { PlayerUI.Instance.SetCost(0); return; }
+        Weapon weapon = item as Weapon;
+        _abilityToAdd = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
+        PlayerUI.Instance.SetCost(_abilityToAdd.Cost);
     }
 
     void UpgradeWeapon(InventoryItemData item)
@@ -45,20 +53,15 @@ public class Forge : InteractableItem
     {
         if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); FailedUpgrade(); return; }
 
-        if (_player.Health <= 50) { Debug.Log("Not enough blood!"); FailedUpgrade(); return; }
-
-        WeaponAbility weaponAbility = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
+        if (_player.Health <= _abilityToAdd.Cost) { Debug.Log("Not enough blood!"); FailedUpgrade(); return; }
 
         foreach (Ability ab in weapon.Abilities)
         {
-            if (ab.Id == weaponAbility.Ability.Id) { FillAbilitySlot(weapon); return; }
+            if (ab.Id == _abilityToAdd.Ability.Id) { FillAbilitySlot(weapon); return; }
         }
-        foreach (Ability ab in weapon.AbilitySlot)
-        {
-            if (ab.Id == weaponAbility.Ability.Id) { FillAbilitySlot(weapon); return; }
-        }
+        if (weapon.BaseAbility.Id == _abilityToAdd.Ability.Id) { FillAbilitySlot(weapon); return; }
 
-        StartCoroutine(BeginUpgrade(weapon, weaponAbility, _player.gameObject, _weapon.gameObject));
+        StartCoroutine(BeginUpgrade(weapon, _abilityToAdd, _player.gameObject, _weapon.gameObject));
     }
 
     IEnumerator BeginUpgrade(Weapon weapon, WeaponAbility weaponAbility, GameObject owner, GameObject host)
@@ -67,8 +70,10 @@ public class Forge : InteractableItem
         yield return new WaitForSeconds(1f);
         Debug.Log(string.Concat("Added ability: ", weaponAbility.Ability, " to weapon: ", weapon.DisplayName));
         PlayerUI.Instance.IsUpgrading = false;
+        Camera.main.Shake(0.05f, 0.5f);
         _player.Damage(new DamageValue(DamageType.Unblockable, weaponAbility.Cost));
         weapon.AddAbility(weaponAbility.Ability, owner, host);
+        _abilityToAdd = null;
     }
 
     void FailedUpgrade()

@@ -24,8 +24,8 @@ namespace BulletHell.UI
 
         [Header("Forge")]
         public GameObject Forge;
+        [SerializeField] TextMeshProUGUI _bloodCost;
         [SerializeField] Slider _forgeProgressBar;
-        [SerializeField] TextMeshProUGUI _currentHealth;
         [SerializeField] PlayerController _playerController;
         [HideInInspector] public bool IsUpgrading = false;
 
@@ -44,6 +44,17 @@ namespace BulletHell.UI
         private void Start()
         {
             Inventory.SetActive(false);
+        }
+
+        void Update()
+        {
+            if(!IsUpgrading) { _forgeProgressBar.value = 0; return; }
+            _forgeProgressBar.value += Time.deltaTime;
+        }
+
+        public void SetCost(float amount)
+        {
+            _bloodCost.text = string.Concat("Cost: ", amount);
         }
 
         public bool TryGetCurrentInputForAction(string action, out string input)

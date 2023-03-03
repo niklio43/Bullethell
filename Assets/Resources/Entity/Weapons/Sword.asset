@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bcd0f6d5e6c47e4f8befedf53a971cc, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  _abilitySlot:
-  - {fileID: 11400000, guid: a0070805f62fa0a40b3ed74bc947a6c6, type: 2}
+  _baseAbility: {fileID: 11400000, guid: a0070805f62fa0a40b3ed74bc947a6c6, type: 2}
+  _abilities: []
   AnimatorController: {fileID: 22100000, guid: c6719dd60da867449bf0b51b1a42df54, type: 2}
   icon: {fileID: 21300000, guid: 03c7fc2e19d16a8499bcf1fc8b4b0c22, type: 3}
   sprite: {fileID: 21300000, guid: e37e1fad0d0f7c24ca9b68a9e0aa06bb, type: 3}

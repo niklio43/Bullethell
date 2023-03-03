@@ -39,6 +39,7 @@ public class WeaponController : MonoBehaviour
 
     public void AssignWeapon(Weapon weapon)
     {
+        UnAssignWeapon();
         weapon.Initialize(_player.gameObject, gameObject);
 
         Animator animator = GetComponent<Animator>();
@@ -49,6 +50,8 @@ public class WeaponController : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = weapon.Sprite;
         gameObject.name = weapon.name;
 
+        GetComponent<AbilityHolder>().SetBaseAbility(weapon.BaseAbility);
+
         foreach (Ability ability in weapon.Abilities)
         {
             GetComponent<AbilityHolder>().AddAbility(ability);
@@ -58,7 +61,10 @@ public class WeaponController : MonoBehaviour
 
     public void UnAssignWeapon()
     {
+        if(_weapon == null) { return; }
         GetComponent<SpriteRenderer>().sprite = null;
+
+        GetComponent<AbilityHolder>().SetBaseAbility(null);
 
         GetComponent<AbilityHolder>().AddAbility(null);
 
@@ -67,7 +73,13 @@ public class WeaponController : MonoBehaviour
         _weapon = null;
     }
 
-    public void Attack(int abilityIndex, InputAction.CallbackContext ctx)
+    public void Attack()
+    {
+        if (_weapon == null) { return; }
+        _weapon.BaseAbility.Cast();
+    }
+
+    public void UseAbility(int abilityIndex)
     {
         if (_weapon == null) { return; }
         if (abilityIndex > _weapon.Abilities.Count - 1 || _weapon.Abilities[abilityIndex] == null) { return; }

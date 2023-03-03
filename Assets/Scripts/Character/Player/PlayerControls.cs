@@ -25,9 +25,9 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Parry.performed += ctx => _player.PlayerAbilities.Parry(1, ctx);
 
         //Ability
-        _inputs.Player.AbilityQ.performed += ctx => _weaponController.Attack(1, ctx);
-        _inputs.Player.AbilityE.performed += ctx => _weaponController.Attack(2, ctx);
-        _inputs.Player.AbilityR.performed += ctx => _weaponController.Attack(3, ctx);
+        _inputs.Player.AbilityQ.performed += ctx => _weaponController.UseAbility(0);
+        _inputs.Player.AbilityE.performed += ctx => _weaponController.UseAbility(1);
+        _inputs.Player.AbilityR.performed += ctx => _weaponController.UseAbility(2);
 
         //Move
         _inputs.Player.Move.performed += ctx => _player.PlayerMovement.Move(ctx);
@@ -38,7 +38,7 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Interact.performed += ctx => playerInteracter.Interact();
 
         //Fire
-        _inputs.Player.Fire.performed += ctx => _weaponController.Attack(0, ctx);
+        _inputs.Player.Fire.performed += ctx => _weaponController.Attack();
         #endregion
     }
 

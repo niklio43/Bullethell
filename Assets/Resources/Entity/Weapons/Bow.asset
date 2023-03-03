@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d127d353507f38747aaef43349c4bd62, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  _abilitySlot:
-  - {fileID: 11400000, guid: 1619840c3bc11f54ea5e0183f6184660, type: 2}
+  _baseAbility: {fileID: 11400000, guid: 1619840c3bc11f54ea5e0183f6184660, type: 2}
   _abilities: []
   AnimatorController: {fileID: 0}
   icon: {fileID: 21300000, guid: 9da26b7754cd9fa4e923c8fd3b090d8a, type: 3}

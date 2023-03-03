@@ -8,7 +8,8 @@ using TMPro;
 public class AbilityHolder : MonoBehaviour
 {
     [SerializeField] List<GameObject> _abilityUI;
-    [SerializeField] List<Ability> _abilities = new List<Ability>();
+    List<Ability> _abilities = new List<Ability>();
+    Ability _baseAbility;
 
     void Update()
     {
@@ -17,11 +18,15 @@ public class AbilityHolder : MonoBehaviour
             _abilities[i].UpdateAbility(Time.deltaTime);
             _abilityUI[i].transform.GetChild(0).GetComponent<TMP_Text>().text = _abilities[i].GetCurrentAmount().ToString();
         }
+        if(_baseAbility == null) { return; }
+        _baseAbility.UpdateAbility(Time.deltaTime);
     }
+
+    public void SetBaseAbility(Ability baseAbility) => _baseAbility = baseAbility;
 
     public void AddAbility(Ability ability)
     {
-        if(ability == null) { _abilities.Clear(); ValueChanged(); return; }
+        if (ability == null) { _abilities.Clear(); ValueChanged(); return; }
         _abilities.Add(ability);
         ValueChanged();
     }

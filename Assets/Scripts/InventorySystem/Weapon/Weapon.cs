@@ -8,19 +8,21 @@ namespace BulletHell.InventorySystem
     public abstract class Weapon : InventoryItemData
     {
         Pool _pool;
-        [SerializeField] List<Ability> _abilitySlot = new List<Ability>();
+        [SerializeField] Ability _baseAbility;
         [SerializeField] List<Ability> _abilities = new List<Ability>();
         public AnimatorOverrideController AnimatorController;
         public Pool Pool { get { return _pool; } set { _pool = value; } }
 
         public List<Ability> Abilities { get { return _abilities; } set { _abilities = value; } }
-        public List<Ability> AbilitySlot { get { return _abilitySlot; } }
+        public Ability BaseAbility { get { return _baseAbility; } }
 
         public void Initialize(GameObject owner, GameObject host)
         {
-            for (int i = 0; i < _abilitySlot.Count; i++)
+            _baseAbility = Instantiate(_baseAbility);
+            _baseAbility.Initialize(owner, host);
+            for (int i = 0; i < _abilities.Count; i++)
             {
-                AddAbility(_abilitySlot[i], owner, host);
+                AddAbility(_abilities[i], owner, host);
             }
         }
 
