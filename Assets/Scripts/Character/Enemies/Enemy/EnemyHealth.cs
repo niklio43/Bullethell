@@ -16,7 +16,9 @@ namespace BulletHell.Enemies
 
             GetComponent<IStaggerable>().Stagger();
 
-            if(_health <= 0) {
+            DamagePopupManager.Instance.InsertIntoPool(Damage.GetDamage(), transform.position);
+
+            if (_health <= 0) {
                 GetComponent<IKillable>().Kill();
             }
         }
