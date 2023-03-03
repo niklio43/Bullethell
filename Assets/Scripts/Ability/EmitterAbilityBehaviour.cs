@@ -26,7 +26,7 @@ namespace BulletHell.Abilities
 
         protected override void Perform()
         {
-            _emitterObject.FireProjectile(_ability.Owner, Target);
+            _emitterObject.FireProjectile(Target, _ability.Owner);
         }
     }
 }

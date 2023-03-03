@@ -98,7 +98,7 @@ namespace BulletHell.Enemies
                 }
 
                 if (CurrentAbility == null) { action.Transition("idle"); return; }
-                CurrentAbility.Cast(_owner.Target, () => { action.Transition("idle"); });
+                CurrentAbility.Cast(_owner.Target.position, () => { action.Transition("idle"); });
             });
 
             return state;

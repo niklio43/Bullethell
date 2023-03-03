@@ -1,5 +1,6 @@
 using BulletHell.EffectInterfaces;
 using BulletHell.StatusSystem;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -7,13 +8,13 @@ namespace BulletHell.Emitters.Projectiles
 {
     public class Projectile : MonoBehaviour, IPoolable
     {
-        ProjectileData _data;
+        [HideInInspector] public ProjectileData Data;
         GameObject _owner;
 
         ObjectPool<Projectile> _pool;
 
-        public Transform Target;
         public float LifeTime;
+        public Vector3 Target;
         public Vector3 Velocity;
 
         Vector3 _inheritedVelocity = Vector3.zero;
@@ -36,32 +37,57 @@ namespace BulletHell.Emitters.Projectiles
 
         public void Initialize(ProjectileData data, GameObject owner)
         {
-            _data = data;
+            Data = data;
             _owner = owner;
-            if (_data.InheritVelocity && _owner.TryGetComponent(out Rigidbody2D rb))
+            if (Data.InheritVelocity && _owner.TryGetComponent(out Rigidbody2D rb))
                 _inheritedVelocity = (Vector3)rb.velocity;
 
 
-            _spriteRenderer.sprite = _data.Sprite;
+            _spriteRenderer.sprite = Data.Sprite;
 
-            _collider.offset = _data.Collider.center;
-            _collider.size = _data.Collider.size / 2;
+            _collider.offset = Data.Collider.center;
+            _collider.size = Data.Collider.size / 2;
 
-            transform.localScale = Vector3.one * _data.Scale;
-            _spriteRenderer.color = _data.BirthColor;
+            transform.localScale = Vector3.one * Data.Scale;
+            _spriteRenderer.color = Data.BirthColor;
 
-            foreach (BaseProjectileBehaviour behaviour in _data.Behaviours) {
-                behaviour.Initialize(this, _data);
+            foreach (BaseProjectileBehaviour behaviour in Data.Behaviours) {
+                behaviour.Initialize(this, Data);
             }
 
-            if (_data.BirthVFX != null)
-                PlayVFX(_data.BirthVFX, true);
+            if (Data.BirthVFX != null)
+                PlayVFX(Data.BirthVFX, true);
+
+            StartCoroutine(ChangeColorOverLife());
         }
+
+        IEnumerator ChangeColorOverLife()
+        {
+            float totalTime = LifeTime;
+
+            yield return LerpColors(totalTime / 2, Data.MidLifeColor);
+            yield return LerpColors(totalTime / 2, Data.DeathColor);
+        }
+
+        IEnumerator LerpColors(float time, Color target)
+        {
+            float timeElapsed = 0;
+            Color startColor = _spriteRenderer.color;
+
+            while (timeElapsed < time) {
+                yield return new WaitForEndOfFrame();
+                timeElapsed += Time.deltaTime;
+                _spriteRenderer.color = Color.Lerp(startColor, target, timeElapsed / time);
+            }
+
+            _spriteRenderer.color = target;
+        }
+
 
         private void FixedUpdate()
         {
-            foreach (BaseProjectileBehaviour behaviour in _data.Behaviours) {
-                behaviour.UpdateBehaviour(this, _data, Time.fixedDeltaTime);
+            foreach (BaseProjectileBehaviour behaviour in Data.Behaviours) {
+                behaviour.UpdateBehaviour(this, Data, Time.fixedDeltaTime);
             }
 
             LifeTime -= Time.fixedDeltaTime;
@@ -76,8 +102,8 @@ namespace BulletHell.Emitters.Projectiles
         {
             float angle = Mathf.Atan2(Velocity.y, Velocity.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-            if(_data.MaxSpeed != 0)
-                Velocity = Vector2.ClampMagnitude(Velocity, _data.MaxSpeed);
+            if(Data.MaxSpeed != 0)
+                Velocity = Vector2.ClampMagnitude(Velocity, Data.MaxSpeed);
 
             Vector3 i_v = _inheritedVelocity * Mathf.Clamp01(Vector3.Dot(_inheritedVelocity.normalized, Velocity)) * Time.fixedDeltaTime;
 
@@ -99,17 +125,17 @@ namespace BulletHell.Emitters.Projectiles
 
         public void CheckCollision(Collider2D collision) {
             if (collision == null) { return; }
-            if (!_data.CollisionTags.Contains(collision.tag)) { return; }
+            if (!Data.CollisionTags.Contains(collision.tag)) { return; }
             if(collision.TryGetComponent(out IDamageable entity)) {
-                entity.Damage(_data.Damage);
+                entity.Damage(Data.Damage);
             }
             if(collision.TryGetComponent(out UnitStatusEffects effectContainer)) {
-                foreach (StatusEffect effect in _data.StatusEffects) {
+                foreach (StatusEffect effect in Data.StatusEffects) {
                     effectContainer.ApplyEffect(effect);
                 }
             }
 
-            if (_data.DestroyOnCollision) ResetObject();
+            if (Data.DestroyOnCollision) ResetObject();
         }
 
         public void PlayVFX(VisualEffectAsset asset, bool playInWorldSpace = true)
@@ -120,8 +146,10 @@ namespace BulletHell.Emitters.Projectiles
 
         public void ResetObject()
         {
-            if(_data.DeathVFX != null) 
-                PlayVFX(_data.DeathVFX, true);
+            StopAllCoroutines();
+
+            if(Data.DeathVFX != null) 
+                PlayVFX(Data.DeathVFX, true);
 
             gameObject.SetActive(false);
 
@@ -129,7 +157,7 @@ namespace BulletHell.Emitters.Projectiles
             transform.position = Vector2.zero;
             Velocity = Vector2.zero;
             
-            _data = null;
+            Data = null;
             
             _pool.Release(this);
         }

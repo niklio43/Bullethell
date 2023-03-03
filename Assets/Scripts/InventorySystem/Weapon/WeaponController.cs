@@ -84,7 +84,8 @@ public class WeaponController : MonoBehaviour
         if (_weapon == null) { return; }
         if (abilityIndex > _weapon.Abilities.Count - 1 || _weapon.Abilities[abilityIndex] == null) { return; }
 
-        _weapon.Abilities[abilityIndex].Cast();
+        //FIX SO THAT CURSOR IS THE TARGET
+        _weapon.Abilities[abilityIndex].Cast(Vector3.zero);
     }
 
     #region Component Caching

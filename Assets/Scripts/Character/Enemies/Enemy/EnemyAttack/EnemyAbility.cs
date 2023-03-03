@@ -22,7 +22,7 @@ namespace BulletHell.Enemies
             Ability.Initialize(_owner.gameObject, host);
         }
 
-        public void Cast(Transform target = null, System.Action castDelegate = null)
+        public void Cast(Vector3 target, System.Action castDelegate = null)
         {
             Ability.Cast(target, castDelegate);
         }

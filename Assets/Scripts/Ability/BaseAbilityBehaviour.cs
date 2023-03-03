@@ -21,7 +21,7 @@ namespace BulletHell.Abilities
         float _currentCastTime = 0;
 
         protected Ability _ability;
-        protected Transform Target => _ability.Target;
+        protected Vector3 Target => _ability.Target;
         private enum AbilityBehaviourState
         {
             Idle,

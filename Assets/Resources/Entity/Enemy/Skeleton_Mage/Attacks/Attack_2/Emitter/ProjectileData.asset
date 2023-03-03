@@ -27,7 +27,7 @@ MonoBehaviour:
   FoldOutAnimation: 0
   BirthVFX: {fileID: 0}
   DeathVFX: {fileID: 8926484042661614526, guid: 27e691e019db68e40bb5e830d7f86862, type: 3}
-  FoldOutBehaviour: 0
+  FoldOutBehaviour: 1
   Speed: 5
   MaxSpeed: 10
   Acceleration: 0

@@ -13,12 +13,15 @@ namespace BulletHell.StatusSystem
 
         protected override IEnumerator DoEffect(UnitStatusEffects effectContainer, GameObject entityRoot, ActiveStatusEffect runTimeData)
         {
-            while(runTimeData.Duration > 0) {
+            if (!entityRoot.TryGetComponent(out IDamageable damageEntity)) { effectContainer.RemoveEffect(this); }
+
+
+            while (runTimeData.Duration > 0) {
                 yield return new WaitForSeconds(TickSpeed);
                 runTimeData.Duration -= TickSpeed;
                 runTimeData.Tick();
                 DamageValue damage = new DamageValue(Damage.GetDamageType(), Damage.GetDamage() * runTimeData.CurrentStacks);
-                entityRoot.GetComponent<IDamageable>().Damage(damage);
+                damageEntity.Damage(damage);
             }
 
             effectContainer.RemoveEffect(this);
