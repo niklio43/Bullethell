@@ -7,5 +7,6 @@ public class InteractableItem : MonoBehaviour, IPickUp
 {
     public virtual void AssignItem() { }
 
-    public virtual void Interact(InventorySystem inventory) { }
+    public virtual void Interact(InventorySystem inventory, PlayerResources playerResources) { }
+
 }

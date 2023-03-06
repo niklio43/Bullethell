@@ -46,6 +46,13 @@ public class PlayerResources : MonoBehaviour, IDamageable, IHealable, IKillable
             return;
         }
         Health += amount;
+        OnHealthChanged?.Invoke();
+    }
+
+    public void ModifyMaxHealth(float amount)
+    {
+        MaxHealth += amount;
+        OnHealthChanged?.Invoke();
     }
 
     public void Kill()

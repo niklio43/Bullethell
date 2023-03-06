@@ -12,7 +12,7 @@ namespace BulletHell.InventorySystem
 
         void Awake()
         {
-            if(ItemData == null) { return; }
+            if (ItemData == null) { return; }
             Initialize(ItemData);
         }
 
@@ -26,12 +26,20 @@ namespace BulletHell.InventorySystem
             gameObject.layer = LayerMask.NameToLayer("Interactable");
         }
 
-        public override void Interact(InventorySystem inventory)
+        public override void Interact(InventorySystem inventory, PlayerResources playerResources)
         {
+            if (ItemData.ItemType == ItemType.Consumable) { Use(playerResources); return; }
             if (inventory.AddToInventory(ItemData, 1))
             {
                 Destroy(gameObject);
             }
+        }
+
+        public void Use(PlayerResources playerResources)
+        {
+            Consumables consumable = ItemData as Consumables;
+            consumable.Use(playerResources);
+            Destroy(gameObject);
         }
     }
 }

@@ -26,7 +26,7 @@ public class Forge : InteractableItem
         _slotItem.AssignedInventorySlot.OnAssign += AssignWeapon;
     }
 
-    public override void Interact(InventorySystem inventory)
+    public override void Interact(InventorySystem inventory, PlayerResources playerResources)
     {
         PlayerUI.Instance.Forge.SetActive(true);
         PlayerUI.Instance.Inventory.SetActive(true);

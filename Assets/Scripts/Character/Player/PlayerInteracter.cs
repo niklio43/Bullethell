@@ -54,7 +54,7 @@ public class PlayerInteracter : MonoBehaviour
     public void Interact()
     {
         if (_closestInteractable == null) return;
-        _closestInteractable.Interact(_inventoryHolder.InventorySystem);
+        _closestInteractable.Interact(_inventoryHolder.InventorySystem, GetComponent<PlayerResources>());
     }
 
     private void OnDrawGizmos()

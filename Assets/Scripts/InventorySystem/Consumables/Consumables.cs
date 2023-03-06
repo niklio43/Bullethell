@@ -6,8 +6,10 @@ namespace BulletHell.InventorySystem
 {
     public class Consumables : InventoryItemData
     {
-        int _restoreAmount;
+        int _amount;
 
-        public int RestoreAmount { get { return _restoreAmount; } set { _restoreAmount = value; } }
+        public int Amount { get { return _amount; } set { _amount = value; } }
+
+        public virtual void Use(PlayerResources playerResources) { }
     }
 }

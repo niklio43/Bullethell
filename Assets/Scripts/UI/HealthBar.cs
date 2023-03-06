@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace BulletHell.UI
 {
@@ -9,6 +10,7 @@ namespace BulletHell.UI
     {
         [SerializeField] Image _fill;
         [SerializeField] float _flashTime = .1f;
+        [SerializeField] TextMeshProUGUI _healthText;
         PlayerResources _playerResources;
 
         Slider _slider;
@@ -33,6 +35,7 @@ namespace BulletHell.UI
                 _slider.maxValue = _playerResources.Health;
             }
             _slider.value = _playerResources.Health;
+            _healthText.text = string.Concat(_playerResources.Health, "/", _playerResources.MaxHealth);
             StartCoroutine(Flash());
         }
 
