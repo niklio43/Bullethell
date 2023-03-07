@@ -5,14 +5,16 @@ using BulletHell.InventorySystem;
 
 public class PlayerInteracter : MonoBehaviour
 {
-    [SerializeField, Range(0, 10f)] float _interactRadius = 5f;
+    [SerializeField, Range(0, 100f)] float _interactRadius = 5f;
     [SerializeField] Material _outlineShader;
-    [SerializeField] Material defaultMat;
+    [SerializeField] Material _defaultMaterial;
+    [SerializeField, Range(0, 10)] float _drawInObjectSpeed = 1f;
     InventoryHolder _inventoryHolder;
 
     LayerMask _interactableMask => 1 << LayerMask.NameToLayer("Interactable");
     IInteractable _closestInteractable = null;
-    List<Collider2D> _interactables = new List<Collider2D>();
+
+    public IInteractable ClosestInteractable { get { return _closestInteractable; } set { _closestInteractable = value; } }
 
     void Awake()
     {
@@ -21,40 +23,81 @@ public class PlayerInteracter : MonoBehaviour
 
     void FixedUpdate()
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, _interactRadius, _interactableMask);
-        if (hit != null)
-        {
-            InteractableItem interactableItem = hit.GetComponent<InteractableItem>();
-            _closestInteractable = interactableItem;
+        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, _interactRadius, _interactableMask);
 
-            if (!_interactables.Contains(hit))
-            {
-                _interactables.Add(hit);
-            }
-
-            hit.gameObject.GetComponent<SpriteRenderer>().material = _outlineShader;
-        }
-        if (!_interactables.Contains(hit))
+        if (_closestInteractable != null)
         {
+            InteractableItem item = (InteractableItem)_closestInteractable;
+            item.GetComponent<SpriteRenderer>().material = _defaultMaterial;
             _closestInteractable = null;
+        }
 
-            for (int i = 0; i < _interactables.Count;)
+        if (hit == null) { return; }
+
+        if(CheckForConsumable(hit)) { return; }
+
+        Transform closestTransform = GetClosest(hit);
+
+        if (closestTransform == null) { return; }
+
+        if (!closestTransform.TryGetComponent(out InteractableItem closest)) { return; }
+
+        _closestInteractable = closest;
+
+        closest.gameObject.GetComponent<SpriteRenderer>().material = _outlineShader;
+    }
+
+    bool CheckForConsumable(Collider2D[] hit)
+    {
+        for (int i = 0; i < hit.Length; i++)
+        {
+            InteractableItem item = hit[i].GetComponent<InteractableItem>();
+            if (item is DroppedItem)
             {
-                if(_interactables[i] != hit)
+                var droppedItem = item as DroppedItem;
+                if (droppedItem.ItemData.ItemType == ItemType.Consumable && droppedItem != null)
                 {
-                    _interactables[i].GetComponent<SpriteRenderer>().material = defaultMat;
-                    _interactables.Remove(_interactables[i]);
-                    continue;
+                    DrawInObject(item.transform);
+                    return true;
                 }
-                i++;
             }
         }
+        return false;
+    }
+
+    Transform GetClosest(Collider2D[] item)
+    {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (Collider2D potentialTarget in item)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget.transform;
+            }
+        }
+        return bestTarget;
+    }
+
+    void DrawInObject(Transform obj)
+    {
+        float distance = Vector2.Distance(obj.position, transform.position);
+        Vector2 direction = transform.position - obj.position;
+        obj.position += (Vector3)direction * Time.deltaTime * _drawInObjectSpeed;
+
+        if (distance > 0.5f) { return; }
+        obj.GetComponent<DroppedItem>().Use(GetComponent<PlayerResources>());
     }
 
     public void Interact()
     {
         if (_closestInteractable == null) return;
         _closestInteractable.Interact(_inventoryHolder.InventorySystem, GetComponent<PlayerResources>());
+        _closestInteractable = null;
     }
 
     private void OnDrawGizmos()

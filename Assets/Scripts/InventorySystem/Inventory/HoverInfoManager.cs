@@ -9,38 +9,27 @@ using UnityEngine.UI;
 
 public class HoverInfoManager : Singleton<HoverInfoManager>
 {
-    [SerializeField] Image _icon;
     [SerializeField] GameObject _infoWindow;
-    [SerializeField] TextMeshProUGUI _itemName;
-    [SerializeField] TextMeshProUGUI _itemType;
-    [SerializeField] TextMeshProUGUI _itemRarity;
 
-    public static Action<InventoryItemData> OnMouseHover;
-    public static Action OnMouseLoseFocus;
-
-    void OnEnable()
-    {
-        OnMouseHover += ShowInfo;
-        OnMouseLoseFocus += HideInfo;
-    }
-
-    void OnDisable()
-    {
-        OnMouseHover -= ShowInfo;
-        OnMouseLoseFocus -= HideInfo;
-    }
+    public delegate void OnMouseHoverDelegate(InventoryItemData item);
+    public OnMouseHoverDelegate OnMouseHover;
+    public delegate void OnMouseLoseFocusDelegate();
+    public OnMouseLoseFocusDelegate OnMouseLoseFocus;
 
     void Start()
     {
+        _infoWindow = Instantiate(_infoWindow);
         HideInfo();
     }
 
-    void ShowInfo(InventoryItemData data)
+    public void ShowInfo(InventoryItemData data)
     {
-        _icon.sprite = data.Icon;
-        _itemName.text = data.DisplayName;
-        _itemType.text = data.ItemType.ToString();
-        _itemRarity.text = data.Rarity.ToString();
+        if(data == null) { HideInfo(); return; }
+        var infoUI = _infoWindow.GetComponent<HoverInfoUI>();
+        infoUI.Icon.sprite = data.Icon;
+        infoUI.ItemName.text = data.DisplayName;
+        infoUI.ItemType.text = data.ItemType.ToString();
+        infoUI.ItemRarity.text = data.Rarity.ToString();
         _infoWindow.SetActive(true);
 
         Vector2 mousePos = Mouse.current.position.ReadValue();
@@ -48,9 +37,13 @@ public class HoverInfoManager : Singleton<HoverInfoManager>
             mousePos.y + (_infoWindow.GetComponent<RectTransform>().sizeDelta.y / 4));
     }
 
-    void HideInfo()
+    public void HideInfo()
     {
-        _itemName.text = "";
+        var infoUI = _infoWindow.GetComponent<HoverInfoUI>();
+        infoUI.Icon.sprite = default;
+        infoUI.ItemName.text = default;
+        infoUI.ItemType.text = default;
+        infoUI.ItemRarity.text = default;
         _infoWindow.SetActive(false);
     }
 }

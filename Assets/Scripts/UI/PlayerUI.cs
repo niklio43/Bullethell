@@ -68,6 +68,7 @@ namespace BulletHell.UI
         {
             Inventory.SetActive(!Inventory.activeSelf);
             Forge.SetActive(false);
+            HoverInfoManager.Instance.HideInfo();
         }
 
         public void AddStatusEffect(ActiveStatusEffect statusEffect)
