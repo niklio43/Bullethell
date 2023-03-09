@@ -21,5 +21,13 @@ namespace BulletHell.InventorySystem
         {
             _inventorySystem = new InventorySystem(_inventorySize);
         }
+
+        void OnEnable()
+        {
+            foreach(InventorySlot slot in _inventorySystem.InventorySlots)
+            {
+                slot?.OnAssign?.Invoke(slot.ItemData);
+            }
+        }
     }
 }

@@ -7,7 +7,6 @@ using BulletHell.UI;
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] PlayerUI _playerUI;
-    [SerializeField] WeaponController _weaponController;
     PlayerController _player;
     PlayerInputs _inputs;
     PlayerInteracter playerInteracter;
@@ -25,9 +24,9 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Parry.performed += ctx => _player.PlayerAbilities.Parry(1, ctx);
 
         //Ability
-        _inputs.Player.AbilityQ.performed += ctx => _weaponController.UseAbility(0);
-        _inputs.Player.AbilityE.performed += ctx => _weaponController.UseAbility(1);
-        _inputs.Player.AbilityR.performed += ctx => _weaponController.UseAbility(2);
+        _inputs.Player.AbilityQ.performed += ctx => _player.WeaponController.UseAbility(0);
+        _inputs.Player.AbilityE.performed += ctx => _player.WeaponController.UseAbility(1);
+        _inputs.Player.AbilityR.performed += ctx => _player.WeaponController.UseAbility(2);
 
         //Move
         _inputs.Player.Move.performed += ctx => _player.PlayerMovement.Move(ctx);
@@ -40,8 +39,10 @@ public class PlayerControls : MonoBehaviour
         _inputs.Player.Inventory.performed += ctx => _playerUI.ToggleInventory();
         _inputs.Player.Interact.performed += ctx => playerInteracter.Interact();
 
-        //Fire
-        _inputs.Player.Fire.performed += ctx => _weaponController.Attack();
+        //Weapon
+        _inputs.Player.Fire.performed += ctx => _player.WeaponController.Attack();
+        _inputs.Player.EquipPrimaryWeapon.performed += ctx => _player.WeaponController.SetActiveWeapon(true);
+        _inputs.Player.EquipSecondaryWeapon.performed += ctx => _player.WeaponController.SetActiveWeapon(false);
         #endregion
     }
 

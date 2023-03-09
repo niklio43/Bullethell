@@ -17,7 +17,7 @@ MonoBehaviour:
   _name: Fire
   _description: Bow fire
   _maxAmount: 1
-  _coolDownTime: 0
+  _coolDownTime: 0.1
   _screenShakeDuration: 0
   _screenShakeAmplitude: 0
   _behaviours:

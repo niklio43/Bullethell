@@ -17,12 +17,6 @@ public class HoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _hoverColor = new Color(0.8f, 0.8f, 0.8f, 1);
     }
 
-    void OnEnable()
-    {
-        HoverInfoManager.Instance.OnMouseHover += HoverInfoManager.Instance.ShowInfo;
-        HoverInfoManager.Instance.OnMouseLoseFocus += HoverInfoManager.Instance.HideInfo;
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (GetComponent<DraggableItem>().IsDragging) { StopAllCoroutines(); return; }
@@ -38,12 +32,12 @@ public class HoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if(GetComponent<DraggableItem>().IsDragging) { StopAllCoroutines(); return; }
         transform.parent.GetComponent<Image>().CrossFadeColor(Color.white, _timeToWait, true, false);
         StopAllCoroutines();
-        HoverInfoManager.Instance.OnMouseLoseFocus();
+        HoverInfoManager.Instance.HideInfo();
     }
 
     void ShowMessage()
     {
-        HoverInfoManager.Instance.OnMouseHover(_item);
+        HoverInfoManager.Instance.ShowInfo(_item);
     }
 
     IEnumerator StartTimer()

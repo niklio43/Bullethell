@@ -7,10 +7,15 @@ using UnityEngine.UI;
 
 public class HoverInfoUI : MonoBehaviour
 {
+    [Header("Weapon info")]
     public Image Icon;
     public TextMeshProUGUI ItemName;
     public TextMeshProUGUI ItemType;
     public TextMeshProUGUI ItemRarity;
+
+    [Header("Ability info")]
+    public GameObject AbilityParent;
+    public AbilityInfo AbilityPrefab;
 
     void Awake()
     {

@@ -9,4 +9,9 @@ public class InteractableItem : MonoBehaviour, IPickUp
 
     public virtual void Interact(InventorySystem inventory, PlayerResources playerResources) { }
 
+    DroppedItem IInteractable.GetComponent<T>()
+    {
+        TryGetComponent(out DroppedItem item);
+        return item;
+    }
 }
