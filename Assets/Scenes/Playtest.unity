@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a697e06946fc3844d905a76078db793c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistent: 1
+  _persistent: 0
   _input: {fileID: 1181653738}
   Inventory: {fileID: 6570868405049808120}
   _infoWindowPrefab: {fileID: 8305457497077217802, guid: 0834ab29b0834064c8e18611dc0e7522, type: 3}
