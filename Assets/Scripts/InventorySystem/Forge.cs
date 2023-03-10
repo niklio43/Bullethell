@@ -30,14 +30,34 @@ public class Forge : InteractableItem
         PlayerUI.Instance.Inventory.SetActive(true);
     }
 
+    void SetRandomAbility(Weapon weapon)
+    {
+        WeaponAbility ability = weapon.Pool.Ability.Rand();
+
+        foreach (Ability ab in weapon.Abilities)
+        {
+            if (ab.Id == ability.Ability.Id) { SetRandomAbility(weapon); return; }
+        }
+        if (weapon.BaseAbility.Id == ability.Ability.Id) { SetRandomAbility(weapon); return; }
+
+        if (weapon.Abilities.Contains(ability.Ability)) { SetRandomAbility(weapon); return; }
+
+        _abilityToAdd = ability;
+    }
+
     public void AssignWeaponToUpgrade(InventoryItemData item)
     {
-        _button.onClick.AddListener(delegate () { UpgradeWeapon(item); });
+        if (item is Weapon)
+        {
+            _button.onClick.AddListener(delegate () { UpgradeWeapon(item); });
 
-        if(item == null) { PlayerUI.Instance.SetCost(0); return; }
-        Weapon weapon = item as Weapon;
-        _abilityToAdd = weapon.Pool._ability[UnityEngine.Random.Range(0, weapon.Pool._ability.Length)];
-        PlayerUI.Instance.SetCost(_abilityToAdd.Cost);
+            if (item == null) { PlayerUI.Instance.SetCost(0); return; }
+            Weapon weapon = item as Weapon;
+            SetRandomAbility(weapon);
+            PlayerUI.Instance.SetCost(_abilityToAdd.Cost);
+            return;
+        }
+        _button.onClick.RemoveAllListeners();
     }
 
     void UpgradeWeapon(InventoryItemData item)
@@ -52,12 +72,6 @@ public class Forge : InteractableItem
         if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); FailedUpgrade(); return; }
 
         if (_player.Health <= _abilityToAdd.Cost) { Debug.Log("Not enough blood!"); FailedUpgrade(); return; }
-
-        foreach (Ability ab in weapon.Abilities)
-        {
-            if (ab.Id == _abilityToAdd.Ability.Id) { FillAbilitySlot(weapon); return; }
-        }
-        if (weapon.BaseAbility.Id == _abilityToAdd.Ability.Id) { FillAbilitySlot(weapon); return; }
 
         StartCoroutine(BeginUpgrade(weapon, _abilityToAdd, _player.gameObject, _weapon.gameObject));
     }

@@ -11,31 +11,29 @@ using BulletHell.UI;
 
 public class HoverInfoManager : Singleton<HoverInfoManager>
 {
-    [SerializeField] GameObject _infoWindowPrefab;
-    GameObject _infoWindow;
+    HoverInfoUI _infoWindow;
+
+    public HoverInfoUI InfoWindow { get { return _infoWindow; } set { _infoWindow = value; } }
 
     void Start()
     {
-        _infoWindow = Instantiate(_infoWindowPrefab);
         HideInfo();
     }
 
     public void ShowInfo(InventoryItemData data)
     {
         if (data == null) { HideInfo(); return; }
-        var infoUI = _infoWindow.GetComponent<HoverInfoUI>();
-        infoUI.transform.SetParent(PlayerUI.Instance.transform);
-        infoUI.Icon.sprite = data.Icon;
-        infoUI.ItemName.text = data.DisplayName;
-        infoUI.ItemType.text = data.ItemType.ToString();
-        infoUI.ItemRarity.text = data.Rarity.ToString();
-        _infoWindow.SetActive(true);
+        _infoWindow.Icon.sprite = data.Icon;
+        _infoWindow.ItemName.text = data.DisplayName;
+        _infoWindow.ItemType.text = data.ItemType.ToString();
+        _infoWindow.ItemRarity.text = data.Rarity.ToString();
+        _infoWindow.gameObject.SetActive(true);
 
         Vector2 mousePos = Mouse.current.position.ReadValue();
         _infoWindow.transform.position = new Vector2(mousePos.x - ((_infoWindow.GetComponent<RectTransform>().sizeDelta.x / 2) + 5),
             mousePos.y + (_infoWindow.GetComponent<RectTransform>().sizeDelta.y / 4));
 
-        foreach(Transform child in infoUI.AbilityParent.transform)
+        foreach(Transform child in _infoWindow.AbilityParent.transform)
         {
             Destroy(child.gameObject);
         }
@@ -52,8 +50,7 @@ public class HoverInfoManager : Singleton<HoverInfoManager>
 
     void ShowAbilities(Ability ability)
     {
-        HoverInfoUI hoverInfoUI = _infoWindow.GetComponent<HoverInfoUI>();
-        AbilityInfo abilityInfo = Instantiate(hoverInfoUI.AbilityPrefab, hoverInfoUI.AbilityParent.transform);
+        AbilityInfo abilityInfo = Instantiate(_infoWindow.AbilityPrefab, _infoWindow.AbilityParent.transform);
 
         abilityInfo.AbilityIcon.sprite = ability.GetIcon();
         abilityInfo.AbilityName.text = ability.GetName();
@@ -62,17 +59,16 @@ public class HoverInfoManager : Singleton<HoverInfoManager>
 
     public void HideInfo()
     {
-        var infoUI = _infoWindow.GetComponent<HoverInfoUI>();
-        infoUI.Icon.sprite = default;
-        infoUI.ItemName.text = default;
-        infoUI.ItemType.text = default;
-        infoUI.ItemRarity.text = default;
+        _infoWindow.Icon.sprite = default;
+        _infoWindow.ItemName.text = default;
+        _infoWindow.ItemType.text = default;
+        _infoWindow.ItemRarity.text = default;
 
-        foreach (Transform child in infoUI.AbilityParent.transform)
+        foreach (Transform child in _infoWindow.AbilityParent.transform)
         {
             Destroy(child.gameObject);
         }
 
-        _infoWindow.SetActive(false);
+        _infoWindow.gameObject.SetActive(false);
     }
 }
