@@ -16,9 +16,4 @@ public class HoverInfoUI : MonoBehaviour
     [Header("Ability info")]
     public GameObject AbilityParent;
     public AbilityInfo AbilityPrefab;
-
-    void Awake()
-    {
-        transform.SetParent(PlayerUI.Instance.transform);
-    }
 }

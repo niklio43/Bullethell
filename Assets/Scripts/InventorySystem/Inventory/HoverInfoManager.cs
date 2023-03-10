@@ -7,14 +7,16 @@ using BulletHell.InventorySystem;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using BulletHell.Abilities;
+using BulletHell.UI;
 
 public class HoverInfoManager : Singleton<HoverInfoManager>
 {
-    [SerializeField] GameObject _infoWindow;
+    [SerializeField] GameObject _infoWindowPrefab;
+    GameObject _infoWindow;
 
     void Start()
     {
-        _infoWindow = Instantiate(_infoWindow);
+        _infoWindow = Instantiate(_infoWindowPrefab);
         HideInfo();
     }
 
@@ -22,6 +24,7 @@ public class HoverInfoManager : Singleton<HoverInfoManager>
     {
         if (data == null) { HideInfo(); return; }
         var infoUI = _infoWindow.GetComponent<HoverInfoUI>();
+        infoUI.transform.SetParent(PlayerUI.Instance.transform);
         infoUI.Icon.sprite = data.Icon;
         infoUI.ItemName.text = data.DisplayName;
         infoUI.ItemType.text = data.ItemType.ToString();

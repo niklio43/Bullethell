@@ -631,19 +631,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 760493737}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1963846127}
-        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Playtest
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &760493737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3281,6 +3269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac39cc45606e1b449ff1967e824f5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playButton: {fileID: 760493736}
 --- !u!224 &2091199844 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5968590155240213257, guid: 19f0939fbfa82c84b80048f5d2a7691e, type: 3}

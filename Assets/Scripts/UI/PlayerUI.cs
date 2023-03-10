@@ -39,10 +39,7 @@ namespace BulletHell.UI
         {
             Health = _healthBar;
             Stamina = _staminaBar;
-        }
-
-        private void Start()
-        {
+            Forge.SetActive(false);
             Inventory.SetActive(false);
         }
 

@@ -21,8 +21,6 @@ public class Forge : InteractableItem
 
     void Start()
     {
-        PlayerUI.Instance.Forge.SetActive(false);
-
         _slotItem.AssignedInventorySlot.OnAssign += AssignWeaponToUpgrade;
     }
 

@@ -9,6 +9,7 @@ TagManager:
   - GroundObstacle
   - Slot
   - Ground
+  - Loading
   layers:
   - Default
   - TransparentFX
