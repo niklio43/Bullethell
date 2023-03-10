@@ -11,6 +11,10 @@ public class MainMenuUI : MonoBehaviour
     private void Start()
     {
         _playButton.onClick.AddListener(delegate () { LevelLoader.Instance.LoadLoading("Playtest"); });
-        //_playButton.onClick.AddListener(() => LevelLoader.Instance.LoadLoading("Playtest"));
+    }
+
+    public void ToggleObj(GameObject obj)
+    {
+        obj.SetActive(!obj.activeSelf);
     }
 }
