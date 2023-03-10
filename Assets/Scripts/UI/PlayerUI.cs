@@ -51,6 +51,7 @@ namespace BulletHell.UI
 
         void Update()
         {
+            if(_forgeProgressBar == null) { return; }
             if(!IsUpgrading) { _forgeProgressBar.value = 0; return; }
             _forgeProgressBar.value += Time.deltaTime;
         }

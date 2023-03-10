@@ -6,31 +6,38 @@ namespace BulletHell.Map
 {
     public class Door : MonoBehaviour
     {
-        [SerializeField] Direction Orientation;
-        [SerializeField] Vector2Int Cell;
-
+        [SerializeField] Direction _orientation;
+        
         [SerializeField] GameObject Open;
         [SerializeField] GameObject Blocked;
 
         [SerializeField] Door connectedDoor;
 
+        #region Getters & Setters
+        public Direction GetOrientation() => _orientation;
         public bool IsConnected() => connectedDoor != null;
 
-        Room _room;
+        #endregion
 
-
-        public void Initialize(Room room)
+        public Direction GetConnecteeOrientation()
         {
-            _room = room;
+            switch (_orientation) {
+                case Direction.Up:
+                    return Direction.Down;
+                case Direction.Down:
+                    return Direction.Up;
+                case Direction.Left:
+                    return Direction.Right;
+                case Direction.Right:
+                    return Direction.Left;
+            }
+
+            return Direction.Up;
         }
 
-        private void Awake()
+        public void OpenDoor(Door door)
         {
-            BlockDoor();
-        }
-
-        public void OpenDoor()
-        {
+            connectedDoor = door;
             Open.SetActive(true);
             Blocked.SetActive(false);
         }
@@ -40,16 +47,5 @@ namespace BulletHell.Map
             Open.SetActive(false);
             Blocked.SetActive(true);
         }
-
-        public Vector2Int GetCellPosition() => Cell;
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.cyan;
-            Vector2 pos = (Vector2)transform.position + (Cell * 20);
-
-            Gizmos.DrawWireCube(pos, Vector3.one * 20);
-        }
-
     }
 }

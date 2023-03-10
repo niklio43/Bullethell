@@ -81,9 +81,17 @@ namespace BulletHell.Map.Generation
 
         List<MapCell> Neighbours;
 
-        public bool Composite = false;
+        Room _occupant = null;
+        Door[] _doors;
 
-        Room _room = null;
+        #region Getters & Setters
+        public bool IsOccupied() => _occupant != null;
+        public void SetOccupant(Room room) => _occupant = room;
+        public Room GetOccupant() => _occupant; 
+        //
+        public Door[] GetDoors() => _doors;
+        public void SetDoors(Door[] doors) => _doors = doors;
+        #endregion
 
         public MapCell(MapGrid grid, int x, int y)
         {
@@ -93,7 +101,6 @@ namespace BulletHell.Map.Generation
             grid.AliveCells.Add(this);
             GetAndUpdateNeighbours();
         }
-
         public MapCell(MapGrid grid, Vector2Int pos)
         {
             _grid = grid;
@@ -117,21 +124,18 @@ namespace BulletHell.Map.Generation
             Neighbours.Add(neighbour);
         }
 
-        public void SetRoom(Room room) => _room = room;
-        public Room GetRoom() => _room; 
-        public bool IsOccupied() => _room != null;
-
         public Vector2Int GetGridPosition() => new Vector2Int(_posX, _posY);
         public Vector2 GetWorldPositon() => _grid.GridToWorldPosition(_posX, _posY);
 
-
+        #region Gizmos
         public void Draw()
         {
             Gizmos.color = Color.green;
-            if(_room != null) {
-                Gizmos.color = _room.colorCoding;
+            if(_occupant != null) {
+                Gizmos.color = _occupant.colorCoding;
             }
             Gizmos.DrawCube(GetWorldPositon(), Vector2.one * _grid.GetCellSize());
         }
+        #endregion
     }
 }
