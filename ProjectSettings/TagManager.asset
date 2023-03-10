@@ -20,7 +20,7 @@ TagManager:
   - Interactable
   - Entity
   - Obstacle
-  - 
+  - Room
   - Post Processing
   - Room Border
   - Projectile
