@@ -36,7 +36,7 @@ public class HoverInfoManager : Singleton<HoverInfoManager>
         {
             Destroy(child.gameObject);
         }
-        if (data is Weapon)
+        if (data.ItemType == ItemType.Weapon)
         {
             Weapon weapon = data as Weapon;
             foreach (Ability ability in weapon.Abilities)

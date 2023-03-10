@@ -6,7 +6,7 @@ using BulletHell.Emitters;
 
 namespace BulletHell.InventorySystem
 {
-    [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/AssultRifle")]
+    [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/Bow")]
     public class Bow : Ranged
     {
         [SerializeField] Sprite icon;
