@@ -6,6 +6,6 @@ namespace BulletHell.Abilities
     public class Pool : ScriptableObject
     {
         [SerializeField] string _poolName;
-        public WeaponAbility[] _ability;
+        public WeaponAbility[] Ability;
     }
 }

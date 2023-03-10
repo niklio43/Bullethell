@@ -14,6 +14,7 @@ namespace BulletHell.UI
         [SerializeField] PlayerInput _input;
         [Header("Inventory")]
         public GameObject Inventory;
+        [SerializeField] GameObject _infoWindowPrefab;
         [Header("Stats and statuseffects")]
         [SerializeField] HealthBar _healthBar;
         [SerializeField] StaminaBar _staminaBar;
@@ -41,10 +42,11 @@ namespace BulletHell.UI
             Stamina = _staminaBar;
         }
 
-        private void Start()
+        void Start()
         {
-            if(Inventory == null) { return; }
+            Forge.SetActive(false);
             Inventory.SetActive(false);
+            HoverInfoManager.Instance.InfoWindow = Instantiate(_infoWindowPrefab, transform).GetComponent<HoverInfoUI>();
         }
 
         void Update()
