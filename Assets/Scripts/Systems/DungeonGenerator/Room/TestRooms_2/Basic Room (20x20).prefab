@@ -2868,13 +2868,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86de81c895c252e40aef506ec73d0831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Doors:
-  - {fileID: 5072265833454634266}
-  - {fileID: 1064036812271728947}
-  - {fileID: 292606122164120731}
-  - {fileID: 7919440947169825211}
   Cells:
-  - {x: 0, y: 0}
+  - _pos: {x: 0, y: 0}
+    Doors:
+    - {fileID: 5072265833454634266}
+    - {fileID: 1064036812271728947}
+    - {fileID: 292606122164120731}
+    - {fileID: 7919440947169825211}
   colorCoding: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &3889596315590326391
 GameObject:
@@ -2922,7 +2922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 2
+  _orientation: 2
   Open: {fileID: 7437049251958072700}
   Blocked: {fileID: 1238726042590472769}
   connectedDoor: {fileID: 0}
@@ -2972,7 +2972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 0
+  _orientation: 0
   Open: {fileID: 804857777775518683}
   Blocked: {fileID: 2966960950962556333}
   connectedDoor: {fileID: 0}
@@ -4219,7 +4219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 1
+  _orientation: 1
   Open: {fileID: 1542163951110154492}
   Blocked: {fileID: 5271860148530415973}
   connectedDoor: {fileID: 0}
@@ -8694,7 +8694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 3
+  _orientation: 3
   Open: {fileID: 9127946041493228815}
   Blocked: {fileID: 4343097321789302732}
   connectedDoor: {fileID: 0}

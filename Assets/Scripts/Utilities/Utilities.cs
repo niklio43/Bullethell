@@ -46,7 +46,6 @@ namespace BulletHell
             return array[UnityEngine.Random.Range(0, array.Length)];
         }
 
-
         public static Coroutine Invoke(this MonoBehaviour mb, Action action, float timeInSeconds)
         {
             return mb.StartCoroutine(InvokeRoutine(action, timeInSeconds));

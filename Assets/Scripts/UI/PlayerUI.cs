@@ -43,11 +43,13 @@ namespace BulletHell.UI
 
         private void Start()
         {
+            if(Inventory == null) { return; }
             Inventory.SetActive(false);
         }
 
         void Update()
         {
+            if(_forgeProgressBar == null) { return; }
             if(!IsUpgrading) { _forgeProgressBar.value = 0; return; }
             _forgeProgressBar.value += Time.deltaTime;
         }

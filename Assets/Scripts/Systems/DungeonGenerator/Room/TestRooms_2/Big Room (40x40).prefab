@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1154369558799738582}
   - component: {fileID: 6686037544819627302}
   m_Layer: 0
-  m_Name: Door (Right) (2)
+  m_Name: Door (Right) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 3
-  Cell: {x: 1, y: 0}
+  _orientation: 3
   Open: {fileID: 5388070146554265174}
   Blocked: {fileID: 8358685639629889983}
   connectedDoor: {fileID: 0}
@@ -2020,8 +2019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 2
-  Cell: {x: 0, y: 1}
+  _orientation: 2
   Open: {fileID: 5951238611657558524}
   Blocked: {fileID: 6439606228630823899}
   connectedDoor: {fileID: 0}
@@ -3277,8 +3275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 0
-  Cell: {x: 0, y: 1}
+  _orientation: 0
   Open: {fileID: 3974434481214818781}
   Blocked: {fileID: 1190934255722641640}
   connectedDoor: {fileID: 0}
@@ -3848,7 +3845,7 @@ GameObject:
   - component: {fileID: 7841292971986508164}
   - component: {fileID: 8396828569344537278}
   m_Layer: 0
-  m_Name: Door (Down) (2)
+  m_Name: Door (Down) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3883,8 +3880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 1
-  Cell: {x: 1, y: 0}
+  _orientation: 1
   Open: {fileID: 4298307195743982596}
   Blocked: {fileID: 5248332309674776558}
   connectedDoor: {fileID: 0}
@@ -3965,20 +3961,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86de81c895c252e40aef506ec73d0831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Doors:
-  - {fileID: 1803193154040173397}
-  - {fileID: 1894517639108120400}
-  - {fileID: 513249772034778601}
-  - {fileID: 8423464637601457620}
-  - {fileID: 482073552423542652}
-  - {fileID: 6686037544819627302}
-  - {fileID: 3386083978489572579}
-  - {fileID: 8396828569344537278}
   Cells:
-  - {x: 0, y: 0}
-  - {x: 1, y: 0}
-  - {x: 1, y: 1}
-  - {x: 0, y: 1}
+  - _pos: {x: 0, y: 0}
+    Doors:
+    - {fileID: 8423464637601457620}
+    - {fileID: 3386083978489572579}
+  - _pos: {x: 1, y: 0}
+    Doors:
+    - {fileID: 6686037544819627302}
+    - {fileID: 8396828569344537278}
+  - _pos: {x: 0, y: 1}
+    Doors:
+    - {fileID: 1803193154040173397}
+    - {fileID: 513249772034778601}
+  - _pos: {x: 1, y: 1}
+    Doors:
+    - {fileID: 1894517639108120400}
+    - {fileID: 482073552423542652}
   colorCoding: {r: 1, g: 0.9490196, b: 0.46666667, a: 1}
 --- !u!1 &3974434481214818781
 GameObject:
@@ -4129,8 +4128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 2
-  Cell: {x: 0, y: 0}
+  _orientation: 2
   Open: {fileID: 7408830404242845674}
   Blocked: {fileID: 6359088648068498134}
   connectedDoor: {fileID: 0}
@@ -20463,8 +20461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 0
-  Cell: {x: 1, y: 1}
+  _orientation: 0
   Open: {fileID: 8619420046975811197}
   Blocked: {fileID: 6545091996095924005}
   connectedDoor: {fileID: 0}
@@ -21022,8 +21019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 1
-  Cell: {x: 0, y: 0}
+  _orientation: 1
   Open: {fileID: 1885441454551150868}
   Blocked: {fileID: 7610939947571585599}
   connectedDoor: {fileID: 0}
@@ -21305,8 +21301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d18c357b2b3d449831335ed9991c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Orientation: 3
-  Cell: {x: 1, y: 1}
+  _orientation: 3
   Open: {fileID: 3045571163184887236}
   Blocked: {fileID: 4621415753923647810}
   connectedDoor: {fileID: 0}

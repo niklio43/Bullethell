@@ -22989,10 +22989,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Doors: []
   Cells:
-  - {x: 0, y: 0}
-  - {x: 1, y: 0}
-  - {x: -1, y: 0}
-  - {x: 0, y: 1}
+  - _pos: {x: 0, y: 0}
+    _Doors: []
+  - _pos: {x: 1, y: 0}
+    _Doors: []
+  - _pos: {x: -1, y: 0}
+    _Doors: []
+  - _pos: {x: 0, y: 1}
+    _Doors: []
   colorCoding: {r: 0.5803922, g: 1, b: 0.5803922, a: 1}
 --- !u!1 &5088306136350092264
 GameObject:
