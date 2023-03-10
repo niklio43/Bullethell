@@ -36,6 +36,17 @@ namespace BulletHell
             }
         }
 
+        public static T Rand<T>(this List<T> list)
+        {
+            return list[UnityEngine.Random.Range(0, list.Count)];
+        }
+
+        public static T Rand<T>(this T[] array)
+        {
+            return array[UnityEngine.Random.Range(0, array.Length)];
+        }
+
+
         public static Coroutine Invoke(this MonoBehaviour mb, Action action, float timeInSeconds)
         {
             return mb.StartCoroutine(InvokeRoutine(action, timeInSeconds));
