@@ -9,6 +9,7 @@ namespace BulletHell.InventorySystem
     public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [HideInInspector] public Transform parentAfterDrag;
+        [HideInInspector] public bool IsDragging = false;
 
         void Awake()
         {
@@ -17,12 +18,15 @@ namespace BulletHell.InventorySystem
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            IsDragging = true;
             parentAfterDrag = transform.parent;
             transform.SetParent(transform.root);
             transform.SetAsLastSibling();
             GetComponent<Image>().raycastTarget = false;
 
             parentAfterDrag.GetComponent<InventorySlotUI>().OnUISlotClick();
+
+            HoverInfoManager.Instance.HideInfo();
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -32,6 +36,7 @@ namespace BulletHell.InventorySystem
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            IsDragging = false;
             transform.SetParent(parentAfterDrag);
 
             if (parentAfterDrag.GetComponent<InventorySlotUI>().AssignedInventorySlot.ItemData == null) { GetComponent<Image>().raycastTarget = true; return; }
@@ -40,7 +45,7 @@ namespace BulletHell.InventorySystem
 
             if (tags.Contains("Slot")) { GetComponent<Image>().raycastTarget = true; return; }
 
-            if(tags.Count > 0 && tags != null)
+            if (tags.Count > 0 && tags != null)
             {
                 parentAfterDrag.GetComponent<InventorySlotUI>().ResetSlot();
             }

@@ -30,6 +30,6 @@ public class DamagePopupManager : Singleton<DamagePopupManager>
         DamagePopup damagePopup = _damagePopupPool.Get();
         damagePopup.gameObject.SetActive(true);
 
-        damagePopup.Setup(1, pos);
+        damagePopup.Setup(damage, pos);
     }
 }

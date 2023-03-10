@@ -43,6 +43,7 @@ public class AbilityHolder : MonoBehaviour
         {
             _abilityUI[i].name = _abilities[i].GetName();
             _abilityUI[i].GetComponent<Image>().sprite = _abilities[i].GetIcon();
+            _abilityUI[i].GetComponent<Image>().color = Color.white;
         }
     }
 
@@ -53,7 +54,7 @@ public class AbilityHolder : MonoBehaviour
             _abilityUI[i].name = "";
             _abilityUI[i].GetComponent<Image>().sprite = null;
             _abilityUI[i].transform.GetChild(0).GetComponent<TMP_Text>().text = "";
-
+            _abilityUI[i].GetComponent<Image>().color = Color.clear;
         }
     }
 }

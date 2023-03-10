@@ -23,16 +23,16 @@ public class Forge : InteractableItem
     {
         PlayerUI.Instance.Forge.SetActive(false);
 
-        _slotItem.AssignedInventorySlot.OnAssign += AssignWeapon;
+        _slotItem.AssignedInventorySlot.OnAssign += AssignWeaponToUpgrade;
     }
 
-    public override void Interact(InventorySystem inventory)
+    public override void Interact(InventorySystem inventory, PlayerResources playerResources)
     {
         PlayerUI.Instance.Forge.SetActive(true);
         PlayerUI.Instance.Inventory.SetActive(true);
     }
 
-    public void AssignWeapon(InventoryItemData item)
+    public void AssignWeaponToUpgrade(InventoryItemData item)
     {
         _button.onClick.AddListener(delegate () { UpgradeWeapon(item); });
 
@@ -67,13 +67,16 @@ public class Forge : InteractableItem
     IEnumerator BeginUpgrade(Weapon weapon, WeaponAbility weaponAbility, GameObject owner, GameObject host)
     {
         PlayerUI.Instance.IsUpgrading = true;
+        _slotItem.transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
         yield return new WaitForSeconds(1f);
         Debug.Log(string.Concat("Added ability: ", weaponAbility.Ability, " to weapon: ", weapon.DisplayName));
         PlayerUI.Instance.IsUpgrading = false;
+        _slotItem.transform.GetChild(0).GetComponent<Image>().raycastTarget = true;
         Camera.main.Shake(0.05f, 0.5f);
         _player.Damage(new DamageValue(DamageType.Unblockable, weaponAbility.Cost));
         weapon.AddAbility(weaponAbility.Ability, owner, host);
         _abilityToAdd = null;
+        _button.onClick.RemoveAllListeners();
     }
 
     void FailedUpgrade()

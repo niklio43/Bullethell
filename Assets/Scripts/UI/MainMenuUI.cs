@@ -5,20 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void LoadScene(string scene)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void LoadScene()
-    {
-        SceneManager.LoadScene("Niklas");
+        SceneManager.LoadScene(scene);
     }
 }

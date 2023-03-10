@@ -4,20 +4,25 @@ using UnityEngine;
 
 namespace BulletHell.InventorySystem
 {
-    [CreateAssetMenu(fileName = "New Potion", menuName = "Inventory System/Consumables/Potion")]
+    [CreateAssetMenu(fileName = "New Heart", menuName = "Inventory System/Item/Consumables/Heart")]
     public class Heart : Consumables
     {
         [SerializeField] Sprite sprite;
-        [SerializeField] int restoreAmount;
+        [SerializeField] int amount;
         [SerializeField] string itemName;
         [SerializeField] ItemType itemType;
 
         void OnEnable()
         {
             Sprite = sprite;
-            RestoreAmount = restoreAmount;
+            Amount = amount;
             DisplayName = itemName;
             ItemType = itemType;
+        }
+
+        public override void Use(PlayerResources playerResources)
+        {
+            playerResources.ModifyMaxHealth(amount);
         }
     }
 }

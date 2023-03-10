@@ -14,6 +14,7 @@ namespace BulletHell.Player
         PlayerAbilities _playerAbilities;
         UnitStatusEffects _unitStatusEffects;
         PlayerResources _playerResources;
+        [SerializeField] WeaponController _weaponController;
 
         public PlayerAimWeapon Aim;
         float timer = 0;
@@ -22,6 +23,7 @@ namespace BulletHell.Player
         public PlayerMovement PlayerMovement => _playerMovement;
         public PlayerAbilities PlayerAbilities => _playerAbilities;
         public PlayerResources PlayerResources => _playerResources;
+        public WeaponController WeaponController => _weaponController;
         #endregion
 
         void Awake()

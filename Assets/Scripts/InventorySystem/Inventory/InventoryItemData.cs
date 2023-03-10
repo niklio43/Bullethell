@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace BulletHell.InventorySystem
 {
-    [CreateAssetMenu(menuName = "Inventory System/Inventory Item")]
     public class InventoryItemData : ScriptableObject
     {
         public int ID { get; set; }

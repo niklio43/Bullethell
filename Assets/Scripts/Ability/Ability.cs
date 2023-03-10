@@ -30,6 +30,7 @@ namespace BulletHell.Abilities
         int _currentAmount;
         #region Getters
         public string GetName() => _name;
+        public string GetDescription() => _description;
         public int GetCurrentAmount() => _currentAmount;
         public bool CanCast() => (_currentAmount > 0 && _abilityState == AbilityState.Idle);
         public float GetTimer() => (_timers.Count == 0) ? 0 : _timers[0];

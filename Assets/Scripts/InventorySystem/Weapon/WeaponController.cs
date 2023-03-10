@@ -1,45 +1,84 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BulletHell.Emitters;
 using BulletHell.Abilities;
-using UnityEngine.VFX;
 using System;
 using BulletHell.Player;
-using UnityEngine.InputSystem;
 using BulletHell.InventorySystem;
-using BulletHell.CameraUtilities;
-using BulletHell.UI;
 
 public class WeaponController : MonoBehaviour
 {
     public Transform CircleOrigin;
     public float Radius;
-    Weapon _weapon;
+    Weapon _equippedWeapon;
+    Weapon _primaryWeapon;
+    Weapon _secondaryWeapon;
     [SerializeField] PlayerController _player;
-    [SerializeField] List<InventorySlotUI> _slots = new List<InventorySlotUI>();
+    [SerializeField] InventorySlotUI _primaryWeaponSlot;
+    [SerializeField] InventorySlotUI _secondaryWeaponSlot;
+
+    public Weapon PrimaryWeapon => _primaryWeapon;
+    public Weapon SecondaryWeapon => _secondaryWeapon;
 
     private void Start()
     {
-        foreach(InventorySlotUI slot in _slots)
-        {
-            slot.AssignedInventorySlot.OnAssign += EquipWeapon;
-        }
+        _primaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignPrimaryWeapon;
+        _secondaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignSecondaryWeapon;
     }
 
-    public void EquipWeapon(InventoryItemData item)
+    public void AssignPrimaryWeapon(InventoryItemData item)
     {
         if (item == null)
         {
-            UnAssignWeapon();
+            UnAssignWeapon(_primaryWeapon);
+            _primaryWeapon = null;
+            EquippedWeaponUI.Instance.SetWeapon
+                (EquippedWeaponUI.Instance.PrimaryWeapon, null, false);
             return;
         }
-        AssignWeapon(item as Weapon);
+        _primaryWeapon = item as Weapon;
+        EquippedWeaponUI.Instance.SetWeapon
+            (EquippedWeaponUI.Instance.PrimaryWeapon, _primaryWeapon.Icon, true);
+        EquippedWeaponUI.Instance.SetActiveWeapon
+            (EquippedWeaponUI.Instance.PrimaryWeapon, EquippedWeaponUI.Instance.SecondaryWeapon);
+        AssignWeapon(_primaryWeapon);
+    }
+
+    public void AssignSecondaryWeapon(InventoryItemData item)
+    {
+        if (item == null)
+        {
+            UnAssignWeapon(_secondaryWeapon);
+            _secondaryWeapon = null;
+            EquippedWeaponUI.Instance.SetWeapon
+                (EquippedWeaponUI.Instance.SecondaryWeapon, null, false);
+            return;
+        }
+        _secondaryWeapon = item as Weapon;
+        EquippedWeaponUI.Instance.SetWeapon
+            (EquippedWeaponUI.Instance.SecondaryWeapon, _secondaryWeapon.Icon, true);
+    }
+
+    public void SetActiveWeapon(bool activeWeapon)
+    {
+        if (activeWeapon)
+        {
+            if (_primaryWeapon == null) { return; }
+            EquippedWeaponUI.Instance.SetActiveWeapon
+                (EquippedWeaponUI.Instance.PrimaryWeapon, EquippedWeaponUI.Instance.SecondaryWeapon);
+            AssignWeapon(_primaryWeapon);
+        }
+        else
+        {
+            if (_secondaryWeapon == null) { return; }
+            EquippedWeaponUI.Instance.SetActiveWeapon
+                (EquippedWeaponUI.Instance.SecondaryWeapon, EquippedWeaponUI.Instance.PrimaryWeapon);
+            AssignWeapon(_secondaryWeapon);
+        }
     }
 
     public void AssignWeapon(Weapon weapon)
     {
-        UnAssignWeapon();
+        UnAssignWeapon(weapon);
         weapon.Initialize(_player.gameObject, gameObject);
 
         Animator animator = GetComponent<Animator>();
@@ -56,12 +95,12 @@ public class WeaponController : MonoBehaviour
         {
             GetComponent<AbilityHolder>().AddAbility(ability);
         }
-        _weapon = weapon;
+        _equippedWeapon = weapon;
     }
 
-    public void UnAssignWeapon()
+    public void UnAssignWeapon(Weapon weapon)
     {
-        if(_weapon == null) { return; }
+        if (weapon == null) { return; }
         GetComponent<SpriteRenderer>().sprite = null;
 
         GetComponent<AbilityHolder>().SetBaseAbility(null);
@@ -69,22 +108,22 @@ public class WeaponController : MonoBehaviour
         GetComponent<AbilityHolder>().AddAbility(null);
 
         GetComponent<Animator>().runtimeAnimatorController = null;
-        _weapon.Uninitialize();
-        _weapon = null;
+        weapon.Uninitialize();
+        _equippedWeapon = null;
     }
 
     public void Attack()
     {
-        if (_weapon == null) { return; }
-        _weapon.BaseAbility.Cast(_player.PlayerMovement.MousePosition);
+        if (_equippedWeapon == null) { return; }
+        _equippedWeapon.BaseAbility.Cast(_player.PlayerMovement.MousePosition);
     }
 
     public void UseAbility(int abilityIndex)
     {
-        if (_weapon == null) { return; }
-        if (abilityIndex > _weapon.Abilities.Count - 1 || _weapon.Abilities[abilityIndex] == null) { return; }
+        if (_equippedWeapon == null) { return; }
+        if (abilityIndex > _equippedWeapon.Abilities.Count - 1 || _equippedWeapon.Abilities[abilityIndex] == null) { return; }
 
-        _weapon.Abilities[abilityIndex].Cast(_player.PlayerMovement.MousePosition);
+        _equippedWeapon.Abilities[abilityIndex].Cast(_player.PlayerMovement.MousePosition);
     }
 
     #region Component Caching
