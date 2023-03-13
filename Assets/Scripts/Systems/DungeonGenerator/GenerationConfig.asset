@@ -16,9 +16,9 @@ MonoBehaviour:
   SizeX: 20
   SizeY: 20
   _randomSeed: 1
-  _seed: 6638
-  RandomWalkSteps: 2
-  Size: 2
+  _seed: 700
+  RandomWalkSteps: 20
+  Size: 20
   MaxBigRooms: 2
   StartRoom: {fileID: 4784733289325639768, guid: b7cc4ce92c2705c4ca053e688ebcbd12, type: 3}
   EndRoom: {fileID: 4784733289325639768, guid: b7cc4ce92c2705c4ca053e688ebcbd12, type: 3}
