@@ -15,16 +15,18 @@ public class DropRandomLoot : Singleton<DropRandomLoot>, IDropLoot
 
         for (int i = 0; i < item.Count; i++)
         {
-            GameObject droppedItem = new GameObject(item[i].DisplayName);
+            InventoryItemData newItem = Instantiate(item[i]);
+
+            GameObject droppedItem = new GameObject(newItem.DisplayName);
 
             droppedItem.transform.position = new Vector3(tf.position.x + Random.Range(-1.5f, 1.5f), tf.position.y + Random.Range(-3f, 3f));
 
             SpriteRenderer sr = droppedItem.AddComponent<SpriteRenderer>();
-            sr.sprite = item[i].Sprite;
+            sr.sprite = newItem.Sprite;
             sr.material = _droppedItemMaterial;
 
             DroppedItem di = droppedItem.AddComponent<DroppedItem>();
-            di.ItemData = item[i];
+            di.ItemData = newItem;
 
             Collider2D col = droppedItem.AddComponent<CircleCollider2D>();
             col.isTrigger = true;
