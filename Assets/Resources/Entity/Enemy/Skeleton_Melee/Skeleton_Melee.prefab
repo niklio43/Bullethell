@@ -193,7 +193,6 @@ GameObject:
   - component: {fileID: 1668731228139601282}
   - component: {fileID: 5441612227424731682}
   - component: {fileID: 7038152530432246689}
-  - component: {fileID: -2190125600223851553}
   m_Layer: 7
   m_Name: Skeleton_Melee
   m_TagString: Enemy
@@ -234,6 +233,7 @@ MonoBehaviour:
   _brain: {fileID: 11400000, guid: 395b3f64103f3c94ea9dc95e99181437, type: 2}
   _enemyMovement: {fileID: 13956960875878199}
   _deathVFX: {fileID: 8926484042661614526, guid: 2c75005ea8dd2c24daf1064fc62a87ae, type: 3}
+  _dropTable: {fileID: 11400000, guid: ae1657e10f400034e9d4e7abe2b73259, type: 2}
   Target: {fileID: 0}
   CanMove: 0
   Aim: {fileID: 4533019207069723459}
@@ -399,18 +399,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 1.12}
   m_EdgeRadius: 0
---- !u!114 &-2190125600223851553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5441612227424731693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e67d786693d85d4e993f88f0b970de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5905640240375230590
 PrefabInstance:
   m_ObjectHideFlags: 0
