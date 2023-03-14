@@ -12,16 +12,14 @@ namespace BulletHell.Map.Generation
         public List<MapCell> AliveCells;
 
         readonly int _sizeX, _sizeY;
-        readonly int _cellSize;
 
-        public int GetCellSize() => _cellSize;
+        int _cellSize => GenerationUtilities.CellSize;
         public Vector2Int GetSize => new Vector2Int(_sizeX, _sizeY);
 
-        public MapGrid(int sizeX, int sizeY, int cellSize)
+        public MapGrid(int sizeX, int sizeY)
         {
             _sizeX = sizeX;
             _sizeY = sizeY;
-            _cellSize = cellSize;
 
             AliveCells = new List<MapCell>();
             _grid = new MapCell[_sizeX, _sizeY];
@@ -39,6 +37,30 @@ namespace BulletHell.Map.Generation
             int posY = y * _cellSize;
 
             return new Vector2Int(posX, posY) + center;
+        }
+
+        public Vector2 WorldToGridPosition(Vector2Int pos) => WorldToGridPosition(pos.x, pos.y);
+        public Vector2Int WorldToGridPosition(float x, float y)
+        {
+            int i_x = Mathf.RoundToInt(x);
+            int i_y = Mathf.RoundToInt(y);
+
+            Vector2Int pos = new Vector2Int(i_x / _cellSize, i_y / _cellSize);
+
+            return pos;
+        }
+
+
+        public Vector2Int GetCenterPosition()
+        {
+            Vector2Int a = new Vector2Int(0, 0);
+
+            foreach (MapCell cell in AliveCells) {
+                a += cell.GetGridPosition();
+            }
+
+            a /= AliveCells.Count;
+            return a;
         }
 
         public List<MapCell> GetNeighbouringCardinalCells(Vector2Int pos) => GetNeighbouringCardinalCells(pos.x, pos.y);
@@ -60,6 +82,14 @@ namespace BulletHell.Map.Generation
 
             return neighbours;
         }
+
+        public MapCell GetCell(Vector2Int pos) => GetCell(pos.x, pos.y);
+        public MapCell GetCell(int x, int y)
+        {
+            if (x < 0 || x >= _sizeX || y < 0 || y >= _sizeY) return null;
+            return _grid[x, y];
+        }
+
 
         public void OnDrawGizmos()
         {
@@ -134,7 +164,7 @@ namespace BulletHell.Map.Generation
             if(_occupant != null) {
                 Gizmos.color = _occupant.colorCoding;
             }
-            Gizmos.DrawCube(GetWorldPositon(), Vector2.one * _grid.GetCellSize());
+            Gizmos.DrawCube(GetWorldPositon(), Vector2.one * GenerationUtilities.CellSize);
         }
         #endregion
     }
