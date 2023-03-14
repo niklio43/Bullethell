@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
     [SerializeField] EnemyBrain _brain;
     [SerializeField] EnemyMovement _enemyMovement;
     [SerializeField] VisualEffectAsset _deathVFX;
+    [SerializeField] DropTable _dropTable;
     [HideInInspector] public Transform Target;
     [HideInInspector] public bool CanMove = true;
     [HideInInspector] public DetectionData DetectionData = new DetectionData();
@@ -84,6 +85,7 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
     {
         _brain.CurrentAbility?.Cancel();
         BulletHell.VFX.VFXManager.Play(_deathVFX, 1, transform.position);
+        DropRandomLoot.Instance?.DropItem(_dropTable.ItemDrop, transform);
         Destroy(gameObject);
     }
 

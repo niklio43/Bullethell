@@ -4,6 +4,5 @@ using UnityEngine;
 
 public interface IDropLoot
 {
-
-    void DropItem(List<ItemDrop> dropTable);
+    void DropItem(List<ItemDrop> dropTable, Transform tf);
 }
