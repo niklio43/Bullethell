@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: GenerationConfig
   m_EditorClassIdentifier: 
   CellSize: 20
-  SizeX: 20
-  SizeY: 20
+  SizeX: 10
+  SizeY: 10
   _randomSeed: 1
-  _seed: 700
-  RandomWalkSteps: 20
+  _seed: 9619
+  RandomWalkSteps: 5
   Size: 20
-  MaxBigRooms: 2
-  StartRoom: {fileID: 4784733289325639768, guid: b7cc4ce92c2705c4ca053e688ebcbd12, type: 3}
+  MaxBigRooms: 10
+  StartRoom: {fileID: 891278719455284213, guid: 1df00222a3e4c7f4f81b5d9284c4fa9a, type: 3}
   EndRoom: {fileID: 4784733289325639768, guid: b7cc4ce92c2705c4ca053e688ebcbd12, type: 3}
   SmallRooms:
   - {fileID: 891278719455284213, guid: 35a619a869f4ced4f93cb00e6c35fcd1, type: 3}
   BigRooms:
   - {fileID: 891278719455284213, guid: 02c53a943a3b7e14d9a3e7bd45761f25, type: 3}
+  - {fileID: 891278719455284213, guid: 8e8607cd06cad06419f501010f5771b3, type: 3}
+  - {fileID: 891278719455284213, guid: 6d2085089d4013845ad4baa614024667, type: 3}

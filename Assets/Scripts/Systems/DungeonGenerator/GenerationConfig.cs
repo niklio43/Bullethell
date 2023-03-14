@@ -8,7 +8,6 @@ namespace BulletHell.Map.Generation
     public class GenerationConfig : ScriptableObject
     {
         [Header("Grid")]
-        public int CellSize = 3;
         public int SizeX = 10;
         public int SizeY = 10;
 
@@ -20,7 +19,6 @@ namespace BulletHell.Map.Generation
 
         [Header("Room Settings")]
         public int MaxBigRooms = 4;
-
 
         [Header("Rooms Tileset")]
         public Room StartRoom;

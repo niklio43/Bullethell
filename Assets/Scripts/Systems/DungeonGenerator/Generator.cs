@@ -24,7 +24,7 @@ namespace BulletHell.Map.Generation
                 Destroy(child.gameObject);
             }
 
-            _grid = new MapGrid(_config.SizeX, _config.SizeY, _config.CellSize);
+            _grid = new MapGrid(_config.SizeX, _config.SizeY);
             Random.InitState(_config.GetSeed());
             StartCoroutine(Generate());
         }
@@ -42,7 +42,7 @@ namespace BulletHell.Map.Generation
             Vector2Int startPosition = new Vector2Int(_config.SizeX / 2, _config.SizeY / 2);
 
             yield return RandomWalk(startPosition);
-            yield return DLA(startPosition);
+            yield return DLA();
         }
         IEnumerator RandomWalk(Vector2Int startPosition)
         {
@@ -75,7 +75,7 @@ namespace BulletHell.Map.Generation
 
             yield return null;
         }
-        IEnumerator DLA(Vector2Int startPosition)
+        IEnumerator DLA()
         {
             int amountOfRooms = _config.RandomWalkSteps;
 
@@ -102,8 +102,44 @@ namespace BulletHell.Map.Generation
 
         IEnumerator PopulateLayout()
         {
+            yield return PlaceStartEndRoom();
             yield return PopulateCells(_config.BigRooms, _config.MaxBigRooms);
             yield return PopulateCells(_config.SmallRooms);
+        }
+
+        IEnumerator PlaceStartEndRoom()
+        {
+            Vector2Int Center = _grid.GetCenterPosition();
+
+            MapCell check = null; 
+            float d = 0;
+
+            foreach (MapCell cell in _grid.AliveCells) {
+                if (cell.IsOccupied()) continue;
+                float dist = Vector2.Distance(Center, cell.GetGridPosition());
+                if(dist > d) {
+                    check = cell;
+                    d = dist;
+                }
+            }
+
+            PlaceRoom(_config.StartRoom, check.GetGridPosition());
+
+            MapCell check_2 = null;
+            d = 0;
+
+            foreach (MapCell cell in _grid.AliveCells) {
+                if (cell.IsOccupied()) continue;
+                float dist = Vector2.Distance(check.GetGridPosition(), cell.GetGridPosition());
+                if (dist > d) {
+                    check_2 = cell;
+                    d = dist;
+                }
+            }
+
+            PlaceRoom(_config.StartRoom, check_2.GetGridPosition());
+
+            yield return null;
         }
 
         IEnumerator PopulateCells(Room[] rooms, int maxAmount = 0)
@@ -134,19 +170,21 @@ namespace BulletHell.Map.Generation
         IEnumerator ConnectDoors()
         {
             foreach (MapCell cell in _grid.AliveCells) {
-                Debug.Log(cell.GetDoors().Length);
                 foreach (Door door in cell.GetDoors()) {
                     if (door.IsConnected()) { continue; }
                     Vector2Int gridPos = cell.GetGridPosition();
                     Vector2Int check = gridPos + door.GetOrientation().GetVector();
 
-                    MapCell CellToConnect = _grid[check.x, check.y];
+                    MapCell mapCell = _grid.GetCell(check);
 
-                    if (CellToConnect == null) { door.BlockDoor(); continue; }
-                    Debug.Log("TESTTTUI");
+                    if(mapCell == null) {
+                        door.CloseDoor();
+                        continue;
+                    }
+
                     Direction requiredOrientation = door.GetConnecteeOrientation();
 
-                    foreach (Door conecteeDoor in CellToConnect.GetDoors()) {
+                    foreach (Door conecteeDoor in mapCell.GetDoors()) {
                         if (conecteeDoor.GetOrientation() == requiredOrientation) {
                             door.OpenDoor(conecteeDoor);
                             conecteeDoor.OpenDoor(door);
@@ -164,8 +202,10 @@ namespace BulletHell.Map.Generation
         public bool ValidRoomPlacement(Room roomOriginal, int x, int y)
         {
             foreach (RoomCell cell in roomOriginal.Cells) {
-                if (_grid[x + cell.x, y + cell.y] == null) return false;
-                if (_grid[x + cell.x, y + cell.y].IsOccupied()) { return false; }
+                Vector2Int check = new Vector2Int(x + cell.x, y + cell.y);
+
+                MapCell mapCell = _grid.GetCell(check);
+                if (mapCell == null || mapCell.IsOccupied()) return false;
             }
 
             return true;
@@ -198,14 +238,14 @@ namespace BulletHell.Map.Generation
             Gizmos.color = Color.gray;
 
             for (int i = 0; i <= _config.SizeY; i++) {
-                Vector3 step = Vector3.up * i * _config.CellSize;
-                Vector3 width = new Vector3(_config.CellSize * _config.SizeX, 0, 0);
+                Vector3 step = Vector3.up * i * GenerationUtilities.CellSize;
+                Vector3 width = new Vector3(GenerationUtilities.CellSize * _config.SizeX, 0, 0);
 
                 Gizmos.DrawLine(transform.position + step, transform.position + step + width);
             }
             for (int i = 0; i <= _config.SizeX; i++) {
-                Vector3 step = Vector3.right * i * _config.CellSize;
-                Vector3 height = new Vector3(0, _config.CellSize * _config.SizeY, 0);
+                Vector3 step = Vector3.right * i * GenerationUtilities.CellSize;
+                Vector3 height = new Vector3(0, GenerationUtilities.CellSize * _config.SizeY, 0);
 
                 Gizmos.DrawLine(transform.position + step, transform.position + step + height);
             }
