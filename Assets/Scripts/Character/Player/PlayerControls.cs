@@ -38,6 +38,8 @@ public class PlayerControls : MonoBehaviour
         //UI
         _inputs.Player.Inventory.performed += ctx => _playerUI.ToggleInventory();
         _inputs.Player.Interact.performed += ctx => playerInteracter.Interact();
+        _inputs.Player.OpenMap.performed += ctx => PlayerUI.Instance.ToggleLargeMap();
+        _inputs.Player.OpenMap.canceled += ctx => PlayerUI.Instance.ToggleLargeMap();
 
         //Weapon
         _inputs.Player.Fire.performed += ctx => _player.WeaponController.Attack();
