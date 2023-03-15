@@ -14368,7 +14368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1181653743}
-  _mapZoom: 0
+  _mapZoom: 10
 --- !u!114 &1207070648
 MonoBehaviour:
   m_ObjectHideFlags: 0
