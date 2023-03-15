@@ -30,6 +30,14 @@ namespace BulletHell.UI
         [SerializeField] PlayerController _playerController;
         [HideInInspector] public bool IsUpgrading = false;
 
+        [Header("Minimap")]
+        [SerializeField] GameObject _largeMap;
+        [SerializeField] MinimapCamera _minimapCamera;
+        [SerializeField] RenderTexture _minimapTexture;
+        [SerializeField] RenderTexture _largemapTexture;
+        public GameObject LargeMap => _largeMap;
+        public MinimapCamera MinimapCamera => _minimapCamera;
+
         public static void Initialize(PlayerController playerController)
         {
             Health.Initialize(playerController.PlayerResources);
@@ -73,6 +81,24 @@ namespace BulletHell.UI
             Inventory.SetActive(!Inventory.activeSelf);
             Forge.SetActive(false);
             HoverInfoManager.Instance.HideInfo();
+        }
+
+        public void ToggleLargeMap()
+        {
+            //set new target to be center of entire map and zoom out camera
+            bool active = !_largeMap.activeSelf;
+            _largeMap.SetActive(active);
+
+            Camera cam = _minimapCamera.GetComponent<Camera>();
+
+            if (active) 
+            {
+                _minimapCamera.MapZoom = 10;
+                cam.targetTexture = _largemapTexture;
+                return;
+            }
+            _minimapCamera.MapZoom = 5;
+            cam.targetTexture = _minimapTexture;
         }
 
         public void AddStatusEffect(ActiveStatusEffect statusEffect)

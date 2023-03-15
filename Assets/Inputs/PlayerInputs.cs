@@ -134,6 +134,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMap"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d0a976f-f31b-4f45-b31b-d4195f7b9844"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -519,6 +528,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""EquipSecondaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b080fa7f-9f91-4128-979c-c85bd26120d1"",
+                    ""path"": ""<Keyboard>/capsLock"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OpenMap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1118,6 +1138,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_Player_Parry = m_Player.FindAction("Parry", throwIfNotFound: true);
         m_Player_EquipPrimaryWeapon = m_Player.FindAction("EquipPrimaryWeapon", throwIfNotFound: true);
         m_Player_EquipSecondaryWeapon = m_Player.FindAction("EquipSecondaryWeapon", throwIfNotFound: true);
+        m_Player_OpenMap = m_Player.FindAction("OpenMap", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1201,6 +1222,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Parry;
     private readonly InputAction m_Player_EquipPrimaryWeapon;
     private readonly InputAction m_Player_EquipSecondaryWeapon;
+    private readonly InputAction m_Player_OpenMap;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -1217,6 +1239,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @Parry => m_Wrapper.m_Player_Parry;
         public InputAction @EquipPrimaryWeapon => m_Wrapper.m_Player_EquipPrimaryWeapon;
         public InputAction @EquipSecondaryWeapon => m_Wrapper.m_Player_EquipSecondaryWeapon;
+        public InputAction @OpenMap => m_Wrapper.m_Player_OpenMap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1262,6 +1285,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @EquipSecondaryWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipSecondaryWeapon;
                 @EquipSecondaryWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipSecondaryWeapon;
                 @EquipSecondaryWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipSecondaryWeapon;
+                @OpenMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMap;
+                @OpenMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMap;
+                @OpenMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1302,6 +1328,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @EquipSecondaryWeapon.started += instance.OnEquipSecondaryWeapon;
                 @EquipSecondaryWeapon.performed += instance.OnEquipSecondaryWeapon;
                 @EquipSecondaryWeapon.canceled += instance.OnEquipSecondaryWeapon;
+                @OpenMap.started += instance.OnOpenMap;
+                @OpenMap.performed += instance.OnOpenMap;
+                @OpenMap.canceled += instance.OnOpenMap;
             }
         }
     }
@@ -1470,6 +1499,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnParry(InputAction.CallbackContext context);
         void OnEquipPrimaryWeapon(InputAction.CallbackContext context);
         void OnEquipSecondaryWeapon(InputAction.CallbackContext context);
+        void OnOpenMap(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
