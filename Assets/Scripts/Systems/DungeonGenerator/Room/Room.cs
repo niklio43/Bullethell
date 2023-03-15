@@ -74,7 +74,6 @@ namespace BulletHell.Map
             }
         }
 
-
         public Vector2Int Pos => _pos;
         public int x => _pos.x;
         public int y => _pos.y;

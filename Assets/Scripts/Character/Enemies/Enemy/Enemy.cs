@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
     public EnemyAim Aim;
     public EnemyWeapon Weapon;
 
+    public delegate void OnDeathDelegate(Enemy enemy);
+    public event OnDeathDelegate OnDeath;
+
+
     RuntimeVisualEffect _stunVFX = null;
 
     EnemyDetection _detection;
@@ -87,6 +91,11 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
         BulletHell.VFX.VFXManager.Play(_deathVFX, 1, transform.position);
         DropRandomLoot.Instance?.DropItem(_dropTable.ItemDrop, transform);
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        OnDeath?.Invoke(this);
     }
 
     public void UpdateDirection()
