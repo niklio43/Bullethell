@@ -24960,26 +24960,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86de81c895c252e40aef506ec73d0831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cells:
-  - _pos: {x: 0, y: 0}
-    Doors:
-    - {fileID: 1068112447152754480}
-  - _pos: {x: 1, y: 0}
-    Doors:
-    - {fileID: 3015049422500998396}
-    - {fileID: 3800913630483774133}
-    - {fileID: 8073822551782359202}
-  - _pos: {x: -1, y: 0}
-    Doors:
-    - {fileID: 8469456344573122736}
-    - {fileID: 4074525893655558818}
-    - {fileID: 3976497283878851105}
-  - _pos: {x: 0, y: 1}
-    Doors:
-    - {fileID: 8337519990266378266}
-    - {fileID: 555456350843252878}
-    - {fileID: 4765277434310885751}
   colorCoding: {r: 0.5803922, g: 1, b: 0.5803922, a: 1}
+  _icon: {fileID: 21300000, guid: 4233742be49b34848af5582e68bc9294, type: 3}
+  _cells: []
 --- !u!1 &3649770418222537096
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,59 +3,39 @@ using UnityEngine;
 
 namespace BulletHell.Map.Generation
 {
-    public class MapGrid
+    public class GenerationGrid
     {
-        public MapCell this[int x, int y] { get { return _grid[x, y]; } set { _grid[x, y] = value; } }
-
-        MapCell[,] _grid;
-
-        public List<MapCell> AliveCells;
-
-        readonly int _sizeX, _sizeY;
-
-        int _cellSize => GenerationUtilities.CellSize;
+        #region Public Fields
+        public GenerationCell this[int x, int y] { get { return _grid[x, y]; } set { _grid[x, y] = value; } }
         public Vector2Int GetSize => new Vector2Int(_sizeX, _sizeY);
+        public List<GenerationCell> AliveCells;
+        #endregion
 
-        public MapGrid(int sizeX, int sizeY)
+        #region Private Fields
+        GenerationCell[,] _grid;
+        readonly int _sizeX, _sizeY;
+        #endregion
+
+        #region Public Methods
+        public GenerationGrid(int sizeX, int sizeY)
         {
             _sizeX = sizeX;
             _sizeY = sizeY;
 
-            AliveCells = new List<MapCell>();
-            _grid = new MapCell[_sizeX, _sizeY];
+            AliveCells = new List<GenerationCell>();
+            _grid = new GenerationCell[_sizeX, _sizeY];
         }
-
-        public Vector2 GridToWorldPosition(Vector2Int pos) => GridToWorldPosition(pos.x, pos.y);
-        public Vector2 GridToWorldPosition(int x, int y)
+        public bool IsWithinBounds(Vector2Int pos) => IsWithinBounds(pos.x, pos.y);
+        public bool IsWithinBounds(float x, float y)
         {
-            if (x < 0 || y < 0) { return Vector2Int.zero; }
-            if (x > _sizeX || y > _sizeY) { return Vector2Int.zero; }
-
-            Vector2Int center = new Vector2Int(_cellSize / 2, _cellSize / 2);
-
-            int posX = x * _cellSize;
-            int posY = y * _cellSize;
-
-            return new Vector2Int(posX, posY) + center;
+            return (x > 0 && x < _sizeX && y > 0 && y < _sizeY);
         }
-
-        public Vector2 WorldToGridPosition(Vector2Int pos) => WorldToGridPosition(pos.x, pos.y);
-        public Vector2Int WorldToGridPosition(float x, float y)
-        {
-            int i_x = Mathf.RoundToInt(x);
-            int i_y = Mathf.RoundToInt(y);
-
-            Vector2Int pos = new Vector2Int(i_x / _cellSize, i_y / _cellSize);
-
-            return pos;
-        }
-
 
         public Vector2Int GetCenterPosition()
         {
             Vector2Int a = new Vector2Int(0, 0);
 
-            foreach (MapCell cell in AliveCells) {
+            foreach (GenerationCell cell in AliveCells) {
                 a += cell.GetGridPosition();
             }
 
@@ -63,19 +43,20 @@ namespace BulletHell.Map.Generation
             return a;
         }
 
-        public List<MapCell> GetNeighbouringCardinalCells(Vector2Int pos) => GetNeighbouringCardinalCells(pos.x, pos.y);
-        public List<MapCell> GetNeighbouringCardinalCells(int x, int y)
+
+        public List<GenerationCell> GetNeighbouringCardinalCells(Vector2Int pos) => GetNeighbouringCardinalCells(pos.x, pos.y);
+        public List<GenerationCell> GetNeighbouringCardinalCells(int x, int y)
         {
-            List<MapCell> neighbours = new List<MapCell>();
+            List<GenerationCell> neighbours = new List<GenerationCell>();
             Vector2Int pos = new Vector2Int(x, y);
 
             for (int i = 0; i < 4; i++) {
                 Direction direction = (Direction)i;
                 Vector2Int check = pos + direction.GetVector();
-                
+
                 if (check.x < 0 || check.x >= _sizeX || check.y < 0 || check.y >= _sizeY) { continue; }
-                
-                if(_grid[check.x, check.y] != null) {
+
+                if (_grid[check.x, check.y] != null) {
                     neighbours.Add(_grid[check.x, check.y]);
                 }
             }
@@ -83,14 +64,15 @@ namespace BulletHell.Map.Generation
             return neighbours;
         }
 
-        public MapCell GetCell(Vector2Int pos) => GetCell(pos.x, pos.y);
-        public MapCell GetCell(int x, int y)
+        public GenerationCell GetCell(Vector2Int pos) => GetCell(pos.x, pos.y);
+        public GenerationCell GetCell(int x, int y)
         {
             if (x < 0 || x >= _sizeX || y < 0 || y >= _sizeY) return null;
             return _grid[x, y];
         }
+        #endregion
 
-
+        #region Gizmos
         public void OnDrawGizmos()
         {
             if (_grid == null) { return; }
@@ -102,28 +84,32 @@ namespace BulletHell.Map.Generation
                 }
             }
         }
+        #endregion
     }
 
-    public class MapCell
+    public class GenerationCell
     {
-        readonly int _posX, _posY;
-        readonly MapGrid _grid;
 
-        List<MapCell> Neighbours;
+        #region Private Fields
+        readonly int _posX, _posY;
+        readonly GenerationGrid _grid;
+
+        List<GenerationCell> Neighbours;
 
         Room _occupant = null;
         Door[] _doors;
+        #endregion
 
         #region Getters & Setters
         public bool IsOccupied() => _occupant != null;
         public void SetOccupant(Room room) => _occupant = room;
-        public Room GetOccupant() => _occupant; 
+        public Room GetOccupant() => _occupant;
         //
         public Door[] GetDoors() => _doors;
         public void SetDoors(Door[] doors) => _doors = doors;
         #endregion
 
-        public MapCell(MapGrid grid, int x, int y)
+        public GenerationCell(GenerationGrid grid, int x, int y)
         {
             _grid = grid;
             _posX = x;
@@ -131,7 +117,7 @@ namespace BulletHell.Map.Generation
             grid.AliveCells.Add(this);
             GetAndUpdateNeighbours();
         }
-        public MapCell(MapGrid grid, Vector2Int pos)
+        public GenerationCell(GenerationGrid grid, Vector2Int pos)
         {
             _grid = grid;
             _posX = pos.x;
@@ -143,25 +129,25 @@ namespace BulletHell.Map.Generation
         void GetAndUpdateNeighbours()
         {
             Neighbours = _grid.GetNeighbouringCardinalCells(_posX, _posY);
-            foreach (MapCell neighbour in Neighbours) {
+            foreach (GenerationCell neighbour in Neighbours) {
                 neighbour.AddNeighbour(this);
             }
         }
 
-        public void AddNeighbour(MapCell neighbour)
+        public void AddNeighbour(GenerationCell neighbour)
         {
-            if(Neighbours.Contains(neighbour)) { return; }
+            if (Neighbours.Contains(neighbour)) { return; }
             Neighbours.Add(neighbour);
         }
 
         public Vector2Int GetGridPosition() => new Vector2Int(_posX, _posY);
-        public Vector2 GetWorldPositon() => _grid.GridToWorldPosition(_posX, _posY);
+        public Vector2 GetWorldPositon() => GenerationUtilities.GridToWorldPosition(_posX, _posY);
 
         #region Gizmos
         public void Draw()
         {
             Gizmos.color = Color.green;
-            if(_occupant != null) {
+            if (_occupant != null) {
                 Gizmos.color = _occupant.colorCoding;
             }
             Gizmos.DrawCube(GetWorldPositon(), Vector2.one * GenerationUtilities.CellSize);

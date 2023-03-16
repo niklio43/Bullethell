@@ -6,37 +6,31 @@ namespace BulletHell.Map
 {
     public class Door : MonoBehaviour
     {
+        #region Public Fields
+
+
+        #endregion
+
+        #region Private Fields
         [SerializeField] Direction _orientation;
-        
         [SerializeField] GameObject _open;
         [SerializeField] GameObject _closed;
         [SerializeField] GameObject _blocker;
-
         Room _room;
 
         DoorState _state = DoorState.Open;
-        public enum DoorState
-        {
-            Open,
-            Closed
-        }
-
         Door _connectedDoor;
+        #endregion
 
-
-
-
-        #region Getters & Setters
+        #region Public Methods
         public Direction GetOrientation() => _orientation;
         public bool IsConnected() => _connectedDoor != null;
-
-        #endregion
 
         public void Initialize(Room room)
         {
             _room = room;
-            room.OnPlayerEnter += BlockDoor;
-            room.OnRoomCleared += UnBlockDoor;
+            room.OnCloseRoom += BlockDoor;
+            room.OnOpenRoom += UnBlockDoor;
         }
 
         public Direction GetConnecteeOrientation()
@@ -70,16 +64,24 @@ namespace BulletHell.Map
             _open.SetActive(false);
             _closed.SetActive(true);
         }
+        #endregion
 
-        public void BlockDoor()
+        #region Private Methods
+        void BlockDoor()
         {
-            if(_state == DoorState.Closed) { return; }
+            if (_state == DoorState.Closed) { return; }
             _blocker.SetActive(true);
         }
 
-        public void UnBlockDoor()
+        void UnBlockDoor()
         {
             _blocker.SetActive(false);
         }
+        #endregion
+    }
+    public enum DoorState
+    {
+        Open,
+        Closed
     }
 }

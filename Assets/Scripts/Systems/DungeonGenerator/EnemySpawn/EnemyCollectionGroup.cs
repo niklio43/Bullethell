@@ -32,7 +32,6 @@ namespace BulletHell.Enemies
         public EnemyCollection GetRandomCollection()
         {
             float r = Random.value;
-
             EnemyCollection selected = null;
 
             foreach (var pair in _spawnChancePairs) {
@@ -44,7 +43,5 @@ namespace BulletHell.Enemies
 
             return selected;
         }
-
-
     }
 }

@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collections:
   - _data: {fileID: 11400000, guid: c244880261c26484b8b0c9e1fc7c0347, type: 2}
-    _weight: 0
-    _maxAmount: 0
+    _weight: 3
+    _maxAmount: 1
+  - _data: {fileID: 11400000, guid: dd2448c68d808634d9bb03d86ddff900, type: 2}
+    _weight: 2
+    _maxAmount: 3

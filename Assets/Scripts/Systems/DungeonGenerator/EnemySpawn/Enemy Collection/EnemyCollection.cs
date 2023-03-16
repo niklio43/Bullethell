@@ -8,9 +8,6 @@ namespace BulletHell.Enemies
     public class EnemyCollection
     {
         #region Public Fields
-        public delegate void OnClearedDelegate(EnemyCollection collection);
-        public event OnClearedDelegate OnCleared;
-
         public int Weight => _weight;
         public int MaxAmount => _maxAmount;
         #endregion
@@ -38,26 +35,17 @@ namespace BulletHell.Enemies
             }
         }
 
-        public void Spawn(Vector2 position, float radius)
+        public List<Enemy> GetEnemies()
         {
+            List<Enemy> list = new List<Enemy>();
             int amount = Random.Range(_data.Min, _data.Max);
 
             for (int i = 0; i < amount; i++) {
-                Vector2 pos;
-
-                while (true) {
-                    pos = position + Random.insideUnitCircle * Random.Range(0, radius);
-
-                    if (Physics2D.OverlapCircle(pos, 1f) == null) {
-                        break;
-                    }
-                }
-
-                EnemyCollectionMember member = GetRandomMember();
-                Enemy enemy = GameObject.Instantiate(member.Object, pos, Quaternion.identity);
-                _activeEnemies.Add(enemy);
-                enemy.OnDeath += EnemyKilled;
+                Enemy enemy = GetRandomMember().Object;
+                list.Add(enemy);
             }
+
+            return list;
         }
 
         EnemyCollectionMember GetRandomMember()
@@ -74,15 +62,6 @@ namespace BulletHell.Enemies
             }
 
             return selected;
-        }
-
-        void EnemyKilled(Enemy enemy)
-        {
-            _activeEnemies.Remove(enemy);
-
-            if(_activeEnemies.Count <= 0) {
-                OnCleared?.Invoke(this);
-            }
         }
     }
 }
