@@ -6,26 +6,28 @@ using BulletHell.Emitters;
 
 namespace BulletHell.InventorySystem
 {
-    [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/Bow")]
-    public class Bow : Ranged
+    [CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Inventory System/Item/Weapon/Melee/Spear")]
+    public class Spear : Melee
     {
         [SerializeField] Sprite icon;
         [SerializeField] Sprite sprite;
         [SerializeField] string itemName;
         [TextArea(4, 20), SerializeField] string description;
+        [SerializeField] int maxStackSize;
         [SerializeField] Pool pool;
         [SerializeField] Rarity rarity;
         [SerializeField] ItemType itemType;
 
         void OnEnable()
         {
+            Icon = icon;
             Sprite = sprite;
             DisplayName = itemName;
-            Pool = pool;
             Description = description;
+            MaxStackSize = maxStackSize;
+            Pool = pool;
             Rarity = rarity;
             ItemType = itemType;
-            Icon = icon;
         }
     }
 }
