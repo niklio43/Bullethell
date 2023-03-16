@@ -11,6 +11,7 @@ namespace BulletHell.Map
     {
         #region Public Fields
         public List<Room> Rooms => _rooms;
+        public Map Map => _map;
         public EnemyCollectionGroup Enemies => _config.EnemyCollectionGroup;
         #endregion
 
@@ -49,7 +50,7 @@ namespace BulletHell.Map
         {
             _map = new GameObject("Map").AddComponent<Map>();
             _map.transform.parent = transform;
-            _map.transform.localPosition = Vector2.right * (_config.SizeX + 10);
+            _map.transform.localPosition = Vector2.zero;
             _map.Initialize(this);
             _map.CreateMap();
         }
