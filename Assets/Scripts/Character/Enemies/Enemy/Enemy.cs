@@ -85,17 +85,19 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
         _brain.SetState(EnemyBrain.EnemyStates.Staggered);
     }
 
+    [ContextMenu("Kill")]
     public void Kill()
     {
         _brain.CurrentAbility?.Cancel();
         BulletHell.VFX.VFXManager.Play(_deathVFX, 1, transform.position);
         DropRandomLoot.Instance?.DropItem(_dropTable.ItemDrop, transform);
+        OnDeath?.Invoke(this);
         Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
-        OnDeath?.Invoke(this);
+        
     }
 
     public void UpdateDirection()
