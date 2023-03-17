@@ -1059,6 +1059,87 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Inventory"",
+            ""id"": ""2c12940b-3254-451f-a50e-bae21b59031e"",
+            ""actions"": [
+                {
+                    ""name"": ""FastEquip"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd03dd25-24bc-4c80-894d-a25a097c5c39"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DisableUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb43984b-b90a-4325-b6b8-1ae7fe0b2368"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""e88c02eb-7848-4209-b24f-72ced499fbf4"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FastEquip"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""7b2768d5-eda2-4b84-bb17-735cd60ff9a2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FastEquip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""0d3c7595-854d-49b2-8e0e-d766f2e2b839"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FastEquip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc58c8ac-3636-4534-bdf5-dc7bcb345f89"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisableUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9b7e3cc-4c8c-4c8c-a363-3e11a0fdcd2f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisableUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1151,6 +1232,10 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Inventory
+        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
+        m_Inventory_FastEquip = m_Inventory.FindAction("FastEquip", throwIfNotFound: true);
+        m_Inventory_DisableUI = m_Inventory.FindAction("DisableUI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1440,6 +1525,47 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Inventory
+    private readonly InputActionMap m_Inventory;
+    private IInventoryActions m_InventoryActionsCallbackInterface;
+    private readonly InputAction m_Inventory_FastEquip;
+    private readonly InputAction m_Inventory_DisableUI;
+    public struct InventoryActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public InventoryActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @FastEquip => m_Wrapper.m_Inventory_FastEquip;
+        public InputAction @DisableUI => m_Wrapper.m_Inventory_DisableUI;
+        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
+        public void SetCallbacks(IInventoryActions instance)
+        {
+            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
+            {
+                @FastEquip.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnFastEquip;
+                @FastEquip.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnFastEquip;
+                @FastEquip.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnFastEquip;
+                @DisableUI.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnDisableUI;
+                @DisableUI.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnDisableUI;
+                @DisableUI.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnDisableUI;
+            }
+            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @FastEquip.started += instance.OnFastEquip;
+                @FastEquip.performed += instance.OnFastEquip;
+                @FastEquip.canceled += instance.OnFastEquip;
+                @DisableUI.started += instance.OnDisableUI;
+                @DisableUI.performed += instance.OnDisableUI;
+                @DisableUI.canceled += instance.OnDisableUI;
+            }
+        }
+    }
+    public InventoryActions @Inventory => new InventoryActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1513,5 +1639,10 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IInventoryActions
+    {
+        void OnFastEquip(InputAction.CallbackContext context);
+        void OnDisableUI(InputAction.CallbackContext context);
     }
 }

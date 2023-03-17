@@ -18,6 +18,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 9da26b7754cd9fa4e923c8fd3b090d8a, type: 3}
   sprite: {fileID: 21300000, guid: 9da26b7754cd9fa4e923c8fd3b090d8a, type: 3}
   itemName: Bow
+  description: cool awesome bow
   pool: {fileID: 11400000, guid: 9e3a3ed0e4ac64947b3cb8be021572d7, type: 2}
   rarity: 1
   itemType: 1
