@@ -69,8 +69,8 @@ namespace BulletHell.Map.Generation
 
                     pos += direction.GetVector();
 
-                    if (pos.x < 0 || pos.x >= _config.SizeX ||
-                        pos.y < 0 || pos.y >= _config.SizeY) { break; }
+                    if (pos.x < 0 || pos.x > _config.SizeX ||
+                        pos.y < 0 || pos.y > _config.SizeY) { break; }
 
                     if (_grid[pos.x, pos.y] == null) {
                         _grid[pos.x, pos.y] = new GenerationCell(_grid, pos);
@@ -93,7 +93,7 @@ namespace BulletHell.Map.Generation
 
                 Vector2Int pos = new Vector2Int(x, y);
 
-                if (_grid.GetNeighbouringCardinalCells(pos).Count > 0) {
+                if (_grid.GetNeighbouringCardinalCells(pos).Count > 0 && _grid.IsWithinBounds(pos)) {
                     _grid[x, y] = new GenerationCell(_grid, pos);
                     amountOfRooms++;
                 }

@@ -12,7 +12,7 @@ namespace BulletHell.Map
         #region Public Fields
         public List<Room> Rooms => _rooms;
         public Room ActiveRoom => _activeRoom;
-        public EnemyCollectionGroup Enemies => _config.EnemyCollectionGroup;
+        public static EnemyCollectionGroup Enemies => _config.EnemyCollectionGroup;
         public delegate void OnInitializeDelegate();
         public static event OnInitializeDelegate OnInitialize;
         #endregion
@@ -43,7 +43,7 @@ namespace BulletHell.Map
             _rooms = rooms;
 
             foreach (Room room in _rooms) {
-                room.Initialize(Instance);
+                room.Initialize();
                 room.transform.parent = Instance.transform;
             }
             OnInitialize?.Invoke();

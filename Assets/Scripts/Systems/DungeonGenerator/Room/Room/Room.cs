@@ -18,7 +18,6 @@ namespace BulletHell.Map
         public event OnOpenRoomDelegate OnOpenRoom;
         public event OnRoomClearedDelegate OnRoomCleared;
 
-        public LevelManager LevelManager => _levelManager;
         public RoomCell[] Cells => _cells;
         public Color colorCoding;
         public Sprite Icon => _icon;
@@ -29,15 +28,13 @@ namespace BulletHell.Map
         [SerializeField] Sprite _icon;
         [SerializeField] RoomCell[] _cells;
         RoomState _roomState = RoomState.InActive;  
-        LevelManager _levelManager;
         Vector2Int _gridposition;
         IRoomEvent[] _events;
         #endregion
 
         #region Public Methods
-        public void Initialize(LevelManager manager)
+        public void Initialize()
         {
-            _levelManager = manager;
             _events = GetComponentsInChildren<IRoomEvent>();
 
             foreach (RoomCell cell in _cells) {
@@ -64,7 +61,6 @@ namespace BulletHell.Map
 
             return avg / _cells.Length;
         }
-
 
         public void CloseRoom()
         {
