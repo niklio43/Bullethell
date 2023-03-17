@@ -54,6 +54,18 @@ namespace BulletHell.Map
             _gridposition = gridPosition;
         }
 
+        public Vector2Int GetCenterPosition()
+        {
+            Vector2Int avg = _gridposition;
+
+            for (int i = 0; i < _cells.Length; i++) {
+                avg += _cells[i].Pos;
+            }
+
+            return avg / _cells.Length;
+        }
+
+
         public void CloseRoom()
         {
             OnCloseRoom?.Invoke();
