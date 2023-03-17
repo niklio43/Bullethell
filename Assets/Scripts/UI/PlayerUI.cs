@@ -32,11 +32,9 @@ namespace BulletHell.UI
 
         [Header("Minimap")]
         [SerializeField] GameObject _largeMap;
-        [SerializeField] MinimapCamera _minimapCamera;
         [SerializeField] RenderTexture _minimapTexture;
         [SerializeField] RenderTexture _largemapTexture;
         public GameObject LargeMap => _largeMap;
-        public MinimapCamera MinimapCamera => _minimapCamera;
 
         public static void Initialize(PlayerController playerController)
         {
@@ -59,8 +57,8 @@ namespace BulletHell.UI
 
         void Update()
         {
-            if(_forgeProgressBar == null) { return; }
-            if(!IsUpgrading) { _forgeProgressBar.value = 0; return; }
+            if (_forgeProgressBar == null) { return; }
+            if (!IsUpgrading) { _forgeProgressBar.value = 0; return; }
             _forgeProgressBar.value += Time.deltaTime;
         }
 
@@ -89,16 +87,14 @@ namespace BulletHell.UI
             bool active = !_largeMap.activeSelf;
             _largeMap.SetActive(active);
 
-            Camera cam = _minimapCamera.GetComponent<Camera>();
-
-            if (active) 
+            if (active)
             {
-                _minimapCamera.MapZoom = 10;
-                cam.targetTexture = _largemapTexture;
+                MinimapCamera.Instance.SetSize(10);
+                MinimapCamera.Instance.SetTexture(_largemapTexture);
                 return;
             }
-            _minimapCamera.MapZoom = 5;
-            cam.targetTexture = _minimapTexture;
+            MinimapCamera.Instance.SetSize(5);
+            MinimapCamera.Instance.SetTexture(_minimapTexture);
         }
 
         public void AddStatusEffect(ActiveStatusEffect statusEffect)

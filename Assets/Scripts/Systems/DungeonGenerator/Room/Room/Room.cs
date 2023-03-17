@@ -73,6 +73,7 @@ namespace BulletHell.Map
             if (_roomState != RoomState.InActive) { return; }
             _roomState = RoomState.Active;
             OnPlayerEnter?.Invoke();
+
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
