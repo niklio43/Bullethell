@@ -7,12 +7,22 @@ public class Minimap : Singleton<Minimap>
 {
     #region Private fields
     List<SpriteRenderer> _roomIcons = new List<SpriteRenderer>();
+    MinimapCamera _camera;
     #endregion
 
     #region Private Methods
     protected override void OnAwake()
     {
+        _camera = GetComponentInChildren<MinimapCamera>();
         LevelManager.OnInitialize += Initialize;
+        LevelManager.OnPlayerMoved += UpdateCamera;
+    }
+    #endregion
+
+    #region Private Methods
+    void UpdateCamera(Room room)
+    {
+        _camera.SetPosition(room.GetCenterPosition());
     }
     #endregion
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinimapCamera : Singleton<MinimapCamera>
+public class MinimapCamera : MonoBehaviour
 {
     Camera _cam;
     public Camera Cam => _cam;
@@ -13,7 +13,7 @@ public class MinimapCamera : Singleton<MinimapCamera>
         _cam = GetComponent<Camera>();
     }
 
-    public void Initialize(Vector3 pos)
+    public void SetPosition(Vector2Int pos)
     {
         transform.position = new Vector3(pos.x, pos.y, -100);
     }
