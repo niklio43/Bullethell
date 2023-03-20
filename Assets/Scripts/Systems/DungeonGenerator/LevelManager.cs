@@ -15,13 +15,15 @@ namespace BulletHell.Map
         public static EnemyCollectionGroup Enemies => _config.EnemyCollectionGroup;
         public delegate void OnInitializeDelegate();
         public static event OnInitializeDelegate OnInitialize;
+        public delegate void OnPlayerMovedDelegate(Room room);
+        public static event OnPlayerMovedDelegate OnPlayerMoved;
         #endregion
 
         #region Private Fields
         [SerializeField] GenerationConfig _Config;
         static GenerationConfig _config;
         static List<Room> _rooms;
-        Room _activeRoom;
+        static Room _activeRoom;
         #endregion
 
         protected override void OnAwake()
@@ -29,6 +31,12 @@ namespace BulletHell.Map
             _config = _Config;
             Enemies.Initialize();
             BeginGeneration();
+        }
+
+        public static void PlayerEnterRoom(Room room)
+        {
+            _activeRoom = room;
+            OnPlayerMoved?.Invoke(room);
         }
 
         public static void BeginGeneration()

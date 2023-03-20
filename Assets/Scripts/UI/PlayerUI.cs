@@ -32,6 +32,7 @@ namespace BulletHell.UI
 
         [Header("Minimap")]
         [SerializeField] GameObject _largeMap;
+        [SerializeField] Camera _minimapCamera;
         [SerializeField] RenderTexture _minimapTexture;
         [SerializeField] RenderTexture _largemapTexture;
         public GameObject LargeMap => _largeMap;
@@ -87,14 +88,16 @@ namespace BulletHell.UI
             bool active = !_largeMap.activeSelf;
             _largeMap.SetActive(active);
 
+            MinimapCamera cam = _minimapCamera.GetComponent<MinimapCamera>();
+
             if (active)
             {
-                MinimapCamera.Instance.SetSize(10);
-                MinimapCamera.Instance.SetTexture(_largemapTexture);
+                cam.SetSize(10);
+                cam.SetTexture(_largemapTexture);
                 return;
             }
-            MinimapCamera.Instance.SetSize(5);
-            MinimapCamera.Instance.SetTexture(_minimapTexture);
+            cam.SetSize(1.5f);
+            cam.SetTexture(_minimapTexture);
         }
 
         public void AddStatusEffect(ActiveStatusEffect statusEffect)

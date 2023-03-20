@@ -78,10 +78,10 @@ namespace BulletHell.Map
         #region Private Methods
         void PlayerEnter()
         {
+            LevelManager.PlayerEnterRoom(this);
             if (_roomState != RoomState.InActive) { return; }
             _roomState = RoomState.Active;
             OnPlayerEnter?.Invoke();
-
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
