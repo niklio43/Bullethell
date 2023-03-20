@@ -3,58 +3,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Enemies;
+using BulletHell.GameEventSystem;
 
 
 namespace BulletHell.Map
 {
-    public class LevelManager : Singleton<LevelManager>
+    public class LevelManager : MonoBehaviour
     {
         #region Public Fields
-        public List<Room> Rooms => _rooms;
+        public Room[] Rooms => _rooms;
         public Room ActiveRoom => _activeRoom;
-        public static EnemyCollectionGroup Enemies => _config.EnemyCollectionGroup;
-        public delegate void OnInitializeDelegate();
-        public static event OnInitializeDelegate OnInitialize;
-        public delegate void OnPlayerMovedDelegate(Room room);
-        public static event OnPlayerMovedDelegate OnPlayerMoved;
+        public EnemyCollectionGroup Enemies => _config.EnemyCollectionGroup;
         #endregion
 
         #region Private Fields
-        [SerializeField] GenerationConfig _Config;
-        static GenerationConfig _config;
-        static List<Room> _rooms;
-        static Room _activeRoom;
+        [SerializeField] GenerationConfig _config;
+        [Header("Events")]
+        [SerializeField] GameEvent OnCompletedMapGeneration;
+        [SerializeField] GameEvent OnPlayerMoved;
+
+        Room[] _rooms;
+        Room _activeRoom;
         #endregion
 
-        protected override void OnAwake()
+        private void Start()
         {
-            _config = _Config;
             Enemies.Initialize();
             BeginGeneration();
         }
 
-        public static void PlayerEnterRoom(Room room)
+        public void PlayerEnterRoom(Room room)
         {
             _activeRoom = room;
-            OnPlayerMoved?.Invoke(room);
+            Debug.Log(room);
+            OnPlayerMoved?.Raise(this, room);
         }
 
-        public static void BeginGeneration()
+        public void BeginGeneration()
         {
             Generator levelGenerator = new Generator(_config);
             levelGenerator.BeginGeneration(OnCompletedGeneration);
         }
 
-        static void OnCompletedGeneration(List<Room> rooms)
+        void OnCompletedGeneration(List<Room> rooms)
         {
             Debug.Log("Generation Completed");
-            _rooms = rooms;
+            _rooms = rooms.ToArray();
 
             foreach (Room room in _rooms) {
-                room.Initialize();
-                room.transform.parent = Instance.transform;
+                room.Initialize(this);
+                room.transform.parent = transform;
+                room.OnPlayerEnter += () => {
+                    PlayerEnterRoom(room);
+                };
             }
-            OnInitialize?.Invoke();
+
+            OnCompletedMapGeneration.Raise(this, _rooms);
         }
     }
 }

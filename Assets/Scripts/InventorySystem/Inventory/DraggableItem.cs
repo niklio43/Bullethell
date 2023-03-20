@@ -62,7 +62,7 @@ namespace BulletHell.InventorySystem
         {
             eventData.position = Input.mousePosition;
             List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
+            UnityEngine.EventSystems.EventSystem.current.RaycastAll(eventData, results);
             List<string> tags = new List<string>();
             for (int i = 0; i < results.Count; i++)
             {

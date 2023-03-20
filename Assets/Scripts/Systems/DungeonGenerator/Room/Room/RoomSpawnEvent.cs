@@ -24,7 +24,7 @@ namespace BulletHell.Map
             _owner.OnPlayerEnter += StartWave;
 
             foreach (SpawnPoint spawnPoint in _spawnPoints) {
-                spawnPoint.Initialize(gameObject, LevelManager.Enemies);
+                spawnPoint.Initialize(gameObject, room.Manager.Enemies);
                 spawnPoint.OnWaveCompleted += OnSpawnPointCompleted;
             }
         }

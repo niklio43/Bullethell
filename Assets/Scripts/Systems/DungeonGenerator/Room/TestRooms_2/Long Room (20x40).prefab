@@ -3946,7 +3946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorCoding: {r: 1, g: 1, b: 1, a: 1}
-  _icon: {fileID: 21300000, guid: eb22a481ed82fab458ec3eb5f59181db, type: 3}
+  _icon: {fileID: 21300000, guid: 06c5d45428abf5b4ea9d1a6f5000db29, type: 3}
   _cells:
   - _doors:
     - {fileID: 1064036812271728947}

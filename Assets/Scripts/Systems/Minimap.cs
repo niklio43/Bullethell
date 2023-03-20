@@ -3,41 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Map;
 
-public class Minimap : Singleton<Minimap>
+public class Minimap : MonoBehaviour
 {
     #region Private fields
     List<SpriteRenderer> _roomIcons = new List<SpriteRenderer>();
     MinimapCamera _camera;
     #endregion
 
-    #region Private Methods
-    protected override void OnAwake()
+    #region Public Methods
+    public void OnGenerationFinished(Component sender, object data)
     {
-        _camera = GetComponentInChildren<MinimapCamera>();
-        LevelManager.OnInitialize += Initialize;
-        LevelManager.OnPlayerMoved += UpdateCamera;
+        if (sender is not LevelManager) { return; }
+        CreateMap(data as Room[]);
     }
-    #endregion
-
-    #region Private Methods
-    void UpdateCamera(Room room)
+    
+    public void OnPlayerMoved(Component sender, object data)
     {
+        if(sender is not LevelManager) { return; }
+        UpdateCamera(data as Room);
+    }
+
+    public void UpdateCamera(Room room)
+    {
+        Debug.Log(_camera);
         _camera.SetPosition(room.GetCenterPosition());
     }
     #endregion
 
-    #region Public Methods
-    public void Initialize()
+    #region Private Methods
+    private void Awake()
     {
-        CreateMap();
+        _camera = GetComponentInChildren<MinimapCamera>();
     }
-
-    public void CreateMap()
+    private void CreateMap(Room[] rooms)
     {
-        List<Room> rooms = LevelManager.Instance.Rooms;
-
-        foreach (Room room in rooms)
-        {
+        foreach (Room room in rooms) {
             SpriteRenderer roomIcon = new GameObject().AddComponent<SpriteRenderer>();
             roomIcon.transform.parent = transform;
             roomIcon.name = $"{room.name} (Icon)";
@@ -47,4 +47,5 @@ public class Minimap : Singleton<Minimap>
         }
     }
     #endregion
+
 }

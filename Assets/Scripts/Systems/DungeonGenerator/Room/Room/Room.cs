@@ -22,19 +22,25 @@ namespace BulletHell.Map
         public Color colorCoding;
         public Sprite Icon => _icon;
         public Vector2Int GridPosition => _gridposition;
+        public LevelManager Manager => _manager;
         #endregion
 
         #region Private Fields
         [SerializeField] Sprite _icon;
         [SerializeField] RoomCell[] _cells;
+
+        LevelManager _manager;
+        
         RoomState _roomState = RoomState.InActive;  
-        Vector2Int _gridposition;
         IRoomEvent[] _events;
+
+        Vector2Int _gridposition;
         #endregion
 
         #region Public Methods
-        public void Initialize()
+        public void Initialize(LevelManager manager)
         {
+            _manager = manager;
             _events = GetComponentsInChildren<IRoomEvent>();
 
             foreach (RoomCell cell in _cells) {
@@ -78,7 +84,6 @@ namespace BulletHell.Map
         #region Private Methods
         void PlayerEnter()
         {
-            LevelManager.PlayerEnterRoom(this);
             if (_roomState != RoomState.InActive) { return; }
             _roomState = RoomState.Active;
             OnPlayerEnter?.Invoke();
