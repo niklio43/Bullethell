@@ -18,13 +18,25 @@ MonoBehaviour:
   _seed: 4680
   RandomWalkSteps: 5
   Size: 20
-  MaxBigRooms: 10
-  StartRoom: {fileID: 891278719455284213, guid: 1df00222a3e4c7f4f81b5d9284c4fa9a, type: 3}
-  EndRoom: {fileID: 4784733289325639768, guid: b7cc4ce92c2705c4ca053e688ebcbd12, type: 3}
-  SmallRooms:
-  - {fileID: 891278719455284213, guid: 35a619a869f4ced4f93cb00e6c35fcd1, type: 3}
+  SpecialRooms:
+  - _roomOriginal: {fileID: 891278719455284213, guid: 1df00222a3e4c7f4f81b5d9284c4fa9a, type: 3}
+    _occupyingSquare: 4
+  - _roomOriginal: {fileID: 891278719455284213, guid: 0d37e365b0c8fdb4298dc350652b78a9, type: 3}
+    _occupyingSquare: 2
+  - _roomOriginal: {fileID: 891278719455284213, guid: 27cdfcf52c510cd41ac6bc8790e602bf, type: 3}
+    _occupyingSquare: 2
   BigRooms:
-  - {fileID: 891278719455284213, guid: 02c53a943a3b7e14d9a3e7bd45761f25, type: 3}
-  - {fileID: 891278719455284213, guid: 8e8607cd06cad06419f501010f5771b3, type: 3}
+  - _maxAmount: -1
+    _roomOriginal: {fileID: 891278719455284213, guid: 02c53a943a3b7e14d9a3e7bd45761f25, type: 3}
+  - _maxAmount: -1
+    _roomOriginal: {fileID: 891278719455284213, guid: 8e8607cd06cad06419f501010f5771b3, type: 3}
+  - _maxAmount: -1
+    _roomOriginal: {fileID: 891278719455284213, guid: 6d2085089d4013845ad4baa614024667, type: 3}
+  SmallRooms:
+  - _maxAmount: 2
+    _roomOriginal: {fileID: 891278719455284213, guid: 23a078499f4f6b746941baa81ec23985, type: 3}
+  DefaultRooms:
+  - _maxAmount: -1
+    _roomOriginal: {fileID: 891278719455284213, guid: 35a619a869f4ced4f93cb00e6c35fcd1, type: 3}
   EnemyCollectionGroup:
     _data: {fileID: 11400000, guid: d65f4986fde302e418f22f35fa8e6e4d, type: 2}

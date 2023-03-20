@@ -18,15 +18,15 @@ namespace BulletHell.Map.Generation
         public int RandomWalkSteps = 4;
         public int Size = 7;
 
-        [Header("Room Settings")]
-        public int MaxBigRooms = 4;
+        [Header("Generation Order:")]
+        [Space(-10)]
+        [Header("Special -> Big -> Small -> Default.")]
 
         [Header("Rooms Tileset")]
-        public Room StartRoom;
-        public Room EndRoom;
-
-        public Room[] SmallRooms;
-        public Room[] BigRooms;
+        public SpecialRoomConfig[] SpecialRooms;
+        public RoomConfig[] BigRooms;
+        public RoomConfig[] SmallRooms;
+        public RoomConfig[] DefaultRooms;
 
         [Header("Enemy Collection")]
         public EnemyCollectionGroup EnemyCollectionGroup;
@@ -38,5 +38,35 @@ namespace BulletHell.Map.Generation
             }
             return _seed;
         }
+    }
+
+    [System.Serializable]
+    public class RoomConfig
+    {
+        #region Public Fields
+        public int MaxAmount => _maxAmount;
+        public Room RoomOriginal => _roomOriginal;
+        #endregion
+
+        #region Private Fields
+        [Tooltip("-1 = No limit")]
+        [SerializeField] int _maxAmount = -1;
+        [SerializeField] Room _roomOriginal;
+        #endregion
+    }
+
+    [System.Serializable]
+    public class SpecialRoomConfig
+    {
+        #region Public Fields
+        public int OccupyingSquare => _occupyingSquare;
+        public Room RoomOriginal => _roomOriginal;
+        #endregion
+
+        #region Private Fields
+        [SerializeField] Room _roomOriginal;
+        [Tooltip("-1 = No limit")]
+        [SerializeField] int _occupyingSquare = 1;
+        #endregion
     }
 }

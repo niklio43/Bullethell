@@ -1,6 +1,4 @@
-using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -79,7 +77,7 @@ namespace BulletHell.Map.Generation
                 }
             }
 
-           
+
         }
         void DLA()
         {
@@ -107,61 +105,72 @@ namespace BulletHell.Map.Generation
         private void PopulateLayout(out List<Room> rooms)
         {
             rooms = new List<Room>();
-            PlaceStartEndRoom(rooms);
-            PopulateCells(rooms, _config.BigRooms, _config.MaxBigRooms);
+            PlaceStartEndRoom(rooms, _config.SpecialRooms);
+            PopulateCells(rooms, _config.BigRooms);
             PopulateCells(rooms, _config.SmallRooms);
+            PopulateCells(rooms, _config.DefaultRooms);
         }
 
-        private void PlaceStartEndRoom(List<Room> rooms)
+        private void PlaceStartEndRoom(List<Room> rooms, SpecialRoomConfig[] roomOriginals)
         {
-            Vector2Int Center = _grid.GetCenterPosition();
+            Dictionary<SpecialRoomConfig, Room> pairs = new Dictionary<SpecialRoomConfig, Room>();
+            Vector2 center = _grid.GetCenterPosition();
+            List<GenerationCell> sortedList = _grid.AliveCells.OrderBy(c => Vector2.Distance(center, c.GetGridPosition())).Reverse().ToList();
 
-            GenerationCell check = null; 
-            float d = 0;
 
-            foreach (GenerationCell cell in _grid.AliveCells) {
-                if (cell.IsOccupied()) continue;
-                float dist = Vector2.Distance(Center, cell.GetGridPosition());
-                if(dist > d) {
-                    check = cell;
-                    d = dist;
+            foreach (SpecialRoomConfig roomConfig in roomOriginals) {
+                foreach (GenerationCell cell in sortedList) {
+                    bool check = false;
+
+                    foreach (var pair in pairs) {
+                        Vector2Int p = cell.GetGridPosition();
+                        Vector2Int c = pair.Value.GetCenterPosition();
+                        int s = pair.Key.OccupyingSquare;
+
+                        if (p.x > c.x - s && p.x < c.x + s &&
+                            p.y > c.y - s && p.y < c.y + s) 
+                            check = true;
+                    }
+
+                    if (check) continue;
+
+                    Room placedRoom = PlaceRoom(roomConfig.RoomOriginal, cell.GetGridPosition());
+
+                    rooms.Add(placedRoom);
+                    pairs.Add(roomConfig, placedRoom);
+                    break;
                 }
             }
-
-            rooms.Add(PlaceRoom(_config.StartRoom, check.GetGridPosition()));
-
-            GenerationCell check_2 = null;
-            d = 0;
-
-            foreach (GenerationCell cell in _grid.AliveCells) {
-                if (cell.IsOccupied()) continue;
-                float dist = Vector2.Distance(check.GetGridPosition(), cell.GetGridPosition());
-                if (dist > d) {
-                    check_2 = cell;
-                    d = dist;
-                }
-            }
-
-            rooms.Add(PlaceRoom(_config.StartRoom, check_2.GetGridPosition()));
         }
 
-        private void PopulateCells(List<Room> rooms, Room[] roomOriginals, int maxAmount = 0)
-        {
-            if (maxAmount == 0) maxAmount = _config.Size;
-            int amountPlaced = 0;
 
+        private void PopulateCells(List<Room> rooms, RoomConfig[] roomOriginals)
+        {
+            if (roomOriginals.Length == 0) return;
+            Dictionary<RoomConfig, int> roomAmountPairs = new Dictionary<RoomConfig, int>();
+
+            foreach (RoomConfig roomConfig in roomOriginals) {
+                roomAmountPairs.Add(roomConfig, 0);
+            }
 
             foreach (GenerationCell cell in _grid.AliveCells) {
-                if (amountPlaced >= maxAmount) { break; }
-
                 System.Random r = new System.Random();
-                Room[] shuffledArray = roomOriginals.OrderBy(e => r.NextDouble()).ToArray();
+                RoomConfig[] shuffledArray = roomOriginals.OrderBy(e => r.NextDouble()).ToArray();
 
-                foreach (Room room in shuffledArray) {
-                    if (!ValidRoomPlacement(room, cell.GetGridPosition())) { continue; }
-                    rooms.Add(PlaceRoom(room, cell.GetGridPosition()));
-                    amountPlaced++;
+                bool check = true;
+
+                foreach (RoomConfig roomConfig in shuffledArray) {
+                    if (roomConfig.MaxAmount != -1 && roomConfig.MaxAmount <= roomAmountPairs[roomConfig]) {
+                        continue;
+                    }
+
+                    check = false;
+                    if (!ValidRoomPlacement(roomConfig.RoomOriginal, cell.GetGridPosition())) { continue; }
+                    rooms.Add(PlaceRoom(roomConfig.RoomOriginal, cell.GetGridPosition()));
+                    roomAmountPairs[roomConfig]++;
                 }
+
+                if (check) break;
             }
         }
 
@@ -214,7 +223,7 @@ namespace BulletHell.Map.Generation
         private Room PlaceRoom(Room roomOriginal, Vector2Int pos) => PlaceRoom(roomOriginal, pos.x, pos.y);
         private Room PlaceRoom(Room roomOriginal, int x, int y)
         {
-            if(!_grid.IsWithinBounds(x, y)) { throw new Exception("Attempted to place rooms outside of bounds!"); }
+            if (!_grid.IsWithinBounds(x, y)) { throw new Exception("Attempted to place rooms outside of bounds!"); }
             Room room = GameObject.Instantiate(roomOriginal, GenerationUtilities.GridToWorldPosition(x, y), Quaternion.identity);
             room.name = roomOriginal.name;
             room.OnCreation(new Vector2Int(x, y));
