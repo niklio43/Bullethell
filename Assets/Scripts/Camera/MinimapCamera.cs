@@ -6,27 +6,18 @@ using BulletHell;
 
 public class MinimapCamera : MonoBehaviour
 {
+    #region Private Fields
     Camera _cam;
-    public Camera Cam => _cam;
+    #endregion
 
+    #region Public Fields
+    public Camera Cam => _cam;
+    #endregion
+
+    #region Private Methods
     void Start()
     {
         _cam = GetComponent<Camera>();
-    }
-
-    public void SetPosition(Vector2Int pos)
-    {
-        StartCoroutine(EasePosition(pos, 0.5f));
-    }
-
-    public void SetSize(float size)
-    {
-        _cam.orthographicSize = size;
-    }
-
-    public void SetTexture(RenderTexture texture)
-    {
-        _cam.targetTexture = texture;
     }
 
     IEnumerator EasePosition(Vector2 targetPos, float t)
@@ -44,4 +35,23 @@ public class MinimapCamera : MonoBehaviour
         }
         transform.position = new Vector3(targetPos.x, targetPos.y, -100);
     }
+    #endregion
+
+    #region Public Methods
+    public void SetPosition(Vector2Int pos)
+    {
+        StartCoroutine(EasePosition(pos, 0.5f));
+    }
+
+    public void SetSize(float size)
+    {
+        _cam.orthographicSize = size;
+    }
+
+    public void SetTexture(RenderTexture texture)
+    {
+        _cam.targetTexture = texture;
+    }
+    #endregion
+
 }
