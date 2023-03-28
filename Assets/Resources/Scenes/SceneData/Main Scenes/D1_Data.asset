@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7bdc605d3405046920cacc1d4338e6, type: 3}
+  m_Name: D1_Data
+  m_EditorClassIdentifier: 
+  SceneReference:
+    sceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    scenePath: Assets/Resources/Scenes/Main Scenes/D1.unity
+    Name: D1
+  RequiredSubScenes:
+  - {fileID: 11400000, guid: 6a9f295a26bc899438644b2615f00c48, type: 2}

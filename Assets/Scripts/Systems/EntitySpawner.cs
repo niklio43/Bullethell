@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EntitySpawner : Singleton<EntitySpawner>
 {
     #region Private Fields

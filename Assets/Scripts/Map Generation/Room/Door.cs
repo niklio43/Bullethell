@@ -29,8 +29,6 @@ namespace BulletHell.Map
         public void Initialize(Room room)
         {
             _room = room;
-            room.OnCloseRoom += BlockDoor;
-            room.OnOpenRoom += UnBlockDoor;
         }
 
         public Direction GetConnecteeOrientation()
@@ -67,13 +65,13 @@ namespace BulletHell.Map
         #endregion
 
         #region Private Methods
-        void BlockDoor()
+        public void BlockDoor()
         {
             if (_state == DoorState.Closed) { return; }
             _blocker.SetActive(true);
         }
 
-        void UnBlockDoor()
+        public void UnBlockDoor()
         {
             _blocker.SetActive(false);
         }

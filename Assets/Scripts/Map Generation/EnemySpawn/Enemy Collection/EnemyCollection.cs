@@ -1,28 +1,29 @@
-using UnityEngine;
 using BulletHell.RandomUtilities;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace BulletHell.Enemies
+namespace BulletHell.Enemies.Collections
 {
-    [CreateAssetMenu(fileName = "Enemy Collection", menuName = "Enemies/Enemy Collection/New Enemy Collection", order = 1)]
-    public class EnemyCollection : ScriptableObject
+    public class EnemyCollection
     {
-        public Entry[] Members;
+        public List<Enemy> Enemies;
+        RandomList<Enemy> _randomEnemy;
 
-        [System.Serializable]
-        public struct Entry
+        public EnemyCollection(SOEnemyCollection data)
         {
-            public Enemy Object;
-            public int Weight;
+            Enemies = new List<Enemy>();
+            _randomEnemy = new RandomList<Enemy>();
+
+            foreach (var entry in data.Members) {
+                Enemies.Add(entry.Object);
+                _randomEnemy.AddEntry(entry.Object, entry.Weight);
+            }
         }
 
-        public RandomList<Entry> GetRandomList()
+        public Enemy RandomEnemy()
         {
-            RandomList<Entry> list = new RandomList<Entry>();
-            foreach (var item in Members) {
-                list.AddEntry(item, item.Weight);
-            }
-
-            return list;
+            return _randomEnemy.GetRandom();
         }
     }
 }

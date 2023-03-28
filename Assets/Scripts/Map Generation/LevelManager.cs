@@ -2,7 +2,7 @@ using BulletHell.Map.Generation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BulletHell.Enemies;
+using BulletHell.Enemies.Collections;
 using BulletHell.GameEventSystem;
 
 
@@ -13,7 +13,9 @@ namespace BulletHell.Map
         #region Public Fields
         public Room[] Rooms => _rooms;
         public Room ActiveRoom => _activeRoom;
-        public EnemyCollectionGroup Enemies => _config.EnemyCollectionGroup;
+
+        public EnemyCollectionGroup EnemyCollectionGroup = null;
+
         #endregion
 
         #region Private Fields
@@ -28,13 +30,16 @@ namespace BulletHell.Map
 
         private void Start()
         {
+            EnemyCollectionGroup = new EnemyCollectionGroup(_config.EnemyCollectionGroup);
             BeginGeneration();
         }
 
-        public void PlayerEnterRoom(Room room)
+        public void PlayerEnterRoom(Component sender, object data)
         {
+            if(data is not Room) { return; }
+            Room room = data as Room;
+
             _activeRoom = room;
-            Debug.Log(room);
             OnPlayerMoved?.Raise(this, room);
         }
 
@@ -52,9 +57,6 @@ namespace BulletHell.Map
             foreach (Room room in _rooms) {
                 room.Initialize(this);
                 room.transform.parent = transform;
-                room.OnPlayerEnter += () => {
-                    PlayerEnterRoom(room);
-                };
             }
 
             OnCompletedMapGeneration.Raise(this, _rooms);

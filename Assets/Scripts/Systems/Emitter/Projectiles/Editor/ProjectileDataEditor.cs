@@ -11,12 +11,15 @@ namespace BulletHell.Emitters.Projectiles.Editor
     [CustomEditor(typeof(ProjectileData))]
     public class ProjectileDataEditor : Editor
     {
+        #region Private Fields
         VisualElement _root;
         ProjectileData _target;
 
         Label _behavioursContext;
         GroupBox _behavioursList;
-        
+        #endregion
+
+        #region Public Methods
         public override VisualElement CreateInspectorGUI()
         {
             if (_target != null) {
@@ -26,7 +29,9 @@ namespace BulletHell.Emitters.Projectiles.Editor
 
             return _root;
         }
+        #endregion
 
+        #region Private Methods
         void Redraw()
         {
             if(_root != null)
@@ -181,12 +186,10 @@ namespace BulletHell.Emitters.Projectiles.Editor
             }
         
         }
-        
-
-
         private void OnEnable()
         {
             _target = target as ProjectileData;
         }
+        #endregion
     }
 }

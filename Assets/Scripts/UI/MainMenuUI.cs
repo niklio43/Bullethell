@@ -10,7 +10,6 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
-        _playButton.onClick.AddListener(delegate () { LevelLoader.Instance.LoadLoading("Playtest"); });
     }
 
     public void ToggleObj(GameObject obj)

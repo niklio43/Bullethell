@@ -148,7 +148,7 @@ namespace BulletHell.Map.Generation
         {
             Gizmos.color = Color.green;
             if (_occupant != null) {
-                Gizmos.color = _occupant.colorCoding;
+                Gizmos.color = _occupant.ColorCoding;
             }
             Gizmos.DrawCube(GetWorldPositon(), Vector2.one * GenerationUtilities.CellSize);
         }
