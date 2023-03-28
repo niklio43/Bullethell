@@ -7,39 +7,43 @@ using BulletHell.InventorySystem;
 
 public class WeaponController : MonoBehaviour
 {
+    #region Public Fields
     public Transform CircleOrigin;
     public float Radius;
+    public Weapon PrimaryWeapon => _primaryWeapon;
+    public Weapon SecondaryWeapon => _secondaryWeapon;
+    #endregion
+
+    #region Private Fields
     Weapon _equippedWeapon;
     Weapon _primaryWeapon;
     Weapon _secondaryWeapon;
     [SerializeField] PlayerController _player;
     [SerializeField] InventorySlotUI _primaryWeaponSlot;
     [SerializeField] InventorySlotUI _secondaryWeaponSlot;
+    #endregion
 
-    public Weapon PrimaryWeapon => _primaryWeapon;
-    public Weapon SecondaryWeapon => _secondaryWeapon;
-
-    private void Start()
+    #region Private Methods
+    void Start()
     {
         _primaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignPrimaryWeapon;
         _secondaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignSecondaryWeapon;
     }
+    #endregion
 
+    #region Public Methods
     public void AssignPrimaryWeapon(InventoryItemData item)
     {
         if (item == null)
         {
             UnAssignWeapon(_primaryWeapon);
             _primaryWeapon = null;
-            EquippedWeaponUI.Instance.SetWeapon
-                (EquippedWeaponUI.Instance.PrimaryWeapon, null, false);
+            EquippedWeaponUI.Instance.SetWeapon(null, false, true);
             return;
         }
         _primaryWeapon = item as Weapon;
-        EquippedWeaponUI.Instance.SetWeapon
-            (EquippedWeaponUI.Instance.PrimaryWeapon, _primaryWeapon.Icon, true);
-        EquippedWeaponUI.Instance.SetActiveWeapon
-            (EquippedWeaponUI.Instance.PrimaryWeapon, EquippedWeaponUI.Instance.SecondaryWeapon);
+        EquippedWeaponUI.Instance.SetWeapon(_primaryWeapon.Icon, true, true);
+        EquippedWeaponUI.Instance.SetActiveWeapon(true);
         AssignWeapon(_primaryWeapon);
     }
 
@@ -49,13 +53,11 @@ public class WeaponController : MonoBehaviour
         {
             UnAssignWeapon(_secondaryWeapon);
             _secondaryWeapon = null;
-            EquippedWeaponUI.Instance.SetWeapon
-                (EquippedWeaponUI.Instance.SecondaryWeapon, null, false);
+            EquippedWeaponUI.Instance.SetWeapon(null, false, false);
             return;
         }
         _secondaryWeapon = item as Weapon;
-        EquippedWeaponUI.Instance.SetWeapon
-            (EquippedWeaponUI.Instance.SecondaryWeapon, _secondaryWeapon.Icon, true);
+        EquippedWeaponUI.Instance.SetWeapon(_secondaryWeapon.Icon, true, false);
     }
 
     public void SetActiveWeapon(bool activeWeapon)
@@ -63,15 +65,13 @@ public class WeaponController : MonoBehaviour
         if (activeWeapon)
         {
             if (_primaryWeapon == null) { return; }
-            EquippedWeaponUI.Instance.SetActiveWeapon
-                (EquippedWeaponUI.Instance.PrimaryWeapon, EquippedWeaponUI.Instance.SecondaryWeapon);
+            EquippedWeaponUI.Instance.SetActiveWeapon(true);
             AssignWeapon(_primaryWeapon);
         }
         else
         {
             if (_secondaryWeapon == null) { return; }
-            EquippedWeaponUI.Instance.SetActiveWeapon
-                (EquippedWeaponUI.Instance.SecondaryWeapon, EquippedWeaponUI.Instance.PrimaryWeapon);
+            EquippedWeaponUI.Instance.SetActiveWeapon(false);
             AssignWeapon(_secondaryWeapon);
         }
     }
@@ -125,6 +125,7 @@ public class WeaponController : MonoBehaviour
 
         _equippedWeapon.Abilities[abilityIndex].Cast(_player.PlayerMovement.MousePosition);
     }
+    #endregion
 
     #region Component Caching
 

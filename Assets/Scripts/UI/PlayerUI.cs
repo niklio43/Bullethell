@@ -10,39 +10,42 @@ namespace BulletHell.UI
 {
     public class PlayerUI : Singleton<PlayerUI>
     {
+        #region Private Fields
         [Header("Key bindings")]
         [SerializeField] PlayerInput _input;
         [Header("Inventory")]
-        public GameObject Inventory;
+        [SerializeField] GameObject _inventory;
         [SerializeField] GameObject _infoWindowPrefab;
         [Header("Stats and statuseffects")]
         [SerializeField] HealthBar _healthBar;
         [SerializeField] StaminaBar _staminaBar;
         [SerializeField] StatusEffectUIManager _statusEffectUIManager;
 
-        public static HealthBar Health;
-        public static StaminaBar Stamina;
 
         [Header("Forge")]
-        public GameObject Forge;
+        [SerializeField] GameObject _forge;
         [SerializeField] TextMeshProUGUI _bloodCost;
         [SerializeField] Slider _forgeProgressBar;
         [SerializeField] PlayerController _playerController;
-        [HideInInspector] public bool IsUpgrading = false;
+        bool _isUpgrading = false;
 
         [Header("Minimap")]
         [SerializeField] GameObject _largeMap;
         [SerializeField] Camera _minimapCamera;
         [SerializeField] RenderTexture _minimapTexture;
         [SerializeField] RenderTexture _largemapTexture;
+        #endregion
+
+        #region Public Fields
+        public static HealthBar Health;
+        public static StaminaBar Stamina;
+        public GameObject Inventory => _inventory;
+        public GameObject Forge => _forge;
+        public bool IsUpgrading { get { return _isUpgrading; } set { _isUpgrading = value; } }
         public GameObject LargeMap => _largeMap;
+        #endregion
 
-        public static void Initialize(PlayerController playerController)
-        {
-            Health.Initialize(playerController.PlayerResources);
-            Stamina.Initialize(playerController.PlayerResources);
-        }
-
+        #region Private Methods
         protected override void OnAwake()
         {
             Health = _healthBar;
@@ -61,6 +64,14 @@ namespace BulletHell.UI
             if (_forgeProgressBar == null) { return; }
             if (!IsUpgrading) { _forgeProgressBar.value = 0; return; }
             _forgeProgressBar.value += Time.deltaTime;
+        }
+        #endregion
+
+        #region Public Methods
+        public static void Initialize(PlayerController playerController)
+        {
+            Health.Initialize(playerController.PlayerResources);
+            Stamina.Initialize(playerController.PlayerResources);
         }
 
         public void SetCost(float amount)
@@ -109,6 +120,6 @@ namespace BulletHell.UI
         {
             _statusEffectUIManager.RemoveStatusEffect(statusEffect);
         }
-
+        #endregion
     }
 }
