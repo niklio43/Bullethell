@@ -2898,7 +2898,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomEvents:
   - rid: 8809522990879604740
-  - rid: 8809523081627828224
   references:
     version: 2
     RefIds:
@@ -2909,19 +2908,6 @@ MonoBehaviour:
         Name: CloseEvent
         StartPolicy: 0
         Delay: 0
-    - rid: 8809523081627828224
-      type: {class: RoomEnemySpawnEvent, ns: BulletHell.Map.RoomEvents, asm: Assembly-CSharp}
-      data:
-        ShowGizmos: 1
-        Name: EnemySpawnEvent
-        StartPolicy: 0
-        Delay: 0
-        _amountOfWaves: 3
-        _spawnPoints:
-        - Position: {x: 0, y: 0}
-          Radius: 8
-          MinAmount: 3
-          MaxAmount: 5
 --- !u!61 &6776087751844112424
 BoxCollider2D:
   m_ObjectHideFlags: 0

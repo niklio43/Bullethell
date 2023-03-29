@@ -21,8 +21,8 @@ namespace BulletHell.Map
         #region Private Fields
         [SerializeField] GenerationConfig _config;
         [Header("Events")]
-        [SerializeField] GameEvent OnCompletedMapGeneration;
-        [SerializeField] GameEvent OnPlayerMoved;
+        [SerializeField] SOGameEvent OnPlayerMoved;
+        [SerializeField] SOGameEvent OnCompletedMapGeneration;
 
         Room[] _rooms;
         Room _activeRoom;
@@ -30,6 +30,7 @@ namespace BulletHell.Map
 
         private void Start()
         {
+            GameEventManager.GetEvent("OnRoomEnter").RegisterCallBack(PlayerEnterRoom);
             EnemyCollectionGroup = new EnemyCollectionGroup(_config.EnemyCollectionGroup);
             BeginGeneration();
         }
@@ -40,7 +41,7 @@ namespace BulletHell.Map
             Room room = data as Room;
 
             _activeRoom = room;
-            OnPlayerMoved?.Raise(this, room);
+            OnPlayerMoved.Raise(this, room);
         }
 
         public void BeginGeneration()
@@ -60,6 +61,11 @@ namespace BulletHell.Map
             }
 
             OnCompletedMapGeneration.Raise(this, _rooms);
+        }
+
+        private void OnDestroy()
+        {
+            GameEventManager.GetEvent("OnRoomEnter").UnRegisterCallback(PlayerEnterRoom);
         }
     }
 }

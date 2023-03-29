@@ -11,8 +11,8 @@ namespace BulletHell.Map
     {
         #region Public Fields
         [Header("Events")]
-        public GameEvent OnRoomEnter;
-        public GameEvent OnRoomCleared;
+        public SOGameEvent OnRoomEnter;
+        public SOGameEvent OnRoomCleared;
 
         [Header("Config")]
         public Color ColorCoding;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,22 +12,29 @@ namespace BulletHell.GameEventSystem
     [System.Serializable]
     public class GameEventListener
     {
-        public GameEvent Event;
+        #region Public Fields
+        public SOGameEvent Event;
+        #endregion
 
-        public CustomEvent Response;
+        #region Private Fields
+        [SerializeField] CustomEvent _response;
+        #endregion
+
+        #region Public Fields
         public void Initialize()
         {
-            Event.Register(this);
+            Event.gameEvent.Register(this);
         }
 
         public void UnInitialize()
         {
-            Event.UnRegister(this);
+            Event.gameEvent.UnRegister(this);
         }
 
         public void OnEventRaised(Component sender, object data)
         {
-            Response?.Invoke(sender, data);
+            _response?.Invoke(sender, data);
         }
+        #endregion
     }
 }
