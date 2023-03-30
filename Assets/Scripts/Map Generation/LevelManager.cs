@@ -2,7 +2,7 @@ using BulletHell.Map.Generation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BulletHell.Enemies;
+using BulletHell.Enemies.Collections;
 using BulletHell.GameEventSystem;
 
 
@@ -13,14 +13,16 @@ namespace BulletHell.Map
         #region Public Fields
         public Room[] Rooms => _rooms;
         public Room ActiveRoom => _activeRoom;
-        public EnemyCollectionGroup Enemies => _config.EnemyCollectionGroup;
+
+        public EnemyCollectionGroup EnemyCollectionGroup = null;
+
         #endregion
 
         #region Private Fields
         [SerializeField] GenerationConfig _config;
         [Header("Events")]
-        [SerializeField] GameEvent OnCompletedMapGeneration;
-        [SerializeField] GameEvent OnPlayerMoved;
+        [SerializeField] SOGameEvent OnPlayerMoved;
+        [SerializeField] SOGameEvent OnCompletedMapGeneration;
 
         Room[] _rooms;
         Room _activeRoom;
@@ -29,7 +31,24 @@ namespace BulletHell.Map
         #region Private Methods
         private void Start()
         {
+            GameEventManager.GetEvent("OnRoomEnter").RegisterCallBack(PlayerEnterRoom);
+            EnemyCollectionGroup = new EnemyCollectionGroup(_config.EnemyCollectionGroup);
             BeginGeneration();
+        }
+
+        public void PlayerEnterRoom(Component sender, object data)
+        {
+            if(data is not Room) { return; }
+            Room room = data as Room;
+
+            _activeRoom = room;
+            OnPlayerMoved.Raise(this, room);
+        }
+
+        public void BeginGeneration()
+        {
+            Generator levelGenerator = new Generator(_config);
+            levelGenerator.BeginGeneration(OnCompletedGeneration);
         }
 
         void OnCompletedGeneration(List<Room> rooms)
@@ -40,28 +59,14 @@ namespace BulletHell.Map
             foreach (Room room in _rooms) {
                 room.Initialize(this);
                 room.transform.parent = transform;
-                room.OnPlayerEnter += () => {
-                    PlayerEnterRoom(room);
-                };
             }
 
             OnCompletedMapGeneration.Raise(this, _rooms);
         }
-        #endregion
 
-        #region Public Methods
-        public void PlayerEnterRoom(Room room)
+        private void OnDestroy()
         {
-            _activeRoom = room;
-            Debug.Log(room);
-            OnPlayerMoved?.Raise(this, room);
+            GameEventManager.GetEvent("OnRoomEnter").UnRegisterCallback(PlayerEnterRoom);
         }
-
-        public void BeginGeneration()
-        {
-            Generator levelGenerator = new Generator(_config);
-            levelGenerator.BeginGeneration(OnCompletedGeneration);
-        }
-        #endregion
     }
 }

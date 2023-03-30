@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BulletHell.Enemies;
+using BulletHell.Enemies.Collections;
 
 namespace BulletHell.Map.Generation
 {
@@ -31,7 +31,7 @@ namespace BulletHell.Map.Generation
         public RoomConfig[] DefaultRooms;
 
         [Header("Enemy Collection")]
-        [SerializeReference] public EnemyCollectionGroup EnemyCollectionGroup;
+        [SerializeReference] public SOEnemyCollectionGroup EnemyCollectionGroup;
 
         public int GetSeed()
         {

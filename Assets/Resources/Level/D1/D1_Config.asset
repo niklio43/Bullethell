@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fb69c2703f6b040a10a42bb089f38e, type: 3}
   m_Name: D1_Config
   m_EditorClassIdentifier: 
-  SizeX: 20
-  SizeY: 20
+  SizeX: 60
+  SizeY: 60
   _randomSeed: 1
   _seed: 4680
-  RandomWalkSteps: 5
-  Size: 20
+  RandomWalkSteps: 10
+  Size: 40
   SpecialRooms:
   - _roomOriginal: {fileID: 891278719455284213, guid: 1df00222a3e4c7f4f81b5d9284c4fa9a, type: 3}
     _occupyingSquare: 4
@@ -26,11 +26,11 @@ MonoBehaviour:
   - _roomOriginal: {fileID: 891278719455284213, guid: 27cdfcf52c510cd41ac6bc8790e602bf, type: 3}
     _occupyingSquare: 2
   BigRooms:
-  - _maxAmount: 1
+  - _maxAmount: 4
     _roomOriginal: {fileID: 891278719455284213, guid: 02c53a943a3b7e14d9a3e7bd45761f25, type: 3}
-  - _maxAmount: 1
+  - _maxAmount: 4
     _roomOriginal: {fileID: 891278719455284213, guid: 8e8607cd06cad06419f501010f5771b3, type: 3}
-  - _maxAmount: 1
+  - _maxAmount: 4
     _roomOriginal: {fileID: 891278719455284213, guid: 6d2085089d4013845ad4baa614024667, type: 3}
   SmallRooms:
   - _maxAmount: 2

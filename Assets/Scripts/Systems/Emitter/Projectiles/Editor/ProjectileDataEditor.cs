@@ -186,7 +186,6 @@ namespace BulletHell.Emitters.Projectiles.Editor
             }
         
         }
-
         private void OnEnable()
         {
             _target = target as ProjectileData;

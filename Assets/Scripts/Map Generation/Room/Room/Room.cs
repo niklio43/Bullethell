@@ -1,92 +1,83 @@
 using BulletHell.Map.Generation;
 using System.Collections.Generic;
 using UnityEngine;
-
+using BulletHell.GameEventSystem;
+using BulletHell.Map.RoomEvents;
 
 namespace BulletHell.Map
 {
+    [RequireComponent(typeof(RoomEventQueue))]
     public class Room : MonoBehaviour
     {
         #region Public Fields
-        public delegate void OnPlayerEnterDelegate();
-        public delegate void OnCloseRoomDelegate();
-        public delegate void OnOpenRoomDelegate();
-        public delegate void OnRoomClearedDelegate();
+        [Header("Events")]
+        public SOGameEvent OnRoomEnter;
+        public SOGameEvent OnRoomCleared;
 
-        public event OnPlayerEnterDelegate OnPlayerEnter;
-        public event OnCloseRoomDelegate OnCloseRoom;
-        public event OnOpenRoomDelegate OnOpenRoom;
-        public event OnRoomClearedDelegate OnRoomCleared;
+        [Header("Config")]
+        public Color ColorCoding;
+        public Sprite Icon;
+        public RoomCell[] Cells;
 
-        public RoomCell[] Cells => _cells;
-        public Color colorCoding;
-        public Sprite Icon => _icon;
-        public Vector2Int GridPosition => _gridposition;
-        public LevelManager Manager => _manager;
+        [HideInInspector] public Vector2Int GridPosition;
+        [HideInInspector] public LevelManager Manager;
+        [HideInInspector] public List<Door> Doors;
         #endregion
 
         #region Private Fields
-        [SerializeField] Sprite _icon;
-        [SerializeField] RoomCell[] _cells;
-
-        LevelManager _manager;
-        
         RoomState _roomState = RoomState.InActive;  
-        IRoomEvent[] _events;
-
-        Vector2Int _gridposition;
+        RoomEventQueue _eventQueue;
         #endregion
 
         #region Public Methods
         public void Initialize(LevelManager manager)
         {
-            _manager = manager;
-            _events = GetComponentsInChildren<IRoomEvent>();
+            Manager = manager;
 
-            foreach (RoomCell cell in _cells) {
+            foreach (RoomCell cell in Cells) {
                 cell.Initialize(this);
-            }
-
-            foreach (IRoomEvent evt in _events) {
-                evt.OnRoomInitialize(this);
             }
         }
 
         public void OnCreation(Vector2Int gridPosition)
         {
-            _gridposition = gridPosition;
+            GridPosition = gridPosition;
         }
 
         public Vector2Int GetCenterPosition()
         {
-            Vector2Int avg = _gridposition;
+            Vector2Int avg = GridPosition;
 
-            for (int i = 0; i < _cells.Length; i++) {
-                avg += _cells[i].Pos;
+            for (int i = 0; i < Cells.Length; i++) {
+                avg += Cells[i].Pos;
             }
 
-            return avg / _cells.Length;
-        }
-
-        public void CloseRoom()
-        {
-            OnCloseRoom?.Invoke();
+            return avg / Cells.Length;
         }
 
         public void RoomCleared()
         {
             _roomState = RoomState.Cleared;
-            OnRoomCleared?.Invoke();
-            OnOpenRoom?.Invoke();
+            OnRoomCleared.Raise(this, this);
         }
         #endregion
 
         #region Private Methods
-        void PlayerEnter()
+        private void Awake()
+        {
+            _eventQueue = GetComponent<RoomEventQueue>();
+
+            for (int i = 0; i < Cells.Length; i++) {
+                Doors.AddRange(Cells[i].Doors);
+            }
+        }
+
+        private void PlayerEnter()
         {
             if (_roomState != RoomState.InActive) { return; }
             _roomState = RoomState.Active;
-            OnPlayerEnter?.Invoke();
+            _eventQueue.StartQueue();
+            OnRoomEnter.Raise(this, this);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -101,9 +92,10 @@ namespace BulletHell.Map
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
+            if(Cells == null) { return; }
 
-            for (int i = 0; i < _cells.Length; i++) {
-                Vector2 pos = (Vector2)transform.position + (_cells[i].Pos * GenerationUtilities.CellSize);
+            for (int i = 0; i < Cells.Length; i++) {
+                Vector2 pos = (Vector2)transform.position + (Cells[i].Pos * GenerationUtilities.CellSize);
 
                 Gizmos.DrawWireCube(pos, Vector2.one * GenerationUtilities.CellSize);
             }

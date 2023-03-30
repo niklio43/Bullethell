@@ -1,3 +1,4 @@
+using BulletHell.Enemies.Collections;
 using BulletHell.RandomUtilities;
 using System;
 using System.Collections.Generic;
@@ -9,96 +10,74 @@ namespace BulletHell.Enemies.Spawning
     public class EnemySpawner
     {
         #region Private Fields
-        Queue<Wave> _waves;
-        List<Enemy> _activeEnemies;
+        private List<Enemy> _activeEnemies = new List<Enemy>();
 
-        Vector2 _position;
-        float _radius;
+        private EnemyCollectionGroup _group;
+        private Vector2 _position;
+        private float _radius;
+        private int _min;
+        private int _max;
 
-        Action _onWaveStarted;
-        Action _onWaveFinished;
-        Action _onCompleted;
+        private Action<EnemySpawner> _OnCleared;
+        private const int spawnAreaSize = 3;
         #endregion
 
         #region Public Methods
-        public EnemySpawner(EnemyCollectionGroup group, Vector2 pos, float radius, int amountOfWaves, int min, int max)
+        public EnemySpawner(EnemyCollectionGroup group, Vector2 position, float radius, int min, int max)
         {
-            _position = pos;
+            _group = group;
+            _position = position;
             _radius = radius;
-
-            CreateQueue(group, amountOfWaves, min, max);
+            _min = min;
+            _max = max;
         }
 
-        public void OnWaveStarted(Action evt) => _onWaveStarted += evt;
-        public void OnWaveFinished(Action evt) => _onWaveFinished += evt;
-        public void OnCompleted(Action evt) => _onCompleted += evt;
-
-        public void NextWave()
+        public void Spawn()
         {
-            if (_waves.Count <= 0) {
-                _onCompleted?.Invoke();
-                _onWaveFinished?.Invoke();
-                return;
-            }
+            Vector2 position = Vector2.zero;
 
-            _activeEnemies = Spawn();
-            foreach (Enemy enemy in _activeEnemies) {
-                enemy.OnDeath += EnemyKilled;
-            }
-        }
-        #endregion
+            while (true) {
+                position = _position + Random.insideUnitCircle * (_radius - spawnAreaSize);
 
-        #region Private Methods
-        private void CreateQueue(EnemyCollectionGroup group, int amountOfWaves, int min, int max)
-        {
-            _waves = new Queue<Wave>();
-            RandomList<EnemyCollectionGroup.Entry> _a = group.GetRandomList();
-
-            for (int i = 0; i < amountOfWaves; i++) {
-                RandomList<EnemyCollection.Entry> _b = _a.GetRandom().Collection.GetRandomList();
-                _waves.Enqueue(new Wave { RandomList = _b , Size = Random.Range(min, max)});
-            }
-        }
-
-        private List<Enemy> Spawn()
-        {
-            List<Enemy> activeEnemies = new List<Enemy>();
-            Wave wave = _waves.Dequeue();
-
-            Vector2 center = _position + (Random.insideUnitCircle * _radius);
-
-            for (int i = 0; i < wave.Size; i++) {
-                while (true) {
-                    Vector2 position = center + Random.insideUnitCircle * Random.Range(0, 3);
-
-                    var collider = Physics2D.OverlapCircle(position, 1f);
-
-                    if (collider == null || collider.isTrigger) {
-                        activeEnemies.Add(EntitySpawner.SpawnEnemy(wave.RandomList.GetRandom().Object, position));
-                        break;
-                    }
+                if(!Physics2D.OverlapCircle(position, spawnAreaSize)) {
+                    break;
                 }
             }
 
-            return activeEnemies;
+            int amount = Random.Range(_min, _max);
+            List<Enemy> enemies = new List<Enemy>();
+
+            for (int i = 0; i < amount; i++) {
+                enemies.Add(_group.RandomCollection().RandomEnemy());
+            }
+
+            InternalSpawn(position, enemies);
+        }
+        public void OnCleared(Action<EnemySpawner> evt) => _OnCleared += evt;
+
+        #endregion
+
+        #region Private Methods
+        private void InternalSpawn(Vector2 position, List<Enemy> enemiesToSpawn)
+        {
+            _activeEnemies.Clear();
+
+            for (int i = 0; i < enemiesToSpawn.Count; i++) {
+                Vector2 pos = position + Random.insideUnitCircle * Random.Range(0, spawnAreaSize);
+                Enemy activeEnemy = EntitySpawner.SpawnEnemy(enemiesToSpawn[i], position);
+                activeEnemy.OnDeath += EnemyKilled;
+
+                _activeEnemies.Add(activeEnemy);
+            }
         }
 
         private void EnemyKilled(Enemy enemy)
         {
             _activeEnemies.Remove(enemy);
             if (_activeEnemies.Count <= 0) {
-                _onWaveFinished?.Invoke();
+                _OnCleared?.Invoke(this);
             }
         }
-
-
-        private struct Wave
-        {
-            public RandomList<EnemyCollection.Entry> RandomList;
-            public int Size;
-        }
-
         #endregion
-
     }
 }
