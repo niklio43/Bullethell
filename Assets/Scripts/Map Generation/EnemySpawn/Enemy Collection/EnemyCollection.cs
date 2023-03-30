@@ -7,9 +7,15 @@ namespace BulletHell.Enemies.Collections
 {
     public class EnemyCollection
     {
+        #region Public Fields
         public List<Enemy> Enemies;
-        RandomList<Enemy> _randomEnemy;
+        #endregion
 
+        #region Private Fields
+        RandomList<Enemy> _randomEnemy;
+        #endregion
+
+        #region Public Methods
         public EnemyCollection(SOEnemyCollection data)
         {
             Enemies = new List<Enemy>();
@@ -20,7 +26,6 @@ namespace BulletHell.Enemies.Collections
                 _randomEnemy.AddEntry(entry.Object, entry.Weight);
             }
         }
-        #endregion
 
         public Enemy RandomEnemy()
         {

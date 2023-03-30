@@ -15,7 +15,6 @@ namespace BulletHell.Enemies.Collections
             public SOEnemyCollection Collection;
             public int Weight;
         }
-<<<<<<< HEAD:Assets/Scripts/Map Generation/EnemySpawn/EnemyCollectionGroup.cs
         #endregion
 
         #region Public Methods
@@ -29,7 +28,5 @@ namespace BulletHell.Enemies.Collections
             return list;
         }
         #endregion
-=======
->>>>>>> main:Assets/Scripts/Map Generation/EnemySpawn/Enemy Collection/SO/SOEnemyCollectionGroup.cs
     }
 }

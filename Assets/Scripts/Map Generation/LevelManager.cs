@@ -68,5 +68,6 @@ namespace BulletHell.Map
         {
             GameEventManager.GetEvent("OnRoomEnter").UnRegisterCallback(PlayerEnterRoom);
         }
+        #endregion
     }
 }
