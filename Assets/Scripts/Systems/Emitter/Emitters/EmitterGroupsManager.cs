@@ -7,11 +7,14 @@ namespace BulletHell.Emitters
 {
     public class EmitterGroupsManager
     {
-        public EmitterGroup this[int i] => _emitterGroups[i];
-
+        #region Private Fields
         List<EmitterGroup> _emitterGroups;
         EmitterData _emitterData;
         Transform _transform;
+        #endregion
+
+        #region Public Fields
+        public EmitterGroup this[int i] => _emitterGroups[i];
 
         public EmitterGroupsManager(Transform transform, EmitterData emitterData)
         {
@@ -19,7 +22,9 @@ namespace BulletHell.Emitters
             _transform = transform;
             _emitterGroups = new List<EmitterGroup>();
         }
+        #endregion
 
+        #region Public Methods
         public void UpdateGroups()
         {
             CreateGroups(_emitterData.EmitterPoints);
@@ -52,5 +57,6 @@ namespace BulletHell.Emitters
                 _emitterGroups[n].Set(positon, direction);
             }
         }
+        #endregion
     }
 }

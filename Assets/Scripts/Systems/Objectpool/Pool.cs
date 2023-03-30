@@ -7,17 +7,20 @@ namespace BulletHell
     //Class responsible for pooling and managing objects.
     public class Pool<T> where T : class, IPoolable
     {
+        #region Public Fields
         public List<T> Members = new List<T>();
         public List<int> Active = new List<int>();
+        public int GetCount() => Members.Count;
+        #endregion
 
+        #region Private Fields
         protected Func<T> CreateFunction;
 
         //Max size of the pool.
         protected readonly int _maxAmount;
+        #endregion
 
-        public int GetCount() => Members.Count;
-
-
+        #region Public Methods
         public Pool(Func<T> CreateFunction, int maxAmount = 10)
         {
             if (CreateFunction == null) throw new ArgumentNullException("createFunction");
@@ -69,7 +72,9 @@ namespace BulletHell
             Members.Clear();
             Active.Clear();
         }
+        #endregion
 
+        #region Private Methods
         //Creates new instaces of the pooled object using the given "CreateFunction".
         protected virtual T Create()
         {
@@ -78,14 +83,17 @@ namespace BulletHell
 
             return newItem;
         }
-
+        #endregion
     }
 
     //Class responsible for pooling and managing objects deriving from MonoBehaviour.
     public class ObjectPool<T> : Pool<T> where T : Behaviour, IPoolable
     {
+        #region Private Fields
         Transform _poolHolder;
+        #endregion
 
+        #region Public Methods
         public ObjectPool(Func<T> CreateFunction, int maxAmount = 10, string poolName = "", Transform parent = null) : base(CreateFunction, maxAmount)
         {
             _poolHolder = new GameObject($"{poolName} (ObjectPool)").transform;
@@ -116,7 +124,9 @@ namespace BulletHell
                 GameObject.Destroy(_poolHolder.gameObject);
             } catch(Exception e) { Debug.Log(e); }
         }
+        #endregion
 
+        #region Private Methods
         //Creates new instaces of the pooled object using the given "CreateFunction".
         protected override T Create()
         {
@@ -127,5 +137,6 @@ namespace BulletHell
 
             return newItem;
         }
+        #endregion
     }
 }

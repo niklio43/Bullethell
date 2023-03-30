@@ -7,18 +7,21 @@ namespace BulletHell.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+        #region Private Fields
         [SerializeField] float _moveSpeed = 5;
         Rigidbody2D _rb;
         Animator _animator;
         Vector2 _movementInput;
         Vector2 _mousePosition;
+        #endregion
 
-        #region Getters & Setters
+        #region Public Fields
         public Rigidbody2D Rb { get { return _rb; } }
         public Vector2 MovementInput { get { return _movementInput; } set { _movementInput = value; } }
         public Vector2 MousePosition { get { return _mousePosition; } set { _mousePosition = value; } }
         #endregion
 
+        #region Private Methods
         void Awake()
         {
             _animator = GetComponent<Animator>();
@@ -30,7 +33,9 @@ namespace BulletHell.Player
             if (_movementInput == Vector2.zero) { _animator.Play("Idle"); return; }
             _animator.Play("Walking");
         }
+        #endregion
 
+        #region Public Methods
         public void Move(InputAction.CallbackContext context)
         {
             _movementInput = context.ReadValue<Vector2>() * _moveSpeed;
@@ -40,6 +45,7 @@ namespace BulletHell.Player
         {
             _mousePosition += context.ReadValue<Vector2>();
         }
+        #endregion
 
         #region Component Caching
 

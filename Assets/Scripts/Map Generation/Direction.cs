@@ -15,6 +15,7 @@ namespace BulletHell.Map
 
     public static class DirectionUtils
     {
+        #region Public Methods
         public static Vector2Int GetVector(this Direction direction)
         {
             switch (direction) {
@@ -30,8 +31,6 @@ namespace BulletHell.Map
 
             return Vector2Int.zero;
         }
+        #endregion
     }
-
-
-
 }

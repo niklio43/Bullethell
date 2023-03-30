@@ -8,26 +8,21 @@ namespace BulletHell.StatusSystem
 {
     public class UnitStatusEffects : MonoBehaviour, IEffectable
     {
-        Dictionary<string, ActiveStatusEffect> _activeEffects; 
-        
+        #region Private Fields
+        Dictionary<string, ActiveStatusEffect> _activeEffects;
+        #endregion
+
+        #region Public Fields
         public delegate void OnAppliedStatusEffectDelegate(ActiveStatusEffect effect);
         public event OnAppliedStatusEffectDelegate OnAppliedStatusEffect;
         public delegate void OnRemovedStatusEffectDelegate(ActiveStatusEffect effect);
         public event OnRemovedStatusEffectDelegate OnRemovedStatusEffect;
+        #endregion
 
+        #region Private Methods
         private void Awake()
         {
             _activeEffects = new Dictionary<string, ActiveStatusEffect>();
-        }
-
-        public void ApplyEffect(StatusEffect effect)
-        {
-            if (_activeEffects.ContainsKey(effect.Id)) {
-                AddStack(_activeEffects[effect.Id]);
-            }
-            else {
-                AddNewStatusEffect(effect);
-            }
         }
 
         void AddNewStatusEffect(StatusEffect effect)
@@ -56,7 +51,18 @@ namespace BulletHell.StatusSystem
                     break;
             }
         }
+        #endregion
 
+        #region Public Methods
+        public void ApplyEffect(StatusEffect effect)
+        {
+            if (_activeEffects.ContainsKey(effect.Id)) {
+                AddStack(_activeEffects[effect.Id]);
+            }
+            else {
+                AddNewStatusEffect(effect);
+            }
+        }
 
         public void RemoveEffect(StatusEffect effect)
         {
@@ -65,5 +71,6 @@ namespace BulletHell.StatusSystem
 
             _activeEffects.Remove(effect.Id);
         }
+        #endregion
     }
 }

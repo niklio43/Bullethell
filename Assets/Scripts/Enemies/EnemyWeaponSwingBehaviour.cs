@@ -8,8 +8,11 @@ namespace BulletHell.Abilities
     [CreateAssetMenu(fileName = "EnemySwingBehaviour", menuName = "Abilities/Custom Behaviours/New Enemy Swing Behaviour")]
     public class EnemyWeaponSwingBehaviour : EmitterAbilityBehaviour
     {
+        #region Private Fields
         int _animationIndex = 0;
+        #endregion
 
+        #region Private Methods
         protected override void Initialize()
         {
             GameObject emitterOwner = _ability.Host;
@@ -32,5 +35,6 @@ namespace BulletHell.Abilities
             _animations[_animationIndex].Play();
             _animationIndex++;
         }
+        #endregion
     }
 }

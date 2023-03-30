@@ -12,22 +12,19 @@ using BulletHell;
 
 public class Forge : InteractableItem
 {
+    #region Private Fields
     [SerializeField] InventorySlotUI _slotItem;
     [SerializeField] Button _button;
     [SerializeField] WeaponController _weapon;
     [SerializeField] PlayerResources _player;
 
     WeaponAbility _abilityToAdd;
+    #endregion
 
+    #region Private Methods
     void Start()
     {
         _slotItem.AssignedInventorySlot.OnAssign += AssignWeaponToUpgrade;
-    }
-
-    public override void Interact(InventorySystem inventory, PlayerResources playerResources)
-    {
-        PlayerUI.Instance.Forge.SetActive(true);
-        PlayerUI.Instance.Inventory.SetActive(true);
     }
 
     void SetRandomAbility(Weapon weapon)
@@ -45,7 +42,7 @@ public class Forge : InteractableItem
         _abilityToAdd = ability;
     }
 
-    public void AssignWeaponToUpgrade(InventoryItemData item)
+    void AssignWeaponToUpgrade(InventoryItemData item)
     {
         if (item is Weapon)
         {
@@ -67,7 +64,7 @@ public class Forge : InteractableItem
         FillAbilitySlot(item as Weapon);
     }
 
-    public void FillAbilitySlot(Weapon weapon)
+    void FillAbilitySlot(Weapon weapon)
     {
         if (weapon.Abilities.Count >= 3) { Debug.Log("Too many abilities applied!"); FailedUpgrade(); return; }
 
@@ -95,4 +92,13 @@ public class Forge : InteractableItem
     {
         Camera.main.Shake(0.1f, 1f);
     }
+    #endregion
+
+    #region Public Methods
+    public override void Interact(InventorySystem inventory, PlayerResources playerResources)
+    {
+        PlayerUI.Instance.Forge.SetActive(true);
+        PlayerUI.Instance.Inventory.SetActive(true);
+    }
+    #endregion
 }

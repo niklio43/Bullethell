@@ -9,8 +9,11 @@ namespace BulletHell.FiniteStateMachine
     [Serializable]
     public class FSM : IFSM
     {
+        #region Private Fields
         private readonly Dictionary<Enum, IState> _states = new Dictionary<Enum, IState>();
+        #endregion
 
+        #region Public Fields
         public GameObject Owner { get; }
 
         public IState CurrentState { get; private set; }
@@ -23,7 +26,9 @@ namespace BulletHell.FiniteStateMachine
         {
             Owner = owner;
         }
+        #endregion
 
+        #region Public Methods
         public IState GetState(Enum id)
         {
             return _states[id];
@@ -59,5 +64,6 @@ namespace BulletHell.FiniteStateMachine
             CurrentState = null;
             EventExit.Invoke();
         }
+        #endregion
     }
 }

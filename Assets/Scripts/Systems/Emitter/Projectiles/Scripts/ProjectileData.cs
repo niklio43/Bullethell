@@ -10,6 +10,7 @@ namespace BulletHell.Emitters.Projectiles
     [CreateAssetMenu(fileName = "ProjectileData", menuName = "Emitters/New Projectile Data")]
     public class ProjectileData : ScriptableObject
     {
+        #region Public Fields
         //General
         public bool FoldOutGeneral = false;
         public new string name = "NewProjectileData";
@@ -44,7 +45,9 @@ namespace BulletHell.Emitters.Projectiles
         public bool DestroyOnCollision = true;
         public List<string> CollisionTags = new List<string>();
         public Bounds Collider;
+        #endregion
 
+        #region Public Methods
         public void AddBehaviour(BaseProjectileBehaviour behaviour)
         {
             if (AlreadyHasBehaviour(behaviour)) return;
@@ -75,5 +78,6 @@ namespace BulletHell.Emitters.Projectiles
 
             return false;
         }
+        #endregion
     }
 }

@@ -6,16 +6,19 @@ namespace BulletHell.FiniteStateMachine
 {
     public class FSMBuilder
     {
-        private readonly List<StateData> _stateData = new List<StateData>();
-        private GameObject _owner;
-        private Enum _defaultState;
-
         private class StateData
         {
             public Enum id;
             public Action<StateBuilder> callback;
         }
 
+        #region Private Fields
+        private readonly List<StateData> _stateData = new List<StateData>();
+        private GameObject _owner;
+        private Enum _defaultState;
+        #endregion
+
+        #region Public Methods
         public FSMBuilder Owner(GameObject owner)
         {
             _owner = owner;
@@ -59,7 +62,9 @@ namespace BulletHell.FiniteStateMachine
 
             return fsm;
         }
+        #endregion
 
+        #region Private Methods
         private void SetupDefaultState(StateData defaultState, IFSM fsm)
         {
             if (_stateData.Count == 0) return;
@@ -71,5 +76,6 @@ namespace BulletHell.FiniteStateMachine
             fsm.DefaultState = fsm.GetState(defaultState.id);
             fsm.SetState(fsm.DefaultState.Id);
         }
+        #endregion
     }
 }

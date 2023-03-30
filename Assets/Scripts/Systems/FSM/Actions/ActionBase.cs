@@ -2,11 +2,16 @@ namespace BulletHell.FiniteStateMachine
 {
     public abstract class ActionBase : IAction
     {
+        #region Private Fields
         private bool _init;
+        #endregion
 
+        #region Public Fields
         public virtual string Name { get; set; } = "Untitled";
         public IState ParentState { get; set; }
+        #endregion
 
+        #region Private Methods
         private void Init()
         {
             if (_init) return;
@@ -16,32 +21,32 @@ namespace BulletHell.FiniteStateMachine
         }
 
         protected virtual void OnInit() { }
+        protected virtual void OnEnter() { }
+        protected virtual void OnExit() { }
+        protected virtual void OnUpdate() { }
+        #endregion
 
+        #region Public Methods
         public void Enter()
         {
             Init();
             OnEnter();
         }
 
-        protected virtual void OnEnter() { }
-
         public void Exit()
         {
             OnExit();
         }
-
-        protected virtual void OnExit() { }
 
         public void Update()
         {
             OnUpdate();
         }
 
-        protected virtual void OnUpdate() { }
-
         public void Transition(string id)
         {
             ParentState.Transition(id);
         }
+        #endregion
     }
 }

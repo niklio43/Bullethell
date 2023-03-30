@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerAimWeapon : MonoBehaviour
 {
+    #region Private Fields
     [SerializeField] float _aimLength = 1f;
+    #endregion
 
+    #region Private Methods
     void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -43,4 +46,5 @@ public class PlayerAimWeapon : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().sortingOrder = 11;
         }
     }
+    #endregion
 }

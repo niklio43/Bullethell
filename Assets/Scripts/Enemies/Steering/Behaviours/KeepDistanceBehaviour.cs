@@ -7,9 +7,12 @@ namespace BulletHell.Enemies.Steering
     [CreateAssetMenu(fileName = "KeepDistanceBehaviour", menuName = "Enemies/Steering/KeepDistanceBehaviour", order = 1)]
     public class KeepDistanceBehaviour : SteeringBehaviour
     {
+        #region Public Fields
         public float Weight = 0;
         public float Clamp = 0;
+        #endregion
 
+        #region Public Methods
         public override void GetSteering(AgentSteering steering, EnemyMovement movement)
         {
             Transform transform = movement.transform;
@@ -37,5 +40,6 @@ namespace BulletHell.Enemies.Steering
                     steering.Interest[i] = result;
             }
         }
+        #endregion
     }
 }

@@ -8,14 +8,19 @@ namespace BulletHell.InventorySystem
 {
     public class DroppedItem : InteractableItem
     {
+        #region Public Fields
         public InventoryItemData ItemData;
+        #endregion
 
+        #region Private Methods
         void Awake()
         {
             if (ItemData == null) { return; }
             Initialize(ItemData);
         }
+        #endregion
 
+        #region Public Methods
         public void Initialize(InventoryItemData itemData)
         {
             ItemData = Instantiate(itemData);
@@ -41,5 +46,6 @@ namespace BulletHell.InventorySystem
             consumable.Use(playerResources);
             Destroy(gameObject);
         }
+        #endregion
     }
 }

@@ -5,9 +5,8 @@ namespace BulletHell.Player
 {
     public class PlayerBrain
     {
+        #region Public Fields
         public IFSM _FSM;
-        PlayerController _player;
-
         public enum PlayerStates
         {
             Default,
@@ -15,7 +14,13 @@ namespace BulletHell.Player
             Dashing,
             Staggered
         }
+        #endregion
 
+        #region Private Fields
+        PlayerController _player;
+        #endregion
+
+        #region Public Methods
         public PlayerBrain(PlayerController player)
         {
             _player = player;
@@ -26,7 +31,9 @@ namespace BulletHell.Player
         {
             _FSM.Update();
         }
+        #endregion
 
+        #region Private Methods
         void Initialize()
         {
             _FSM = new FSMBuilder()
@@ -93,5 +100,6 @@ namespace BulletHell.Player
            })
            .Build();
         }
+        #endregion
     }
 }

@@ -7,13 +7,26 @@ namespace BulletHell.InventorySystem
 {
     public class DynamicInventoryDisplay : InventoryDisplay
     {
+        #region Private Fields
         [SerializeField] protected List<InventorySlotUI> _slotsUI;
+        #endregion
 
+        #region Private Methods
         protected override void Start()
         {
             base.Start();
         }
 
+        private void ClearSlots()
+        {
+            if (_slotDictionary != null)
+            {
+                _slotDictionary.Clear();
+            }
+        }
+        #endregion
+
+        #region Public Methods
         public void RefreshDynamicInventory(InventorySystem invToDisplay)
         {
             ClearSlots();
@@ -34,14 +47,6 @@ namespace BulletHell.InventorySystem
                 _slotsUI[i].UpdateUISlot();
             }
         }
-
-        private void ClearSlots()
-        {
-            if (_slotDictionary != null)
-            {
-                _slotDictionary.Clear();
-            }
-        }
-
+        #endregion
     }
 }

@@ -6,8 +6,11 @@ namespace BulletHell.GameEventSystem
 {
     public class EventListeners : MonoBehaviour
     {
+        #region Private Fields
         [SerializeField] GameEventListener[] _listeners;
+        #endregion
 
+        #region Private Methods
         private void OnEnable()
         {
             for (int i = 0; i < _listeners.Length; i++) {
@@ -21,5 +24,6 @@ namespace BulletHell.GameEventSystem
                 _listeners[i].UnInitialize();
             }
         }
+        #endregion
     }
 }

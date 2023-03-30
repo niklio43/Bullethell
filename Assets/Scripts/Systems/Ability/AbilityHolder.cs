@@ -7,10 +7,13 @@ using TMPro;
 
 public class AbilityHolder : MonoBehaviour
 {
+    #region Private Fields
     [SerializeField] List<GameObject> _abilityUI;
     List<Ability> _abilities = new List<Ability>();
     Ability _baseAbility;
+    #endregion
 
+    #region Private Methods
     void Update()
     {
         for (int i = 0; i < _abilities.Count; i++)
@@ -22,6 +25,14 @@ public class AbilityHolder : MonoBehaviour
         _baseAbility.UpdateAbility(Time.deltaTime);
     }
 
+    void ValueChanged()
+    {
+        if (_abilities.Count > 0) { SetGraphic(); return; }
+        RemoveGraphic();
+    }
+    #endregion
+
+    #region Public Methods
     public void SetBaseAbility(Ability baseAbility) => _baseAbility = baseAbility;
 
     public void AddAbility(Ability ability)
@@ -29,12 +40,6 @@ public class AbilityHolder : MonoBehaviour
         if (ability == null) { _abilities.Clear(); ValueChanged(); return; }
         _abilities.Add(ability);
         ValueChanged();
-    }
-
-    void ValueChanged()
-    {
-        if (_abilities.Count > 0) { SetGraphic(); return; }
-        RemoveGraphic();
     }
 
     public void SetGraphic()
@@ -57,4 +62,5 @@ public class AbilityHolder : MonoBehaviour
             _abilityUI[i].GetComponent<Image>().color = Color.clear;
         }
     }
+    #endregion
 }

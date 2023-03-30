@@ -11,9 +11,13 @@ namespace BulletHell.GameEventSystem
     [System.Serializable]
     public class GameEventListener
     {
+        #region Public Fields
         public GameEvent Event;
 
         public CustomEvent Response;
+        #endregion
+
+        #region Public Methods
         public void Initialize()
         {
             Event.Register(this);
@@ -28,5 +32,6 @@ namespace BulletHell.GameEventSystem
         {
             Response?.Invoke(sender, data);
         }
+        #endregion
     }
 }

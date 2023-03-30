@@ -6,8 +6,11 @@ namespace BulletHell.FiniteStateMachine
 {
     public class ActionSetAnimationClip : ActionSetAnimatorVariableBase
     {
+        #region Private Fields
         private readonly string _clipName;
+        #endregion
 
+        #region Public Fields
         public override string Name { get; set; } = "Set Animation Clip";
 
         public ActionSetAnimationClip(AnimationClip clip)
@@ -19,7 +22,9 @@ namespace BulletHell.FiniteStateMachine
         {
             _clipName = clipName;
         }
+        #endregion
 
+        #region Private Methods
         protected override void OnEnter()
         {
             if(_animator == null) { return; }
@@ -27,5 +32,6 @@ namespace BulletHell.FiniteStateMachine
             _animator?.Play(_clipName);
             _animator?.Update(Time.deltaTime);
         }
+        #endregion
     }
 }

@@ -5,8 +5,11 @@ using BulletHell.InventorySystem;
 
 public class DropRandomLoot : Singleton<DropRandomLoot>, IDropLoot
 {
+    #region Private Fields
     [SerializeField] Material _droppedItemMaterial;
+    #endregion
 
+    #region Public Methods
     public void DropItem(List<ItemDrop> dropTable, Transform tf)
     {
         if(dropTable == null) { return; }
@@ -35,7 +38,9 @@ public class DropRandomLoot : Singleton<DropRandomLoot>, IDropLoot
             sr.sortingLayerID = SortingLayer.NameToID("Top");
         }
     }
+    #endregion
 
+    #region Private Methods
     List<InventoryItemData> SelectRandomItem(List<ItemDrop> dropTable)
     {
         List<InventoryItemData> itemsToDrop = new List<InventoryItemData>();
@@ -48,4 +53,5 @@ public class DropRandomLoot : Singleton<DropRandomLoot>, IDropLoot
         }
         return itemsToDrop;
     }
+    #endregion
 }

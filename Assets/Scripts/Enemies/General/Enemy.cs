@@ -12,11 +12,21 @@ using BulletHell.EffectInterfaces;
 
 public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
 {
-    public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
+    #region Private Fields
     [SerializeField] EnemyBrain _brain;
     [SerializeField] EnemyMovement _enemyMovement;
     [SerializeField] VisualEffectAsset _deathVFX;
     [SerializeField] DropTable _dropTable;
+    RuntimeVisualEffect _stunVFX = null;
+
+    EnemyDetection _detection;
+
+    bool _flipped = false;
+    Vector3 _defaultScale;
+    #endregion
+
+    #region Public Fields
+    public EnemyMovmentType MovementType = EnemyMovmentType.Grounded;
     [HideInInspector] public Transform Target;
     [HideInInspector] public bool CanMove = true;
     [HideInInspector] public DetectionData DetectionData = new DetectionData();
@@ -25,24 +35,16 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
 
     public delegate void OnDeathDelegate(Enemy enemy);
     public event OnDeathDelegate OnDeath;
-
-
-    RuntimeVisualEffect _stunVFX = null;
-
-    EnemyDetection _detection;
-
-    bool _flipped = false;
-    Vector3 _defaultScale;
-
     public enum EnemyMovmentType
     {
         Grounded,
         Airborne
     }
-
     [Header("Distances")]
     [Range(0, 10)] public float PreferredDistance;
+    #endregion
 
+    #region Private Methods
     private void Awake()
     {
         _detection = GetComponent<EnemyDetection>();
@@ -65,6 +67,13 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
         if (CanMove) _enemyMovement.Move();
     }
 
+    private void OnDestroy()
+    {
+
+    }
+    #endregion
+
+    #region Public Methods
     public void Stun()
     {
         _brain.CurrentAbility?.Cancel();
@@ -93,11 +102,6 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
         DropRandomLoot.Instance?.DropItem(_dropTable.ItemDrop, transform);
         OnDeath?.Invoke(this);
         Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        
     }
 
     public void UpdateDirection()
@@ -151,7 +155,7 @@ public class Enemy : MonoBehaviour, IKillable, IStaggerable, IStunable
         return false;
 
     }
-
+    #endregion
 
     #region Component Caching
 

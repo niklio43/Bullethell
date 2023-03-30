@@ -5,15 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    #region Public Fields
     public static GameStates gameState = GameStates.Playing;
-
-    [SerializeField] InputAction pauseGame;
-
     public delegate void ChangeHandler(GameStates state);
     public static event ChangeHandler onStateChange;
-
     [HideInInspector] public bool pause;
+    #endregion
 
+    #region Private Fields
+    [SerializeField] InputAction pauseGame;
+    #endregion
+
+    #region Private Methods
     void Awake()
     {
         //SetCursor();
@@ -46,8 +49,9 @@ public class GameManager : Singleton<GameManager>
     {
         if (gameState == GameStates.Playing) { pause = true; } else { pause = false; }
     }
+    #endregion
 
-
+    #region Public Methods
     public void PauseGame()
     {
         if (gameState == GameStates.Menu || gameState == GameStates.Loading) { return; }
@@ -66,12 +70,6 @@ public class GameManager : Singleton<GameManager>
             onStateChange?.Invoke(gameState);
         }
         onStateChange?.Invoke(gameState);
-    }
-
-    //temporary function, replace with async system later
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Quit()
@@ -94,6 +92,7 @@ public class GameManager : Singleton<GameManager>
         if (scale)
             Time.timeScale = 1f;
     }
+    #endregion
 }
 
 public enum GameStates

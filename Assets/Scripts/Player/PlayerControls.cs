@@ -6,10 +6,14 @@ using BulletHell.UI;
 
 public class PlayerControls : MonoBehaviour
 {
+    #region Private Fields
     [SerializeField] PlayerUI _playerUI;
     PlayerController _player;
     PlayerInputs _inputs;
     PlayerInteracter playerInteracter;
+    #endregion
+
+    #region Private Methods
     void Awake()
     {
         playerInteracter = GetComponent<PlayerInteracter>();
@@ -50,4 +54,5 @@ public class PlayerControls : MonoBehaviour
 
     private void OnEnable() => _inputs?.Player.Enable();
     private void OnDisable() => _inputs?.Player.Disable();
+    #endregion
 }

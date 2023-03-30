@@ -9,23 +9,25 @@ namespace BulletHell.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        #region Private Fields
         PlayerBrain _playerBrain;
         PlayerMovement _playerMovement;
         PlayerAbilities _playerAbilities;
         UnitStatusEffects _unitStatusEffects;
         PlayerResources _playerResources;
         [SerializeField] WeaponController _weaponController;
-
-        public PlayerAimWeapon Aim;
         float timer = 0;
+        #endregion
 
-        #region Getters & Setters
+        #region Public Fields
+        public PlayerAimWeapon Aim;
         public PlayerMovement PlayerMovement => _playerMovement;
         public PlayerAbilities PlayerAbilities => _playerAbilities;
         public PlayerResources PlayerResources => _playerResources;
         public WeaponController WeaponController => _weaponController;
         #endregion
 
+        #region Private Methods
         void Awake()
         {
             _playerBrain = new PlayerBrain(this);
@@ -47,7 +49,9 @@ namespace BulletHell.Player
         {
             _playerBrain.UpdateBrain();
         }
+        #endregion
 
+        #region Public Methods
         public void OnAppliedStatusEffect(ActiveStatusEffect statusEffect)
         {
             PlayerUI.Instance.AddStatusEffect(statusEffect);
@@ -83,6 +87,7 @@ namespace BulletHell.Player
             _unitStatusEffects.OnAppliedStatusEffect -= OnAppliedStatusEffect;
             _unitStatusEffects.OnRemovedStatusEffect -= OnRemovedStatusEffect;
         }
+        #endregion
 
         #region Component Caching
 

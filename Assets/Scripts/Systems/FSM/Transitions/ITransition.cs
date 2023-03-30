@@ -7,7 +7,9 @@ namespace BulletHell.FiniteStateMachine
 {
     public interface ITransition 
     {
+        #region Private Fields
         string Name { get; }
         Enum Target { get; }
+        #endregion
     }
 }

@@ -8,36 +8,21 @@ using TMPro;
 
 public class InputManager : MonoBehaviour
 {
+    #region Public Fields
     public static PlayerInputs InputActions;
 
     public static event Action RebindComplete;
     public static event Action RebindCanceled;
     public static event Action<InputAction, int> RebindStarted;
+    #endregion
 
+    #region Private Methods
     void Awake()
     {
         if (InputActions == null)
             InputActions = new PlayerInputs();
 
         DontDestroyOnLoad(gameObject);
-    }
-
-    public static void StartRebind(string actionName, int bindingIndex, TMP_Text statusText, bool excludeMouse)
-    {
-        InputAction action = InputActions.asset.FindAction(actionName);
-
-        if(action == null || action.bindings.Count <= bindingIndex) { Debug.Log("Couldn't find action or binding"); return; }
-
-        if (action.bindings[bindingIndex].isComposite)
-        {
-            var firstPartIndex = bindingIndex + 1;
-            if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isComposite)
-                DoRebind(action, bindingIndex, statusText, true, excludeMouse);
-        }
-        else
-        {
-            DoRebind(action, bindingIndex, statusText, false, excludeMouse);
-        }
     }
 
     static void DoRebind(InputAction actionToRebind, int bindingIndex, TMP_Text statusText, bool allCompositeParts, bool excludeMouse)
@@ -83,6 +68,34 @@ public class InputManager : MonoBehaviour
         rebind.Start(); //starts the rebinding process
     }
 
+    static void SaveBindingOverride(InputAction action)
+    {
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            PlayerPrefs.SetString(action.actionMap + action.name + i, action.bindings[i].overridePath);
+        }
+    }
+    #endregion
+
+    #region Public Methods
+    public static void StartRebind(string actionName, int bindingIndex, TMP_Text statusText, bool excludeMouse)
+    {
+        InputAction action = InputActions.asset.FindAction(actionName);
+
+        if(action == null || action.bindings.Count <= bindingIndex) { Debug.Log("Couldn't find action or binding"); return; }
+
+        if (action.bindings[bindingIndex].isComposite)
+        {
+            var firstPartIndex = bindingIndex + 1;
+            if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isComposite)
+                DoRebind(action, bindingIndex, statusText, true, excludeMouse);
+        }
+        else
+        {
+            DoRebind(action, bindingIndex, statusText, false, excludeMouse);
+        }
+    }
+
     public static string GetBindingName(string actionName, int bindingIndex)
     {
         if (InputActions == null)
@@ -90,14 +103,6 @@ public class InputManager : MonoBehaviour
 
         InputAction action = InputActions.asset.FindAction(actionName);
         return action.GetBindingDisplayString(bindingIndex);
-    }
-
-    static void SaveBindingOverride(InputAction action)
-    {
-        for (int i = 0; i < action.bindings.Count; i++)
-        {
-            PlayerPrefs.SetString(action.actionMap + action.name + i, action.bindings[i].overridePath);
-        }
     }
 
     public static void LoadBindingOverride(string actionName)
@@ -134,4 +139,5 @@ public class InputManager : MonoBehaviour
 
         SaveBindingOverride(action);
     }
+    #endregion
 }

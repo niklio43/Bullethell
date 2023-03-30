@@ -8,8 +8,10 @@ namespace BulletHell.Emitters.Projectiles
 {
     public abstract class BaseProjectileBehaviour : ScriptableObject
     {
+        #region Public Methods
         public abstract string Id();
         public virtual void Initialize(Projectile owner, ProjectileData data) { }
         public virtual void UpdateBehaviour(Projectile owner, ProjectileData data, float dt) { }
+        #endregion
     }
 }

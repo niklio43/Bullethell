@@ -12,12 +12,16 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
+    #region Public Fields
     public Sound[] sounds;
-    [HideInInspector]
-    public float menuVolume;
+    [HideInInspector] public float menuVolume;
+    #endregion
 
+    #region Private Fields
     [SerializeField] float multiplier = 30f;
+    #endregion
 
+    #region Private Methods
     void Awake()
     {
         foreach (Sound sound in sounds)
@@ -30,6 +34,14 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    IEnumerator DestroyLocalSound(float time, GameObject obj)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(obj);
+    }
+    #endregion
+
+    #region Public Methods
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -89,12 +101,6 @@ public class AudioManager : Singleton<AudioManager>
         StartCoroutine(DestroyLocalSound(source.clip.length, obj));
     }
 
-    IEnumerator DestroyLocalSound(float time, GameObject obj)
-    {
-        yield return new WaitForSeconds(time);
-        Destroy(obj);
-    }
-
     public string GetRandomAudio(string[] audio)
     {
         int randomIndex = UnityEngine.Random.Range(0, audio.Length);
@@ -144,4 +150,5 @@ public class AudioManager : Singleton<AudioManager>
             sound.mixer.audioMixer.SetFloat("Music", Mathf.Log10(soundLevel) * multiplier);
         }
     }
+    #endregion
 }

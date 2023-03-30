@@ -6,6 +6,7 @@ namespace BulletHell.Enemies.Steering
 {
     public static class ContextSolver
     {
+        #region Public Methods
         public static Vector2 GetDirection(AgentSteering steering)
         {
             Vector2 direction = Vector2.zero;
@@ -16,5 +17,6 @@ namespace BulletHell.Enemies.Steering
             direction.Normalize();
             return direction;
         }
+        #endregion
     }
 }

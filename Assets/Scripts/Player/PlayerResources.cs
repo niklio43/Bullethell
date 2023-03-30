@@ -6,6 +6,7 @@ using BulletHell;
 
 public class PlayerResources : MonoBehaviour, IDamageable, IHealable, IKillable
 {
+    #region Public Fields
     public float Health;
     public float MaxHealth;
     public int Stamina;
@@ -16,8 +17,9 @@ public class PlayerResources : MonoBehaviour, IDamageable, IHealable, IKillable
 
     public delegate void OnStaminaChangedDelegate();
     public event OnStaminaChangedDelegate OnStaminaChanged;
+    #endregion
 
-
+    #region Public Methods
     public void Damage(DamageValue Damage)
     {
         Health -= Damage.GetDamage();
@@ -59,4 +61,5 @@ public class PlayerResources : MonoBehaviour, IDamageable, IHealable, IKillable
     {
         throw new System.NotImplementedException();
     }
+    #endregion
 }

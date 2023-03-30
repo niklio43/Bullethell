@@ -8,57 +8,30 @@ namespace BulletHell.Emitters.Projectiles
 {
     public class Projectile : MonoBehaviour, IPoolable
     {
+        #region Public Fields
         [HideInInspector] public ProjectileData Data;
-        GameObject _owner;
-
-        ObjectPool<Projectile> _pool;
-
+        [HideInInspector] public bool hasCollision = true;
         public float LifeTime;
         public Vector3 Target;
         public Vector3 Velocity;
-
-        Vector3 _inheritedVelocity = Vector3.zero;
-
-        [HideInInspector] public bool hasCollision = true;
-
         public void SetPool(ObjectPool<Projectile> pool) => _pool = pool;
+        #endregion
 
-
+        #region Private Fields
+        GameObject _owner;
+        ObjectPool<Projectile> _pool;
+        Vector3 _inheritedVelocity = Vector3.zero;
         #region Components
         SpriteRenderer _spriteRenderer;
         BoxCollider2D _collider;
         #endregion
+        #endregion
 
+        #region Private Methods
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider = GetComponent<BoxCollider2D>();
-        }
-
-        public void Initialize(ProjectileData data, GameObject owner)
-        {
-            Data = data;
-            _owner = owner;
-            if (Data.InheritVelocity && _owner.TryGetComponent(out Rigidbody2D rb))
-                _inheritedVelocity = (Vector3)rb.velocity;
-
-
-            _spriteRenderer.sprite = Data.Sprite;
-
-            _collider.offset = Data.Collider.center;
-            _collider.size = Data.Collider.size / 2;
-
-            transform.localScale = Vector3.one * Data.Scale;
-            _spriteRenderer.color = Data.BirthColor;
-
-            foreach (BaseProjectileBehaviour behaviour in Data.Behaviours) {
-                behaviour.Initialize(this, Data);
-            }
-
-            if (Data.BirthVFX != null)
-                PlayVFX(Data.BirthVFX, true);
-
-            StartCoroutine(ChangeColorOverLife());
         }
 
         IEnumerator ChangeColorOverLife()
@@ -82,7 +55,6 @@ namespace BulletHell.Emitters.Projectiles
 
             _spriteRenderer.color = target;
         }
-
 
         private void FixedUpdate()
         {
@@ -114,6 +86,34 @@ namespace BulletHell.Emitters.Projectiles
         {
             if(!hasCollision) { return; }
             CheckCollision(collision);
+        }
+        #endregion
+
+        #region Public Methods
+        public void Initialize(ProjectileData data, GameObject owner)
+        {
+            Data = data;
+            _owner = owner;
+            if (Data.InheritVelocity && _owner.TryGetComponent(out Rigidbody2D rb))
+                _inheritedVelocity = (Vector3)rb.velocity;
+
+
+            _spriteRenderer.sprite = Data.Sprite;
+
+            _collider.offset = Data.Collider.center;
+            _collider.size = Data.Collider.size / 2;
+
+            transform.localScale = Vector3.one * Data.Scale;
+            _spriteRenderer.color = Data.BirthColor;
+
+            foreach (BaseProjectileBehaviour behaviour in Data.Behaviours) {
+                behaviour.Initialize(this, Data);
+            }
+
+            if (Data.BirthVFX != null)
+                PlayVFX(Data.BirthVFX, true);
+
+            StartCoroutine(ChangeColorOverLife());
         }
 
         public void CheckCollision(Collider2D[] colliders)
@@ -161,5 +161,6 @@ namespace BulletHell.Emitters.Projectiles
             
             _pool.Release(this);
         }
+        #endregion
     }
 }

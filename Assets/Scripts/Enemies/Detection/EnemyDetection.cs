@@ -5,12 +5,17 @@ namespace BulletHell.Enemies.Detection
 {
     public class EnemyDetection : MonoBehaviour
     {
+        #region Public Fields
         public bool DrawGizmos = false;
         [Range(0, 10)] public float DetectionRadius = 2;
         [Range(0, 10)] public float ObstacleDetectionRadius = 1;
+        #endregion
 
+        #region Private Fields
         Enemy _enemy;
+        #endregion
 
+        #region Private Methods
         private void Awake()
         {
             _enemy = GetComponent<Enemy>();
@@ -19,21 +24,6 @@ namespace BulletHell.Enemies.Detection
         private void Start()
         {
             InvokeRepeating(nameof(Detect), 0, .05f);
-        }
-
-        public DetectionData Detect()
-        {
-            DetectionData data = new DetectionData();
-
-            data.Add("Players", DetectEntities("Player", DetectionRadius));
-            data.Add("Enemies", DetectEntities("Enemy", DetectionRadius));
-            data.Add("Obstacles", DetectEntities("Obstacle", ObstacleDetectionRadius, 1 << LayerMask.NameToLayer("Obstacle")));
-            
-            if(_enemy.MovementType == Enemy.EnemyMovmentType.Grounded) {
-                data.Add("Obstacles", DetectEntities("GroundObstacle", ObstacleDetectionRadius));
-            }
-
-            return data;
         }
 
         EntityData[] DetectEntities(string tag, float radius)
@@ -58,5 +48,24 @@ namespace BulletHell.Enemies.Detection
 
             return entities.ToArray();
         }
+        #endregion
+
+        #region Public Methods
+        public DetectionData Detect()
+        {
+            DetectionData data = new DetectionData();
+
+            data.Add("Players", DetectEntities("Player", DetectionRadius));
+            data.Add("Enemies", DetectEntities("Enemy", DetectionRadius));
+            data.Add("Obstacles", DetectEntities("Obstacle", ObstacleDetectionRadius, 1 << LayerMask.NameToLayer("Obstacle")));
+            
+            if(_enemy.MovementType == Enemy.EnemyMovmentType.Grounded) {
+                data.Add("Obstacles", DetectEntities("GroundObstacle", ObstacleDetectionRadius));
+            }
+
+            return data;
+        }
+        #endregion
+
     }
 }

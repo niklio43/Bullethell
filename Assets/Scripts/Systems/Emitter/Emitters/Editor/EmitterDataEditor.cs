@@ -11,9 +11,12 @@ namespace BulletHell.Emitters.Editor
     [CustomEditor(typeof(EmitterData))]
     public class EmitterDataEditor : Editor
     {
+        #region Private Fields
         VisualElement _root;
         EmitterData _target;
+        #endregion
 
+        #region Public Methods
         public override VisualElement CreateInspectorGUI()
         {
             if(_target != null)
@@ -21,7 +24,9 @@ namespace BulletHell.Emitters.Editor
 
             return _root;
         }
+        #endregion
 
+        #region Private Methods
         void Redraw()
         {
             CreateRoot();
@@ -90,5 +95,6 @@ namespace BulletHell.Emitters.Editor
         {
             _target = target as EmitterData;
         }
+        #endregion
     }
 }

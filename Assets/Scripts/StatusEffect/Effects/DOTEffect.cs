@@ -8,9 +8,12 @@ namespace BulletHell.StatusSystem
     [CreateAssetMenu(fileName = "DOTEffect", menuName = "Status Effects/New DOT Effect")]
     public class DOTEffect : StatusEffect
     {
+        #region Public Fields
         public float TickSpeed;
         public DamageValue Damage;
+        #endregion
 
+        #region Private Methods
         protected override IEnumerator DoEffect(UnitStatusEffects effectContainer, GameObject entityRoot, ActiveStatusEffect runTimeData)
         {
             if (!entityRoot.TryGetComponent(out IDamageable damageEntity)) { effectContainer.RemoveEffect(this); }
@@ -26,5 +29,6 @@ namespace BulletHell.StatusSystem
 
             effectContainer.RemoveEffect(this);
         }
+        #endregion
     }
 }

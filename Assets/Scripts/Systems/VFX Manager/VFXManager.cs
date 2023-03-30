@@ -6,6 +6,7 @@ namespace BulletHell.VFX
 {
     public class VFXManager : Singleton<VFXManager>
     {
+        #region Public Fields
         public static ObjectPool<RuntimeVisualEffect> Pool
         {
             get {
@@ -15,8 +16,13 @@ namespace BulletHell.VFX
             }
 
         }
-        static ObjectPool<RuntimeVisualEffect> _pool;
+        #endregion
 
+        #region Private Fields
+        static ObjectPool<RuntimeVisualEffect> _pool;
+        #endregion
+
+        #region Public Methods
         public static RuntimeVisualEffect PlayBurst(VisualEffectAsset asset, Vector3 position, Transform parent = null, VFXAttribute[] vfxAttributes = null)
         {
             RuntimeVisualEffect vfx = Pool.Get();
@@ -51,7 +57,9 @@ namespace BulletHell.VFX
             vfx.PlayUntilStopped(asset, vfxAttributes, waitForParticles);
             return vfx;
         }
+        #endregion
 
+        #region Private Methods
         RuntimeVisualEffect Create()
         {
             RuntimeVisualEffect vfx = new GameObject().AddComponent<RuntimeVisualEffect>();
@@ -60,13 +68,17 @@ namespace BulletHell.VFX
 
             return vfx;
         }
+        #endregion
     }
 
     public class RuntimeVisualEffect : MonoBehaviour, IPoolable
     {
+        #region Private Fields
         Pool<RuntimeVisualEffect> _pool;
         VisualEffect _vfx;
+        #endregion
 
+        #region Public Methods
         public void Initialize(Pool<RuntimeVisualEffect> pool)
         {
             _pool = pool;
@@ -128,7 +140,9 @@ namespace BulletHell.VFX
             gameObject.SetActive(false);
             _pool.Release(this);
         }
+        #endregion
 
+        #region Private Methods
         IEnumerator PlayForSeconds(float time, bool waitForParticles = false)
         {
             yield return new WaitForSeconds(time);
@@ -141,6 +155,7 @@ namespace BulletHell.VFX
 
             ResetObject();
         }
+        #endregion
     }
 
     #region VFX Attributes

@@ -7,15 +7,18 @@ namespace BulletHell.Enemies.Steering
 {
     public class EnemyPathFinder : MonoBehaviour
     {
+        #region Private Fields
         [SerializeField] float _targetDistanceThreshold = 1;
         [SerializeField] float _waypointDistanceThreshold = 1;
 
         Enemy _owner;
         Seeker _seeker;
         Path _currentPath;
-
-        public PathState State = PathState.NoPath;
         int _currentWaypoint;
+        #endregion
+
+        #region Public Fields
+        public PathState State = PathState.NoPath;
 
         public enum PathState
         {
@@ -23,44 +26,12 @@ namespace BulletHell.Enemies.Steering
             HasPath,
             PathError,
         }
+        #endregion
 
+        #region Private Methods
         private void Awake()
         {
             _seeker = GetComponent<Seeker>();
-        }
-
-        public void Initialize(Enemy owner)
-        {
-            _owner = owner;
-        }
-
-        public Vector3 GetCurrentPathNode()
-        {
-            if (State == PathState.NoPath || State == PathState.PathError) { return transform.position; }
-            return _currentPath.vectorPath[_currentWaypoint];
-        }
-
-        public Vector3 GetPathNode(int index)
-        {
-            if (State == PathState.NoPath || State == PathState.PathError) { return transform.position; }
-            return _currentPath.vectorPath[index];
-        }
-
-        public void UpdatePathTraversal()
-        {
-            CheckPathValidity();
-            if(State == PathState.NoPath) { return; }
-
-
-            float d = Vector2.Distance(transform.position, GetPathNode(_currentWaypoint));
-            if (d <= _waypointDistanceThreshold) {
-                if (_currentWaypoint + 1 < _currentPath.vectorPath.Count) {
-                    _currentWaypoint++;
-                }
-                else {
-                    ReachedEndOfPath();
-                }
-            }
         }
 
         void CheckPathValidity()
@@ -106,5 +77,42 @@ namespace BulletHell.Enemies.Steering
                 _currentWaypoint = 0;
             }
         }
+        #endregion
+
+        #region Public Methods
+        public void Initialize(Enemy owner)
+        {
+            _owner = owner;
+        }
+
+        public Vector3 GetCurrentPathNode()
+        {
+            if (State == PathState.NoPath || State == PathState.PathError) { return transform.position; }
+            return _currentPath.vectorPath[_currentWaypoint];
+        }
+
+        public Vector3 GetPathNode(int index)
+        {
+            if (State == PathState.NoPath || State == PathState.PathError) { return transform.position; }
+            return _currentPath.vectorPath[index];
+        }
+
+        public void UpdatePathTraversal()
+        {
+            CheckPathValidity();
+            if(State == PathState.NoPath) { return; }
+
+
+            float d = Vector2.Distance(transform.position, GetPathNode(_currentWaypoint));
+            if (d <= _waypointDistanceThreshold) {
+                if (_currentWaypoint + 1 < _currentPath.vectorPath.Count) {
+                    _currentWaypoint++;
+                }
+                else {
+                    ReachedEndOfPath();
+                }
+            }
+        }
+        #endregion
     }
 }

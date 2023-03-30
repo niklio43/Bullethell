@@ -8,15 +8,18 @@ namespace BulletHell.InventorySystem
     [System.Serializable]
     public class InventoryHolder : MonoBehaviour
     {
+        #region Private Fields
         [SerializeField] int _inventorySize;
         [SerializeField] protected InventorySystem _inventorySystem;
-
-        #region Getter
-        public InventorySystem InventorySystem => _inventorySystem;
         #endregion
 
-        public static UnityAction<InventorySystem> OnDynamicInventoryDisplayRequested;
+        #region Public Fields
+        public InventorySystem InventorySystem => _inventorySystem;
 
+        public static UnityAction<InventorySystem> OnDynamicInventoryDisplayRequested;
+        #endregion
+
+        #region Private Methods
         void Awake()
         {
             _inventorySystem = new InventorySystem(_inventorySize);
@@ -29,5 +32,6 @@ namespace BulletHell.InventorySystem
                 slot?.OnAssign?.Invoke(slot.ItemData);
             }
         }
+        #endregion
     }
 }

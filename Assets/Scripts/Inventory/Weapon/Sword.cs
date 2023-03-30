@@ -9,6 +9,7 @@ namespace BulletHell.InventorySystem
     [CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Inventory System/Item/Weapon/Melee/Sword")]
     public class Sword : Melee
     {
+        #region Private Fields
         [SerializeField] Sprite icon;
         [SerializeField] Sprite sprite;
         [SerializeField] string itemName;
@@ -17,7 +18,9 @@ namespace BulletHell.InventorySystem
         [SerializeField] Pool pool;
         [SerializeField] Rarity rarity;
         [SerializeField] ItemType itemType;
+        #endregion
 
+        #region Private Methods
         void OnEnable()
         {
             Icon = icon;
@@ -29,5 +32,6 @@ namespace BulletHell.InventorySystem
             Rarity = rarity;
             ItemType = itemType;
         }
+        #endregion
     }
 }

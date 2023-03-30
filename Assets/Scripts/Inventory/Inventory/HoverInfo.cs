@@ -8,15 +8,31 @@ using System;
 
 public class HoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    #region Private Fields
     float _timeToWait = 0.5f;
     InventoryItemData _item;
     Color _hoverColor;
+    #endregion
 
+    #region Private Methods
     void Start()
     {
         _hoverColor = new Color(0.8f, 0.8f, 0.8f, 1);
     }
 
+    void ShowMessage()
+    {
+        HoverInfoManager.Instance.ShowInfo(_item);
+    }
+
+    IEnumerator StartTimer()
+    {
+        yield return new WaitForSeconds(_timeToWait);
+        ShowMessage();
+    }
+    #endregion
+
+    #region Public Methods
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (GetComponent<DraggableItem>().IsDragging) { StopAllCoroutines(); return; }
@@ -34,15 +50,5 @@ public class HoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         StopAllCoroutines();
         HoverInfoManager.Instance.HideInfo();
     }
-
-    void ShowMessage()
-    {
-        HoverInfoManager.Instance.ShowInfo(_item);
-    }
-
-    IEnumerator StartTimer()
-    {
-        yield return new WaitForSeconds(_timeToWait);
-        ShowMessage();
-    }
+    #endregion
 }

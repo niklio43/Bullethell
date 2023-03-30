@@ -9,20 +9,20 @@ namespace BulletHell.InventorySystem
 
     public abstract class InventoryDisplay : MonoBehaviour
     {
+        #region Private Fields
         [SerializeField] MouseObj _mouseObj;
 
         protected InventorySystem _inventorySystem;
         protected Dictionary<InventorySlotUI, InventorySlot> _slotDictionary;
+        #endregion
 
-        #region Getter
+        #region Public Fields
         public InventorySystem InventorySystem => _inventorySystem;
         public Dictionary<InventorySlotUI, InventorySlot> SlotDictionary => _slotDictionary;
         #endregion
 
+        #region Private Methods
         protected virtual void Start() { }
-
-        public abstract void AssignSlot(InventorySystem invToDisplay);
-
         protected virtual void UpdateSlot(InventorySlot updatedSlot)
         {
             foreach (var slot in _slotDictionary)
@@ -33,6 +33,11 @@ namespace BulletHell.InventorySystem
                 }
             }
         }
+        #endregion
+
+        #region Public Methods
+        public abstract void AssignSlot(InventorySystem invToDisplay);
+
 
         public void SlotClicked(InventorySlotUI clickedUISlot)
         {
@@ -89,5 +94,6 @@ namespace BulletHell.InventorySystem
         {
             _mouseObj.ClearSlot();
         }
+        #endregion
     }
 }

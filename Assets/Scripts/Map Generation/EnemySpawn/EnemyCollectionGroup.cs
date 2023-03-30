@@ -6,6 +6,7 @@ namespace BulletHell.Enemies
     [CreateAssetMenu(fileName = "Enemy Collection Group", menuName = "Enemies/Enemy Collection/New Enemy Collection Group", order = 1)]
     public class EnemyCollectionGroup : ScriptableObject
     {
+        #region Public Fields
         public Entry[] Collections;
 
         [System.Serializable]
@@ -14,7 +15,9 @@ namespace BulletHell.Enemies
             public EnemyCollection Collection;
             public int Weight;
         }
+        #endregion
 
+        #region Public Methods
         public RandomList<Entry> GetRandomList()
         {
             RandomList<Entry> list = new RandomList<Entry>();
@@ -24,5 +27,6 @@ namespace BulletHell.Enemies
 
             return list;
         }
+        #endregion
     }
 }

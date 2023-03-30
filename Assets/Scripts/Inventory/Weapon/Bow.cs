@@ -9,6 +9,7 @@ namespace BulletHell.InventorySystem
     [CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Inventory System/Item/Weapon/Ranged/Bow")]
     public class Bow : Ranged
     {
+        #region Private Fields
         [SerializeField] Sprite icon;
         [SerializeField] Sprite sprite;
         [SerializeField] string itemName;
@@ -16,7 +17,9 @@ namespace BulletHell.InventorySystem
         [SerializeField] Pool pool;
         [SerializeField] Rarity rarity;
         [SerializeField] ItemType itemType;
+        #endregion
 
+        #region Private Methods
         void OnEnable()
         {
             Sprite = sprite;
@@ -27,5 +30,6 @@ namespace BulletHell.InventorySystem
             ItemType = itemType;
             Icon = icon;
         }
+        #endregion
     }
 }

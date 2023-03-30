@@ -6,6 +6,7 @@ using BulletHell.Player;
 
 public class PlayerAfterImageSprite : MonoBehaviour, IPoolable
 {
+    #region Private Fields
     [SerializeField] float _activeTime = .1f;
     float _timeActivated;
     float _alpha;
@@ -15,14 +16,32 @@ public class PlayerAfterImageSprite : MonoBehaviour, IPoolable
 
     SpriteRenderer _sr;
     Color _color;
+    #endregion
 
+    #region Public Fields
     public ObjectPool<PlayerAfterImageSprite> Pool;
+    #endregion
 
+    #region Private Methods
     void Awake()
     {
         _sr = GetComponent<SpriteRenderer>();
     }
 
+    void Update()
+    {
+        _alpha *= _alphaMultiplier;
+        _color = new Color(1f, 1f, 1f, _alpha);
+        _sr.color = _color;
+
+        if(Time.time >= (_timeActivated + _activeTime))
+        {
+            ResetObject();
+        }
+    }
+    #endregion
+
+    #region Public Methods
     public void ResetObject()
     {
         gameObject.SetActive(false);
@@ -42,16 +61,5 @@ public class PlayerAfterImageSprite : MonoBehaviour, IPoolable
         transform.localScale = player.localScale;
         _timeActivated = Time.time;
     }
-
-    void Update()
-    {
-        _alpha *= _alphaMultiplier;
-        _color = new Color(1f, 1f, 1f, _alpha);
-        _sr.color = _color;
-
-        if(Time.time >= (_timeActivated + _activeTime))
-        {
-            ResetObject();
-        }
-    }
+    #endregion
 }

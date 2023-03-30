@@ -6,9 +6,12 @@ namespace BulletHell.InventorySystem
 {
     public class StaticInventoryDisplay : InventoryDisplay
     {
+        #region Private Fields
         [SerializeField] InventoryHolder _inventoryHolder;
         [SerializeField] InventorySlotUI[] _slots;
+        #endregion
 
+        #region Private Methods
         protected override void Start()
         {
             base.Start();
@@ -22,6 +25,9 @@ namespace BulletHell.InventorySystem
 
             AssignSlot(_inventorySystem);
         }
+        #endregion
+
+        #region Public Methods
         public override void AssignSlot(InventorySystem invToDisplay)
         {
             _slotDictionary = new Dictionary<InventorySlotUI, InventorySlot>();
@@ -34,5 +40,6 @@ namespace BulletHell.InventorySystem
                 _slots[i].Initialize(_inventorySystem.InventorySlots[i]);
             }
         }
+        #endregion
     }
 }

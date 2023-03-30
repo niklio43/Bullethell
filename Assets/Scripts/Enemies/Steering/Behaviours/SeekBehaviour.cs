@@ -5,8 +5,11 @@ namespace BulletHell.Enemies.Steering
     [CreateAssetMenu(fileName = "SeekBehaviour", menuName = "Enemies/Steering/Seek Behaviour", order = 1)]
     public class SeekBehaviour : SteeringBehaviour
     {
+        #region Public Fields
         public float Weight = 0;
+        #endregion
 
+        #region Public Methods
         public override void GetSteering(AgentSteering steering, EnemyMovement movement)
         {
             Transform transform = movement.transform;
@@ -34,5 +37,6 @@ namespace BulletHell.Enemies.Steering
                     steering.Interest[i] = result;
             }
         }
+        #endregion
     }
 }

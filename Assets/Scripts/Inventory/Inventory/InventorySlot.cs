@@ -9,15 +9,17 @@ namespace BulletHell.InventorySystem
     [System.Serializable]
     public class InventorySlot
     {
+        #region Private Fields
         [SerializeField] InventoryItemData _itemData;
+        #endregion
 
+        #region Public Fields
         public delegate void OnAssignDelegate(InventoryItemData item);
         public OnAssignDelegate OnAssign;
-
-        #region Getter
         public InventoryItemData ItemData => _itemData;
         #endregion
 
+        #region Public Methods
         public InventorySlot(InventoryItemData source, int amount)
         {
             _itemData = source;
@@ -68,5 +70,6 @@ namespace BulletHell.InventorySystem
         {
             _itemData.StackSize -= amount;
         }
+        #endregion
     }
 }

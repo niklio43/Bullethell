@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 [System.Serializable]
 public class Sound
 {
+    #region Public Fields
     public string name;
 
     public AudioClip clip;
@@ -19,4 +20,5 @@ public class Sound
     public AudioSource audio;
 
     public bool loop;
+    #endregion
 }

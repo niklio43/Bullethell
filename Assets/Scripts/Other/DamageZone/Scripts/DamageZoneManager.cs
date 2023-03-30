@@ -5,9 +5,12 @@ using BulletHell;
 
 public class DamageZoneManager : Singleton<DamageZoneManager>
 {
+    #region Private Fields
     static ObjectPool<DamageZone> _zonePool;
     static DamageZone _zone;
+    #endregion
 
+    #region Private Methods
     protected override void OnAwake()
     {
         _zone = Resources.Load<DamageZone>("DamageZone");
@@ -20,7 +23,9 @@ public class DamageZoneManager : Singleton<DamageZoneManager>
         zone.Initialize(_zonePool);
         return zone;
     }
+    #endregion
 
+    #region Public Methods
     public static DamageZone PlaceZone(Vector2 position, float size)
     {
         DamageZone zone = _zonePool.Get();
@@ -29,8 +34,5 @@ public class DamageZoneManager : Singleton<DamageZoneManager>
         zone.Indicate(size);
         return zone;
     }
-
-
-
-
+    #endregion
 }

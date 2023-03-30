@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    #region Private Fields
     [SerializeField] Camera _camera;
     [SerializeField] Transform _target;
     [SerializeField] float _threshold;
     [SerializeField, Range(-20, 0)] float _zoom;
     [SerializeField, Range(0, 5)] float _damping;
+    #endregion
 
+    #region Private Methods
     void FixedUpdate()
     {
         Vector3 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
@@ -20,4 +23,5 @@ public class CameraController : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, targetPos.y, _zoom), _damping * Time.fixedDeltaTime);
     }
+    #endregion
 }

@@ -1229,18 +1229,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _persistent: 0
   _input: {fileID: 1181653738}
-  Inventory: {fileID: 6570868405049808120}
+  _inventory: {fileID: 6570868405049808120}
   _infoWindowPrefab: {fileID: 8305457497077217802, guid: 0834ab29b0834064c8e18611dc0e7522, type: 3}
   _healthBar: {fileID: 1978408359319193799}
   _staminaBar: {fileID: 1280149869574675003}
   _statusEffectUIManager: {fileID: 1280149871137548084}
-  Forge: {fileID: 1731201331}
+  _forge: {fileID: 1731201331}
   _bloodCost: {fileID: 357509819}
   _forgeProgressBar: {fileID: 1079958660}
   _playerController: {fileID: 1181653735}
-  IsUpgrading: 0
   _largeMap: {fileID: 287756397}
-  _minimapCamera: {fileID: 1207070647}
+  _minimapCamera: {fileID: 1207070650}
   _minimapTexture: {fileID: 8400000, guid: c811f9b0fed847b45bba9cc5c2450950, type: 2}
   _largemapTexture: {fileID: 8400000, guid: e674013b8a37f0343b158aa983e67ed6, type: 2}
 --- !u!114 &289019621
@@ -1916,14 +1915,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9710fdb950442bbefdeb546184cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies:
-  - {fileID: 3263897386200201228, guid: 24b3e7a0400eb0c49a8f3e7237604895, type: 3}
-  - {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-  - {fileID: 5441612227424731693, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
-  _spawnRadius: 6.6
-  _instantiateRadius: 2.3
-  _enemiesPerWave: 4
-  player: {fileID: 1181653743}
 --- !u!1 &522521209
 GameObject:
   m_ObjectHideFlags: 0
@@ -13810,14 +13801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9710fdb950442bbefdeb546184cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies:
-  - {fileID: 3263897386200201228, guid: 24b3e7a0400eb0c49a8f3e7237604895, type: 3}
-  - {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-  - {fileID: 5441612227424731693, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
-  _spawnRadius: 6.6
-  _instantiateRadius: 2.3
-  _enemiesPerWave: 4
-  player: {fileID: 1181653743}
 --- !u!1 &1144734422 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8075015994817220101, guid: 1e3d99d4103b9234c9b1611bc42f82a8, type: 3}
@@ -14367,8 +14350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf0ce8a852439048bd2d05a902e2c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1181653743}
-  _mapZoom: 10
 --- !u!114 &1207070648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14680,14 +14661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9710fdb950442bbefdeb546184cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies:
-  - {fileID: 3263897386200201228, guid: 24b3e7a0400eb0c49a8f3e7237604895, type: 3}
-  - {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-  - {fileID: 5441612227424731693, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
-  _spawnRadius: 6.6
-  _instantiateRadius: 2.3
-  _enemiesPerWave: 4
-  player: {fileID: 1181653743}
 --- !u!1001 &1324336871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16059,14 +16032,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479a9710fdb950442bbefdeb546184cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies:
-  - {fileID: 3263897386200201228, guid: 24b3e7a0400eb0c49a8f3e7237604895, type: 3}
-  - {fileID: 8461412192270030066, guid: 72ec4605a80c9c2438b0bc94e6706c99, type: 3}
-  - {fileID: 5441612227424731693, guid: 29d27276254175749a07f2530ca5b3ec, type: 3}
-  _spawnRadius: 6.6
-  _instantiateRadius: 2.3
-  _enemiesPerWave: 4
-  player: {fileID: 1181653743}
 --- !u!1001 &1862021276
 PrefabInstance:
   m_ObjectHideFlags: 0

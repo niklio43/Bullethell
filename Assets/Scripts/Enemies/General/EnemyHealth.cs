@@ -7,9 +7,12 @@ namespace BulletHell.Enemies
 {
     public class EnemyHealth : MonoBehaviour, IDamageable, IHealable
     {
+        #region Private Fields
         [SerializeField] float _health;
         [SerializeField] float _maxHealth;
+        #endregion
 
+        #region Public Methods
         public void Damage(DamageValue Damage)
         {
             _health -= Damage.GetDamage();
@@ -28,5 +31,6 @@ namespace BulletHell.Enemies
             if(_health + amount > _maxHealth) { _health = _maxHealth; }
             else { _health = amount; }
         }
+        #endregion
     }
 }

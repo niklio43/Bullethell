@@ -7,6 +7,7 @@ namespace BulletHell.Player
 {
     public class PlayerInteracter : MonoBehaviour
     {
+        #region Private Fields
         [SerializeField, Range(0, 100f)] float _interactRadius = 5f;
         [SerializeField] Material _outlineShader;
         [SerializeField] Material _defaultMaterial;
@@ -15,9 +16,13 @@ namespace BulletHell.Player
         [SerializeField] InventoryHolder _equipmentInventory;
         LayerMask _interactableMask => 1 << LayerMask.NameToLayer("Interactable");
         IInteractable _closestInteractable = null;
+        #endregion
 
+        #region Public Fields
         public IInteractable ClosestInteractable { get { return _closestInteractable; } set { _closestInteractable = value; } }
+        #endregion
 
+        #region Private Methods
         void Awake()
         {
             _inventoryHolder = GetComponent<InventoryHolder>();
@@ -94,7 +99,9 @@ namespace BulletHell.Player
             if (distance > 0.5f) { return; }
             obj.GetComponent<DroppedItem>().Use(GetComponent<PlayerResources>());
         }
+        #endregion
 
+        #region Public Methods
         public void Interact()
         {
             if (_closestInteractable == null) return;
@@ -128,11 +135,14 @@ namespace BulletHell.Player
             }
             return false;
         }
+        #endregion
 
+        #region Gizmos
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, _interactRadius);
         }
+        #endregion
     }
 }

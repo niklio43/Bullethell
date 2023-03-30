@@ -8,12 +8,18 @@ namespace BulletHell.Enemies
     [System.Serializable]
     public class EnemyAbility
     {
+        #region Public Fields
         public Ability Ability;
+        #endregion
+
+        #region Private Fields
         [SerializeField] float _minDist;
         [SerializeField] float _maxDist;
 
         Enemy _owner;
+        #endregion
 
+        #region Public Methods
         public void Initialize(Enemy owner)
         {
             _owner = owner;
@@ -36,5 +42,6 @@ namespace BulletHell.Enemies
             float dist = Vector2.Distance(_owner.transform.position, _owner.Target.position);
             return Ability.CanCast() && (dist > _minDist && dist < _maxDist);
         }
+        #endregion
     }
 }

@@ -10,17 +10,20 @@ namespace BulletHell.InventorySystem
 {
     public class InventorySlotUI : MonoBehaviour, IDropHandler
     {
+        #region Private Fields
         [SerializeField] Image _itemSprite;
         [SerializeField] TextMeshProUGUI _itemCount;
         [SerializeField] InventorySlot _assignedInventorySlot;
         [SerializeField] ItemType _allowedItems;
+        #endregion
 
-        #region Getter
+        #region Public Fields
         public InventoryDisplay ParentDisplay { get; private set; }
         public ItemType AllowedItems => _allowedItems;
         public InventorySlot AssignedInventorySlot => _assignedInventorySlot;
         #endregion
 
+        #region Private Methods
         void Awake()
         {
             ClearSlot();
@@ -28,6 +31,16 @@ namespace BulletHell.InventorySystem
             ParentDisplay = transform.parent.GetComponent<InventoryDisplay>();
         }
 
+        void UpdateAssignedVariables(DraggableItem item)
+        {
+            var slot = item.parentAfterDrag.GetComponent<InventorySlotUI>();
+
+            slot._itemSprite = item.GetComponent<Image>();
+            slot._itemCount = item.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        }
+        #endregion
+
+        #region Public Methods
         public void Initialize(InventorySlot slot)
         {
             var unityDelegate = _assignedInventorySlot.OnAssign;
@@ -100,13 +113,6 @@ namespace BulletHell.InventorySystem
             UpdateAssignedVariables(draggableItem);
             UpdateAssignedVariables(currentObj.GetComponent<DraggableItem>());
         }
-
-        void UpdateAssignedVariables(DraggableItem item)
-        {
-            var slot = item.parentAfterDrag.GetComponent<InventorySlotUI>();
-
-            slot._itemSprite = item.GetComponent<Image>();
-            slot._itemCount = item.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        }
+        #endregion
     }
 }

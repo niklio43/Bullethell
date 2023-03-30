@@ -8,6 +8,7 @@ namespace BulletHell.Player
 {
     public class PlayerAbilities : MonoBehaviour
     {
+        #region Private Fields
         bool _isDashing = false;
         bool _isInteracting = false;
         bool _isInvincible = false;
@@ -18,16 +19,18 @@ namespace BulletHell.Player
         [SerializeField] List<Ability> _abilities = new List<Ability>();
         [SerializeField] PlayerAfterImageSprite _afterImage;
         [SerializeField] float _dashTime = .1f;
+        #endregion
 
-        #region Getters & Setters
+        #region Public Fields
         public ObjectPool<PlayerAfterImageSprite> AfterImagePool { get { return _afterImagePool; } }
-        public float DashTime { get { return _dashTime; } }
+        public float DashTime => _dashTime;
         public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
         public bool IsInteracting { get { return _isInteracting; } set { _isInteracting = value; } }
         public bool IsInvincible { get { return _isInvincible; } set { _isInvincible = value; } }
         public bool IsParrying { get { return _isParrying; } set { _isParrying = value; } }
         #endregion
 
+        #region Private Methods
         void Awake()
         {
             _afterImagePool = new ObjectPool<PlayerAfterImageSprite>(CreateAfterImage, 10, "AfterImagePool");
@@ -47,6 +50,17 @@ namespace BulletHell.Player
             }
         }
 
+        PlayerAfterImageSprite CreateAfterImage()
+        {
+            PlayerAfterImageSprite afterImage = Instantiate(_afterImage);
+
+            afterImage.Pool = _afterImagePool;
+
+            return afterImage;
+        }
+        #endregion
+
+        #region Public Methods
         public void Dash(int abilityIndex, InputAction.CallbackContext context)
         {
             if (context.performed && !_isDashing)
@@ -62,15 +76,7 @@ namespace BulletHell.Player
                 _abilities[abilityIndex].Cast(Vector3.zero);
             }
         }
-
-        PlayerAfterImageSprite CreateAfterImage()
-        {
-            PlayerAfterImageSprite afterImage = Instantiate(_afterImage);
-
-            afterImage.Pool = _afterImagePool;
-
-            return afterImage;
-        }
+        #endregion
 
         #region Component Caching
 

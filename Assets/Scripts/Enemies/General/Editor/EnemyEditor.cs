@@ -8,13 +8,18 @@ namespace BulletHell.Enemies
     [CustomEditor(typeof(Enemy))]
     public class EnemyEditor : Editor
     {
+        #region Private Fields
         Enemy _target;
+        #endregion
 
+        #region Public Methods
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
         }
+        #endregion
 
+        #region Private Methods
         private void OnSceneGUI()
         {
             Draw();
@@ -30,5 +35,6 @@ namespace BulletHell.Enemies
         {
             _target = (Enemy)target;
         }
+        #endregion
     }
 }

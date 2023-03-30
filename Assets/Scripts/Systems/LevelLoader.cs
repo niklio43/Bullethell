@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LevelLoader : Singleton<LevelLoader>
 {
+    #region Public Methods
     public async void LoadLoading(string sceneName)
     {
         var scene = SceneManager.LoadSceneAsync("Loading");
@@ -35,4 +36,5 @@ public class LevelLoader : Singleton<LevelLoader>
 
         scene.allowSceneActivation = true;
     }
+    #endregion
 }

@@ -7,18 +7,23 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
 {
     public class TrackBehaviour : BaseProjectileBehaviour
     {
+        #region Private Fields
         [SerializeField] float TrackRadius;
         [SerializeField] float TrackIntensity;
+        #endregion
 
-
+        #region Public Fields
         public override string Id() => "03";
+        #endregion
 
+        #region Public Methods
         public override void Initialize(Projectile owner, ProjectileData data)
         {
             owner.StartCoroutine(Track(owner, data));
         }
+        #endregion
 
-        
+        #region Private Methods
         IEnumerator Track(Projectile owner, ProjectileData data)
         {
             Transform currentTarget = null;
@@ -55,6 +60,6 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
 
             return closestCollider;
         }
-
+        #endregion
     }
 }

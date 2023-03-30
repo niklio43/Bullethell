@@ -8,8 +8,11 @@ namespace BulletHell.Enemies.Detection
     [CustomEditor(typeof(EnemyDetection))]
     public class DetectionEditor : Editor
     {
+        #region Private Fields
         EnemyDetection _target;
+        #endregion
 
+        #region Private Methods
         private void OnSceneGUI()
         {
             Draw();
@@ -29,5 +32,6 @@ namespace BulletHell.Enemies.Detection
         {
             _target = (EnemyDetection)target;
         }
+        #endregion
     }
 }

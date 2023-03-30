@@ -8,13 +8,19 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
     //[CreateAssetMenu(fileName = "AirborneBehaviour", menuName = "Emitters/ProjectileBehaviours/Airborne")]
     public class AirborneBehaviour : BaseProjectileBehaviour
     {
+        #region Private Fields
         [SerializeField] float _gravity = 9.8f;
         [SerializeField] float _impactSize = 2;
         [SerializeField] float _offset = 1;
         [SerializeField] float _maxDistance = 1;
         [SerializeField, Range(.1f, 10)] float flightDuration;
-        public override string Id() => "04";
+        #endregion
 
+        #region Public Fields
+        public override string Id() => "04";
+        #endregion
+
+        #region Public Methods
         public override void Initialize(Projectile owner, ProjectileData data)
         {
             Vector2 dir = owner.Target - owner.transform.position;
@@ -25,7 +31,9 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
 
             owner.StartCoroutine(ArcRoutine(target, owner, data));
         }
+        #endregion
 
+        #region Private Methods
         IEnumerator ArcRoutine(Vector2 target, Projectile owner, ProjectileData data)
         {
             Vector2 dir = target - (Vector2)owner.transform.position;
@@ -52,5 +60,6 @@ namespace BulletHell.Emitters.Projectiles.Behaviours
             owner.CheckCollision(zone.Activate());
             owner.ResetObject();
         }
+        #endregion
     }
 }

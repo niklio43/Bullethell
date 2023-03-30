@@ -8,14 +8,19 @@ namespace BulletHell.InventorySystem
 {
     public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
+        #region Public Fields
         [HideInInspector] public Transform parentAfterDrag;
         [HideInInspector] public bool IsDragging = false;
+        #endregion
 
+        #region Private Methods
         void Awake()
         {
             parentAfterDrag = transform.parent;
         }
+        #endregion
 
+        #region Public Methods
         public void OnBeginDrag(PointerEventData eventData)
         {
             IsDragging = true;
@@ -72,5 +77,6 @@ namespace BulletHell.InventorySystem
 
             return tags;
         }
+        #endregion
     }
 }

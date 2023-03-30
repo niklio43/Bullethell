@@ -26,22 +26,10 @@ namespace BulletHell.Map
         Room _activeRoom;
         #endregion
 
+        #region Private Methods
         private void Start()
         {
             BeginGeneration();
-        }
-
-        public void PlayerEnterRoom(Room room)
-        {
-            _activeRoom = room;
-            Debug.Log(room);
-            OnPlayerMoved?.Raise(this, room);
-        }
-
-        public void BeginGeneration()
-        {
-            Generator levelGenerator = new Generator(_config);
-            levelGenerator.BeginGeneration(OnCompletedGeneration);
         }
 
         void OnCompletedGeneration(List<Room> rooms)
@@ -59,5 +47,21 @@ namespace BulletHell.Map
 
             OnCompletedMapGeneration.Raise(this, _rooms);
         }
+        #endregion
+
+        #region Public Methods
+        public void PlayerEnterRoom(Room room)
+        {
+            _activeRoom = room;
+            Debug.Log(room);
+            OnPlayerMoved?.Raise(this, room);
+        }
+
+        public void BeginGeneration()
+        {
+            Generator levelGenerator = new Generator(_config);
+            levelGenerator.BeginGeneration(OnCompletedGeneration);
+        }
+        #endregion
     }
 }

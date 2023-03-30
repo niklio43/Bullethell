@@ -6,8 +6,11 @@ namespace BulletHell.Map.Generation
 {
     public static class GenerationUtilities
     {
+        #region Public Fields
         public static int CellSize => 20;
+        #endregion
 
+        #region Public Methods
         public static Vector2 GridToWorldPosition(Vector2Int pos) => GridToWorldPosition(pos.x, pos.y);
         public static Vector2 GridToWorldPosition(int x, int y)
         {
@@ -29,8 +32,6 @@ namespace BulletHell.Map.Generation
 
             return pos;
         }
-
-
-
+        #endregion
     }
 }

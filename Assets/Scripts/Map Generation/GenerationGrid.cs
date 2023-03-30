@@ -109,6 +109,7 @@ namespace BulletHell.Map.Generation
         public void SetDoors(Door[] doors) => _doors = doors;
         #endregion
 
+        #region Public Methods
         public GenerationCell(GenerationGrid grid, int x, int y)
         {
             _grid = grid;
@@ -126,6 +127,16 @@ namespace BulletHell.Map.Generation
             GetAndUpdateNeighbours();
         }
 
+        public void AddNeighbour(GenerationCell neighbour)
+        {
+            if (Neighbours.Contains(neighbour)) { return; }
+            Neighbours.Add(neighbour);
+        }
+        public Vector2Int GetGridPosition() => new Vector2Int(_posX, _posY);
+        public Vector2 GetWorldPositon() => GenerationUtilities.GridToWorldPosition(_posX, _posY);
+        #endregion
+
+        #region Private Methods
         void GetAndUpdateNeighbours()
         {
             Neighbours = _grid.GetNeighbouringCardinalCells(_posX, _posY);
@@ -133,15 +144,7 @@ namespace BulletHell.Map.Generation
                 neighbour.AddNeighbour(this);
             }
         }
-
-        public void AddNeighbour(GenerationCell neighbour)
-        {
-            if (Neighbours.Contains(neighbour)) { return; }
-            Neighbours.Add(neighbour);
-        }
-
-        public Vector2Int GetGridPosition() => new Vector2Int(_posX, _posY);
-        public Vector2 GetWorldPositon() => GenerationUtilities.GridToWorldPosition(_posX, _posY);
+        #endregion
 
         #region Gizmos
         public void Draw()

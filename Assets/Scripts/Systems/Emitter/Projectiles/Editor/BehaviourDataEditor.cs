@@ -12,9 +12,12 @@ namespace BulletHell.Emitters.Projectiles.Editor
     [CustomEditor(typeof(BaseProjectileBehaviour), true)]
     public class BehaviourDataEditor : Editor
     {
+        #region Private Fields
         VisualElement _root;
         BaseProjectileBehaviour _target;
+        #endregion
 
+        #region Public Methods
         public override VisualElement CreateInspectorGUI()
         {
             if (_target != null)
@@ -22,7 +25,9 @@ namespace BulletHell.Emitters.Projectiles.Editor
 
             return _root;
         }
+        #endregion
 
+        #region Private Methods
         void Redraw()
         {
             CreateRoot();
@@ -60,5 +65,6 @@ namespace BulletHell.Emitters.Projectiles.Editor
         {
             _target = target as BaseProjectileBehaviour;
         }
+        #endregion
     }
 }

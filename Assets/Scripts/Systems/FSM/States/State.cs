@@ -7,7 +7,11 @@ namespace BulletHell.FiniteStateMachine
 {
     public class State : IState
     {
+        #region Private Fields
         private readonly Dictionary<string, ITransition> _transitions = new Dictionary<string, ITransition>();
+        #endregion
+
+        #region Public Fields
         public Enum Id { get; }
         public List<IAction> Actions { get; } = new List<IAction>();
         public IFSM ParentFsm { get; }
@@ -17,6 +21,9 @@ namespace BulletHell.FiniteStateMachine
             ParentFsm = fsm;
             Id = id;
         }
+        #endregion
+
+        #region Public Methods
         public void AddTransition(ITransition transition)
         {
             _transitions[transition.Name] = transition;
@@ -58,5 +65,6 @@ namespace BulletHell.FiniteStateMachine
 
             ParentFsm.SetState(transition.Target);
         }
+        #endregion
     }
 }

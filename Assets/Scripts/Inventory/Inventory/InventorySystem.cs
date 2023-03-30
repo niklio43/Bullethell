@@ -9,15 +9,18 @@ namespace BulletHell.InventorySystem
     [System.Serializable]
     public class InventorySystem
     {
+        #region Private Fields
         [SerializeField] List<InventorySlot> _inventorySlots;
-
-        #region Getter
-        public List<InventorySlot> InventorySlots => _inventorySlots;
-        public int InventorySize => InventorySlots.Count;
         #endregion
 
-        public UnityAction<InventorySlot> OnInventorySlotChanged;
+        #region Public Fields
+        public List<InventorySlot> InventorySlots => _inventorySlots;
+        public int InventorySize => InventorySlots.Count;
 
+        public UnityAction<InventorySlot> OnInventorySlotChanged;
+        #endregion
+
+        #region Public Methods
         public InventorySystem(int size)
         {
             _inventorySlots = new List<InventorySlot>(size);
@@ -63,5 +66,6 @@ namespace BulletHell.InventorySystem
             freeSlot = InventorySlots.FirstOrDefault(i => i.ItemData == null); // Get first slot that is null or empty
             return freeSlot == null ? false : true;
         }
+        #endregion
     }
 }

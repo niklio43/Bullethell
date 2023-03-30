@@ -7,15 +7,21 @@ namespace BulletHell.InventorySystem
 {
     public abstract class Weapon : InventoryItemData
     {
+        #region Private Fields
         Pool _pool;
         [SerializeField] Ability _baseAbility;
         [SerializeField] List<Ability> _abilities = new List<Ability>();
+        #endregion
+
+        #region Public Fields
         public AnimatorOverrideController AnimatorController;
         public Pool Pool { get { return _pool; } set { _pool = value; } }
 
         public List<Ability> Abilities { get { return _abilities; } set { _abilities = value; } }
         public Ability BaseAbility { get { return _baseAbility; } }
+        #endregion
 
+        #region Public Methods
         public void Initialize(GameObject owner, GameObject host)
         {
             _baseAbility = Instantiate(_baseAbility);
@@ -51,5 +57,6 @@ namespace BulletHell.InventorySystem
             }
             _abilities.Add(ab);
         }
+        #endregion
     }
 }

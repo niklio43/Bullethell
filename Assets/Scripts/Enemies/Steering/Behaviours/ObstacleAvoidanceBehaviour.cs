@@ -8,6 +8,7 @@ namespace BulletHell.Enemies.Steering
     [CreateAssetMenu(fileName = "ObstacleAvoidanceBehaviour", menuName = "Enemies/Steering/Obstacle Avoidance Behaviour", order = 1)]
     public class ObstacleAvoidanceBehaviour : SteeringBehaviour
     {
+        #region Public Methods
         public override void GetSteering(AgentSteering steering, EnemyMovement movement)
         {
             Transform transform = movement.transform;
@@ -32,5 +33,6 @@ namespace BulletHell.Enemies.Steering
                 }
             }
         }
+        #endregion
     }
 }

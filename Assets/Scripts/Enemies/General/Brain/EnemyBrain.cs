@@ -8,16 +8,20 @@ namespace BulletHell.Enemies
     [CreateAssetMenu(fileName = "EnemyBrain", menuName = "Enemies/Brains/Default Brain", order = 1)]
     public class EnemyBrain : ScriptableObject
     {
+        #region Private Fields
         [SerializeField] protected List<EnemyAbility> abilities = new List<EnemyAbility>();
-        [HideInInspector] public EnemyAbility CurrentAbility = null;
-        public IFSM FSM { get; protected set; }
         Enemy _owner;
-
-        [HideInInspector] public bool LockState = false;
         bool _canAttack = true;
 
         float attackCoolDown = 1.5f;
         float _currentAttackCoolDown = 0;
+        #endregion
+
+        #region Public Fields
+        [HideInInspector] public EnemyAbility CurrentAbility = null;
+        public IFSM FSM { get; protected set; }
+
+        [HideInInspector] public bool LockState = false;
 
         public enum EnemyStates
         {
@@ -27,7 +31,9 @@ namespace BulletHell.Enemies
             Staggered,
             Stunned
         }
+        #endregion
 
+        #region Public Methods
         public virtual void Initialize(Enemy owner)
         {
             _owner = owner;
@@ -130,6 +136,25 @@ namespace BulletHell.Enemies
             return state;
         }
 
+        public virtual void UpdateBrain(float dt)
+        {
+            FSM.Update();
+
+            _currentAttackCoolDown += dt;
+
+            foreach (EnemyAbility ability in abilities) {
+                ability.UpdateAbility(Time.deltaTime);
+            }
+        }
+
+        public void SetState(EnemyStates state)
+        {
+            if(LockState) { return; }
+            FSM.SetState(state);
+        }
+        #endregion
+
+        #region Private Methods
         bool CanCastAbility()
         {
             foreach (EnemyAbility ability in abilities) {
@@ -147,23 +172,7 @@ namespace BulletHell.Enemies
                 abilities[i].Initialize(_owner);
             }
         }
-
-        public virtual void UpdateBrain(float dt)
-        {
-            FSM.Update();
-
-            _currentAttackCoolDown += dt;
-
-            foreach (EnemyAbility ability in abilities) {
-                ability.UpdateAbility(Time.deltaTime);
-            }
-        }
-
-        public void SetState(EnemyStates state)
-        {
-            if(LockState) { return; }
-            FSM.SetState(state);
-        }
+        #endregion
 
     }
 }

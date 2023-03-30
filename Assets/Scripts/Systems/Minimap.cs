@@ -47,5 +47,4 @@ public class Minimap : MonoBehaviour
         }
     }
     #endregion
-
 }

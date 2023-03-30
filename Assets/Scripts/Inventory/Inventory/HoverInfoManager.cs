@@ -11,15 +11,31 @@ using BulletHell.UI;
 
 public class HoverInfoManager : Singleton<HoverInfoManager>
 {
+    #region Private Fields
     HoverInfoUI _infoWindow;
+    #endregion
 
+    #region Public Fields
     public HoverInfoUI InfoWindow { get { return _infoWindow; } set { _infoWindow = value; } }
+    #endregion
 
+    #region Private Methods
     void Start()
     {
         HideInfo();
     }
 
+    void ShowAbilities(Ability ability)
+    {
+        AbilityInfo abilityInfo = Instantiate(_infoWindow.AbilityPrefab, _infoWindow.AbilityParent.transform);
+
+        abilityInfo.AbilityIcon.sprite = ability.GetIcon();
+        abilityInfo.AbilityName.text = ability.GetName();
+        abilityInfo.AbilityDescription.text = ability.GetDescription();
+    }
+    #endregion
+
+    #region Public Methods
     public void ShowInfo(InventoryItemData data)
     {
         if (data == null) { HideInfo(); return; }
@@ -48,15 +64,6 @@ public class HoverInfoManager : Singleton<HoverInfoManager>
         }
     }
 
-    void ShowAbilities(Ability ability)
-    {
-        AbilityInfo abilityInfo = Instantiate(_infoWindow.AbilityPrefab, _infoWindow.AbilityParent.transform);
-
-        abilityInfo.AbilityIcon.sprite = ability.GetIcon();
-        abilityInfo.AbilityName.text = ability.GetName();
-        abilityInfo.AbilityDescription.text = ability.GetDescription();
-    }
-
     public void HideInfo()
     {
         _infoWindow.Icon.sprite = default;
@@ -71,4 +78,5 @@ public class HoverInfoManager : Singleton<HoverInfoManager>
 
         _infoWindow.gameObject.SetActive(false);
     }
+    #endregion
 }

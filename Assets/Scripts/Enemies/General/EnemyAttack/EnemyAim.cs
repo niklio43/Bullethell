@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAim : MonoBehaviour
 {
+    #region Public Methods
     public void UpdateAim(Transform target)
     {
         if (target == null) return;
@@ -17,5 +18,5 @@ public class EnemyAim : MonoBehaviour
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y * -1, 0);
     }
-
+    #endregion
 }

@@ -9,9 +9,12 @@ namespace BulletHell.InventorySystem
 {
     public class MouseObj : MonoBehaviour
     {
+        #region Public Fields
         public InventorySlot AssignedInventorySlot;
         public InventorySlotUI Sender;
+        #endregion
 
+        #region Public Methods
         public void UpdateMouseSlot(InventorySlotUI invSlotUI)
         {
             Sender = invSlotUI;
@@ -25,5 +28,6 @@ namespace BulletHell.InventorySystem
             AssignedInventorySlot.ClearSlot();
             AssignedInventorySlot.OnAssign = null;
         }
+        #endregion
     }
 }

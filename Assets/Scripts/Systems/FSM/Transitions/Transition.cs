@@ -7,6 +7,7 @@ namespace BulletHell.FiniteStateMachine
 {
     public class Transition : ITransition
     {
+        #region Public Fields
         public string Name { get; }
 
         public Enum Target { get; }
@@ -16,5 +17,6 @@ namespace BulletHell.FiniteStateMachine
             Name = name;
             Target = target;
         }
+        #endregion
     }
 }

@@ -6,34 +6,20 @@ using System;
 
 public class DamageZone : MonoBehaviour, IPoolable
 {
+    #region Private Fields
     ObjectPool<DamageZone> _pool;
     SpriteRenderer _spriteRenderer;
 
     float _size = 0;
+    #endregion
 
+    #region Private Methods
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.material = Instantiate(_spriteRenderer.material);
 
         transform.localScale = Vector3.zero;
-    }
-
-    public void Initialize(ObjectPool<DamageZone> pool)
-    {
-        _pool = pool;
-    }
-
-    public void Indicate(float size)
-    {
-        _size = size;
-        StartCoroutine(Animate(size, .35f));
-    }
-
-    public Collider2D[] Activate()
-    {
-        StartCoroutine(DamageRoutine());
-        return CheckDamage(_size);
     }
 
     Collider2D[] CheckDamage(float size)
@@ -72,6 +58,25 @@ public class DamageZone : MonoBehaviour, IPoolable
         _spriteRenderer.material.SetFloat("_maskScale", 0);
         ResetObject();
     }
+    #endregion
+
+    #region Public Methods
+    public void Initialize(ObjectPool<DamageZone> pool)
+    {
+        _pool = pool;
+    }
+
+    public void Indicate(float size)
+    {
+        _size = size;
+        StartCoroutine(Animate(size, .35f));
+    }
+
+    public Collider2D[] Activate()
+    {
+        StartCoroutine(DamageRoutine());
+        return CheckDamage(_size);
+    }
 
     public void ResetObject()
     {
@@ -80,4 +85,5 @@ public class DamageZone : MonoBehaviour, IPoolable
         gameObject.SetActive(false);
         _pool.Release(this);
     }
+    #endregion
 }

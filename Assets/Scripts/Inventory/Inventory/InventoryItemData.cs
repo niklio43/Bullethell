@@ -6,6 +6,7 @@ namespace BulletHell.InventorySystem
 {
     public class InventoryItemData : ScriptableObject
     {
+        #region Public Fields
         public int ID { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
@@ -15,6 +16,7 @@ namespace BulletHell.InventorySystem
         public int StackSize { get; set; }
         public Rarity Rarity { get; set; }
         public ItemType ItemType { get; set; }
+        #endregion
     }
     public enum Rarity
     {

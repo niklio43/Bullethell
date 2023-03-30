@@ -7,10 +7,16 @@ namespace BulletHell.FiniteStateMachine
 {
     public class StateBuilder
     {
+        #region Public Fields
         public Enum Id { get; set; }
+        #endregion
+
+        #region Private Fields
         private readonly List<ITransition> _transitions = new List<ITransition>();
         private readonly List<IAction> _actions = new List<IAction>();
+        #endregion
 
+        #region Public Methods
         public StateBuilder SetTransition(string change, Enum id)
         {
             _transitions.Add(new Transition(change, id));
@@ -115,5 +121,6 @@ namespace BulletHell.FiniteStateMachine
 
             return state;
         }
+        #endregion
     }
 }
