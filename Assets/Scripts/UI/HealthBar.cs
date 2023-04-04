@@ -8,12 +8,13 @@ namespace BulletHell.UI
 {
     public class HealthBar : MonoBehaviour
     {
+        #region Private Fields
         [SerializeField] Image _fill;
         [SerializeField] float _flashTime = .1f;
         [SerializeField] TextMeshProUGUI _healthText;
-        PlayerResources _playerResources;
-
         Slider _slider;
+        float _health, _maxHealth;
+        #endregion
 
         private void Awake()
         {
@@ -21,21 +22,28 @@ namespace BulletHell.UI
             _fill.material = Instantiate(_fill.material);
         }
 
-        public void Initialize(PlayerResources playerResources)
+        public void OnHealthChanged(Component sender, object data)
         {
-            _playerResources = playerResources;
-            _playerResources.OnHealthChanged += UpdateBar;
-            UpdateBar();
+            if(data is not float) { return; }
+            _health = (float)data;
+            UpdateBar(_health, _maxHealth);
         }
 
-        void UpdateBar()
+        public void OnMaxHealthChanged(Component sender, object data)
         {
-            if(_playerResources.Health > _slider.maxValue)
+            if (data is not float) { return; }
+            _maxHealth = (float)data;
+            UpdateBar(_health, _maxHealth);
+        }
+
+        void UpdateBar(float currentHealth, float maxHealth)
+        {
+            if(maxHealth > _slider.maxValue)
             {
-                _slider.maxValue = _playerResources.Health;
+                _slider.maxValue = currentHealth;
             }
-            _slider.value = _playerResources.Health;
-            _healthText.text = string.Concat(_playerResources.Health, "/", _playerResources.MaxHealth);
+            _slider.value = currentHealth;
+            _healthText.text = string.Concat(currentHealth, "/", maxHealth);
             StartCoroutine(Flash());
         }
 

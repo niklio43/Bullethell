@@ -68,11 +68,6 @@ namespace BulletHell.UI
         #endregion
 
         #region Public Methods
-        public static void Initialize(PlayerController playerController)
-        {
-            Health.Initialize(playerController.PlayerResources);
-            Stamina.Initialize(playerController.PlayerResources);
-        }
 
         public void SetCost(float amount)
         {
