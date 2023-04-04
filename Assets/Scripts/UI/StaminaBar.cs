@@ -23,7 +23,6 @@ namespace BulletHell.UI {
 
         public void OnStaminaChanged(Component sender, object data)
         {
-            Debug.Log("stamina changed");
             if (data is not int) { return; }
             _currentStaminaCount = (int)data;
             UpdateBar(sender as PlayerResources);
@@ -31,7 +30,6 @@ namespace BulletHell.UI {
 
         void UpdateBar(PlayerResources playerResources)
         {
-            Debug.Log("update");
             int amountToAdd = playerResources.Stamina - _currentStaminaCount;
             if (amountToAdd == 0) return;
             _currentStaminaCount += amountToAdd;
