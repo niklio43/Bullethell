@@ -4,7 +4,6 @@ using BulletHell.Abilities;
 using System;
 using BulletHell.Player;
 using BulletHell.InventorySystem;
-using BulletHell.GameEventSystem;
 
 public class WeaponController : MonoBehaviour
 {
