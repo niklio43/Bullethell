@@ -25,7 +25,7 @@ public class PlayerResources : MonoBehaviour, IDamageable, IHealable, IKillable
         OnHealthChanged.Raise(this, Health);
         OnMaxHealthChanged.Raise(this, MaxHealth);
         OnStaminaChanged.Raise(this, Stamina);
-        OnStaminaChanged.Raise(this, MaxStamina);
+        OnMaxStaminaChanged.Raise(this, MaxStamina);
     }
 
     #region Public Methods

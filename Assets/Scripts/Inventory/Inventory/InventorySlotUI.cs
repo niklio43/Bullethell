@@ -43,9 +43,9 @@ namespace BulletHell.InventorySystem
         #region Public Methods
         public void Initialize(InventorySlot slot)
         {
-            var unityDelegate = _assignedInventorySlot.OnAssign;
+            var gameEvent = _assignedInventorySlot.OnInventorySlotAssigned;
             _assignedInventorySlot = slot;
-            _assignedInventorySlot.OnAssign = unityDelegate;
+            _assignedInventorySlot.OnInventorySlotAssigned = gameEvent;
 
             UpdateUISlot(slot);
         }

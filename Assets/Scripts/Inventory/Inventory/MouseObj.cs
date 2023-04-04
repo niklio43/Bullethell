@@ -19,14 +19,14 @@ namespace BulletHell.InventorySystem
         {
             Sender = invSlotUI;
             AssignedInventorySlot?.AssignItem(Sender.AssignedInventorySlot.ItemData);
-            AssignedInventorySlot.OnAssign = Sender.AssignedInventorySlot.OnAssign;
+            AssignedInventorySlot.OnInventorySlotAssigned = Sender.AssignedInventorySlot.OnInventorySlotAssigned;
         }
 
         public void ClearSlot()
         {
             Sender = null;
             AssignedInventorySlot.ClearSlot();
-            AssignedInventorySlot.OnAssign = null;
+            AssignedInventorySlot.OnInventorySlotAssigned = null;
         }
         #endregion
     }

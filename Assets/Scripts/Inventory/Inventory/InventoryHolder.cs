@@ -29,7 +29,7 @@ namespace BulletHell.InventorySystem
         {
             foreach(InventorySlot slot in _inventorySystem.InventorySlots)
             {
-                slot?.OnAssign?.Invoke(slot.ItemData);
+                slot?.OnInventorySlotAssigned?.Raise(null, slot.ItemData);
             }
         }
         #endregion

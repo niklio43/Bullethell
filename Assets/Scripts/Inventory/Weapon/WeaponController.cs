@@ -4,6 +4,7 @@ using BulletHell.Abilities;
 using System;
 using BulletHell.Player;
 using BulletHell.InventorySystem;
+using BulletHell.GameEventSystem;
 
 public class WeaponController : MonoBehaviour
 {
@@ -19,43 +20,36 @@ public class WeaponController : MonoBehaviour
     Weapon _primaryWeapon;
     Weapon _secondaryWeapon;
     [SerializeField] PlayerController _player;
-    [SerializeField] InventorySlotUI _primaryWeaponSlot;
-    [SerializeField] InventorySlotUI _secondaryWeaponSlot;
-    #endregion
-
-    #region Private Methods
-    void Start()
-    {
-        _primaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignPrimaryWeapon;
-        _secondaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignSecondaryWeapon;
-    }
     #endregion
 
     #region Public Methods
-    public void AssignPrimaryWeapon(InventoryItemData item)
+
+    public void AssignPrimaryWeapon(Component sender, object data)
     {
-        if (item == null)
-        {
-            UnAssignWeapon(_primaryWeapon);
-            _primaryWeapon = null;
-            EquippedWeaponUI.Instance.SetWeapon(null, false, true);
-            return;
-        }
+        UnAssignWeapon(_primaryWeapon);
+        _primaryWeapon = null;
+        EquippedWeaponUI.Instance.SetWeapon(null, false, true);
+
+        if (data is not InventoryItemData) { return; }
+        var item = data as InventoryItemData;
+        if(item is not Weapon) { return; }
+
         _primaryWeapon = item as Weapon;
         EquippedWeaponUI.Instance.SetWeapon(_primaryWeapon.Icon, true, true);
         EquippedWeaponUI.Instance.SetActiveWeapon(true);
         AssignWeapon(_primaryWeapon);
     }
 
-    public void AssignSecondaryWeapon(InventoryItemData item)
+    public void AssignSecondaryWeapon(Component sender, object data)
     {
-        if (item == null)
-        {
-            UnAssignWeapon(_secondaryWeapon);
-            _secondaryWeapon = null;
-            EquippedWeaponUI.Instance.SetWeapon(null, false, false);
-            return;
-        }
+        UnAssignWeapon(_secondaryWeapon);
+        _secondaryWeapon = null;
+        EquippedWeaponUI.Instance.SetWeapon(null, false, false);
+
+        if (data is not InventoryItemData) { return; }
+        var item = data as InventoryItemData;
+        if (item is not Weapon) { return; }
+
         _secondaryWeapon = item as Weapon;
         EquippedWeaponUI.Instance.SetWeapon(_secondaryWeapon.Icon, true, false);
     }
@@ -76,7 +70,23 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void AssignWeapon(Weapon weapon)
+    public void Attack()
+    {
+        if (_equippedWeapon == null) { return; }
+        _equippedWeapon.BaseAbility.Cast(_player.PlayerMovement.MousePosition);
+    }
+
+    public void UseAbility(int abilityIndex)
+    {
+        if (_equippedWeapon == null) { return; }
+        if (abilityIndex > _equippedWeapon.Abilities.Count - 1 || _equippedWeapon.Abilities[abilityIndex] == null) { return; }
+
+        _equippedWeapon.Abilities[abilityIndex].Cast(_player.PlayerMovement.MousePosition);
+    }
+    #endregion
+
+    #region Private Methods
+    void AssignWeapon(Weapon weapon)
     {
         UnAssignWeapon(weapon);
         weapon.Initialize(_player.gameObject, gameObject);
@@ -98,7 +108,7 @@ public class WeaponController : MonoBehaviour
         _equippedWeapon = weapon;
     }
 
-    public void UnAssignWeapon(Weapon weapon)
+    void UnAssignWeapon(Weapon weapon)
     {
         if (weapon == null) { return; }
         GetComponent<SpriteRenderer>().sprite = null;
@@ -110,20 +120,6 @@ public class WeaponController : MonoBehaviour
         GetComponent<Animator>().runtimeAnimatorController = null;
         weapon.Uninitialize();
         _equippedWeapon = null;
-    }
-
-    public void Attack()
-    {
-        if (_equippedWeapon == null) { return; }
-        _equippedWeapon.BaseAbility.Cast(_player.PlayerMovement.MousePosition);
-    }
-
-    public void UseAbility(int abilityIndex)
-    {
-        if (_equippedWeapon == null) { return; }
-        if (abilityIndex > _equippedWeapon.Abilities.Count - 1 || _equippedWeapon.Abilities[abilityIndex] == null) { return; }
-
-        _equippedWeapon.Abilities[abilityIndex].Cast(_player.PlayerMovement.MousePosition);
     }
     #endregion
 

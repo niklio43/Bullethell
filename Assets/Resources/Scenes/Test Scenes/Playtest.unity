@@ -7256,6 +7256,7 @@ GameObject:
   - component: {fileID: 928942587}
   - component: {fileID: 928942585}
   - component: {fileID: 928942589}
+  - component: {fileID: 928942590}
   m_Layer: 6
   m_Name: Forge
   m_TagString: Untagged
@@ -7362,6 +7363,35 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.28
+--- !u!114 &928942590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928942584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ffa7272d42be24d8d349bda9aaaf1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listeners:
+  - Event: {fileID: 11400000, guid: f2211708e7bd4a44a81e79cf09723723, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 928942585}
+          m_TargetAssemblyTypeName: Forge, Assembly-CSharp
+          m_MethodName: AssignWeaponToUpgrade
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &929190152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14240,6 +14270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AssignedInventorySlot:
     _itemData: {fileID: 0}
+    OnInventorySlotAssigned: {fileID: 0}
   Sender: {fileID: 0}
 --- !u!114 &1181653750
 MonoBehaviour:
@@ -15416,6 +15447,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4623565676832941913, guid: 1e3d99d4103b9234c9b1611bc42f82a8, type: 3}
+      propertyPath: _assignedInventorySlot.OnInventorySlotAssigned
+      value: 
+      objectReference: {fileID: 11400000, guid: f2211708e7bd4a44a81e79cf09723723, type: 2}
+    - target: {fileID: 4623565676832941913, guid: 1e3d99d4103b9234c9b1611bc42f82a8, type: 3}
       propertyPath: _assignedInventorySlot.OnAssign.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -16519,6 +16554,7 @@ GameObject:
   - component: {fileID: 1992674396}
   - component: {fileID: 1992674397}
   - component: {fileID: 1992674395}
+  - component: {fileID: 1992674399}
   m_Layer: 7
   m_Name: Weapon
   m_TagString: Untagged
@@ -16593,8 +16629,6 @@ MonoBehaviour:
   CircleOrigin: {fileID: 1423690934}
   Radius: 0.6
   _player: {fileID: 1181653735}
-  _primaryWeaponSlot: {fileID: 4623565677192367360}
-  _secondaryWeaponSlot: {fileID: 4623565677636128914}
 --- !u!212 &1992674398
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16647,6 +16681,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1992674399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992674391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ffa7272d42be24d8d349bda9aaaf1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listeners:
+  - Event: {fileID: 11400000, guid: d240702fd4e634948ae4164e372ec86c, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1992674397}
+          m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+          m_MethodName: AssignPrimaryWeapon
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Event: {fileID: 11400000, guid: 97dc93460d6c3334f9145aef00427635, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1992674397}
+          m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+          m_MethodName: AssignSecondaryWeapon
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &2031068736 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 348080579296137917, guid: 1e3d99d4103b9234c9b1611bc42f82a8, type: 3}
@@ -17924,6 +18003,7 @@ GameObject:
   - component: {fileID: 1280149869574675000}
   - component: {fileID: 1280149869574675001}
   - component: {fileID: 1280149869574675003}
+  - component: {fileID: 1280149869574675008}
   m_Layer: 5
   m_Name: StaminaBar
   m_TagString: Untagged
@@ -17931,6 +18011,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1280149869574675008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280149869574675007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ffa7272d42be24d8d349bda9aaaf1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listeners:
+  - Event: {fileID: 11400000, guid: 47205f326f9fe8445ae0deda27d0ad71, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1280149869574675003}
+          m_TargetAssemblyTypeName: BulletHell.UI.StaminaBar, Assembly-CSharp
+          m_MethodName: OnStaminaChanged
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Event: {fileID: 11400000, guid: 4d4f8dc176822d245af49867c7f0621a, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1280149869574675003}
+          m_TargetAssemblyTypeName: BulletHell.UI.StaminaBar, Assembly-CSharp
+          m_MethodName: OnMaxStaminaChanged
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1280149869584036316
 GameObject:
   m_ObjectHideFlags: 0
@@ -20235,6 +20360,7 @@ MonoBehaviour:
   _itemCount: {fileID: 4002321155906341623}
   _assignedInventorySlot:
     _itemData: {fileID: 0}
+    OnInventorySlotAssigned: {fileID: 11400000, guid: d240702fd4e634948ae4164e372ec86c, type: 2}
   _allowedItems: 1
 --- !u!114 &4623565677636128914
 MonoBehaviour:
@@ -20252,6 +20378,7 @@ MonoBehaviour:
   _itemCount: {fileID: 4002321156552644453}
   _assignedInventorySlot:
     _itemData: {fileID: 0}
+    OnInventorySlotAssigned: {fileID: 11400000, guid: 97dc93460d6c3334f9145aef00427635, type: 2}
   _allowedItems: 1
 --- !u!222 &4700459067961526070
 CanvasRenderer:
