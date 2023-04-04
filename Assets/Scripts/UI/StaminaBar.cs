@@ -13,7 +13,6 @@ namespace BulletHell.UI {
 
         RectTransform _rectTransform;
         SpriteRenderer _spriteRenderer;
-        PlayerResources _playerResources;
 
         private void Awake()
         {
@@ -22,16 +21,18 @@ namespace BulletHell.UI {
             _image.material = Instantiate(_image.material);
         }
 
-        public void Initialize(PlayerResources playerResources)
+        public void OnStaminaChanged(Component sender, object data)
         {
-            _playerResources = playerResources;
-            _playerResources.OnStaminaChanged += UpdateBar;
-            UpdateBar();
+            Debug.Log("stamina changed");
+            if (data is not int) { return; }
+            _currentStaminaCount = (int)data;
+            UpdateBar(sender as PlayerResources);
         }
 
-        void UpdateBar()
+        void UpdateBar(PlayerResources playerResources)
         {
-            int amountToAdd = _playerResources.Stamina - _currentStaminaCount;
+            Debug.Log("update");
+            int amountToAdd = playerResources.Stamina - _currentStaminaCount;
             if (amountToAdd == 0) return;
             _currentStaminaCount += amountToAdd;
             _rectTransform.sizeDelta = new Vector2(100 * _currentStaminaCount, 100);

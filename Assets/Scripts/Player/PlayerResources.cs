@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.EffectInterfaces;
 using BulletHell;
+using BulletHell.GameEventSystem;
 
 public class PlayerResources : MonoBehaviour, IDamageable, IHealable, IKillable
 {
@@ -12,32 +13,40 @@ public class PlayerResources : MonoBehaviour, IDamageable, IHealable, IKillable
     public int Stamina;
     public float MaxStamina;
 
-    public delegate void OnHealthChangedDelegate();
-    public event OnHealthChangedDelegate OnHealthChanged;
-
-    public delegate void OnStaminaChangedDelegate();
-    public event OnStaminaChangedDelegate OnStaminaChanged;
+    [Header("Events")]
+    public SOGameEvent OnHealthChanged;
+    public SOGameEvent OnMaxHealthChanged;
+    public SOGameEvent OnStaminaChanged;
+    public SOGameEvent OnMaxStaminaChanged;
     #endregion
+
+    void Start()
+    {
+        OnHealthChanged.Raise(this, Health);
+        OnMaxHealthChanged.Raise(this, MaxHealth);
+        OnStaminaChanged.Raise(this, Stamina);
+        OnStaminaChanged.Raise(this, MaxStamina);
+    }
 
     #region Public Methods
     public void Damage(DamageValue Damage)
     {
         Health -= Damage.GetDamage();
-        OnHealthChanged?.Invoke();
+        OnHealthChanged.Raise(this, Health);
         if(Health <= 0) { Kill(); }
     }
 
     public void UseStamina(int amount)
     {
         Stamina -= amount;
-        OnStaminaChanged?.Invoke();
+        OnStaminaChanged.Raise(this, Stamina);
         Invoke("AddStamina", 1);
     }
 
     public void AddStamina()
     {
         Stamina++;
-        OnStaminaChanged?.Invoke();
+        OnStaminaChanged.Raise(this, Stamina);
     }
 
     public void Heal(float amount)
@@ -48,13 +57,13 @@ public class PlayerResources : MonoBehaviour, IDamageable, IHealable, IKillable
             return;
         }
         Health += amount;
-        OnHealthChanged?.Invoke();
+        OnHealthChanged.Raise(this, Health);
     }
 
     public void ModifyMaxHealth(float amount)
     {
         MaxHealth += amount;
-        OnHealthChanged?.Invoke();
+        OnMaxHealthChanged.Raise(this, MaxHealth);
     }
 
     public void Kill()

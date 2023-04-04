@@ -14287,6 +14287,10 @@ MonoBehaviour:
   MaxHealth: 100
   Stamina: 5
   MaxStamina: 5
+  OnHealthChanged: {fileID: 11400000, guid: 5457effc95e04b94d85dd71e5c7d301a, type: 2}
+  OnMaxHealthChanged: {fileID: 11400000, guid: 3ce7d9f15cac9944ba172ecb535d5164, type: 2}
+  OnStaminaChanged: {fileID: 11400000, guid: 47205f326f9fe8445ae0deda27d0ad71, type: 2}
+  OnMaxStaminaChanged: {fileID: 11400000, guid: 4d4f8dc176822d245af49867c7f0621a, type: 2}
 --- !u!114 &1181653754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17708,6 +17712,7 @@ GameObject:
   - component: {fileID: 1280149869469638470}
   - component: {fileID: 1280149869469638471}
   - component: {fileID: 1978408359319193799}
+  - component: {fileID: 1978408359319193800}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -18751,6 +18756,51 @@ MonoBehaviour:
   _fill: {fileID: 1280149869703619355}
   _flashTime: 0.1
   _healthText: {fileID: 2100149428}
+--- !u!114 &1978408359319193800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280149869469638469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ffa7272d42be24d8d349bda9aaaf1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listeners:
+  - Event: {fileID: 11400000, guid: 5457effc95e04b94d85dd71e5c7d301a, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1978408359319193799}
+          m_TargetAssemblyTypeName: BulletHell.UI.HealthBar, Assembly-CSharp
+          m_MethodName: OnHealthChanged
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Event: {fileID: 11400000, guid: 3ce7d9f15cac9944ba172ecb535d5164, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1978408359319193799}
+          m_TargetAssemblyTypeName: BulletHell.UI.HealthBar, Assembly-CSharp
+          m_MethodName: OnMaxHealthChanged
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2123854947998457071
 MonoBehaviour:
   m_ObjectHideFlags: 0

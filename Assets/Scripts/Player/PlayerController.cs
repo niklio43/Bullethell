@@ -40,11 +40,6 @@ namespace BulletHell.Player
             _unitStatusEffects.OnRemovedStatusEffect += OnRemovedStatusEffect;
         }
 
-        void Start()
-        {
-            PlayerUI.Initialize(this);
-        }
-
         void FixedUpdate()
         {
             _playerBrain.UpdateBrain();
