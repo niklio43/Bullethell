@@ -9,28 +9,26 @@ namespace BulletHell.Map.RoomEvents
 {
     public class RoomEnemySpawnEvent : RoomEvent
     {
+        #region Public Fields
+        #endregion
+
         #region Private Fields
         [SerializeField] int _amountOfWaves;
-
-        [Space(10)]
         [SerializeField] List<SpawnPoint> _spawnPoints;
-        List<EnemySpawner> _spawners = new List<EnemySpawner>();
 
+        List<EnemySpawner> _spawners = new List<EnemySpawner>();
         List<EnemySpawner> _activeSpawners = new List<EnemySpawner>();
         int _currentWave = 0;
+
         #endregion
 
         #region Public Methods
-        public RoomEnemySpawnEvent(RoomEventQueue queue, string name) : base(queue, name) { }
-        #endregion
-
-        #region Private Methods
-        protected override void StartEvent()
+        public override void StartEvent(Room room)
         {
             _spawners = new List<EnemySpawner>();
             foreach (SpawnPoint point in _spawnPoints) {
-                EnemyCollectionGroup group = _room.Manager.EnemyCollectionGroup;
-                Vector2 position = (Vector2)_room.transform.position + point.Position;
+                EnemyCollectionGroup group = room.Manager.EnemyCollectionGroup;
+                Vector2 position = (Vector2)transform.position + point.Position;
 
                 EnemySpawner newSpawner = new EnemySpawner(group, position, point.Radius, point.MinAmount, point.MaxAmount);
                 _spawners.Add(newSpawner);
@@ -38,13 +36,15 @@ namespace BulletHell.Map.RoomEvents
 
             SpawnWave();
         }
+        #endregion
 
+        #region Private Methods
         private void SpawnWave()
         {
             _currentWave++;
 
             if(_currentWave > _amountOfWaves) {
-                Done();
+                _completed = true;
                 return;
             }
 
@@ -68,7 +68,8 @@ namespace BulletHell.Map.RoomEvents
         #endregion
 
         #region Gizmos
-        public override void DrawGizmosSelected(Transform transform)
+
+        private void OnDrawGizmosSelected()
         {
             if (_spawnPoints == null) { return; }
             Gizmos.color = Color.red;

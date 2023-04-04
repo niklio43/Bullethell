@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fb69c2703f6b040a10a42bb089f38e, type: 3}
   m_Name: D1_Config
   m_EditorClassIdentifier: 
-  SizeX: 60
-  SizeY: 60
+  SizeX: 20
+  SizeY: 20
   _randomSeed: 1
   _seed: 4680
-  RandomWalkSteps: 10
-  Size: 40
+  RandomWalkSteps: 5
+  Size: 20
   SpecialRooms:
   - _roomOriginal: {fileID: 891278719455284213, guid: 1df00222a3e4c7f4f81b5d9284c4fa9a, type: 3}
     _occupyingSquare: 4

@@ -13,7 +13,18 @@ namespace BulletHell.GameEventSystem
         #endregion
 
         #region Private Fields
-        private List<GameEventListener> _eventListeners = new List<GameEventListener>();
+        private List<GameEventListener> m_eventListeners = new List<GameEventListener>();
+        private List<GameEventListener> _eventListeners
+        {
+            get {
+                if(m_eventListeners == null) {
+                    m_eventListeners = new List<GameEventListener>();
+                }
+                return m_eventListeners;
+            }
+        }
+
+
         private Action<Component, object> _onEventRaised;
         #endregion
 

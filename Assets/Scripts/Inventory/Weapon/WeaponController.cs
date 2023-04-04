@@ -26,8 +26,8 @@ public class WeaponController : MonoBehaviour
     #region Private Methods
     void Start()
     {
-        _primaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignPrimaryWeapon;
-        _secondaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignSecondaryWeapon;
+        //_primaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignPrimaryWeapon;
+        //_secondaryWeaponSlot.AssignedInventorySlot.OnAssign += AssignSecondaryWeapon;
     }
     #endregion
 

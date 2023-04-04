@@ -7,84 +7,84 @@ namespace BulletHell.Map.RoomEvents
     public class RoomEventQueue : MonoBehaviour
     {
         #region Public Fields
-        [SerializeReference] 
-        public List<RoomEvent> RoomEvents;
+        [SerializeField] private List<OnIntializeRoomEvent> RoomEventsOnInitialize;
+        [SerializeField] private List<QueuedRoomEvent> RoomEvents;
         #endregion
 
         #region Private Fields
         private Room _room;
-        private int _queueIndex;
         #endregion
 
         #region Public Methods
 
-        public void StartQueue()
+        public void OnInitialize(Room room)
         {
-            _queueIndex = 0;
-            NextInQueue();
-        }
-
-        public void NextInQueue()
-        {
-            if(_queueIndex >= RoomEvents.Count) {
-                _room.RoomCleared();
-                return;
+            foreach (var roomEvent in RoomEventsOnInitialize) {
+                roomEvent.Event.StartEvent(room);
             }
-
-            RoomEvent lastRoomEvent = RoomEvents[_queueIndex];
-            RoomEvents[_queueIndex].StartEvent(_room);
-            _queueIndex++;
-
-            while(_queueIndex < RoomEvents.Count) {
-                if(RoomEvents[_queueIndex].StartPolicy == StartPolicy.After) {
-                    break;
-                }
-
-                lastRoomEvent = RoomEvents[_queueIndex];
-                RoomEvents[_queueIndex].StartEvent(_room);
-
-                _queueIndex++;
-            }
-
-            lastRoomEvent.OnFinished(NextInQueue);
         }
 
 
-        #region Add Events
-        [ContextMenu("Add Event/Open Event")] public void AddOpenEvent() => RoomEvents.Add(new RoomOpenEvent(this, "OpenEvent"));
-        [ContextMenu("Add Event/Close Event")] public void AddCloseEvent() => RoomEvents.Add(new RoomCloseEvent(this, "CloseEvent"));
-        [ContextMenu("Add Event/Spawn Event")] public void AddEnemySpawnEvent() => RoomEvents.Add(new RoomEnemySpawnEvent(this, "EnemySpawnEvent"));
-        #endregion
+        public void StartQueue(Room room)
+        {
+            _room = room;
+            Queue<QueuedRoomEvent> queue = new Queue<QueuedRoomEvent>(RoomEvents);
+            StartCoroutine(QueueRoutine(queue));
+        }
 
+
+        //_room.RoomCleared();
         #endregion
 
         #region Private Methods
-        private void Awake()
+        IEnumerator QueueRoutine(Queue<QueuedRoomEvent> queue)
         {
-            _room = GetComponent<Room>();
+            while (queue.Count > 0) {
+                yield return IterateQueue(queue);
+            }
+
+            _room.RoomCleared();
+        }
+
+        IEnumerator IterateQueue(Queue<QueuedRoomEvent> queue)
+        {
+            QueuedRoomEvent top = queue.Dequeue();
+            yield return new WaitForSeconds(top.Delay);
+            top.Event.StartEvent(_room);
+
+            while (queue.Peek().StartPolicy == StartPolicy.With) {
+                top = queue.Dequeue();
+                yield return new WaitForSeconds(top.Delay);
+                top.Event.StartEvent(_room);
+            }
+
+            yield return new WaitUntil(() => top.Event.Completed);
         }
         #endregion
 
-        #region Gizmos
-        private void OnDrawGizmosSelected()
+        [System.Serializable]
+        private struct OnIntializeRoomEvent
         {
-            if(RoomEvents == null) { return; }
-            foreach (RoomEvent roomEvent in RoomEvents) {
-                if (roomEvent == null) { continue; }
-                if (!roomEvent.ShowGizmos) { continue; }
-                roomEvent.DrawGizmosSelected(transform);
-            }
+            public RoomEvent Event;
+            [TextArea]
+            public string Note;
         }
 
-        private void OnDrawGizmos()
+        [System.Serializable]
+        private struct QueuedRoomEvent
         {
-            if (RoomEvents == null) { return; }
-            foreach (RoomEvent roomEvent in RoomEvents) {
-                if(roomEvent == null) { continue; }
-                if (!roomEvent.ShowGizmos) { continue; }
-                roomEvent.DrawGizmos(transform);
-            }
+            public RoomEvent Event;
+            [Header("Details")]
+            public StartPolicy StartPolicy;
+            public float Delay;
+            [TextArea]
+            public string Note;
         }
-        #endregion
+
+        private enum StartPolicy
+        {
+            With,
+            After
+        }
     }
 }

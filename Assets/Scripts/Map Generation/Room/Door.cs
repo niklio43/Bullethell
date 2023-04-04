@@ -62,9 +62,7 @@ namespace BulletHell.Map
             _open.SetActive(false);
             _closed.SetActive(true);
         }
-        #endregion
 
-        #region Private Methods
         public void BlockDoor()
         {
             if (_state == DoorState.Closed) { return; }
@@ -74,6 +72,16 @@ namespace BulletHell.Map
         public void UnBlockDoor()
         {
             _blocker.SetActive(false);
+        }
+
+        #endregion
+
+        #region Private Methods
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player")) {
+                _room.PlayerEnter();
+            }
         }
         #endregion
     }

@@ -35,11 +35,12 @@ namespace BulletHell.Enemies.Spawning
         public void Spawn()
         {
             Vector2 position = Vector2.zero;
+            LayerMask mask = ~((1 << LayerMask.NameToLayer("Solid")));
 
             while (true) {
                 position = _position + Random.insideUnitCircle * (_radius - spawnAreaSize);
 
-                if(!Physics2D.OverlapCircle(position, spawnAreaSize)) {
+                if(!Physics2D.OverlapCircle(position, spawnAreaSize, mask)) {
                     break;
                 }
             }

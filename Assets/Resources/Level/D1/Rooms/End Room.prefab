@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8778947437075819104}
   - component: {fileID: 2579938848206264761}
   - component: {fileID: 3056250645585096378}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 6349899285586034894}
   - component: {fileID: 3583233869486947588}
   - component: {fileID: 1416748974908978596}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 8275505640476236413}
   - component: {fileID: 2004258629940330549}
   - component: {fileID: 1142912323954137877}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 4964783366056817357}
   - component: {fileID: 7225470777719283145}
   - component: {fileID: 4581524845773157748}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1826,7 +1826,7 @@ GameObject:
   - component: {fileID: 8937413898530193033}
   - component: {fileID: 4463931915308722071}
   - component: {fileID: 3251981095187880712}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1980,7 +1980,7 @@ GameObject:
   - component: {fileID: 1594655092766387101}
   - component: {fileID: 3176893411286246321}
   - component: {fileID: 6382034940995568955}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2249,7 +2249,7 @@ GameObject:
   - component: {fileID: 1469432349384461631}
   - component: {fileID: 2052503505133411269}
   - component: {fileID: 7756696023517842595}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2695,10 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8991c07f2b33d644a43012ad9f4acb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomEvents: []
-  references:
-    version: 2
-    RefIds: []
+  RoomEvents: []
 --- !u!1 &3816317971260756619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2793,7 +2790,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9141962995053290567}
   - component: {fileID: 1064036812271728947}
-  m_Layer: 0
+  - component: {fileID: 560160676576918145}
+  m_Layer: 2
   m_Name: Door (Left)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2834,6 +2832,32 @@ MonoBehaviour:
   _open: {fileID: 7437049251958072700}
   _closed: {fileID: 1238726042590472769}
   _blocker: {fileID: 3235840629055199134}
+--- !u!61 &560160676576918145
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889596315590326391}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -8.5, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &4148629863983815789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,7 +2868,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5123025426155421267}
   - component: {fileID: 5072265833454634266}
-  m_Layer: 0
+  - component: {fileID: 1734826001103438044}
+  m_Layer: 2
   m_Name: Door (Up)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2885,6 +2910,32 @@ MonoBehaviour:
   _open: {fileID: 804857777775518683}
   _closed: {fileID: 2966960950962556333}
   _blocker: {fileID: 3235840629055199134}
+--- !u!61 &1734826001103438044
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4148629863983815789}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 7.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &4343097321789302732
 GameObject:
   m_ObjectHideFlags: 0
@@ -3125,7 +3176,7 @@ GameObject:
   - component: {fileID: 5261226787623935614}
   - component: {fileID: 8014600186289472729}
   - component: {fileID: 5851174021256200687}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3330,7 +3381,7 @@ GameObject:
   - component: {fileID: 4643668762582439212}
   - component: {fileID: 4037931318612859963}
   - component: {fileID: 6162624567318998580}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3548,7 +3599,7 @@ GameObject:
   - component: {fileID: 2819437342516805482}
   - component: {fileID: 3702203608286538855}
   - component: {fileID: 3183632385156740617}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3749,7 +3800,7 @@ GameObject:
   - component: {fileID: 7209568273217148125}
   - component: {fileID: 8593511641218652266}
   - component: {fileID: 3627379394643026167}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3947,7 +3998,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6352277120798776778}
   - component: {fileID: 7919440947169825211}
-  m_Layer: 0
+  - component: {fileID: 6146272322744799739}
+  m_Layer: 2
   m_Name: Door (Down)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3988,6 +4040,32 @@ MonoBehaviour:
   _open: {fileID: 1542163951110154492}
   _closed: {fileID: 5271860148530415973}
   _blocker: {fileID: 3816317971260756619}
+--- !u!61 &6146272322744799739
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5531713274508647536}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -8.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &5680828305721145886
 GameObject:
   m_ObjectHideFlags: 0
@@ -4115,7 +4193,7 @@ GameObject:
   - component: {fileID: 5572799929800187291}
   - component: {fileID: 4528804098991998685}
   - component: {fileID: 2373145658966075876}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8014,7 +8092,7 @@ GameObject:
   - component: {fileID: 569194626201744809}
   - component: {fileID: 2856369391616396567}
   - component: {fileID: 2842071998094578836}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8233,7 +8311,7 @@ GameObject:
   - component: {fileID: 1886445914246628082}
   - component: {fileID: 446046334536386155}
   - component: {fileID: 6482766751139251034}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8416,7 +8494,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6629407745637944164}
   - component: {fileID: 292606122164120731}
-  m_Layer: 0
+  - component: {fileID: 5243771533345409455}
+  m_Layer: 2
   m_Name: Door (Right)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8457,6 +8536,32 @@ MonoBehaviour:
   _open: {fileID: 9127946041493228815}
   _closed: {fileID: 4343097321789302732}
   _blocker: {fileID: 5680828305721145886}
+--- !u!61 &5243771533345409455
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156997971419263939}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8.5, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &9127946041493228815
 GameObject:
   m_ObjectHideFlags: 0

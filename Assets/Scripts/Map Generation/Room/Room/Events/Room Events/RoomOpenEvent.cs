@@ -6,19 +6,13 @@ namespace BulletHell.Map.RoomEvents
 {
     public class RoomOpenEvent : RoomEvent
     {
-        #region Public Methods
-        public RoomOpenEvent(RoomEventQueue queue, string name) : base(queue, name) { }
-        #endregion
-
-        #region Private Methods
-        protected override void StartEvent()
+        public override void StartEvent(Room room)
         {
-            foreach (Door door in _room.Doors) {
+            foreach (Door door in room.Doors) {
                 door.UnBlockDoor();
             }
 
-            Done();
+            _completed = true;
         }
-        #endregion
     }
 }

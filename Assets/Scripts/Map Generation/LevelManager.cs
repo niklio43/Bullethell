@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Enemies.Collections;
 using BulletHell.GameEventSystem;
-
+using Pathfinding;
 
 namespace BulletHell.Map
 {
     public class LevelManager : MonoBehaviour
     {
         #region Public Fields
-        public Room[] Rooms => _rooms;
         public Room ActiveRoom => _activeRoom;
 
         public EnemyCollectionGroup EnemyCollectionGroup = null;
@@ -24,14 +23,13 @@ namespace BulletHell.Map
         [SerializeField] SOGameEvent OnPlayerMoved;
         [SerializeField] SOGameEvent OnCompletedMapGeneration;
 
-        Room[] _rooms;
+        GenerationData _data;
         Room _activeRoom;
         #endregion
 
         #region Private Methods
         private void Start()
         {
-            GameEventManager.GetEvent("OnRoomEnter").RegisterCallBack(PlayerEnterRoom);
             EnemyCollectionGroup = new EnemyCollectionGroup(_config.EnemyCollectionGroup);
             BeginGeneration();
         }
@@ -51,23 +49,51 @@ namespace BulletHell.Map
             levelGenerator.BeginGeneration(OnCompletedGeneration);
         }
 
-        void OnCompletedGeneration(List<Room> rooms)
+        void OnCompletedGeneration(GenerationData data)
         {
             Debug.Log("Generation Completed");
-            _rooms = rooms.ToArray();
+            _data = data;
 
-            foreach (Room room in _rooms) {
+            foreach (Room room in _data.Rooms) {
                 room.Initialize(this);
                 room.transform.parent = transform;
             }
 
-            OnCompletedMapGeneration.Raise(this, _rooms);
+            CreateAstarBounds();
+            OnCompletedMapGeneration.Raise(this, _data);
         }
 
-        private void OnDestroy()
+        void CreateAstarBounds()
         {
-            GameEventManager.GetEvent("OnRoomEnter").UnRegisterCallback(PlayerEnterRoom);
+            AstarData data = AstarPath.active.data;
+
+            GridGraph gg = data.AddGraph(typeof (GridGraph)) as GridGraph;
+            float nodeSize = 1f;
+            int width = _data.Bounds.Width * (int)(1 / nodeSize);
+            int depth = _data.Bounds.Height * (int)(1 / nodeSize);
+            Debug.Log(new Vector3(_data.Bounds.Center.x, _data.Bounds.Center.y, 0));
+
+            gg.center = new Vector3(_data.Bounds.Center.x, _data.Bounds.Center.y, 0) ;
+            gg.SetDimensions(width, depth, nodeSize);
+            gg.is2D = true;
+            gg.collision.use2D = true;
+
+            LayerMask mask = 1 << LayerMask.NameToLayer("Solid");
+
+            gg.collision.mask = mask;
+            AstarPath.active.Scan();
         }
         #endregion
+
+        private void OnDrawGizmosSelected()
+        {
+            if (_data == null) return;
+
+            Gizmos.color = Color.yellow;
+            Vector3 center = new Vector3(_data.Bounds.Center.x, _data.Bounds.Center.y);
+            Vector3 bounds = new Vector3(_data.Bounds.Width, _data.Bounds.Height);
+            Gizmos.DrawWireCube(center, bounds);
+
+        }
     }
 }

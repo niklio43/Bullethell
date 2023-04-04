@@ -21,7 +21,7 @@ namespace BulletHell.Map.Generation
             _config = config;
             _grid = new GenerationGrid(_config.SizeX, _config.SizeY);
         }
-        public void BeginGeneration(Action<List<Room>> OnCompletedGeneration)
+        public void BeginGeneration(Action<GenerationData> OnCompletedGeneration)
         {
             if (!Application.isPlaying) { throw new Exception("Cannot generate outside of play-mode"); }
             OnCompletedGeneration.Invoke(Generate());
@@ -30,13 +30,15 @@ namespace BulletHell.Map.Generation
         #endregion
 
         #region Private Methods
-        List<Room> Generate()
+        GenerationData Generate()
         {
             GenerateLayout();
             PopulateLayout(out List<Room> rooms);
             ConnectDoors();
 
-            return rooms;
+            LayoutBounds bounds = CalculateBounds();
+
+            return new GenerationData(rooms, bounds);
         }
 
         #region Generate Layout
@@ -124,11 +126,11 @@ namespace BulletHell.Map.Generation
 
                     foreach (var pair in pairs) {
                         Vector2Int p = cell.GetGridPosition();
-                        Vector2Int c = pair.Value.GetCenterPosition();
+                        Vector2Int c = pair.Value.GetCenterPositionAsInt();
                         int s = pair.Key.OccupyingSquare;
 
                         if (p.x > c.x - s && p.x < c.x + s &&
-                            p.y > c.y - s && p.y < c.y + s) 
+                            p.y > c.y - s && p.y < c.y + s)
                             check = true;
                     }
 
@@ -238,6 +240,39 @@ namespace BulletHell.Map.Generation
 
         #endregion
 
+        private LayoutBounds CalculateBounds()
+        {
+            int minX = _grid.AliveCells[0].GetGridPosition().x;
+            int minY = _grid.AliveCells[0].GetGridPosition().y;
+            int maxX = _grid.AliveCells[0].GetGridPosition().x;
+            int maxY = _grid.AliveCells[0].GetGridPosition().y;
+
+            for (int i = 1; i < _grid.AliveCells.Count; i++) {
+                Vector2Int pos = _grid.AliveCells[i].GetGridPosition();
+                if(pos.x > maxX) {
+                    maxX = pos.x;
+                }
+                if(pos.y > maxY) {
+                    maxY = pos.y;
+                }
+                if(pos.x < minX) {
+                    minX = pos.x;
+                }
+                if(pos.y < minY) {
+                    minY = pos.y;
+                }
+            }
+
+            int width = (1 + maxX - minX);
+            int height = (1 + maxY - minY);
+            Vector2 center = new Vector2(minX, minY) + new Vector2(width / 2f, height / 2f);
+
+            width *= GenerationUtilities.CellSize;
+            height *= GenerationUtilities.CellSize;
+            center *= GenerationUtilities.CellSize;
+
+            return new LayoutBounds() {Width = width, Height = height, Center = center};
+        }
         #endregion
 
         #region Gizmos
@@ -269,4 +304,22 @@ namespace BulletHell.Map.Generation
         //}
         #endregion
     }
+
+    public class GenerationData{
+        public List<Room> Rooms;
+        public LayoutBounds Bounds;
+
+        public GenerationData(List<Room> rooms, LayoutBounds bounds)
+        {
+            this.Rooms = rooms;
+            this.Bounds = bounds;
+        }
+    }
+
+    public struct LayoutBounds
+    {
+        public int Width, Height;
+        public Vector2 Center;
+    }
+
 }

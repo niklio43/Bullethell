@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletHell.Map;
+using BulletHell.Map.Generation;
 
 public class Minimap : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class Minimap : MonoBehaviour
     public void OnGenerationFinished(Component sender, object data)
     {
         if (sender is not LevelManager) { return; }
-        CreateMap(data as Room[]);
+        GenerationData genData = data as GenerationData;
+
+        CreateMap(genData.Rooms);
     }
     
     public void OnPlayerMoved(Component sender, object data)
@@ -35,7 +38,7 @@ public class Minimap : MonoBehaviour
     {
         _camera = GetComponentInChildren<MinimapCamera>();
     }
-    private void CreateMap(Room[] rooms)
+    private void CreateMap(List<Room> rooms)
     {
         foreach (Room room in rooms) {
             SpriteRenderer roomIcon = new GameObject().AddComponent<SpriteRenderer>();

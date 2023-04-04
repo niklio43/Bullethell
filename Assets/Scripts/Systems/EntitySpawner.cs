@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class EntitySpawner : Singleton<EntitySpawner>
 {
@@ -11,22 +11,28 @@ public class EntitySpawner : Singleton<EntitySpawner>
     #endregion
 
     #region Private Methods
-    protected override void OnAwake()
+
+    private static void Validate()
     {
-        _entityHolder = new GameObject("Entities");
-        _enemyHolder = new GameObject("Enemies");
-        _enemyHolder.transform.parent = _entityHolder.transform;
+        if(_entityHolder == null) {
+            _entityHolder = new GameObject("Entities");
+            _enemyHolder = new GameObject("Enemies");
+            _enemyHolder.transform.parent = _entityHolder.transform;
+        }
     }
+
     #endregion
 
     #region Public Methods
     public static GameObject SpawnEntity(GameObject entityOriginal, Vector2 position)
     {
+        Validate();
         return Instantiate(entityOriginal, position, Quaternion.identity, _entityHolder.transform);
     }
 
     public static Enemy SpawnEnemy(Enemy enemyOriginal, Vector2 position)
     {
+        Validate();
         return Instantiate(enemyOriginal, position, Quaternion.identity, _enemyHolder.transform);
     }
     #endregion

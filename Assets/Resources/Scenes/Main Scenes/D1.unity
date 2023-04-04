@@ -152,7 +152,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1323744969}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -183,7 +184,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ffa7272d42be24d8d349bda9aaaf1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listeners: []
+  _listeners:
+  - Event: {fileID: 11400000, guid: 1b074827c500c894c9906a57e353d19a, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 483767854}
+          m_TargetAssemblyTypeName: BulletHell.Map.LevelManager, Assembly-CSharp
+          m_MethodName: PlayerEnterRoom
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &798519394
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +319,76 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!4 &1323744969 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+  m_PrefabInstance: {fileID: 1383046419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1383046419
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 483767853}
+    m_Modifications:
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054896, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054898, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: m_Name
+      value: AStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054899, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: scanOnStartup
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458169060373054899, guid: 8b142cb77531a95449affd38967892cc, type: 3}
+      propertyPath: data.dataString
+      value: UEsDBBQAAAgIAAAIIeywnCCjagIAACUFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMziVjmxCgt9YhpIckTGgnF1+EtMYaZMkjyQGS4b93JdvYISev377dffthfxKhbAXMabMygj9pDuTniHib/Bj1zkc40p1WG/EBHedNcFd4Eg2cV+qERjz2YVaX4Ixgv9ROenKEYK1Erk255DtItXUW4ZxKC+gy2vlohdDniBzxMV74kBNaycxbH2gtotEZTQbKgempHbGjNaxaMUnLCriXPCDfJNOOj2agKmyoZbVupqUUthVE3KkKDae0sjW2gwQuKDYYVEzwtQCxK5wXOwx+yXMLrlVm6OleGJxTk5X81s3wSmr3jbx3KmtfJ5neBVlN0qdv/nEc3LnR5WNXN458DVcItn+lJ0atG0x3CN/3wuMwpQOVe7qV8FaAetYro2vF0elM7UNrC8l9/3ppLS2A7Xu8kXoF1tX3HcU3s/k8nizuJstxNGsX5hs6h1EcUynKbdjDbQNspA7DD+cABjf1B9WHY7FtXkS9pH8W/tLd8Kpax4Mw1qGrbVl5rVtdG08lyzBA31rtUm0UBLjtoAJFpTutMY273ueVb1D2yvNA/ffTFm993WdxFRLgnh9FV661Plw2Zwt9eAJbvNROCgW9aO94xjmlWqnm3IYz6cI2tckpG4TtasG/3hm5Y5Mpi6LFnCcsiWgyTjhP5vlsO7vdxhBvpyQcolDYJ5XrRmg7Htya6pMrPLrutzJaGVqF0+eGHlbio9SDkQuV6w0zAOrlSwYLBmvgR8qXXOB8NuCcUGHd5DMjUrM98OzCz0Kjy6MzNOu7z0gl3rXzSEbS8BvJiIcvd7028C7g4Gt3yc7k/B9QSwMEFAAACAgAAAgh7N+nOyBtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJJZsrFpsoGBpUWKUbKRQaKRrlFKipFFmnmSuUmSYaphkqlSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAAgh7LCcIKNqAgAAJQUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAgh7N+nOyBtAAAAeAAAAAkAJAAAAAAAAAAAAAAAtwIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABvAwAAAAA=
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b142cb77531a95449affd38967892cc, type: 3}
 --- !u!1 &1497706624
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class MinimapCamera : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public void SetPosition(Vector2Int pos)
+    public void SetPosition(Vector2 pos)
     {
         StartCoroutine(EasePosition(pos, 0.5f));
     }

@@ -44,16 +44,28 @@ namespace BulletHell.Map
             GridPosition = gridPosition;
         }
 
-        public Vector2Int GetCenterPosition()
+        public Vector2Int GetCenterPositionAsInt()
         {
-            Vector2Int avg = GridPosition;
+            Vector2Int avg = Vector2Int.zero;
 
             for (int i = 0; i < Cells.Length; i++) {
                 avg += Cells[i].Pos;
             }
 
-            return avg / Cells.Length;
+            return GridPosition + avg / Cells.Length;
         }
+
+        public Vector2 GetCenterPosition()
+        {
+            Vector2 avg = Vector2.zero;
+
+            for (int i = 0; i < Cells.Length; i++) {
+                avg += Cells[i].Pos;
+            }
+
+            return GridPosition + avg / Cells.Length;
+        }
+
 
         public void RoomCleared()
         {
@@ -65,26 +77,20 @@ namespace BulletHell.Map
         #region Private Methods
         private void Awake()
         {
-            _eventQueue = GetComponent<RoomEventQueue>();
-
             for (int i = 0; i < Cells.Length; i++) {
                 Doors.AddRange(Cells[i].Doors);
             }
+
+            _eventQueue = GetComponent<RoomEventQueue>();
+            _eventQueue.OnInitialize(this);
         }
 
-        private void PlayerEnter()
+        public void PlayerEnter()
         {
+            OnRoomEnter.Raise(this, this);
             if (_roomState != RoomState.InActive) { return; }
             _roomState = RoomState.Active;
-            _eventQueue.StartQueue();
-            OnRoomEnter.Raise(this, this);
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.CompareTag("Player")) {
-                PlayerEnter();
-            }
+            _eventQueue.StartQueue(this);
         }
         #endregion
 

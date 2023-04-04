@@ -23,12 +23,12 @@ namespace BulletHell.GameEventSystem
         #region Public Fields
         public void Initialize()
         {
-            Event.gameEvent.Register(this);
+            GameEventManager.GetEvent(Event.name).Register(this);
         }
 
         public void UnInitialize()
         {
-            Event.gameEvent.UnRegister(this);
+            GameEventManager.GetEvent(Event.name).UnRegister(this);
         }
 
         public void OnEventRaised(Component sender, object data)
