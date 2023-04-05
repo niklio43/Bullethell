@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -86,7 +87,27 @@ namespace BulletHell.InventorySystem
 
                 //Temporary
                 Transform player = GameObject.FindGameObjectWithTag("Player").transform;
-                droppedItem.transform.position = new Vector2(player.position.x + Random.Range(-2, 2), player.position.y + Random.Range(-2, 2));
+
+                StartCoroutine(AnimateDrop(droppedItem.transform, player.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), .2f));
+
+            }
+        }
+
+        IEnumerator AnimateDrop(Transform item, Vector3 startPos, Vector2 targetPos, float time)
+        {
+            item.position = startPos;
+            float timeElapsed = 0;
+            while (timeElapsed < time)
+            {
+                yield return new WaitForEndOfFrame();
+                timeElapsed += Time.deltaTime;
+
+                float tempPosX = Easing.EaseInOut(startPos.x, targetPos.x, timeElapsed / time);
+                float tempPosY = Easing.EaseInOut(startPos.y, targetPos.y, timeElapsed / time);
+                Vector3 finalPos = new Vector3(tempPosX, tempPosY, 0);
+
+                float distanceMulti = Vector3.Distance(startPos, targetPos);
+                item.position += (finalPos - startPos).normalized * Time.deltaTime * distanceMulti;
             }
         }
 

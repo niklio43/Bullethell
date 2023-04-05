@@ -1,3 +1,4 @@
+using BulletHell.GameEventSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace BulletHell.InventorySystem
         #endregion
 
         #region Public Fields
-        public delegate void OnAssignDelegate(InventoryItemData item);
-        public OnAssignDelegate OnAssign;
         public InventoryItemData ItemData => _itemData;
+        [Header("Events")]
+        public SOGameEvent OnInventorySlotAssigned;
         #endregion
 
         #region Public Methods
@@ -40,7 +41,7 @@ namespace BulletHell.InventorySystem
         {
             _itemData = data;
 
-            OnAssign?.Invoke(_itemData);
+            OnInventorySlotAssigned?.Raise(null, _itemData);
         }
 
         public void UpdateInventorySlot(InventoryItemData data, int amount)

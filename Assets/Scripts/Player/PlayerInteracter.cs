@@ -119,14 +119,14 @@ namespace BulletHell.Player
 
                 if (weaponController.PrimaryWeapon == null)
                 {
-                    weaponController.AssignPrimaryWeapon(droppedItem.ItemData);
+                    weaponController.AssignPrimaryWeapon(null, droppedItem.ItemData);
                     _closestInteractable.Interact(_equipmentInventory.InventorySystem, GetComponent<PlayerResources>());
                     _closestInteractable = null;
                     return true;
                 }
                 if (weaponController.SecondaryWeapon == null)
                 {
-                    weaponController.AssignSecondaryWeapon(droppedItem.ItemData);
+                    weaponController.AssignSecondaryWeapon(null, droppedItem.ItemData);
                     _closestInteractable.Interact(_equipmentInventory.InventorySystem, GetComponent<PlayerResources>());
                     _closestInteractable = null;
                     return true;

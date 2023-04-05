@@ -22,10 +22,6 @@ public class Forge : InteractableItem
     #endregion
 
     #region Private Methods
-    void Start()
-    {
-        _slotItem.AssignedInventorySlot.OnAssign += AssignWeaponToUpgrade;
-    }
 
     void SetRandomAbility(Weapon weapon)
     {
@@ -40,21 +36,6 @@ public class Forge : InteractableItem
         if (weapon.Abilities.Contains(ability.Ability)) { SetRandomAbility(weapon); return; }
 
         _abilityToAdd = ability;
-    }
-
-    void AssignWeaponToUpgrade(InventoryItemData item)
-    {
-        if (item is Weapon)
-        {
-            _button.onClick.AddListener(delegate () { UpgradeWeapon(item); });
-
-            if (item == null) { PlayerUI.Instance.SetCost(0); return; }
-            Weapon weapon = item as Weapon;
-            SetRandomAbility(weapon);
-            PlayerUI.Instance.SetCost(_abilityToAdd.Cost);
-            return;
-        }
-        _button.onClick.RemoveAllListeners();
     }
 
     void UpgradeWeapon(InventoryItemData item)
@@ -99,6 +80,24 @@ public class Forge : InteractableItem
     {
         PlayerUI.Instance.Forge.SetActive(true);
         PlayerUI.Instance.Inventory.SetActive(true);
+    }
+
+    public void AssignWeaponToUpgrade(Component sender, object data)
+    {
+        if (data is not InventoryItemData) { return; }
+        var item = data as InventoryItemData;
+
+        if (item is Weapon)
+        {
+            _button.onClick.AddListener(delegate () { UpgradeWeapon(item); });
+
+            if (item == null) { PlayerUI.Instance.SetCost(0); return; }
+            Weapon weapon = item as Weapon;
+            SetRandomAbility(weapon);
+            PlayerUI.Instance.SetCost(_abilityToAdd.Cost);
+            return;
+        }
+        _button.onClick.RemoveAllListeners();
     }
     #endregion
 }
