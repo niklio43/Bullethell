@@ -353,6 +353,10 @@ MonoBehaviour:
   MaxHealth: 100
   Stamina: 5
   MaxStamina: 5
+  OnHealthChanged: {fileID: 11400000, guid: 5457effc95e04b94d85dd71e5c7d301a, type: 2}
+  OnMaxHealthChanged: {fileID: 11400000, guid: 3ce7d9f15cac9944ba172ecb535d5164, type: 2}
+  OnStaminaChanged: {fileID: 11400000, guid: 47205f326f9fe8445ae0deda27d0ad71, type: 2}
+  OnMaxStaminaChanged: {fileID: 11400000, guid: 4d4f8dc176822d245af49867c7f0621a, type: 2}
 --- !u!114 &4493810273424168707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +554,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: eabe2f2f-4c72-4b0b-9abd-adf105153225
     m_ActionName: Player/EquipSecondaryWeapon[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d0a976f-f31b-4f45-b31b-d4195f7b9844
+    m_ActionName: Player/OpenMap[/Keyboard/capsLock]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd03dd25-24bc-4c80-894d-a25a097c5c39
+    m_ActionName: Inventory/FastEquip[/Mouse/leftButton,/Keyboard/ctrl]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fb43984b-b90a-4325-b6b8-1ae7fe0b2368
+    m_ActionName: Inventory/DisableUI[/Keyboard/tab,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
